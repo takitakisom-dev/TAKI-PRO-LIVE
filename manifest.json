@@ -1,1 +1,19 @@
-
+{
+  "name": "TAKI PRO LIVE",
+  "short_name": "TAKI PRO LIVE",
+  "description": "TAKI PRO LIVE - Cifra, VS, Playback e Pedidos Ao Vivo com Caixinha PIX",
+  "start_url": "./index.html?dono=TAKI123",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#c9a86a",
+  "scope": "./",
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  },
+  "icons": [
+    {"src": "icon-512.png","sizes": "512x512","type": "image/png","purpose": "any maskable"},
+    {"src": "icon-192.png","sizes": "192x192","type": "image/png","purpose": "any maskable"}
+  ]
+}
