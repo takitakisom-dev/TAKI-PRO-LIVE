@@ -26,7 +26,7 @@ body{background:var(--bg);color:var(--text);padding-bottom:100px}
 .card-header{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:14px;text-transform:uppercase}
 .file-label{border:1px dashed var(--line2);padding:16px;border-radius:10px;display:block;text-align:center;background:var(--card2);color:var(--muted);font-weight:700;font-size:11px;cursor:pointer;margin:8px 0}
 input[type=text],input[type=password],input[type=email],textarea,select{width:100%;background:var(--card2);color:var(--text);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:14px;outline:none}
-textarea{min-height:140px;font-family:monospace;font-size:14px}
+textarea{min-height:80px;font-family:system-ui;font-size:13px}
 .preview-wrapper{border:1px solid var(--line2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;margin-top:12px;max-height:55vh;min-height:120px}
 .preview-top{background:var(--card);border-bottom:1px solid var(--line2);padding:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .preview-content{flex:1;overflow-y:auto;padding:16px;min-height:80px}
@@ -67,6 +67,11 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 .caixinha-btn{padding:16px;border-radius:10px;border:2px solid var(--line);background:var(--card2);color:var(--text);font-weight:900;font-size:14px;cursor:pointer}
 .caixinha-btn.gold{border:2px solid var(--gold);color:var(--gold);background:rgba(201,168,106,0.15)}
 .caixinha-btn.active{background:var(--gold);color:#000;border:2px solid var(--gold)}
+.offline-badge{background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px;font-weight:900}
+.online-badge{background:#4a9eff;color:#fff;padding:2px 6px;border-radius:10px;font-size:8px;font-weight:900}
+.client-tab{display:flex;gap:8px;margin:12px 0}
+.client-tab-btn{flex:1;padding:14px;border-radius:10px;border:1px solid var(--line);background:var(--card2);color:var(--muted);font-weight:800;font-size:11px;cursor:pointer;text-align:center}
+.client-tab-btn.active{border:2px solid var(--gold);background:rgba(201,168,106,0.15);color:var(--gold)}
 </style>
 </head>
 <body>
@@ -74,7 +79,7 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div id="loginScreen">
 <div style="background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:24px;width:100%;max-width:380px">
 <h2 style="color:var(--gold);text-align:center;font-weight:900">TAKI PRO LIVE</h2>
-<p style="color:var(--muted);text-align:center;font-size:11px;margin:6px 0 20px 0">CIFRA + VS + PEDIDOS - FAÇA LOGIN</p>
+<p style="color:var(--muted);text-align:center;font-size:11px;margin:6px 0 20px 0">CIFRA + VS + PEDIDOS</p>
 <div id="loginForm">
 <input type="email" id="loginEmail" placeholder="Seu e-mail" style="margin-bottom:10px">
 <input type="password" id="loginPass" placeholder="Sua senha" style="margin-bottom:14px">
@@ -96,8 +101,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div style="background:var(--card);border:2px solid #ff4a4a;border-radius:16px;padding:24px;max-width:400px;width:100%">
 <h2 style="color:#ff4a4a">🚫 SISTEMA BLOQUEADO</h2>
 <p style="color:#fff;margin:14px 0;font-weight:700">PAGAR PARA LIBERAR</p>
-<p style="color:var(--muted);font-size:12px;margin-bottom:16px">Seu acesso foi bloqueado por falta de pagamento ou expirou seu plano.<br><br>Entre em contato com a TAKI DESENVOLVIMENTO DE SISTEMAS</p>
-<button class="btn gold big" onclick="window.open('https://wa.me/5512992209787?text=Olá TAKI, meu sistema TAKI PRO LIVE está bloqueado, quero liberar meu acesso','_blank')">📲 CHAMAR NO ZAP 12 992209787</button>
+<p style="color:var(--muted);font-size:12px;margin-bottom:16px">Seu acesso foi bloqueado.<br><br>Entre em contato com a TAKI DESENVOLVIMENTO DE SISTEMAS</p>
+<button class="btn gold big" onclick="window.open('https://wa.me/5512992209787?text=Olá TAKI, meu sistema TAKI PRO LIVE está bloqueado, quero liberar meu acesso','_blank')">📲 ZAP 12 992209787</button>
 <button class="btn big" onclick="fazerLogout()">SAIR E TROCAR CONTA</button>
 </div>
 </div>
@@ -107,13 +112,13 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div class="header">
 <button class="hamburger" onclick="document.getElementById('menuOverlay').style.display='block'">☰</button>
 <h1>TAKI PRO LIVE <span id="userInfoHeader">CIFRA + VS + PEDIDOS</span></h1>
-<div style="width:44px;text-align:center"><span class="pro-badge">PRO</span></div>
+<div style="width:44px;text-align:center"><span class="pro-badge" id="offlineStatus">PRO</span></div>
 </div>
 
 <div id="menuOverlay" onclick="if(event.target.id==='menuOverlay')this.style.display='none'">
 <div id="menuPanel">
 <div style="display:flex;justify-content:space-between"><b style="color:var(--gold)">TAKI PRO LIVE</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><small style="color:var(--muted)">Logado como:</small><br><b id="menuUserName" style="color:var(--gold);font-size:12px">-</b><br><small id="menuUserEmail" style="color:var(--muted);font-size:10px">-</small></div>
+<div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><small style="color:var(--muted)">Logado:</small><br><b id="menuUserName" style="color:var(--gold);font-size:12px">-</b><br><small id="menuUserEmail" style="color:var(--muted);font-size:10px">-</small><br><small id="menuOfflineInfo" style="color:#00ff00;font-size:9px">● OFFLINE OK - Cifras e VS funcionam sem internet</small></div>
 <div class="menu-title">NAVEGAÇÃO</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🏠 HOME - PALCO</button>
 <div class="menu-title">PRO LIVE</div>
@@ -126,60 +131,65 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div class="menu-title">CONFIGURAÇÃO</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-config')">⚙️ CONFIGURAÇÃO COMPLETA</button>
 <div class="menu-title" id="adminMenuTitle" style="display:none">ADMIN - TAKI</div>
-<button class="menu-item pro" id="adminMenuBtn" style="display:none" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-admin');carregarUsuarios()">👑 PAINEL ADMIN - USUÁRIOS</button>
+<button class="menu-item pro" id="adminMenuBtn" style="display:none" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-admin');carregarUsuarios()">👑 CLIENTES CADASTRADOS - VER SENHAS</button>
 <div class="menu-title">BACKUP E APP</div>
 <button class="menu-item gold" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
 <button class="menu-item gold" onclick="document.getElementById('fileImport').click()">📥 IMPORTAR BACKUP</button>
 <input type="file" id="fileImport" accept=".json" style="display:none" onchange="importarBackup(this)">
-<button class="menu-item" onclick="if(window.deferredPrompt)window.deferredPrompt.prompt()">📲 INSTALAR APP</button>
+<button class="menu-item" onclick="if(window.deferredPrompt)window.deferredPrompt.prompt()">📲 INSTALAR APP - FUNCIONA OFFLINE</button>
 <button class="menu-item gold" onclick="doShare()">📤 COMPARTILHAR</button>
-<button class="menu-item" style="border:1px solid #ff4a4a;color:#ff4a4a" onclick="fazerLogout()">🚪 SAIR DA CONTA</button>
-<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.5 - Limpo</small>
+<button class="menu-item" style="border:1px solid #ff4a4a;color:#ff4a4a" onclick="fazerLogout()">🚪 SAIR</button>
+<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.6 - Offline + Online</small>
 </div>
 </div>
 
 <div class="main">
 <div id="view-home" class="view active">
-<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
+<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span> <span id="offlineBadge" class="offline-badge">OFFLINE OK</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span> • <span id="cifrasOfflineCount">0 cifras offline</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
 <div class="card t1">
-<div class="card-header">VS + PLAYBACK</div>
-<div class="volume-prof"><div class="volume-label"><b>VS BATERIA</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div></div>
-<div class="volume-prof"><div class="volume-label"><b>PLAYBACK</b><span id="playbackInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK</div><input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold)">80</span></div></div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div>
+<div class="card-header">VS + PLAYBACK - OFFLINE + ONLINE</div>
+<div class="volume-prof"><div class="volume-label"><b>VS BATERIA - OFFLINE</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS (salva offline)</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div><small style="color:#00ff00;font-size:9px">✅ VS salvo offline - funciona sem internet</small></div>
+<div class="volume-prof"><div class="volume-label"><b>PLAYBACK - OFFLINE</b><span id="playbackInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK (salva offline)</div><input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold)">80</span></div><small style="color:#00ff00;font-size:9px">✅ Playback salvo offline - funciona sem internet</small></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC OFFLINE</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div>
 </div>
-<div class="card" style="border-left:3px solid var(--gold)"><div class="card-header">BPM + PITCH</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">BPM</small><div id="bpmDisplay" class="bpm-display">100</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changeBPM(-5)" style="flex:1">-5</button><button class="small gold" onclick="changeBPM(-1)" style="flex:1">-1</button><button class="small gold" onclick="changeBPM(1)" style="flex:1">+1</button><button class="small" onclick="changeBPM(5)" style="flex:1">+5</button></div><input type="range" id="bpmRange" min="40" max="240" value="100" style="width:100%;margin-top:10px" oninput="setBPM(this.value)"></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">PITCH</small><div id="pitchDisplay" class="bpm-display" style="font-size:20px">0</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changePitch(-1)" style="flex:1">-1</button><button class="small gold" onclick="changePitch(0,true)" style="flex:1">0</button><button class="small" onclick="changePitch(1)" style="flex:1">+1</button></div><input type="range" id="pitchRange" min="-12" max="12" value="0" style="width:100%;margin-top:10px" oninput="setPitch(this.value)"></div></div></div>
-<div class="card" style="border:1px dashed var(--line2)"><div class="card-header">CIFRA - COLE E SALVE COM VS</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="text" id="artistaMusica" placeholder="Artista"><input type="text" id="nomeMusica" placeholder="Música"></div><textarea id="inputCifraHome" placeholder="Cole a cifra..." oninput="renderCifra()"></textarea>
-<div style="display:flex;gap:8px;margin-top:8px"><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkVS" checked> Salvar VS junto</label><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkPlayback" checked> Salvar Playback junto</label></div>
-<button class="btn gold big" onclick="salvarMusica()">💾 SALVAR CIFRA (+ VS/Playback se marcado)</button><button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela();showFloat()">⛶ TELA CHEIA</button><div id="saveStatus" style="margin-top:10px;color:var(--gold);text-align:center"></div></div>
+<div class="card" style="border-left:3px solid var(--gold)"><div class="card-header">BPM + PITCH - OFFLINE</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">BPM</small><div id="bpmDisplay" class="bpm-display">100</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changeBPM(-5)" style="flex:1">-5</button><button class="small gold" onclick="changeBPM(-1)" style="flex:1">-1</button><button class="small gold" onclick="changeBPM(1)" style="flex:1">+1</button><button class="small" onclick="changeBPM(5)" style="flex:1">+5</button></div><input type="range" id="bpmRange" min="40" max="240" value="100" style="width:100%;margin-top:10px" oninput="setBPM(this.value)"></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">PITCH</small><div id="pitchDisplay" class="bpm-display" style="font-size:20px">0</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changePitch(-1)" style="flex:1">-1</button><button class="small gold" onclick="changePitch(0,true)" style="flex:1">0</button><button class="small" onclick="changePitch(1)" style="flex:1">+1</button></div><input type="range" id="pitchRange" min="-12" max="12" value="0" style="width:100%;margin-top:10px" oninput="setPitch(this.value)"></div></div></div>
+<div class="card" style="border:1px dashed var(--line2)"><div class="card-header">CIFRA - SALVA OFFLINE + ONLINE</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="text" id="artistaMusica" placeholder="Artista"><input type="text" id="nomeMusica" placeholder="Música"></div><textarea id="inputCifraHome" placeholder="Cole a cifra..." oninput="renderCifra()"></textarea>
+<div style="display:flex;gap:8px;margin-top:8px"><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkVS" checked> Salvar VS offline</label><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkPlayback" checked> Salvar Playback offline</label></div>
+<button class="btn gold big" onclick="salvarMusica()">💾 SALVAR CIFRA OFFLINE (+ VS/Playback)</button><button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela();showFloat()">⛶ TELA CHEIA OFFLINE</button><div id="saveStatus" style="margin-top:10px;color:var(--gold);text-align:center"></div><small style="color:#00ff00;font-size:9px;display:block;text-align:center;margin-top:6px">✅ Tudo salvo no celular - funciona sem internet + pedidos online quando tem internet</small></div>
 <div class="card" style="padding:0;overflow:hidden">
 <div class="preview-wrapper">
 <div class="preview-top"><b style="color:var(--gold);font-size:10px">TOM:</b><div id="transposeInfo" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="small" onclick="changeTranspose(-1)">-1</button><button class="small gold" onclick="changeTranspose(0,true)">0</button><button class="small" onclick="changeTranspose(1)">+1</button><button class="small gold" onclick="toggleScroll('normal')">▶️ ROLAGEM</button></div>
 <div style="display:flex;gap:6px;background:var(--card2);padding:10px"><button class="small gold" onclick="changeBothSize(-3)">MICRO 6px</button><button class="small gold" onclick="changeBothSize(-1)">MENOR</button><button class="small gold" onclick="setSize(16,12)">16px</button><button class="small gold" onclick="changeBothSize(1)">MAIOR</button><span id="sizeInfo" style="color:var(--gold);margin-left:auto">16px</span></div>
 <input type="range" id="sizeSlider" min="6" max="80" value="16" style="margin:6px 10px;width:calc(100% - 20px)" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()">
-<div class="preview-content" id="output"><div class="preview-empty">Cole a cifra acima que a prévia aparece aqui sem espaço vago</div></div>
+<div class="preview-content" id="output"><div class="preview-empty">Cole a cifra acima - funciona offline</div></div>
 </div>
 </div>
-<div class="card scroll-prof"><div class="card-header">ROLAGEM</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800">2</span></div><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
+<div class="card scroll-prof"><div class="card-header">ROLAGEM - OFFLINE</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800">2</span></div><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 </div>
-<div id="view-prolive" class="view"><div class="card pro"><div class="card-header">PEDIDOS AO VIVO + CAIXINHA</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div><button class="btn gold big" onclick="testarPedido()">🔔 TESTAR PEDIDO</button></div><div class="card"><div class="card-header">CONFIG PRO LIVE</div><input type="text" id="codigoDono" value="TAKI123" style="margin-top:6px;color:var(--gold)" onchange="salvarConfigProLive()"><input type="text" id="pixKey" placeholder="PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><input type="text" id="pixNome" placeholder="Nome PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><textarea id="listaMusicasPedidos" placeholder="Músicas que cliente pode pedir" style="min-height:100px;margin-top:8px" onchange="salvarConfigProLive()"></textarea><button class="btn gold big" style="margin-top:10px" onclick="salvarConfigProLive();conectarNtfy()">💾 SALVAR E CONECTAR AO VIVO</button></div></div>
+
+<div id="view-prolive" class="view"><div class="card pro"><div class="card-header">PEDIDOS AO VIVO + CAIXINHA - ONLINE</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS + RECADOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div><button class="btn gold big" onclick="testarPedido()">🔔 TESTAR PEDIDO</button><small style="color:var(--muted);font-size:9px;display:block;margin-top:8px;text-align:center">Pedidos e caixinha precisam de internet - Cifras e VS funcionam offline</small></div><div class="card"><div class="card-header">CONFIG PRO LIVE</div><input type="text" id="codigoDono" value="TAKI123" style="margin-top:6px;color:var(--gold)" onchange="salvarConfigProLive()"><input type="text" id="pixKey" placeholder="PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><input type="text" id="pixNome" placeholder="Nome PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><textarea id="listaMusicasPedidos" placeholder="Músicas que cliente pode pedir" style="min-height:100px;margin-top:8px" onchange="salvarConfigProLive()"></textarea><button class="btn gold big" style="margin-top:10px" onclick="salvarConfigProLive();conectarNtfy()">💾 SALVAR E CONECTAR AO VIVO</button></div></div>
+
 <div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE - CLIENTE PEDE MÚSICA</div><div id="qrContainer" class="qr-box"></div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all;color:var(--gold)"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK</button><button class="btn big" onclick="compartilharLinkCliente()">📤 COMPARTILHAR LINK</button></div></div>
+
 <div id="view-config" class="view">
 <div class="card">
-<div class="card-header">CONFIGURAÇÃO COMPLETA</div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">TEMAS</b><div class="theme-grid" id="themeGrid"></div></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">FONTES</b><div class="font-grid" id="fontGrid"></div></div>
+<div class="card-header">CONFIGURAÇÃO COMPLETA - OFFLINE</div>
+<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">TEMAS - OFFLINE</b><div class="theme-grid" id="themeGrid"></div></div>
+<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">FONTES - OFFLINE</b><div class="font-grid" id="fontGrid"></div></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">TAMANHO - MICRO 6px ATÉ 80px</b><div style="display:flex;gap:6px;justify-content:center;margin-top:8px"><button class="small gold" onclick="changeBothSize(-3)">MICRO 6px</button><button class="small gold" onclick="changeBothSize(-1)">MENOR</button><div id="sizeInfoConfig" style="color:var(--gold);font-weight:900">16px</div><button class="small gold" onclick="changeBothSize(1)">MAIOR</button></div><input type="range" id="sizeSliderConfig" min="6" max="80" value="16" style="width:100%;margin-top:10px" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()"></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px;border-left:3px solid var(--gold)"><b style="color:var(--gold);font-size:11px">ROLAGEM</b><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><button class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="margin-top:8px"><span id="scrollSpeedValConfig" style="color:var(--gold);font-weight:700">2</span><input type="range" id="scrollSpeedConfig" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
+<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px;border-left:3px solid var(--gold)"><b style="color:var(--gold);font-size:11px">ROLAGEM - OFFLINE</b><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><button class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="margin-top:8px"><span id="scrollSpeedValConfig" style="color:var(--gold);font-weight:700">2</span><input type="range" id="scrollSpeedConfig" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 <button class="btn big" style="margin-top:12px" onclick="showView('view-home')">← VOLTAR HOME</button>
 </div>
 </div>
-<div id="view-cifras" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>📄 MINHAS CIFRAS SALVAS</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><div id="listaCifras" style="margin-top:12px"></div></div></div>
-<div id="view-cifras-vs" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>🎧 CIFRAS COM VS / PLAYBACK SALVAS</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><small style="color:var(--muted)">Só mostra cifras que foram salvas com VS ou Playback junto</small><div id="listaCifrasVs" style="margin-top:12px"></div></div></div>
-<div id="view-pastas" class="view"><div class="card"><b>📁 PASTAS POR ARTISTA</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
+
+<div id="view-cifras" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>📄 MINHAS CIFRAS SALVAS - OFFLINE</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><small style="color:#00ff00;font-size:9px">✅ Funciona sem internet</small><div id="listaCifras" style="margin-top:12px"></div></div></div>
+<div id="view-cifras-vs" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>🎧 CIFRAS COM VS / PLAYBACK - OFFLINE</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><small style="color:#00ff00;font-size:9px">✅ VS/Playback salvo offline - funciona sem internet</small><div id="listaCifrasVs" style="margin-top:12px"></div></div></div>
+<div id="view-pastas" class="view"><div class="card"><b>📁 PASTAS POR ARTISTA - OFFLINE</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
+
 <div id="view-admin" class="view">
 <div class="card pro">
-<div class="card-header">👑 PAINEL ADMIN - TAKI - TODOS USUÁRIOS</div>
-<small style="color:var(--muted)">Você como admin vê todos, bloqueia quem não pagou. Seu ZAP: 12 992209787</small>
+<div class="card-header">👑 CLIENTES CADASTRADOS - SENHAS VISÍVEIS - ADMIN</div>
+<small style="color:var(--muted)">Você vê todos com email e senha - Libera ou Bloqueia - Seu ZAP 12 992209787</small>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">
 <div style="background:var(--card2);border:1px solid var(--gold);border-radius:8px;padding:10px;text-align:center"><small style="color:var(--muted)">TOTAL</small><div id="adminTotal" style="color:var(--gold);font-size:20px;font-weight:900">0</div></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center"><small style="color:var(--muted)">ATIVOS</small><div id="adminAtivos" style="color:#00ff00;font-size:20px;font-weight:900">0</div></div>
@@ -189,10 +199,14 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="btn gold big" style="margin-top:12px" onclick="carregarUsuarios()">🔄 ATUALIZAR LISTA</button>
 </div>
 </div>
+
 </div>
+
 <div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent" onclick="showFloat()"></div><div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div><div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button><button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button><button class="small" onclick="stopScroll();resetHide()">⏸️</button></div><div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><span id="scrollSpeedVal" style="display:none"></span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div><div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div></div><div style="display:flex;gap:6px"><button class="small gold" onclick="changeBothSize(-3);resetHide()" style="flex:1">MICRO</button><button class="small gold" onclick="changeBothSize(-1);resetHide()" style="flex:1">MENOR</button><button class="small gold" onclick="changeBothSize(1);resetHide()" style="flex:1">MAIOR</button></div><div style="display:flex;gap:6px"><button class="small gold" onclick="playBoth();resetHide()" style="flex:1">▶ PLAY 2</button><button class="small" onclick="pauseBoth();resetHide()" style="flex:1">⏸</button></div></div><button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button></div>
+
 <textarea id="inputCifra" style="display:none"></textarea>
 <textarea id="inputFull" style="display:none"></textarea>
+
 <script>
 var letraSize=16,cifraSize=12,transpose=0,bpm=100,pitch=0,hideTimer=null;
 var scrollInterval=null,scrollSpeed=2,isScrolling=false,scrollMode='normal';
@@ -226,6 +240,7 @@ function initUsers(){
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   if(users.length==0){
     users.push({nome:'ADMIN TAKI',email:'admin@taki',pass:'taki123',ativo:true,isAdmin:true,data:new Date().toISOString()});
+    users.push({nome:'Alexandre Gomes',email:'alexandre@example.com',pass:'123456',ativo:true,isAdmin:false,data:new Date().toISOString()});
     localStorage.setItem('taki-users',JSON.stringify(users));
   }
 }
@@ -281,6 +296,7 @@ function entrarSistema(){
     document.getElementById('adminMenuBtn').style.display='block';
   }
   carregar();gerarQRCode();conectarNtfy();renderPedidos();
+  atualizarContadoresOffline();
 }
 function fazerLogout(){localStorage.removeItem('taki-currentUser');currentUser=null;location.reload();}
 function carregarUsuarios(){
@@ -288,7 +304,7 @@ function carregarUsuarios(){
   document.getElementById('adminTotal').innerText=users.length;
   document.getElementById('adminAtivos').innerText=users.filter(u=>u.ativo).length;
   document.getElementById('adminBloqueados').innerText=users.filter(u=>!u.ativo).length;
-  var html=users.map((u,i)=>'<div style="background:var(--card2);border:1px solid '+(u.ativo?'var(--line)':'#ff4a4a')+';border-radius:10px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b style="color:'+(u.isAdmin?'var(--gold)':'#fff')+'">'+u.nome+' '+(u.isAdmin?'👑':'')+'</b><br><small style="color:var(--muted)">'+u.email+'</small><br><small style="color:'+(u.ativo?'#00ff00':'#ff4a4a')+'">'+(u.ativo?'✅ ATIVO':'🚫 BLOQUEADO')+' - '+new Date(u.data).toLocaleDateString()+'</small></div><div style="display:flex;flex-direction:column;gap:4px"><button class="small '+(u.ativo?'':'gold')+'" onclick="toggleUser('+i+')">'+(u.ativo?'🚫 BLOQUEAR':'✅ LIBERAR')+'</button><button class="small" onclick="removerUser('+i+')">🗑️</button></div></div>').join('');
+  var html=users.map((u,i)=>'<div style="background:var(--card2);border:1px solid '+(u.ativo?'var(--line)':'#ff4a4a')+';border-radius:10px;padding:12px;margin:8px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><b style="color:'+(u.isAdmin?'var(--gold)':'#fff')+'">👤 '+u.nome+' '+(u.isAdmin?'👑 ADMIN':'')+'</b><br><div style="background:var(--card3);border-radius:6px;padding:8px;margin:6px 0"><small style="color:var(--muted)">Email:</small><br><b style="color:var(--gold);font-size:12px">'+u.email+'</b><br><small style="color:var(--muted)">Senha visível:</small><br><b style="color:#00ff00;font-size:13px;font-family:monospace">🔑 '+u.pass+'</b></div><small style="color:'+(u.ativo?'#00ff00':'#ff4a4a')+'">'+(u.ativo?'✅ ATIVO - Liberado':'🚫 BLOQUEADO - Precisa pagar')+' • '+new Date(u.data).toLocaleDateString()+'</small></div><div style="display:flex;flex-direction:column;gap:6px;margin-left:10px"><button class="small '+(u.ativo?'':'gold')+'" style="padding:10px 14px" onclick="toggleUser('+i+')">'+(u.ativo?'🚫 BLOQUEAR':'✅ LIBERAR')+'</button><button class="small" style="padding:10px 14px" onclick="removerUser('+i+')">🗑️</button></div></div></div>').join('');
   document.getElementById('listaUsuariosAdmin').innerHTML=html||'<div style="text-align:center;color:var(--muted)">Nenhum usuário</div>';
 }
 function toggleUser(i){
@@ -346,8 +362,39 @@ function renderFontsInit(){
   });
 }
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='view-qr') gerarQRCode();}
-function loadVS(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioVS');a.src=url;a.volume=document.getElementById('volVS').value/100;a.load();a.play().catch(()=>{});document.getElementById('vsInfo').innerText=f.name.substring(0,20);updateRate();window._hasVS=true;window._hasVSName=f.name;}
-function loadPlayback(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioPlayback');a.src=url;a.volume=document.getElementById('volPlayback').value/100;a.load();a.play().catch(()=>{});document.getElementById('playbackInfo').innerText=f.name.substring(0,20);updateRate();window._hasPlayback=true;window._hasPlaybackName=f.name;}
+function loadVS(input){
+  var f=input.files[0];if(!f) return;
+  var url=URL.createObjectURL(f);
+  var a=document.getElementById('audioVS');a.src=url;a.volume=document.getElementById('volVS').value/100;a.load();
+  a.play().catch(()=>{});
+  document.getElementById('vsInfo').innerText=f.name.substring(0,20);
+  updateRate();
+  window._hasVS=true;window._hasVSName=f.name;
+  // Salva offline como base64
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var userKey=currentUser?currentUser.email:'geral';
+    localStorage.setItem('taki-vs-data-'+userKey,e.target.result);
+    localStorage.setItem('taki-vs-name-'+userKey,f.name);
+  };
+  reader.readAsDataURL(f);
+}
+function loadPlayback(input){
+  var f=input.files[0];if(!f) return;
+  var url=URL.createObjectURL(f);
+  var a=document.getElementById('audioPlayback');a.src=url;a.volume=document.getElementById('volPlayback').value/100;a.load();
+  a.play().catch(()=>{});
+  document.getElementById('playbackInfo').innerText=f.name.substring(0,20);
+  updateRate();
+  window._hasPlayback=true;window._hasPlaybackName=f.name;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var userKey=currentUser?currentUser.email:'geral';
+    localStorage.setItem('taki-playback-data-'+userKey,e.target.result);
+    localStorage.setItem('taki-playback-name-'+userKey,f.name);
+  };
+  reader.readAsDataURL(f);
+}
 function playBoth(){var a1=document.getElementById('audioVS');var a2=document.getElementById('audioPlayback');if(a1.src){a1.currentTime=0;a1.play().catch(()=>{});}if(a2.src){a2.currentTime=0;a2.play().catch(()=>{});}}
 function pauseBoth(){document.getElementById('audioVS').pause();document.getElementById('audioPlayback').pause();}
 function getRate(){return (bpm/100)*Math.pow(2,pitch/12);}
@@ -386,7 +433,7 @@ function parseBlocks(){var a=document.getElementById('inputCifra').value||'';var
 function renderCifra(){
   var blocks=parseBlocks();
   var out=document.getElementById('output');
-  if(blocks.length==0){out.innerHTML='<div class="preview-empty">Cole a cifra acima que a prévia aparece aqui sem espaço vago</div>';renderTela();return;}
+  if(blocks.length==0){out.innerHTML='<div class="preview-empty">Cole a cifra acima - funciona offline</div>';renderTela();return;}
   out.innerHTML='';
   blocks.forEach(b=>{
     if(b.type==='space'){out.innerHTML+='<div style="height:8px"></div>';}
@@ -418,8 +465,8 @@ function salvarMusica(){
   var hasPlayback=document.getElementById('checkPlayback').checked && window._hasPlayback;
   lista.push({id:Date.now(),nome,artista:artista||'Sem Artista',cifra,bpm,pitch,transpose,letraSize,cifraSize,hasVS:hasVS,hasPlayback:hasPlayback,vsName:window._hasVSName||'',playbackName:window._hasPlaybackName||''});
   localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));
-  document.getElementById('saveStatus').innerText='✅ "'+nome+'" salvo! '+(hasVS?' + VS':'')+(hasPlayback?' + Playback':'');
-  carregar();
+  document.getElementById('saveStatus').innerText='✅ "'+nome+'" salvo OFFLINE! '+(hasVS?' + VS':'')+(hasPlayback?' + Playback':'');
+  carregar();atualizarContadoresOffline();
 }
 function carregar(){
   var userKey=currentUser?currentUser.email:'geral';
@@ -428,15 +475,15 @@ function carregar(){
   var cVs=document.getElementById('listaCifrasVs');
   var p=document.getElementById('listaPastas');
   if(c){
-    c.innerHTML=todas.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma cifra salva</div>':todas.map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>'+m.nome+'</b><br><small>'+m.artista+' '+(m.hasVS?'🎧 VS':'' )+' '+(m.hasPlayback?'🎵 Playback':'')+'</small></div><div style="display:flex;gap:4px"><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');
+    c.innerHTML=todas.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma cifra salva offline</div>':todas.map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>'+m.nome+'</b><br><small>'+m.artista+' '+(m.hasVS?'🎧 VS':'' )+' '+(m.hasPlayback?'🎵 Playback':'')+' • OFFLINE</small></div><div style="display:flex;gap:4px"><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');
   }
   if(cVs){
     var comVS=todas.filter(m=>m.hasVS||m.hasPlayback);
-    cVs.innerHTML=comVS.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma cifra com VS/Playback<br><small>Marque "Salvar VS junto" ao salvar</small></div>':comVS.map(m=>'<div style="background:var(--card2);border:1px solid var(--gold);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>🎧 '+m.nome+'</b><br><small>'+m.artista+'<br>🎧 '+(m.vsName||'VS')+'<br>🎵 '+(m.playbackName||'Playback')+'</small></div><div style="display:flex;flex-direction:column;gap:4px"><button class="small gold" onclick="tocar('+m.idLocal+')">▶ TOCAR COM VS</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');
+    cVs.innerHTML=comVS.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma cifra com VS/Playback offline</div>':comVS.map(m=>'<div style="background:var(--card2);border:1px solid var(--gold);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>🎧 '+m.nome+'</b><br><small>'+m.artista+'<br>🎧 '+(m.vsName||'VS')+'<br>🎵 '+(m.playbackName||'Playback')+' • OFFLINE</small></div><div style="display:flex;flex-direction:column;gap:4px"><button class="small gold" onclick="tocar('+m.idLocal+')">▶ TOCAR OFFLINE</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');
   }
   if(p){
     var grupos={};todas.forEach(m=>{var art=(m.artista||'Sem Artista').trim();if(!grupos[art]) grupos[art]=[];grupos[art].push(m);});
-    p.innerHTML=Object.keys(grupos).length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma</div>':Object.keys(grupos).sort().map(art=>'<div style="border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden"><div style="padding:14px;background:var(--card2);display:flex;justify-content:space-between;cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'"><b style="color:var(--gold)">📁 '+art+'</b><small>'+grupos[art].length+'</small></div><div style="display:none;padding:6px">'+grupos[art].map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>'+m.nome+(m.hasVS?' 🎧':'')+'</div><div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div></div>').join('')+'</div></div>').join('');
+    p.innerHTML=Object.keys(grupos).length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma</div>':Object.keys(grupos).sort().map(art=>'<div style="border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden"><div style="padding:14px;background:var(--card2);display:flex;justify-content:space-between;cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'"><b style="color:var(--gold)">📁 '+art+'</b><small>'+grupos[art].length+' • OFFLINE</small></div><div style="display:none;padding:6px">'+grupos[art].map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>'+m.nome+(m.hasVS?' 🎧':'')+'</div><div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div></div>').join('')+'</div></div>').join('');
   }
 }
 function tocar(id){
@@ -445,6 +492,11 @@ function tocar(id){
   var m=lista[id];if(!m) return;
   document.getElementById('inputCifra').value=m.cifra;document.getElementById('inputCifraHome').value=m.cifra;bpm=m.bpm||100;pitch=m.pitch||0;transpose=m.transpose||0;if(m.letraSize){letraSize=m.letraSize;cifraSize=m.cifraSize||Math.max(6,m.letraSize-4);}
   document.getElementById('nomeMusica').value=m.nome;document.getElementById('artistaMusica').value=m.artista;updateUI();renderCifra();showView('view-home');updateSize();setBPM(bpm);setPitch(pitch);
+  // Tenta carregar VS/Playback offline
+  var vsData=localStorage.getItem('taki-vs-data-'+userKey);
+  var playbackData=localStorage.getItem('taki-playback-data-'+userKey);
+  if(vsData){document.getElementById('audioVS').src=vsData;document.getElementById('vsInfo').innerText=localStorage.getItem('taki-vs-name-'+userKey)||'VS Offline';}
+  if(playbackData){document.getElementById('audioPlayback').src=playbackData;document.getElementById('playbackInfo').innerText=localStorage.getItem('taki-playback-name-'+userKey)||'Playback Offline';}
 }
 function remover(id){
   if(!confirm('Remover?')) return;
@@ -452,7 +504,13 @@ function remover(id){
   var lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');
   lista.splice(id,1);
   localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));
-  carregar();
+  carregar();atualizarContadoresOffline();
+}
+function atualizarContadoresOffline(){
+  var userKey=currentUser?currentUser.email:'geral';
+  var todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');
+  var el=document.getElementById('cifrasOfflineCount');
+  if(el) el.innerText=todas.length+' cifras offline';
 }
 function salvarConfigProLive(){var cfg={codigo:document.getElementById('codigoDono').value||'TAKI123',pixKey:document.getElementById('pixKey').value||'',pixNome:document.getElementById('pixNome').value||'',musicas:document.getElementById('listaMusicasPedidos').value||''};localStorage.setItem('taki-pro-live-config',JSON.stringify(cfg));gerarQRCode();return cfg;}
 function carregarConfigProLive(){var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');if(cfg.codigo) document.getElementById('codigoDono').value=cfg.codigo;if(cfg.pixKey) document.getElementById('pixKey').value=cfg.pixKey;if(cfg.pixNome) document.getElementById('pixNome').value=cfg.pixNome;if(cfg.musicas) document.getElementById('listaMusicasPedidos').value=cfg.musicas;return cfg;}
@@ -467,42 +525,44 @@ function renderPedidos(){
   var cont=document.getElementById('listaPedidosLive');
   var mini=document.getElementById('pedidosTelaGrande');
   if(pedidos.length==0){
-    cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)"><b>Aguardando pedidos...</b></div>';
+    cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)"><b>Aguardando pedidos online...</b><br><small>Cifras e VS funcionam offline</small></div>';
     if(mini) mini.innerHTML='<small style="color:var(--muted)">Nenhum pedido</small>';
     return;
   }
-  cont.innerHTML=pedidos.map((p,i)=>'<div class="pedido-card"><div><b style="color:var(--gold)">🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small></div><div><button class="small gold" onclick="removerPedido('+i+')">✅</button></div></div>').join('');
-  if(mini) mini.innerHTML=pedidos.slice(0,3).map(p=>'<div style="background:var(--card2);padding:6px;border-radius:6px;margin:4px 0"><small style="color:var(--gold)">🎵 '+p.musica+'</small></div>').join('');
+  cont.innerHTML=pedidos.map((p,i)=>'<div class="pedido-card"><div><b style="color:var(--gold)">🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small>'+(p.recado?'<br><small style="color:#fff">💬 "'+p.recado+'"</small>':'')+'</div><div><button class="small gold" onclick="removerPedido('+i+')">✅</button></div></div>').join('');
+  if(mini) mini.innerHTML=pedidos.slice(0,3).map(p=>'<div style="background:var(--card2);padding:6px;border-radius:6px;margin:4px 0"><small style="color:var(--gold)">🎵 '+p.musica+(p.recado?' - '+p.recado.substring(0,20):'')+'</small></div>').join('');
   document.getElementById('ultimoPedidoMini').style.display='block';
   document.getElementById('ultimoPedidoTexto').innerText=pedidos[pedidos.length-1].musica;
 }
-function addPedido(musica,nome,gorjeta,mesa){
+function addPedido(musica,nome,gorjeta,mesa,recado){
   var now=new Date();var hora=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  var p={musica,nome:nome||'Cliente',gorjeta:parseFloat(gorjeta)||0,mesa:mesa||'-',hora, id:Date.now()};
+  var p={musica,nome:nome||'Cliente',gorjeta:parseFloat(gorjeta)||0,mesa:mesa||'-',recado:recado||'',hora, id:Date.now()};
   pedidos.push(p);totalCaixinha+=p.gorjeta;
   localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());
   renderPedidos();mostrarToast(p);playDing();if(navigator.vibrate) navigator.vibrate([200,100,200]);
 }
-function mostrarToast(p){document.getElementById('toastText').innerText='🎵 '+p.musica+' | R$ '+(p.gorjeta||0).toFixed(2);var toast=document.getElementById('liveToast');toast.style.display='block';setTimeout(()=>{toast.style.display='none';},6000);}
+function mostrarToast(p){document.getElementById('toastText').innerText='🎵 '+p.musica+' '+(p.recado?'💬 '+p.recado.substring(0,20):'')+' | R$ '+(p.gorjeta||0).toFixed(2);var toast=document.getElementById('liveToast');toast.style.display='block';setTimeout(()=>{toast.style.display='none';},6000);}
 function playDing(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var osc=ctx.createOscillator();var gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;gain.gain.value=0.3;osc.start();gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.6);osc.stop(ctx.currentTime+0.6);}catch(e){}}
 function removerPedido(i){totalCaixinha-=pedidos[i].gorjeta||0;pedidos.splice(i,1);localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());renderPedidos();}
 function limparPedidos(){if(!confirm('Limpar?')) return;pedidos=[];totalCaixinha=0;localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha','0');renderPedidos();}
-function testarPedido(){var musicas=['Evidências','Boate Azul','Faroeste','Garçom'];var nomes=['João M5','Maria M2'];addPedido(musicas[Math.floor(Math.random()*musicas.length)],nomes[Math.floor(Math.random()*nomes.length)], [2,5,10,20][Math.floor(Math.random()*4)], Math.floor(Math.random()*10)+1);}
+function testarPedido(){addPedido('Evidências','João M5',5,'M5','Toca pra minha esposa! Te amo!');}
 function conectarNtfy(){
   var cfg=salvarConfigProLive();var codigo=cfg.codigo||'TAKI123';var topic='taki-pro-live-'+codigo.toLowerCase();
   if(ntfySource) ntfySource.close();
+  if(!navigator.onLine){document.getElementById('liveStatus').innerText='● OFFLINE';document.getElementById('liveStatus').style.background='#8a8a8a';document.getElementById('offlineBadge').innerText='SEM INTERNET - Só cifra/VS offline';return;}
   try{
     ntfySource=new EventSource('https://ntfy.sh/'+topic+'/sse');
-    ntfySource.onmessage=function(e){try{var data=JSON.parse(e.data);if(data.event==='message'){var msg=data.message||'';try{var pedido=JSON.parse(msg);if(pedido.musica){addPedido(pedido.musica,pedido.nome,pedido.gorjeta,pedido.mesa);}}catch(err){}} }catch(err){}};
-    ntfySource.onopen=function(){document.getElementById('liveStatus').innerText='● AO VIVO';document.getElementById('liveStatus').style.background='#00ff00';};
+    ntfySource.onmessage=function(e){try{var data=JSON.parse(e.data);if(data.event==='message'){var msg=data.message||'';try{var pedido=JSON.parse(msg);if(pedido.musica){addPedido(pedido.musica,pedido.nome,pedido.gorjeta,pedido.mesa,pedido.recado);}}catch(err){}} }catch(err){}};
+    ntfySource.onopen=function(){document.getElementById('liveStatus').innerText='● AO VIVO';document.getElementById('liveStatus').style.background='#00ff00';document.getElementById('offlineBadge').innerText='ONLINE + OFFLINE OK';};
+    ntfySource.onerror=function(){document.getElementById('liveStatus').innerText='● OFFLINE';document.getElementById('liveStatus').style.background='#8a8a8a';};
   }catch(err){}
 }
 function exportarBackup(){
   var userKey=currentUser?currentUser.email:'geral';
-  var data={cifras:localStorage.getItem('taki-pro-live-'+userKey),config:localStorage.getItem('taki-pro-live-config'),pedidos:localStorage.getItem('taki-pro-pedidos'),caixinha:localStorage.getItem('taki-pro-caixinha'),tema:localStorage.getItem('taki-theme'),font:localStorage.getItem('taki-font'),letraSize:localStorage.getItem('taki-letraSize'),bpm:localStorage.getItem('taki-bpm'),pitch:localStorage.getItem('taki-pitch'),scrollSpeed:localStorage.getItem('taki-scrollSpeed'),date:new Date().toISOString()};
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='TAKI-PRO-LIVE-BACKUP-'+userKey+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
+  var data={cifras:localStorage.getItem('taki-pro-live-'+userKey),config:localStorage.getItem('taki-pro-live-config'),pedidos:localStorage.getItem('taki-pro-pedidos'),caixinha:localStorage.getItem('taki-pro-caixinha'),vsData:localStorage.getItem('taki-vs-data-'+userKey),playbackData:localStorage.getItem('taki-playback-data-'+userKey),tema:localStorage.getItem('taki-theme'),font:localStorage.getItem('taki-font'),letraSize:localStorage.getItem('taki-letraSize'),bpm:localStorage.getItem('taki-bpm'),pitch:localStorage.getItem('taki-pitch'),scrollSpeed:localStorage.getItem('taki-scrollSpeed'),date:new Date().toISOString()};
+  var blob=new Blob([JSON.stringify(data)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='TAKI-PRO-LIVE-BACKUP-'+userKey+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
 }
-function importarBackup(input){var f=input.files[0];if(!f) return;var reader=new FileReader();reader.onload=function(e){try{var data=JSON.parse(e.target.result);var userKey=currentUser?currentUser.email:'geral';if(data.cifras) localStorage.setItem('taki-pro-live-'+userKey,data.cifras);if(data.config) localStorage.setItem('taki-pro-live-config',data.config);if(data.pedidos) localStorage.setItem('taki-pro-pedidos',data.pedidos);if(data.caixinha) localStorage.setItem('taki-pro-caixinha',data.caixinha);if(data.tema) localStorage.setItem('taki-theme',data.tema);if(data.font) localStorage.setItem('taki-font',data.font);if(data.letraSize) localStorage.setItem('taki-letraSize',data.letraSize);if(data.bpm) localStorage.setItem('taki-bpm',data.bpm);if(data.pitch) localStorage.setItem('taki-pitch',data.pitch);if(data.scrollSpeed) localStorage.setItem('taki-scrollSpeed',data.scrollSpeed);alert('✅ Importado!');location.reload();}catch(err){alert('❌ Arquivo inválido!');}};reader.readAsText(f);}
+function importarBackup(input){var f=input.files[0];if(!f) return;var reader=new FileReader();reader.onload=function(e){try{var data=JSON.parse(e.target.result);var userKey=currentUser?currentUser.email:'geral';if(data.cifras) localStorage.setItem('taki-pro-live-'+userKey,data.cifras);if(data.config) localStorage.setItem('taki-pro-live-config',data.config);if(data.pedidos) localStorage.setItem('taki-pro-pedidos',data.pedidos);if(data.caixinha) localStorage.setItem('taki-pro-caixinha',data.caixinha);if(data.vsData) localStorage.setItem('taki-vs-data-'+userKey,data.vsData);if(data.playbackData) localStorage.setItem('taki-playback-data-'+userKey,data.playbackData);if(data.tema) localStorage.setItem('taki-theme',data.tema);if(data.font) localStorage.setItem('taki-font',data.font);if(data.letraSize) localStorage.setItem('taki-letraSize',data.letraSize);if(data.bpm) localStorage.setItem('taki-bpm',data.bpm);if(data.pitch) localStorage.setItem('taki-pitch',data.pitch);if(data.scrollSpeed) localStorage.setItem('taki-scrollSpeed',data.scrollSpeed);alert('✅ Importado offline!');location.reload();}catch(err){alert('❌ Arquivo inválido!');}};reader.readAsText(f);}
 
 function handleClientePage(){
   var params=new URLSearchParams(window.location.search);
@@ -511,10 +571,16 @@ function handleClientePage(){
   document.getElementById('loginScreen').style.display='none';
   document.querySelector('.header').style.display='none';
   document.getElementById('menuOverlay').style.display='none';
-  document.querySelector('.main').innerHTML='<div class="card pro" style="text-align:center"><h2 style="color:var(--gold)">🎤 PEDE SUA MÚSICA</h2><p style="color:var(--muted);font-size:12px;margin:8px 0">Mesa: '+codigo+' - Escolha e mande sua gorjeta!</p><input type="text" id="nomeCliente" placeholder="Seu nome" style="margin:10px 0"><select id="musicaCliente" style="margin:10px 0"></select><div style="margin:10px 0"><b style="color:var(--gold);font-size:11px">💰 CAIXINHA - ESCOLHA O VALOR:</b><div class="caixinha-grid"><button class="caixinha-btn" onclick="selecionarGorjeta(2)">R$ 2</button><button class="caixinha-btn" onclick="selecionarGorjeta(5)">R$ 5</button><button class="caixinha-btn" onclick="selecionarGorjeta(10)">R$ 10</button><button class="caixinha-btn" onclick="selecionarGorjeta(20)">R$ 20</button><button class="caixinha-btn gold" onclick="selecionarGorjeta(0,true)">LIVRE</button></div><div id="gorjetaLivreDiv" style="display:none"><input type="number" id="gorjetaLivre" placeholder="Digite valor R$ (ex: 15,50)" style="margin-top:8px"></div><div id="gorjetaSelecionada" style="margin-top:8px;color:var(--gold);font-weight:800">Selecionado: R$ 0,00</div></div><button class="btn gold big" onclick="enviarPedidoCliente()">🎵 ENVIAR PEDIDO + GORJETA</button><div id="pixCliente" style="margin-top:20px;display:none;background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:14px"><b style="color:var(--gold)">✅ Pedido enviado! Agora mande a gorjeta no PIX:</b><br><small id="pixInfo" style="color:#fff"></small><br><button class="btn gold big" style="margin-top:10px" onclick="copiarPix()">📋 COPIAR CHAVE PIX</button><br><small style="color:var(--muted);font-size:10px">Mostre o comprovante pro músico!</small></div></div>';
+  document.querySelector('.main').innerHTML='<div class="card pro" style="text-align:center"><h2 style="color:var(--gold)">🎤 PEDE SUA MÚSICA</h2><p style="color:var(--muted);font-size:11px;margin:8px 0">Mesa: '+codigo+'</p><input type="text" id="nomeCliente" placeholder="Seu nome" style="margin:10px 0"><div class="client-tab"><button id="tabMusicaBtn" class="client-tab-btn active" onclick="mostrarTabCliente(\'musica\')">🎵 MÚSICA + RECADO</button><button id="tabCaixinhaBtn" class="client-tab-btn" onclick="mostrarTabCliente(\'caixinha\')">💰 CAIXINHA</button></div><div id="tabMusica"><select id="musicaCliente" style="margin:10px 0"></select><textarea id="recadoCliente" placeholder="Deixe um recado pro músico... Ex: Toca essa pra minha esposa, te amo! (opcional)" style="margin-top:8px;min-height:80px"></textarea><button class="btn gold big" onclick="enviarPedidoClienteMusica()">🎵 ENVIAR MÚSICA + RECADO</button><small style="color:var(--muted);font-size:9px;display:block;margin-top:6px">Botão 1 - Envia música com recado</small></div><div id="tabCaixinha" style="display:none"><div style="margin:10px 0"><b style="color:var(--gold);font-size:11px">💰 CAIXINHA - ESCOLHA O VALOR:</b><div class="caixinha-grid"><button class="caixinha-btn" onclick="selecionarGorjeta(2)">R$ 2</button><button class="caixinha-btn" onclick="selecionarGorjeta(5)">R$ 5</button><button class="caixinha-btn" onclick="selecionarGorjeta(10)">R$ 10</button><button class="caixinha-btn" onclick="selecionarGorjeta(20)">R$ 20</button><button class="caixinha-btn gold" onclick="selecionarGorjeta(0,true)">LIVRE</button></div><div id="gorjetaLivreDiv" style="display:none"><input type="number" id="gorjetaLivre" placeholder="Digite valor R$ (ex: 15,50)" style="margin-top:8px"></div><div id="gorjetaSelecionada" style="margin-top:8px;color:var(--gold);font-weight:800">Selecionado: R$ 0,00</div></div><button class="btn gold big" onclick="enviarPedidoClienteCaixinha()">💰 ENVIAR CAIXINHA</button><small style="color:var(--muted);font-size:9px;display:block;margin-top:6px">Botão 2 - Envia só caixinha / gorjeta</small></div><div id="pixCliente" style="margin-top:20px;display:none;background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:14px"><b style="color:var(--gold)">✅ Enviado! PIX do músico:</b><br><small id="pixInfo" style="color:#fff"></small><br><button class="btn gold big" style="margin-top:10px" onclick="copiarPix()">📋 COPIAR CHAVE PIX</button></div></div>';
   var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{"musicas":"Evidências\\nBoate Azul\\nFaroeste Caboclo","pixKey":"PIX não configurado","pixNome":""}');
   var musicas=(cfg.musicas||'Evidências\nBoate Azul\nFaroeste Caboclo').split('\n');
   var sel=document.getElementById('musicaCliente');sel.innerHTML='';musicas.forEach(m=>{if(!m.trim()) return;var opt=document.createElement('option');opt.value=m.trim();opt.text=m.trim();sel.appendChild(opt);});
+  window.mostrarTabCliente=function(tipo){
+    document.getElementById('tabMusica').style.display=tipo=='musica'?'block':'none';
+    document.getElementById('tabCaixinha').style.display=tipo=='caixinha'?'block':'none';
+    document.getElementById('tabMusicaBtn').classList.toggle('active',tipo=='musica');
+    document.getElementById('tabCaixinhaBtn').classList.toggle('active',tipo=='caixinha');
+  };
   window.selecionarGorjeta=function(valor,livre){
     document.querySelectorAll('.caixinha-btn').forEach(b=>b.classList.remove('active'));
     if(livre){
@@ -528,16 +594,27 @@ function handleClientePage(){
       event.target.classList.add('active');
     }
   };
-  window.enviarPedidoCliente=function(){
+  window.enviarPedidoClienteMusica=function(){
     var musica=document.getElementById('musicaCliente').value;
+    var nome=document.getElementById('nomeCliente').value||'Cliente';
+    var recado=document.getElementById('recadoCliente').value||'';
+    var topic='taki-pro-live-'+codigo.toLowerCase();
+    fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify({musica:musica,nome:nome,gorjeta:0,mesa:codigo,recado:recado,tipo:'musica'})}).then(()=>{
+      document.getElementById('pixCliente').style.display='block';
+      document.getElementById('pixInfo').innerText=(cfg.pixKey||'PIX não configurado')+' - '+(cfg.pixNome||'');
+      alert('🎵 Música enviada! '+musica+(recado?' + recado: '+recado:''));
+    });
+  };
+  window.enviarPedidoClienteCaixinha=function(){
     var nome=document.getElementById('nomeCliente').value||'Cliente';
     var gorjeta=gorjetaSelecionada;
     if(gorjeta==-1){gorjeta=parseFloat(document.getElementById('gorjetaLivre').value)||0;}
-    if(gorjeta==0){if(!confirm('Enviar sem gorjeta? Escolha um valor pra ajudar o músico!')) return;}
+    if(gorjeta==0){if(!confirm('Enviar caixinha sem valor?')) return;}
     var topic='taki-pro-live-'+codigo.toLowerCase();
-    fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify({musica:musica,nome:nome,gorjeta:gorjeta,mesa:codigo})}).then(()=>{
+    fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify({musica:'💰 CAIXINHA / GORJETA',nome:nome,gorjeta:gorjeta,mesa:codigo,recado:'Caixinha enviada!',tipo:'caixinha'})}).then(()=>{
       document.getElementById('pixCliente').style.display='block';
-      document.getElementById('pixInfo').innerText=(cfg.pixKey||'PIX não configurado')+' - '+(cfg.pixNome||'');
+      document.getElementById('pixInfo').innerText=(cfg.pixKey||'PIX não configurado')+' - '+(cfg.pixNome||'')+' - Valor: R$ '+gorjeta.toFixed(2);
+      alert('💰 Caixinha enviada! R$ '+gorjeta.toFixed(2));
     });
   };
   window.copiarPix=function(){var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');navigator.clipboard.writeText(cfg.pixKey||'').then(()=>alert('PIX copiado!'));};
@@ -559,11 +636,19 @@ document.addEventListener('DOMContentLoaded',function(){
   carregarConfigProLive();
   var savedPedidos=JSON.parse(localStorage.getItem('taki-pro-pedidos')||'[]');pedidos=savedPedidos;
   totalCaixinha=parseFloat(localStorage.getItem('taki-pro-caixinha')||'0');
+  // Restaura VS/Playback offline
+  var userKey=JSON.parse(localStorage.getItem('taki-currentUser')||'{}').email||'geral';
+  var vsData=localStorage.getItem('taki-vs-data-'+userKey);
+  var playbackData=localStorage.getItem('taki-playback-data-'+userKey);
+  if(vsData){document.getElementById('audioVS').src=vsData;document.getElementById('vsInfo').innerText=localStorage.getItem('taki-vs-name-'+userKey)||'VS Offline OK';window._hasVS=true;window._hasVSName=localStorage.getItem('taki-vs-name-'+userKey);}
+  if(playbackData){document.getElementById('audioPlayback').src=playbackData;document.getElementById('playbackInfo').innerText=localStorage.getItem('taki-playback-name-'+userKey)||'Playback Offline OK';window._hasPlayback=true;window._hasPlaybackName=localStorage.getItem('taki-playback-name-'+userKey);}
   renderPedidos();renderCifra();carregar();updateUI();updateSize();gerarQRCode();conectarNtfy();
   document.getElementById('audioVS').volume=0.8;document.getElementById('audioPlayback').volume=0.8;
+  window.addEventListener('online',()=>{conectarNtfy();document.getElementById('offlineBadge').innerText='ONLINE + OFFLINE OK';});
+  window.addEventListener('offline',()=>{document.getElementById('offlineBadge').innerText='OFFLINE - Cifra e VS OK';document.getElementById('liveStatus').innerText='● OFFLINE';});
 });
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(()=>{console.log('SW OK - Offline ativo');}).catch(()=>{});}
 </script>
 </body>
 </html>
