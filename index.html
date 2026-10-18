@@ -71,7 +71,6 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 </head>
 <body>
 
-<!-- TELA LOGIN -->
 <div id="loginScreen">
 <div style="background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:24px;width:100%;max-width:380px">
 <h2 style="color:var(--gold);text-align:center;font-weight:900">TAKI PRO LIVE</h2>
@@ -81,7 +80,6 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <input type="password" id="loginPass" placeholder="Sua senha" style="margin-bottom:14px">
 <button class="btn gold big" onclick="fazerLogin()">ENTRAR</button>
 <button class="btn big" onclick="mostrarCadastro()">CRIAR CONTA GRÁTIS</button>
-<small style="color:var(--muted);display:block;text-align:center;margin-top:12px;font-size:9px">Admin padrão: admin@taki / taki123</small>
 </div>
 <div id="cadastroForm" style="display:none">
 <input type="text" id="cadNome" placeholder="Seu nome artístico" style="margin-bottom:10px">
@@ -94,7 +92,6 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 </div>
 </div>
 
-<!-- TELA BLOQUEADO -->
 <div id="blockedScreen">
 <div style="background:var(--card);border:2px solid #ff4a4a;border-radius:16px;padding:24px;max-width:400px;width:100%">
 <h2 style="color:#ff4a4a">🚫 SISTEMA BLOQUEADO</h2>
@@ -117,25 +114,19 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div id="menuPanel">
 <div style="display:flex;justify-content:space-between"><b style="color:var(--gold)">TAKI PRO LIVE</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><small style="color:var(--muted)">Logado como:</small><br><b id="menuUserName" style="color:var(--gold);font-size:12px">-</b><br><small id="menuUserEmail" style="color:var(--muted);font-size:10px">-</small></div>
-
 <div class="menu-title">NAVEGAÇÃO</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🏠 HOME - PALCO</button>
-
 <div class="menu-title">PRO LIVE</div>
 <button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-prolive')">🎤 PEDIDOS AO VIVO + CAIXINHA</button>
 <button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE DA MESA</button>
-
 <div class="menu-title">MINHAS CIFRAS</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 MINHAS CIFRAS SALVAS</button>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras-vs');carregar()">🎧 CIFRAS COM VS / PLAYBACK SALVAS</button>
 <button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-pastas');carregar()">📁 PASTAS POR ARTISTA</button>
-
 <div class="menu-title">CONFIGURAÇÃO</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-config')">⚙️ CONFIGURAÇÃO COMPLETA</button>
-
 <div class="menu-title" id="adminMenuTitle" style="display:none">ADMIN - TAKI</div>
 <button class="menu-item pro" id="adminMenuBtn" style="display:none" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-admin');carregarUsuarios()">👑 PAINEL ADMIN - USUÁRIOS</button>
-
 <div class="menu-title">BACKUP E APP</div>
 <button class="menu-item gold" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
 <button class="menu-item gold" onclick="document.getElementById('fileImport').click()">📥 IMPORTAR BACKUP</button>
@@ -143,27 +134,23 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="menu-item" onclick="if(window.deferredPrompt)window.deferredPrompt.prompt()">📲 INSTALAR APP</button>
 <button class="menu-item gold" onclick="doShare()">📤 COMPARTILHAR</button>
 <button class="menu-item" style="border:1px solid #ff4a4a;color:#ff4a4a" onclick="fazerLogout()">🚪 SAIR DA CONTA</button>
-<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.4 - Com Login</small>
+<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.5 - Limpo</small>
 </div>
 </div>
 
 <div class="main">
 <div id="view-home" class="view active">
 <div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
-
 <div class="card t1">
 <div class="card-header">VS + PLAYBACK</div>
 <div class="volume-prof"><div class="volume-label"><b>VS BATERIA</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div></div>
 <div class="volume-prof"><div class="volume-label"><b>PLAYBACK</b><span id="playbackInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK</div><input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold)">80</span></div></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div>
 </div>
-
 <div class="card" style="border-left:3px solid var(--gold)"><div class="card-header">BPM + PITCH</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">BPM</small><div id="bpmDisplay" class="bpm-display">100</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changeBPM(-5)" style="flex:1">-5</button><button class="small gold" onclick="changeBPM(-1)" style="flex:1">-1</button><button class="small gold" onclick="changeBPM(1)" style="flex:1">+1</button><button class="small" onclick="changeBPM(5)" style="flex:1">+5</button></div><input type="range" id="bpmRange" min="40" max="240" value="100" style="width:100%;margin-top:10px" oninput="setBPM(this.value)"></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">PITCH</small><div id="pitchDisplay" class="bpm-display" style="font-size:20px">0</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changePitch(-1)" style="flex:1">-1</button><button class="small gold" onclick="changePitch(0,true)" style="flex:1">0</button><button class="small" onclick="changePitch(1)" style="flex:1">+1</button></div><input type="range" id="pitchRange" min="-12" max="12" value="0" style="width:100%;margin-top:10px" oninput="setPitch(this.value)"></div></div></div>
-
 <div class="card" style="border:1px dashed var(--line2)"><div class="card-header">CIFRA - COLE E SALVE COM VS</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="text" id="artistaMusica" placeholder="Artista"><input type="text" id="nomeMusica" placeholder="Música"></div><textarea id="inputCifraHome" placeholder="Cole a cifra..." oninput="renderCifra()"></textarea>
 <div style="display:flex;gap:8px;margin-top:8px"><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkVS" checked> Salvar VS junto</label><label style="display:flex;align-items:center;gap:6px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px"><input type="checkbox" id="checkPlayback" checked> Salvar Playback junto</label></div>
 <button class="btn gold big" onclick="salvarMusica()">💾 SALVAR CIFRA (+ VS/Playback se marcado)</button><button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela();showFloat()">⛶ TELA CHEIA</button><div id="saveStatus" style="margin-top:10px;color:var(--gold);text-align:center"></div></div>
-
 <div class="card" style="padding:0;overflow:hidden">
 <div class="preview-wrapper">
 <div class="preview-top"><b style="color:var(--gold);font-size:10px">TOM:</b><div id="transposeInfo" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="small" onclick="changeTranspose(-1)">-1</button><button class="small gold" onclick="changeTranspose(0,true)">0</button><button class="small" onclick="changeTranspose(1)">+1</button><button class="small gold" onclick="toggleScroll('normal')">▶️ ROLAGEM</button></div>
@@ -172,14 +159,10 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div class="preview-content" id="output"><div class="preview-empty">Cole a cifra acima que a prévia aparece aqui sem espaço vago</div></div>
 </div>
 </div>
-
 <div class="card scroll-prof"><div class="card-header">ROLAGEM</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800">2</span></div><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 </div>
-
 <div id="view-prolive" class="view"><div class="card pro"><div class="card-header">PEDIDOS AO VIVO + CAIXINHA</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div><button class="btn gold big" onclick="testarPedido()">🔔 TESTAR PEDIDO</button></div><div class="card"><div class="card-header">CONFIG PRO LIVE</div><input type="text" id="codigoDono" value="TAKI123" style="margin-top:6px;color:var(--gold)" onchange="salvarConfigProLive()"><input type="text" id="pixKey" placeholder="PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><input type="text" id="pixNome" placeholder="Nome PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><textarea id="listaMusicasPedidos" placeholder="Músicas que cliente pode pedir" style="min-height:100px;margin-top:8px" onchange="salvarConfigProLive()"></textarea><button class="btn gold big" style="margin-top:10px" onclick="salvarConfigProLive();conectarNtfy()">💾 SALVAR E CONECTAR AO VIVO</button></div></div>
-
 <div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE - CLIENTE PEDE MÚSICA</div><div id="qrContainer" class="qr-box"></div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all;color:var(--gold)"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK</button><button class="btn big" onclick="compartilharLinkCliente()">📤 COMPARTILHAR LINK</button></div></div>
-
 <div id="view-config" class="view">
 <div class="card">
 <div class="card-header">CONFIGURAÇÃO COMPLETA</div>
@@ -190,11 +173,9 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="btn big" style="margin-top:12px" onclick="showView('view-home')">← VOLTAR HOME</button>
 </div>
 </div>
-
 <div id="view-cifras" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>📄 MINHAS CIFRAS SALVAS</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><div id="listaCifras" style="margin-top:12px"></div></div></div>
 <div id="view-cifras-vs" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>🎧 CIFRAS COM VS / PLAYBACK SALVAS</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><small style="color:var(--muted)">Só mostra cifras que foram salvas com VS ou Playback junto</small><div id="listaCifrasVs" style="margin-top:12px"></div></div></div>
 <div id="view-pastas" class="view"><div class="card"><b>📁 PASTAS POR ARTISTA</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
-
 <div id="view-admin" class="view">
 <div class="card pro">
 <div class="card-header">👑 PAINEL ADMIN - TAKI - TODOS USUÁRIOS</div>
@@ -208,20 +189,15 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="btn gold big" style="margin-top:12px" onclick="carregarUsuarios()">🔄 ATUALIZAR LISTA</button>
 </div>
 </div>
-
 </div>
-
 <div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent" onclick="showFloat()"></div><div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div><div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button><button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button><button class="small" onclick="stopScroll();resetHide()">⏸️</button></div><div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><span id="scrollSpeedVal" style="display:none"></span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div><div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div></div><div style="display:flex;gap:6px"><button class="small gold" onclick="changeBothSize(-3);resetHide()" style="flex:1">MICRO</button><button class="small gold" onclick="changeBothSize(-1);resetHide()" style="flex:1">MENOR</button><button class="small gold" onclick="changeBothSize(1);resetHide()" style="flex:1">MAIOR</button></div><div style="display:flex;gap:6px"><button class="small gold" onclick="playBoth();resetHide()" style="flex:1">▶ PLAY 2</button><button class="small" onclick="pauseBoth();resetHide()" style="flex:1">⏸</button></div></div><button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button></div>
-
 <textarea id="inputCifra" style="display:none"></textarea>
 <textarea id="inputFull" style="display:none"></textarea>
-
 <script>
 var letraSize=16,cifraSize=12,transpose=0,bpm=100,pitch=0,hideTimer=null;
 var scrollInterval=null,scrollSpeed=2,isScrolling=false,scrollMode='normal';
 var pedidos=[],totalCaixinha=0,ntfySource=null,currentUser=null,gorjetaSelecionada=0;
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-
 var THEMES=[
 {name:'Branco Leve',bg:'#f5f5f0',card:'#ffffff',card2:'#eeeeee',card3:'#e0e0e0',text:'#111111',muted:'#666',line:'#cccccc',line2:'#bbbbbb',cifra:'#b8860b',letra:'#000000',gold:'#c9a86a'},
 {name:'Preto Pro',bg:'#080808',card:'#121212',card2:'#181818',card3:'#1e1e1e',text:'#e8dcc0',muted:'#8a8a8a',line:'#232323',line2:'#2a2a2a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#c9a86a'},
@@ -246,8 +222,6 @@ var FONTS=[
 {name:'Impact',family:"Impact,sans-serif"},
 {name:'Comic',family:"'Comic Sans MS',cursive"}
 ];
-
-// LOGIN SYSTEM
 function initUsers(){
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   if(users.length==0){
@@ -306,7 +280,6 @@ function entrarSistema(){
     document.getElementById('adminMenuTitle').style.display='block';
     document.getElementById('adminMenuBtn').style.display='block';
   }
-  // Carrega dados do usuário
   carregar();gerarQRCode();conectarNtfy();renderPedidos();
 }
 function fazerLogout(){localStorage.removeItem('taki-currentUser');currentUser=null;location.reload();}
@@ -336,7 +309,6 @@ function removerUser(i){
   localStorage.setItem('taki-users',JSON.stringify(users));
   carregarUsuarios();
 }
-
 window.applyTheme = function(idx){
   var t=THEMES[idx];
   var r=document.documentElement.style;
@@ -373,7 +345,6 @@ function renderFontsInit(){
     var btn=document.createElement('button');btn.className='small '+(i==cur?'gold active':'');btn.style.fontFamily=f.family;btn.style.padding='10px';btn.style.textAlign='left';btn.innerText=(i==cur?'✅ ':'')+f.name;btn.onclick=function(){ window.applyFont(i); };grid.appendChild(btn);
   });
 }
-
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='view-qr') gerarQRCode();}
 function loadVS(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioVS');a.src=url;a.volume=document.getElementById('volVS').value/100;a.load();a.play().catch(()=>{});document.getElementById('vsInfo').innerText=f.name.substring(0,20);updateRate();window._hasVS=true;window._hasVSName=f.name;}
 function loadPlayback(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioPlayback');a.src=url;a.volume=document.getElementById('volPlayback').value/100;a.load();a.play().catch(()=>{});document.getElementById('playbackInfo').innerText=f.name.substring(0,20);updateRate();window._hasPlayback=true;window._hasPlaybackName=f.name;}
@@ -474,7 +445,6 @@ function tocar(id){
   var m=lista[id];if(!m) return;
   document.getElementById('inputCifra').value=m.cifra;document.getElementById('inputCifraHome').value=m.cifra;bpm=m.bpm||100;pitch=m.pitch||0;transpose=m.transpose||0;if(m.letraSize){letraSize=m.letraSize;cifraSize=m.cifraSize||Math.max(6,m.letraSize-4);}
   document.getElementById('nomeMusica').value=m.nome;document.getElementById('artistaMusica').value=m.artista;updateUI();renderCifra();showView('view-home');updateSize();setBPM(bpm);setPitch(pitch);
-  if(m.hasVS||m.hasPlayback){alert('🎧 Cifra com VS/Playback: '+m.nome+'\n\nCarregue os áudios VS/Playback de novo (navegador não guarda áudio por segurança), mas já tá marcado que essa cifra usa VS!');}
 }
 function remover(id){
   if(!confirm('Remover?')) return;
@@ -484,7 +454,6 @@ function remover(id){
   localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));
   carregar();
 }
-
 function salvarConfigProLive(){var cfg={codigo:document.getElementById('codigoDono').value||'TAKI123',pixKey:document.getElementById('pixKey').value||'',pixNome:document.getElementById('pixNome').value||'',musicas:document.getElementById('listaMusicasPedidos').value||''};localStorage.setItem('taki-pro-live-config',JSON.stringify(cfg));gerarQRCode();return cfg;}
 function carregarConfigProLive(){var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');if(cfg.codigo) document.getElementById('codigoDono').value=cfg.codigo;if(cfg.pixKey) document.getElementById('pixKey').value=cfg.pixKey;if(cfg.pixNome) document.getElementById('pixNome').value=cfg.pixNome;if(cfg.musicas) document.getElementById('listaMusicasPedidos').value=cfg.musicas;return cfg;}
 function gerarQRCode(){var cfg=carregarConfigProLive();var codigo=cfg.codigo||document.getElementById('codigoDono').value||'TAKI123';var baseUrl=location.origin+location.pathname;var linkCliente=baseUrl+'?cliente='+codigo;document.getElementById('linkCliente').innerText=linkCliente;var qrDiv=document.getElementById('qrContainer');qrDiv.innerHTML='';QRCode.toCanvas(linkCliente,{width:200,margin:2},function(err,canvas){if(!err) qrDiv.appendChild(canvas);});}
@@ -569,7 +538,6 @@ function handleClientePage(){
     fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify({musica:musica,nome:nome,gorjeta:gorjeta,mesa:codigo})}).then(()=>{
       document.getElementById('pixCliente').style.display='block';
       document.getElementById('pixInfo').innerText=(cfg.pixKey||'PIX não configurado')+' - '+(cfg.pixNome||'');
-      alert('🎵 Pedido enviado! '+musica+'\n💰 R$ '+gorjeta.toFixed(2));
     });
   };
   window.copiarPix=function(){var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');navigator.clipboard.writeText(cfg.pixKey||'').then(()=>alert('PIX copiado!'));};
