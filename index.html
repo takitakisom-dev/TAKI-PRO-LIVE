@@ -12,10 +12,10 @@
 <style>
 :root{--gold:#c9a86a;--bg:#080808;--card:#121212;--card2:#181818;--card3:#1e1e1e;--text:#e8dcc0;--muted:#8a8a8a;--line:#232323;--line2:#2a2a2a;--cifra:#FFD700;--letra:#FFF;--header-bg:#0a0a0a;--font-main:'Montserrat',sans-serif;--font-cifra:'Montserrat',sans-serif}
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
-body{background:var(--bg);color:var(--text);padding-bottom:100px;transition:0.3s}
+body{background:var(--bg);color:var(--text);padding-bottom:100px}
 .header{background:linear-gradient(90deg,#0a0a0a,#1a1500);border-bottom:2px solid var(--gold);padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
-.header h1{color:var(--gold);font-size:14px;font-weight:900;width:100%;text-align:center;letter-spacing:2.5px}
-.header h1 span{color:#fff;font-size:10px;display:block;letter-spacing:4px;margin-top:2px;opacity:0.7}
+.header h1{color:var(--gold);font-size:14px;font-weight:900;width:100%;text-align:center}
+.header h1 span{color:#fff;font-size:10px;display:block;opacity:0.7}
 .hamburger{width:44px;height:44px;border:1px solid var(--gold);background:rgba(201,168,106,0.1);color:var(--gold);border-radius:8px;font-size:20px;cursor:pointer;position:absolute;left:12px}
 .btn{border:1px solid var(--line);background:var(--card2);color:var(--gold);padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:11px}
 .btn.gold{border:1px solid var(--gold);background:rgba(201,168,106,0.12);color:var(--gold)}
@@ -24,50 +24,48 @@ body{background:var(--bg);color:var(--text);padding-bottom:100px;transition:0.3s
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
 .card.t1{border:1px solid var(--line2);border-left:3px solid var(--gold)}
 .card.pro{border:1px solid var(--gold);background:linear-gradient(180deg,#121212,#1a150a)}
-.card-header{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:14px;letter-spacing:1.2px;text-transform:uppercase}
+.card-header{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:14px;text-transform:uppercase}
 .file-label{border:1px dashed var(--line2);padding:16px;border-radius:10px;display:block;text-align:center;background:var(--card2);color:var(--muted);font-weight:700;font-size:11px;cursor:pointer;margin:8px 0}
 input[type=text],textarea,select{width:100%;background:var(--card2);color:var(--text);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:14px;outline:none}
 textarea{min-height:160px;font-family:monospace;font-size:14px}
 .preview-wrapper{border:1px solid var(--line2);border-radius:12px;overflow:hidden;height:62vh;display:flex;flex-direction:column;margin-top:12px}
 .preview-top{background:var(--card);border-bottom:1px solid var(--line2);padding:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.preview-content{flex:1;overflow-y:auto;padding:16px;scroll-behavior:smooth}
+.preview-content{flex:1;overflow-y:auto;padding:16px}
 .cifra-line{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:6px;font-family:var(--font-cifra)}
 .letra-line{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block;font-family:var(--font-main);line-height:1.35}
 .section-label{color:var(--gold);font-weight:700;font-size:10px;border:1px solid var(--line2);padding:5px 12px;border-radius:20px;display:inline-block;margin:16px 0 8px 0;background:rgba(201,168,106,0.08)}
 .small{border:1px solid var(--line);background:var(--card2);color:var(--muted);padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;font-size:11px}
 .small.gold{border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,106,0.08)}
-.small.active{background:var(--gold);color:var(--bg)}
+.small.active{background:var(--gold);color:var(--bg)!important}
 .bpm-display{font-size:28px;font-weight:900;color:var(--gold);text-align:center}
 #menuOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999}
 #menuPanel{background:var(--bg);border-right:1px solid var(--gold);width:88%;max-width:380px;height:100%;padding:16px;overflow-y:auto}
-.menu-title{color:var(--gold);font-weight:800;font-size:10px;margin:22px 0 8px 0;border-bottom:1px solid var(--line);padding-bottom:6px;letter-spacing:1.2px}
+.menu-title{color:var(--gold);font-weight:800;font-size:10px;margin:22px 0 8px 0;border-bottom:1px solid var(--line);padding-bottom:6px}
 .menu-item{width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);color:var(--text);padding:13px;border-radius:8px;margin:6px 0;font-weight:600;cursor:pointer;font-size:12px}
 .menu-item.gold{border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,106,0.08)}
 .menu-item.pro{border:2px solid var(--gold);background:linear-gradient(90deg,rgba(201,168,106,0.15),rgba(201,168,106,0.05));color:var(--gold);font-weight:800}
 .view{display:none}.view.active{display:block}
 .volume-prof{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;margin:8px 0}
-.volume-label{color:var(--muted);font-weight:700;font-size:10px;letter-spacing:0.8px;margin-bottom:8px;display:flex;justify-content:space-between}
+.volume-label{color:var(--muted);font-weight:700;font-size:10px;display:flex;justify-content:space-between;margin-bottom:8px}
 .scroll-prof{background:var(--card2);border:1px solid var(--line2);border-radius:10px;padding:12px;margin:10px 0;border-left:3px solid var(--gold)}
 .pro-badge{background:var(--gold);color:#000;padding:3px 8px;border-radius:10px;font-size:9px;font-weight:900}
 .pedido-card{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
 .qr-box{background:#fff;padding:12px;border-radius:12px;display:inline-block;margin:10px 0}
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-.modal.open{display:flex}
-.modal-content{background:var(--card);border:1px solid var(--gold);border-radius:12px;padding:18px;width:100%;max-width:420px}
 #liveToast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#1a1500,#0a0a0a);border:2px solid var(--gold);border-radius:14px;padding:14px 20px;width:90%;max-width:400px;display:none;z-index:100}
 #telaGrande{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:1000;flex-direction:column}
 .tela-header{background:var(--header-bg);border-bottom:2px solid var(--gold);padding:12px;display:flex;justify-content:space-between;align-items:center}
-.tela-content{flex:1;overflow-y:auto;padding:20px 16px 200px 16px;scroll-behavior:smooth}
+.tela-content{flex:1;overflow-y:auto;padding:20px 16px 200px 16px}
 .tela-cifra{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:8px;font-family:var(--font-cifra)}
 .tela-letra{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block;font-family:var(--font-main)}
 input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 .theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.theme-btn{padding:14px;border-radius:10px;border:1px solid var(--line);font-weight:800;font-size:11px;cursor:pointer;text-align:left}
+.theme-btn{padding:14px;border-radius:10px;border:2px solid var(--line);font-weight:800;font-size:11px;cursor:pointer;text-align:left}
+.font-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 </style>
 </head>
 <body>
 
-<div id="liveToast"><div style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:var(--gold);font-size:13px">🔔 NOVO PEDIDO AO VIVO!</b><br><span id="toastText" style="color:#fff;font-size:12px"></span></div><button class="btn gold" onclick="document.getElementById('liveToast').style.display='none'">OK</button></div></div>
+<div id="liveToast"><div style="display:flex;justify-content:space-between;align-items:center"><div><b style="color:var(--gold);font-size:13px">🔔 NOVO PEDIDO!</b><br><span id="toastText" style="color:#fff;font-size:12px"></span></div><button class="btn gold" onclick="document.getElementById('liveToast').style.display='none'">OK</button></div></div>
 
 <div class="header">
 <button class="hamburger" onclick="document.getElementById('menuOverlay').style.display='block'">☰</button>
@@ -77,165 +75,59 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 
 <div id="menuOverlay" onclick="if(event.target.id==='menuOverlay')this.style.display='none'">
 <div id="menuPanel">
-<div style="display:flex;justify-content:space-between;align-items:center"><b style="color:var(--gold);font-size:13px">TAKI PRO LIVE</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div>
+<div style="display:flex;justify-content:space-between"><b style="color:var(--gold)">TAKI PRO LIVE</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div>
 <div class="menu-title">PRO LIVE</div>
 <button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-prolive')">🎤 PEDIDOS AO VIVO</button>
-<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE DA MESA</button>
+<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE</button>
 <div class="menu-title">PALCO</div>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🎸 PALCO</button>
 <button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-config')">⚙️ CONFIGURAÇÃO</button>
 <div class="menu-title">REPERTÓRIO</div>
-<button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 MINHAS CIFRAS</button>
+<button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 CIFRAS</button>
 <button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-pastas');carregar()">📁 PASTAS</button>
 <div class="menu-title">BACKUP</div>
-<button class="menu-item gold" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
-<button class="menu-item gold" onclick="document.getElementById('fileImport').click()">📥 IMPORTAR BACKUP</button>
+<button class="menu-item gold" onclick="exportarBackup()">💾 EXPORTAR</button>
+<button class="menu-item gold" onclick="document.getElementById('fileImport').click()">📥 IMPORTAR</button>
 <input type="file" id="fileImport" accept=".json" style="display:none" onchange="importarBackup(this)">
-<div class="menu-title">APP</div>
-<button class="menu-item" onclick="if(window.deferredPrompt)window.deferredPrompt.prompt()">📲 INSTALAR</button>
-<button class="menu-item gold" onclick="doShare()">📤 COMPARTILHAR</button>
-<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.2</small>
 </div>
 </div>
 
 <div class="main">
-
 <div id="view-home" class="view active">
-
-<div class="card pro" style="padding:10px">
-<div style="display:flex;justify-content:space-between;align-items:center">
-<div>
-<b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span></b><br>
-<small style="color:var(--muted);font-size:10px"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span></small>
-</div>
-<button class="small gold" onclick="showView('view-prolive')">VER 🔔</button>
-</div>
-<div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div>
-</div>
+<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
 
 <div class="card t1">
 <div class="card-header">VS + PLAYBACK</div>
-<div class="volume-prof">
-<div class="volume-label"><b>VS BATERIA</b><span id="vsInfo">Nenhum</span></div>
-<div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div>
-<input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)">
-<audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio>
-<div style="display:flex;gap:10px;align-items:center;margin-top:8px"><span style="color:var(--muted);font-size:10px;min-width:50px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold);font-weight:700;font-size:11px">80</span></div>
-</div>
-<div class="volume-prof">
-<div class="volume-label"><b>PLAYBACK</b><span id="playbackInfo">Nenhum</span></div>
-<div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK</div>
-<input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)">
-<audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio>
-<div style="display:flex;gap:10px;align-items:center;margin-top:8px"><span style="color:var(--muted);font-size:10px;min-width:50px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold);font-weight:700;font-size:11px">80</span></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
-<button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC</button>
-<button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button>
-</div>
+<div class="volume-prof"><div class="volume-label"><b>VS BATERIA</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div></div>
+<div class="volume-prof"><div class="volume-label"><b>PLAYBACK</b><span id="playbackInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK</div><input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold)">80</span></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div>
 </div>
 
-<div class="card" style="border-left:3px solid var(--gold)">
-<div class="card-header">BPM + PITCH</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
-<small style="color:var(--muted);font-size:10px">BPM</small>
-<div id="bpmDisplay" class="bpm-display">100</div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changeBPM(-5)" style="flex:1">-5</button><button class="small gold" onclick="changeBPM(-1)" style="flex:1">-1</button><button class="small gold" onclick="changeBPM(1)" style="flex:1">+1</button><button class="small" onclick="changeBPM(5)" style="flex:1">+5</button></div>
-<input type="range" id="bpmRange" min="40" max="240" value="100" style="width:100%;margin-top:10px" oninput="setBPM(this.value)">
-</div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center">
-<small style="color:var(--muted);font-size:10px">PITCH</small>
-<div id="pitchDisplay" class="bpm-display" style="font-size:20px">0</div>
-<div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changePitch(-1)" style="flex:1">-1</button><button class="small gold" onclick="changePitch(0,true)" style="flex:1">0</button><button class="small" onclick="changePitch(1)" style="flex:1">+1</button></div>
-<input type="range" id="pitchRange" min="-12" max="12" value="0" style="width:100%;margin-top:10px" oninput="setPitch(this.value)">
-</div>
-</div>
+<div class="card" style="border-left:3px solid var(--gold)"><div class="card-header">BPM + PITCH</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">BPM</small><div id="bpmDisplay" class="bpm-display">100</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changeBPM(-5)" style="flex:1">-5</button><button class="small gold" onclick="changeBPM(-1)" style="flex:1">-1</button><button class="small gold" onclick="changeBPM(1)" style="flex:1">+1</button><button class="small" onclick="changeBPM(5)" style="flex:1">+5</button></div><input type="range" id="bpmRange" min="40" max="240" value="100" style="width:100%;margin-top:10px" oninput="setBPM(this.value)"></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">PITCH</small><div id="pitchDisplay" class="bpm-display" style="font-size:20px">0</div><div style="display:flex;gap:6px;margin-top:8px"><button class="small" onclick="changePitch(-1)" style="flex:1">-1</button><button class="small gold" onclick="changePitch(0,true)" style="flex:1">0</button><button class="small" onclick="changePitch(1)" style="flex:1">+1</button></div><input type="range" id="pitchRange" min="-12" max="12" value="0" style="width:100%;margin-top:10px" oninput="setPitch(this.value)"></div></div></div>
+
+<div class="card" style="border:1px dashed var(--line2)"><div class="card-header">CIFRA</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="text" id="artistaMusica" placeholder="Artista"><input type="text" id="nomeMusica" placeholder="Música"></div><textarea id="inputCifraHome" placeholder="Cole a cifra..." oninput="renderCifra()"></textarea><button class="btn gold big" onclick="salvarMusica()">💾 SALVAR</button><button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela();showFloat()">⛶ TELA CHEIA</button><div id="saveStatus" style="margin-top:10px;color:var(--gold);text-align:center"></div></div>
+
+<div class="card" style="padding:0;overflow:hidden"><div class="preview-wrapper"><div class="preview-top"><b style="color:var(--gold);font-size:10px">TOM:</b><div id="transposeInfo" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="small" onclick="changeTranspose(-1)">-1</button><button class="small gold" onclick="changeTranspose(0,true)">0</button><button class="small" onclick="changeTranspose(1)">+1</button><button class="small gold" onclick="toggleScroll('normal')">▶️ ROLAGEM</button></div><div style="display:flex;gap:6px;background:var(--card2);padding:10px"><button class="small gold" onclick="changeBothSize(-3)">MICRO 6px</button><button class="small gold" onclick="changeBothSize(-1)">MENOR</button><button class="small gold" onclick="setSize(16,12)">16px</button><button class="small gold" onclick="changeBothSize(1)">MAIOR</button><span id="sizeInfo" style="color:var(--gold);margin-left:auto">16px</span></div><input type="range" id="sizeSlider" min="6" max="80" value="16" style="margin:6px 10px;width:calc(100% - 20px)" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()"><div class="preview-content" id="output"></div></div></div>
+
+<div class="card scroll-prof"><div class="card-header">ROLAGEM</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800">2</span></div><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 </div>
 
-<div class="card" style="border:1px dashed var(--line2)">
-<div class="card-header">CIFRA</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<input type="text" id="artistaMusica" placeholder="Artista">
-<input type="text" id="nomeMusica" placeholder="Música">
-</div>
-<textarea id="inputCifraHome" placeholder="Cole a cifra..." oninput="renderCifra()"></textarea>
-<button class="btn gold big" onclick="salvarMusica()">💾 SALVAR</button>
-<button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela();showFloat()">⛶ TELA CHEIA</button>
-<div id="saveStatus" style="margin-top:10px;color:var(--gold);font-weight:700;text-align:center;font-size:12px"></div>
-</div>
-
-<div class="card" style="padding:0;overflow:hidden">
-<div class="preview-wrapper">
-<div class="preview-top">
-<b style="color:var(--gold);font-size:10px">TOM:</b>
-<div id="transposeInfo" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div>
-<button class="small" onclick="changeTranspose(-1)">-1</button>
-<button class="small gold" onclick="changeTranspose(0,true)">0</button>
-<button class="small" onclick="changeTranspose(1)">+1</button>
-<button class="small gold" onclick="toggleScroll('normal')">▶️ ROLAGEM</button>
-</div>
-<div style="display:flex;gap:6px;background:var(--card2);padding:10px;border-top:1px solid var(--line)">
-<button class="small gold" onclick="changeBothSize(-3)">MICRO 6px</button>
-<button class="small gold" onclick="changeBothSize(-1)">MENOR</button>
-<button class="small gold" onclick="setSize(16,12)">16px</button>
-<button class="small gold" onclick="changeBothSize(1)">MAIOR</button>
-<span id="sizeInfo" style="color:var(--gold);font-weight:700;font-size:11px;margin-left:auto">16px</span>
-</div>
-<input type="range" id="sizeSlider" min="6" max="80" value="16" style="margin:6px 10px;width:calc(100% - 20px)" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()">
-<div class="preview-content" id="output"></div>
-</div>
-</div>
-
-<div class="card scroll-prof">
-<div class="card-header">ROLAGEM</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-<button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')" style="padding:12px">▶️ INICIAR</button>
-<button class="btn big" onclick="resetScroll('normal')" style="padding:12px">⏮️ TOPO</button>
-<button class="btn big" onclick="stopScroll()" style="padding:12px">⏸️ PAUSAR</button>
-</div>
-<div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px">
-<div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800;font-size:11px">2</span></div>
-<input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%;margin-top:6px" oninput="setScrollSpeed(this.value)">
-</div>
-</div>
-
-</div>
-
-<div id="view-prolive" class="view">
-<div class="card pro">
-<div class="card-header">PEDIDOS AO VIVO</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted);font-size:10px">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted);font-size:10px">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div>
-</div>
-<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div>
-<button class="btn gold big" onclick="testarPedido()">🔔 TESTAR</button>
-</div>
-<div class="card">
-<div class="card-header">CONFIG PRO LIVE</div>
-<input type="text" id="codigoDono" value="TAKI123" style="margin-top:6px;font-weight:800;color:var(--gold)" onchange="salvarConfigProLive()">
-<input type="text" id="pixKey" placeholder="PIX" style="margin-top:8px" onchange="salvarConfigProLive()">
-<input type="text" id="pixNome" placeholder="Nome PIX" style="margin-top:8px" onchange="salvarConfigProLive()">
-<textarea id="listaMusicasPedidos" placeholder="Músicas" style="min-height:100px;margin-top:8px" onchange="salvarConfigProLive()"></textarea>
-<button class="btn gold big" style="margin-top:10px" onclick="salvarConfigProLive();conectarNtfy()">💾 SALVAR</button>
-</div>
-</div>
+<div id="view-prolive" class="view"><div class="card pro"><div class="card-header">PEDIDOS AO VIVO</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div><button class="btn gold big" onclick="testarPedido()">🔔 TESTAR</button></div><div class="card"><div class="card-header">CONFIG</div><input type="text" id="codigoDono" value="TAKI123" style="margin-top:6px;color:var(--gold)" onchange="salvarConfigProLive()"><input type="text" id="pixKey" placeholder="PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><input type="text" id="pixNome" placeholder="Nome PIX" style="margin-top:8px" onchange="salvarConfigProLive()"><textarea id="listaMusicasPedidos" placeholder="Músicas" style="min-height:100px;margin-top:8px" onchange="salvarConfigProLive()"></textarea><button class="btn gold big" style="margin-top:10px" onclick="salvarConfigProLive();conectarNtfy()">💾 SALVAR</button></div></div>
 
 <div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE</div><div id="qrContainer" class="qr-box"></div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all;color:var(--gold)"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK</button></div></div>
 
 <div id="view-config" class="view">
 <div class="card">
-<div class="card-header">CONFIGURAÇÃO</div>
+<div class="card-header">CONFIGURAÇÃO - TEMAS + FONTES + TAMANHO + ROLAGEM</div>
 
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px">
-<b style="color:var(--gold);font-size:11px">TEMAS</b>
+<b style="color:var(--gold);font-size:11px">TEMAS - CLIQUE AQUI PRA TROCAR</b>
 <div class="theme-grid" id="themeGrid"></div>
 </div>
 
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px">
-<b style="color:var(--gold);font-size:11px">FONTES</b>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px" id="fontGrid"></div>
+<b style="color:var(--gold);font-size:11px">FONTES - CLIQUE AQUI PRA TROCAR</b>
+<div class="font-grid" id="fontGrid"></div>
 </div>
 
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px">
@@ -251,39 +143,18 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button>
 <button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button>
 </div>
-<div style="margin-top:8px"><span id="scrollSpeedValConfig" style="color:var(--gold);font-weight:700;font-size:11px">2</span><input type="range" id="scrollSpeedConfig" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div>
+<div style="margin-top:8px"><span id="scrollSpeedValConfig" style="color:var(--gold);font-weight:700">2</span><input type="range" id="scrollSpeedConfig" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div>
 </div>
 
 <button class="btn big" style="margin-top:12px" onclick="showView('view-home')">← VOLTAR</button>
 </div>
 </div>
 
-<div id="view-cifras" class="view"><div class="card"><b>MINHAS CIFRAS</b><div id="listaCifras" style="margin-top:12px"></div></div></div>
+<div id="view-cifras" class="view"><div class="card"><b>CIFRAS</b><div id="listaCifras" style="margin-top:12px"></div></div></div>
 <div id="view-pastas" class="view"><div class="card"><b>PASTAS</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
-
 </div>
 
-<div id="telaGrande">
-<div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div>
-<div class="tela-content" id="telaContent" onclick="showFloat()"></div>
-<div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30">
-<div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div>
-<div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div>
-<div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px">
-<div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px">
-<button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button>
-<button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button>
-<button class="small" onclick="stopScroll();resetHide()">⏸️</button>
-</div>
-<div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><span id="scrollSpeedVal" style="display:none"></span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div>
-<div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div>
-</div>
-<div style="display:flex;gap:6px"><button class="small gold" onclick="changeBothSize(-3);resetHide()" style="flex:1">MICRO</button><button class="small gold" onclick="changeBothSize(-1);resetHide()" style="flex:1">MENOR</button><button class="small gold" onclick="changeBothSize(1);resetHide()" style="flex:1">MAIOR</button></div>
-<div style="display:flex;gap:6px"><button class="small gold" onclick="playBoth();resetHide()" style="flex:1">▶ PLAY 2</button><button class="small" onclick="pauseBoth();resetHide()" style="flex:1">⏸</button></div>
-</div>
-<button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button>
-</div>
+<div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent" onclick="showFloat()"></div><div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div><div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button><button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button><button class="small" onclick="stopScroll();resetHide()">⏸️</button></div><div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><span id="scrollSpeedVal" style="display:none"></span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div><div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div></div><div style="display:flex;gap:6px"><button class="small gold" onclick="changeBothSize(-3);resetHide()" style="flex:1">MICRO</button><button class="small gold" onclick="changeBothSize(-1);resetHide()" style="flex:1">MENOR</button><button class="small gold" onclick="changeBothSize(1);resetHide()" style="flex:1">MAIOR</button></div><div style="display:flex;gap:6px"><button class="small gold" onclick="playBoth();resetHide()" style="flex:1">▶ PLAY 2</button><button class="small" onclick="pauseBoth();resetHide()" style="flex:1">⏸</button></div></div><button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button></div>
 
 <textarea id="inputCifra" style="display:none"></textarea>
 <textarea id="inputFull" style="display:none"></textarea>
@@ -319,42 +190,78 @@ var FONTS=[
 {name:'Comic',family:"'Comic Sans MS',cursive"}
 ];
 
-function applyTheme(idx){
+// FUNÇÕES GLOBAIS - CORRIGIDO AGORA FUNCIONA
+window.applyTheme = function(idx){
   var t=THEMES[idx];
-  document.documentElement.style.setProperty('--bg',t.bg);
-  document.documentElement.style.setProperty('--card',t.card);
-  document.documentElement.style.setProperty('--card2',t.card2);
-  document.documentElement.style.setProperty('--card3',t.card3);
-  document.documentElement.style.setProperty('--text',t.text);
-  document.documentElement.style.setProperty('--muted',t.muted);
-  document.documentElement.style.setProperty('--line',t.line);
-  document.documentElement.style.setProperty('--line2',t.line2);
-  document.documentElement.style.setProperty('--cifra',t.cifra);
-  document.documentElement.style.setProperty('--letra',t.letra);
-  document.documentElement.style.setProperty('--gold',t.gold);
-  document.documentElement.style.setProperty('--header-bg',t.card);
+  var r=document.documentElement.style;
+  r.setProperty('--bg',t.bg);
+  r.setProperty('--card',t.card);
+  r.setProperty('--card2',t.card2);
+  r.setProperty('--card3',t.card3);
+  r.setProperty('--text',t.text);
+  r.setProperty('--muted',t.muted);
+  r.setProperty('--line',t.line);
+  r.setProperty('--line2',t.line2);
+  r.setProperty('--cifra',t.cifra);
+  r.setProperty('--letra',t.letra);
+  r.setProperty('--gold',t.gold);
+  r.setProperty('--header-bg',t.card);
   localStorage.setItem('taki-theme',idx);
-  renderThemes();
-}
-function renderThemes(){
+  // Atualiza sem recriar tudo
+  var cur=idx;
+  document.querySelectorAll('#themeGrid .theme-btn').forEach((btn,i)=>{
+    btn.style.borderColor = (i==cur ? t.gold : t.line);
+    btn.style.boxShadow = (i==cur ? '0 0 10px '+t.gold : 'none');
+    if(i==cur) btn.innerText='✅ '+THEMES[i].name;
+    else btn.innerText=THEMES[i].name;
+  });
+};
+
+window.applyFont = function(idx){
+  var f=FONTS[idx];
+  var r=document.documentElement.style;
+  r.setProperty('--font-main',f.family);
+  r.setProperty('--font-cifra',f.family);
+  localStorage.setItem('taki-font',idx);
+  document.querySelectorAll('#fontGrid .small').forEach((btn,i)=>{
+    if(i==idx){btn.classList.add('gold','active'); btn.innerText='✅ '+FONTS[i].name;}
+    else{btn.classList.remove('gold','active'); btn.innerText=FONTS[i].name;}
+  });
+  renderCifra();
+};
+
+function renderThemesInit(){
   var cur=parseInt(localStorage.getItem('taki-theme')||'1');
   var grid=document.getElementById('themeGrid');
   if(!grid) return;
-  grid.innerHTML=THEMES.map((t,i)=>'<button class="theme-btn" style="background:'+t.bg+';color:'+t.letra+';border:2px solid '+(i==cur?t.gold:t.line)+';" onclick="applyTheme('+i+')">'+(i==cur?'✅ ':'')+t.name+'</button>').join('');
+  grid.innerHTML='';
+  THEMES.forEach((t,i)=>{
+    var btn=document.createElement('button');
+    btn.className='theme-btn';
+    btn.style.background=t.bg;
+    btn.style.color=t.letra;
+    btn.style.borderColor=(i==cur?t.gold:t.line);
+    btn.innerText=(i==cur?'✅ ':'')+t.name;
+    btn.onclick=function(){ window.applyTheme(i); };
+    grid.appendChild(btn);
+  });
 }
-function applyFont(idx){
-  var f=FONTS[idx];
-  document.documentElement.style.setProperty('--font-main',f.family);
-  document.documentElement.style.setProperty('--font-cifra',f.family);
-  localStorage.setItem('taki-font',idx);
-  renderFonts();
-  renderCifra();
-}
-function renderFonts(){
+
+function renderFontsInit(){
   var cur=parseInt(localStorage.getItem('taki-font')||'0');
   var grid=document.getElementById('fontGrid');
   if(!grid) return;
-  grid.innerHTML=FONTS.map((f,i)=>'<button class="small '+(i==cur?'gold active':'')+'" style="font-family:'+f.family+';padding:10px" onclick="applyFont('+i+')">'+(i==cur?'✅ ':'')+f.name+'</button>').join('');
+  grid.innerHTML='';
+  FONTS.forEach((f,i)=>{
+    var btn=document.createElement('button');
+    btn.className='small '+(i==cur?'gold active':'');
+    btn.style.fontFamily=f.family;
+    btn.style.padding='10px';
+    btn.style.textAlign='left';
+    btn.innerText=(i==cur?'✅ ':'')+f.name;
+    btn.onclick=function(){ window.applyFont(i); };
+    grid.appendChild(btn);
+  });
 }
 
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='view-qr') gerarQRCode();}
@@ -397,8 +304,8 @@ function transposeLine(line,s){if(s==0) return line;return line.split(/(\s+)/).m
 function parseBlocks(){var a=document.getElementById('inputCifra').value||'';var b=document.getElementById('inputFull').value||'';var c=document.getElementById('inputCifraHome').value||'';var raw=[a,b,c].sort((x,y)=>y.length-x.length)[0]||'';document.getElementById('inputCifra').value=raw;document.getElementById('inputFull').value=raw;document.getElementById('inputCifraHome').value=raw;var lines=raw.split('\n');var blocks=[];for(var i=0;i<lines.length;i++){var l=lines[i];if(!l.trim()){blocks.push({type:'space'});continue;}if(isSection(l)){blocks.push({type:'section',text:l.trim()});continue;}if(isChordLine(l)){var next=lines[i+1]||'';if(next.trim() &&!isChordLine(next) &&!isSection(next)){blocks.push({type:'pair',cifra:l.trim(),letra:next.trim()});i++;continue;}else{blocks.push({type:'cifra',text:l.trim()});continue;}}blocks.push({type:'letra',text:l.trim()});}return blocks;}
 function renderCifra(){var blocks=parseBlocks();var out=document.getElementById('output');out.innerHTML='';blocks.forEach(b=>{if(b.type==='space'){out.innerHTML+='<div style="height:8px"></div>';}else if(b.type==='section'){out.innerHTML+='<div style="margin:12px 0"><div class="section-label">'+b.text.toUpperCase()+'</div></div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);out.innerHTML+='<div style="margin:14px 0"><div class="cifra-line" style="font-size:'+cifraSize+'px">'+cifra+'</div><div class="letra-line" style="font-size:'+letraSize+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);out.innerHTML+='<div style="margin:14px 0"><div class="cifra-line" style="font-size:'+cifraSize+'px">'+txt+'</div></div>';}else{out.innerHTML+='<div style="margin:14px 0"><div class="letra-line" style="font-size:'+letraSize+'px">'+b.text.toUpperCase()+'</div></div>';}});renderTela();updateSize();}
 function renderTela(){var blocks=parseBlocks();var tg=document.getElementById('telaContent');var h='';blocks.forEach(b=>{if(b.type==='space'){h+='<div style="height:8px"></div>';}else if(b.type==='section'){h+='<div style="margin:12px 0"><div class="section-label">'+b.text.toUpperCase()+'</div></div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+cifra+'</div><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+txt+'</div></div>';}else{h+='<div style="margin:16px 0"><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.text.toUpperCase()+'</div></div>';}});tg.innerHTML=h;var el=document.getElementById('telaSync');if(el) el.innerText=transpose+' | '+bpm+' BPM';}
-function showFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.display='flex';f.style.opacity='1';f.style.transform='translateX(-50%) translateY(0)';}if(btn) btn.style.display='none';resetHide();}
-function hideFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.opacity='0';f.style.transform='translateX(-50%) translateY(20px)';setTimeout(()=>{if(f.style.opacity=='0') f.style.display='none';},400);}if(btn) btn.style.display='block';clearTimeout(hideTimer);}
+function showFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.display='flex';f.style.opacity='1';}if(btn) btn.style.display='none';resetHide();}
+function hideFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.display='none';}if(btn) btn.style.display='block';clearTimeout(hideTimer);}
 function resetHide(){clearTimeout(hideTimer);hideTimer=setTimeout(()=>{hideFloat();},6000);}
 function changeTranspose(d,isReset){if(isReset) transpose=0; else transpose=Math.max(-7,Math.min(7,transpose+d));updateUI();renderCifra();}
 function updateUI(){var name=transpose==0?'0':transpose;var el=document.getElementById('transposeInfo');if(el) el.innerText=name;var el2=document.getElementById('telaTom');if(el2) el2.innerText=name;}
@@ -422,12 +329,12 @@ function renderPedidos(){
   var cont=document.getElementById('listaPedidosLive');
   var mini=document.getElementById('pedidosTelaGrande');
   if(pedidos.length==0){
-    cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)"><b>Aguardando pedidos...</b></div>';
+    cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)"><b>Aguardando...</b></div>';
     if(mini) mini.innerHTML='<small style="color:var(--muted)">Nenhum pedido</small>';
     return;
   }
   cont.innerHTML=pedidos.map((p,i)=>'<div class="pedido-card"><div><b style="color:var(--gold)">🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small></div><div><button class="small gold" onclick="removerPedido('+i+')">✅</button></div></div>').join('');
-  if(mini) mini.innerHTML=pedidos.slice(0,3).map(p=>'<div style="background:var(--card2);padding:6px;border-radius:6px;margin:4px 0"><small style="color:var(--gold)">🎵 '+p.musica+' - R$ '+(p.gorjeta||0).toFixed(2)+'</small></div>').join('');
+  if(mini) mini.innerHTML=pedidos.slice(0,3).map(p=>'<div style="background:var(--card2);padding:6px;border-radius:6px;margin:4px 0"><small style="color:var(--gold)">🎵 '+p.musica+'</small></div>').join('');
   document.getElementById('ultimoPedidoMini').style.display='block';
   document.getElementById('ultimoPedidoTexto').innerText=pedidos[pedidos.length-1].musica;
 }
@@ -463,13 +370,16 @@ document.addEventListener('DOMContentLoaded',function(){
   var savedSpeed=parseInt(localStorage.getItem('taki-scrollSpeed')||'2');setScrollSpeed(savedSpeed);
   var savedBpm=parseInt(localStorage.getItem('taki-bpm')||'100');bpm=savedBpm;setBPM(bpm);
   var savedPitch=parseInt(localStorage.getItem('taki-pitch')||'0');pitch=savedPitch;setPitch(pitch);
-  var savedTheme=parseInt(localStorage.getItem('taki-theme')||'1');applyTheme(savedTheme);
-  var savedFont=parseInt(localStorage.getItem('taki-font')||'0');applyFont(savedFont);
+  renderThemesInit();
+  renderFontsInit();
+  var savedTheme=parseInt(localStorage.getItem('taki-theme')||'1');
+  window.applyTheme(savedTheme);
+  var savedFont=parseInt(localStorage.getItem('taki-font')||'0');
+  window.applyFont(savedFont);
   carregarConfigProLive();
   var savedPedidos=JSON.parse(localStorage.getItem('taki-pro-pedidos')||'[]');pedidos=savedPedidos;
   totalCaixinha=parseFloat(localStorage.getItem('taki-pro-caixinha')||'0');
   renderPedidos();renderCifra();carregar();updateUI();updateSize();gerarQRCode();conectarNtfy();
-  renderThemes();renderFonts();
   document.getElementById('audioVS').volume=0.8;document.getElementById('audioPlayback').volume=0.8;
 });
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
