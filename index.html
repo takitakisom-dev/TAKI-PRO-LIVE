@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,12 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TAKI PRO LIVE</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-512.png">
 <meta name="theme-color" content="#c9a86a">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Oswald:wght@700&family=Bebas+Neue&family=Inter:wght@800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
 <style>
-:root{--gold:#c9a86a;--bg:#080808;--card:#121212;--card2:#181818;--card3:#1e1e1e;--text:#e8dcc0;--muted:#8a8a8a;--line:#232323;--line2:#2a2a2a;--cifra:#FFD700;--letra:#FFF;--header-bg:#0a0a0a;--font-main:'Montserrat',sans-serif;--font-cifra:'Montserrat',sans-serif}
+:root{--gold:#c9a86a;--bg:#080808;--card:#121212;--card2:#181818;--card3:#1e1e1e;--text:#e8dcc0;--muted:#8a8a8a;--line:#232323;--line2:#2a2a2a;--cifra:#FFD700;--letra:#FFF}
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
 body{background:var(--bg);color:var(--text);padding-bottom:100px}
 .header{background:linear-gradient(90deg,#0a0a0a,#1a1500);border-bottom:2px solid var(--gold);padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
@@ -21,23 +20,20 @@ body{background:var(--bg);color:var(--text);padding-bottom:100px}
 .btn.big{width:100%;padding:14px;font-size:12px;font-weight:800;border-radius:10px;margin:6px 0}
 .main{padding:12px;max-width:760px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
-.card.t1{border:1px solid var(--line2);border-left:3px solid var(--gold)}
 .card.pro{border:1px solid var(--gold);background:linear-gradient(180deg,#121212,#1a150a)}
 .card-header{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:14px;text-transform:uppercase}
 .file-label{border:1px dashed var(--line2);padding:16px;border-radius:10px;display:block;text-align:center;background:var(--card2);color:var(--muted);font-weight:700;font-size:11px;cursor:pointer;margin:8px 0}
 input[type=text],input[type=password],input[type=email],textarea,select{width:100%;background:var(--card2);color:var(--text);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:14px;outline:none}
-textarea{min-height:80px;font-family:system-ui;font-size:13px}
+textarea{min-height:80px}
 .preview-wrapper{border:1px solid var(--line2);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;margin-top:12px;max-height:55vh;min-height:120px}
 .preview-top{background:var(--card);border-bottom:1px solid var(--line2);padding:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .preview-content{flex:1;overflow-y:auto;padding:16px;min-height:80px}
-.preview-empty{color:var(--muted);text-align:center;padding:20px;font-size:11px}
-.cifra-line{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:6px;font-family:var(--font-cifra)}
-.letra-line{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block;font-family:var(--font-main);line-height:1.35}
+.cifra-line{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:6px}
+.letra-line{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block;line-height:1.35}
 .section-label{color:var(--gold);font-weight:700;font-size:10px;border:1px solid var(--line2);padding:5px 12px;border-radius:20px;display:inline-block;margin:16px 0 8px 0;background:rgba(201,168,106,0.08)}
 .small{border:1px solid var(--line);background:var(--card2);color:var(--muted);padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;font-size:11px}
-.small.gold{border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,106,0.08)}
-.small.active{background:var(--gold);color:var(--bg)!important}
-.bpm-display{font-size:28px;font-weight:900;color:var(--gold);text-align:center}
+.small.gold{border:1px solid var(--gold);color:var(--gold)}
+.small.active{background:var(--gold);color:#000!important}
 #menuOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999}
 #menuPanel{background:var(--bg);border-right:1px solid var(--gold);width:88%;max-width:380px;height:100%;padding:16px;overflow-y:auto}
 .menu-title{color:var(--gold);font-weight:800;font-size:10px;margin:22px 0 8px 0;border-bottom:1px solid var(--line);padding-bottom:6px}
@@ -53,10 +49,10 @@ textarea{min-height:80px;font-family:system-ui;font-size:13px}
 .qr-box{background:#fff;padding:12px;border-radius:12px;display:inline-block;margin:10px 0}
 #liveToast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#1a1500,#0a0a0a);border:2px solid var(--gold);border-radius:14px;padding:14px 20px;width:90%;max-width:400px;display:none;z-index:100}
 #telaGrande{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:1000;flex-direction:column}
-.tela-header{background:var(--header-bg);border-bottom:2px solid var(--gold);padding:12px;display:flex;justify-content:space-between;align-items:center}
+.tela-header{background:var(--card);border-bottom:2px solid var(--gold);padding:12px;display:flex;justify-content:space-between;align-items:center}
 .tela-content{flex:1;overflow-y:auto;padding:20px 16px 200px 16px}
-.tela-cifra{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:8px;font-family:var(--font-cifra)}
-.tela-letra{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block;font-family:var(--font-main)}
+.tela-cifra{color:var(--cifra)!important;font-weight:800;display:block;margin-bottom:8px}
+.tela-letra{color:var(--letra)!important;font-weight:800;text-transform:uppercase;display:block}
 input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 .theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .theme-btn{padding:14px;border-radius:10px;border:2px solid var(--line);font-weight:800;font-size:11px;cursor:pointer;text-align:left}
@@ -65,7 +61,6 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 #blockedScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:6000;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
 .caixinha-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}
 .caixinha-btn{padding:16px;border-radius:10px;border:2px solid var(--line);background:var(--card2);color:var(--text);font-weight:900;font-size:14px;cursor:pointer}
-.caixinha-btn.gold{border:2px solid var(--gold);color:var(--gold);background:rgba(201,168,106,0.15)}
 .caixinha-btn.active{background:var(--gold);color:#000;border:2px solid var(--gold)}
 .offline-badge{background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px;font-weight:900}
 </style>
@@ -75,7 +70,6 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div id="loginScreen">
 <div style="background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:24px;width:100%;max-width:380px">
 <h2 style="color:var(--gold);text-align:center;font-weight:900">TAKI PRO LIVE</h2>
-<p style="color:var(--muted);text-align:center;font-size:11px;margin:6px 0 20px 0">CIFRA + VS + PEDIDOS</p>
 <div id="loginForm">
 <input type="email" id="loginEmail" placeholder="Seu e-mail" style="margin-bottom:10px">
 <input type="password" id="loginPass" placeholder="Sua senha" style="margin-bottom:14px">
@@ -83,7 +77,7 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <button class="btn big" onclick="mostrarCadastro()">CRIAR CONTA GRÁTIS</button>
 </div>
 <div id="cadastroForm" style="display:none">
-<input type="text" id="cadNome" placeholder="Seu nome artístico (ex: João)" style="margin-bottom:10px">
+<input type="text" id="cadNome" placeholder="Seu nome artístico" style="margin-bottom:10px">
 <input type="email" id="cadEmail" placeholder="Seu e-mail" style="margin-bottom:10px">
 <input type="password" id="cadPass" placeholder="Crie uma senha" style="margin-bottom:14px">
 <button class="btn gold big" onclick="fazerCadastro()">CRIAR CONTA</button>
@@ -95,10 +89,9 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 
 <div id="blockedScreen">
 <div style="background:var(--card);border:2px solid #ff4a4a;border-radius:16px;padding:24px;max-width:400px;width:100%">
-<h2 style="color:#ff4a4a">🚫 SISTEMA BLOQUEADO</h2>
-<p style="color:#fff;margin:14px 0;font-weight:700">PAGAR PARA LIBERAR</p>
-<button class="btn gold big" onclick="window.open('https://wa.me/5512992209787?text=Olá TAKI, meu sistema TAKI PRO LIVE está bloqueado, quero liberar meu acesso','_blank')">📲 ZAP 12 992209787</button>
-<button class="btn big" onclick="fazerLogout()">SAIR E TROCAR CONTA</button>
+<h2 style="color:#ff4a4a">🚫 BLOQUEADO</h2>
+<button class="btn gold big" onclick="window.open('https://wa.me/5512992209787','_blank')">📲 ZAP 12 992209787</button>
+<button class="btn big" onclick="fazerLogout()">SAIR</button>
 </div>
 </div>
 
@@ -106,44 +99,34 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 
 <div class="header">
 <button class="hamburger" onclick="document.getElementById('menuOverlay').style.display='block'">☰</button>
-<h1>TAKI PRO LIVE <span id="userInfoHeader">CIFRA + VS + PEDIDOS</span></h1>
-<div style="width:44px;text-align:center"><span class="pro-badge" id="offlineStatus">PRO</span></div>
+<h1>TAKI PRO LIVE <span id="userInfoHeader"></span></h1>
+<div style="width:44px;text-align:center"><span class="pro-badge">PRO</span></div>
 </div>
 
 <div id="menuOverlay" onclick="if(event.target.id==='menuOverlay')this.style.display='none'">
 <div id="menuPanel">
 <div style="display:flex;justify-content:space-between"><b style="color:var(--gold)">TAKI PRO LIVE</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><small style="color:var(--muted)">Logado:</small><br><b id="menuUserName" style="color:var(--gold);font-size:12px">-</b><br><small id="menuUserEmail" style="color:var(--muted);font-size:10px">-</small><br><small id="menuOfflineInfo" style="color:#00ff00;font-size:9px">● OFFLINE OK</small></div>
+<div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><b id="menuUserName" style="color:var(--gold);font-size:12px">-</b><br><small id="menuUserEmail" style="color:var(--muted);font-size:10px">-</small></div>
 <div class="menu-title">NAVEGAÇÃO</div>
-<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🏠 HOME - PALCO</button>
-<div class="menu-title">PRO LIVE</div>
-<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-prolive')">🎤 PEDIDOS AO VIVO + CAIXINHA</button>
-<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE DA MESA</button>
-<div class="menu-title">MINHAS CIFRAS</div>
-<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 MINHAS CIFRAS SALVAS</button>
-<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras-vs');carregar()">🎧 CIFRAS COM VS SALVAS</button>
-<button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-pastas');carregar()">📁 PASTAS POR ARTISTA</button>
-<div class="menu-title">CONFIGURAÇÃO</div>
-<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-config')">⚙️ CONFIGURAÇÃO COMPLETA</button>
-<div class="menu-title" id="adminMenuTitle" style="display:none">ADMIN - TAKI</div>
-<button class="menu-item pro" id="adminMenuBtn" style="display:none" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-admin');carregarUsuarios()">👑 CLIENTES CADASTRADOS - VER SENHAS</button>
-<div class="menu-title">BACKUP E APP</div>
-<button class="menu-item gold" onclick="exportarBackup()">💾 EXPORTAR BACKUP</button>
-<button class="menu-item gold" onclick="document.getElementById('fileImport').click()">📥 IMPORTAR BACKUP</button>
-<input type="file" id="fileImport" accept=".json" style="display:none" onchange="importarBackup(this)">
-<button class="menu-item" onclick="if(window.deferredPrompt)window.deferredPrompt.prompt()">📲 INSTALAR APP</button>
-<button class="menu-item gold" onclick="doShare()">📤 COMPARTILHAR</button>
+<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🏠 HOME</button>
+<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-prolive')">🎤 PEDIDOS AO VIVO</button>
+<button class="menu-item pro" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE</button>
+<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 CIFRAS</button>
+<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras-vs');carregar()">🎧 CIFRAS COM VS</button>
+<button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-pastas');carregar()">📁 PASTAS</button>
+<button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-config')">⚙️ CONFIG</button>
+<button class="menu-item pro" id="adminMenuBtn" style="display:none" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-admin');carregarUsuarios()">👑 CLIENTES CADASTRADOS</button>
 <button class="menu-item" style="border:1px solid #ff4a4a;color:#ff4a4a" onclick="fazerLogout()">🚪 SAIR</button>
-<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">TAKI PRO LIVE v1.8.1 - Botão Corrigido</small>
+<small style="color:var(--muted);display:block;margin-top:20px;font-size:9px">v1.8.2 CORRIGIDO - BOTÃO FUNCIONANDO</small>
 </div>
 </div>
 
 <div class="main">
 <div id="view-home" class="view active">
-<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span> <span id="offlineBadge" class="offline-badge">OFFLINE OK</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span> • <span id="cifrasOfflineCount">0 cifras offline</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
+<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span id="liveStatus" style="background:#00ff00;color:#000;padding:2px 6px;border-radius:10px;font-size:8px">● AO VIVO</span> <span id="offlineBadge" class="offline-badge">OFFLINE OK</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0</span> • <span id="caixinhaTotal">R$ 0,00</span> • <span id="cifrasOfflineCount">0</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER</button></div><div id="ultimoPedidoMini" style="display:none;margin-top:8px;background:var(--card3);border-radius:8px;padding:8px"><small style="color:var(--gold)">Último: <span id="ultimoPedidoTexto">-</span></small></div></div>
 <div class="card t1">
 <div class="card-header">VS + PLAYBACK - OFFLINE</div>
-<div class="volume-prof"><div class="volume-label"><b>VS BATERIA</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div></div>
+<div class="volume-prof"><div class="volume-label"><b>VS</b><span id="vsInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none" onchange="loadVS(this)"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volVS" min="0" max="100" value="80" oninput="document.getElementById('volVSVal').innerText=this.value;document.getElementById('audioVS').volume=this.value/100"><span id="volVSVal" style="color:var(--gold)">80</span></div></div>
 <div class="volume-prof"><div class="volume-label"><b>PLAYBACK</b><span id="playbackInfo">Nenhum</span></div><div class="file-label" onclick="document.getElementById('filePlayback').click()">CARREGAR PLAYBACK</div><input type="file" id="filePlayback" accept="audio/*" style="display:none" onchange="loadPlayback(this)"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><div style="display:flex;gap:10px;margin-top:8px"><span style="color:var(--muted);font-size:10px">VOLUME</span><input type="range" id="volPlayback" min="0" max="100" value="80" oninput="document.getElementById('volPlaybackVal').innerText=this.value;document.getElementById('audioPlayback').volume=this.value/100"><span id="volPlaybackVal" style="color:var(--gold)">80</span></div></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY SYNC</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div>
 </div>
@@ -156,58 +139,55 @@ input[type=range]{flex:1;accent-color:var(--gold);height:4px}
 <div class="preview-top"><b style="color:var(--gold);font-size:10px">TOM:</b><div id="transposeInfo" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="small" onclick="changeTranspose(-1)">-1</button><button class="small gold" onclick="changeTranspose(0,true)">0</button><button class="small" onclick="changeTranspose(1)">+1</button><button class="small gold" onclick="toggleScroll('normal')">▶️ ROLAGEM</button></div>
 <div style="display:flex;gap:6px;background:var(--card2);padding:10px"><button class="small gold" onclick="changeBothSize(-3)">MICRO</button><button class="small gold" onclick="changeBothSize(-1)">MENOR</button><button class="small gold" onclick="setSize(16,12)">16px</button><button class="small gold" onclick="changeBothSize(1)">MAIOR</button><span id="sizeInfo" style="color:var(--gold);margin-left:auto">16px</span></div>
 <input type="range" id="sizeSlider" min="6" max="80" value="16" style="margin:6px 10px;width:calc(100% - 20px)" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()">
-<div class="preview-content" id="output"><div class="preview-empty">Cole a cifra acima</div></div>
+<div class="preview-content" id="output"><div class="preview-empty">Cole a cifra</div></div>
 </div>
 </div>
-<div class="card scroll-prof"><div class="card-header">ROLAGEM</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><button id="btnScrollPlay" class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="background:var(--card3);border-radius:8px;padding:10px;margin-top:8px"><div style="display:flex;justify-content:space-between"><span style="color:var(--muted);font-size:10px">VELOCIDADE</span><span id="scrollSpeedVal" style="color:var(--gold);font-weight:800">2</span></div><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 </div>
 
 <div id="view-prolive" class="view">
 <div class="card pro">
-<div class="card-header">PEDIDOS AO VIVO + CAIXINHA - ONLINE + OFFLINE CIFRA</div>
+<div class="card-header">PEDIDOS AO VIVO</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
 <div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small style="color:var(--muted)">FILA</small><div id="filaDisplay" style="color:#fff;font-size:24px;font-weight:900">0</div></div>
 </div>
-<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS + RECADOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div>
+<div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div>
 <button class="btn gold big" onclick="testarPedido()">🔔 TESTAR PEDIDO</button>
 </div>
 
 <div class="card">
-<div class="card-header">CONFIG PRO LIVE - NOME DO MÚSICO QUE COMPRA O SISTEMA</div>
-<input type="text" id="codigoDono" value="ANDRÉ TAKI" style="margin-top:6px;color:var(--gold);font-weight:800" placeholder="Código da mesa - Ex: ANDRÉ TAKI" oninput="salvarConfigProLiveSemAlert(); gerarQRCode()">
-<input type="text" id="pixKey" placeholder="Sua chave PIX - Ex: 30499462882 ou seu CPF/CNPJ/Telefone" style="margin-top:8px" value="30499462882" oninput="salvarConfigProLiveSemAlert(); gerarQRCode()">
-<input type="text" id="pixNome" placeholder="Seu nome artístico - Ex: Andre Furtado - Vai aparecer: Deixe uma caixinha para o músico Andre Furtado" style="margin-top:8px" value="Andre Furtado" oninput="salvarConfigProLiveSemAlert(); gerarQRCode()">
-<textarea id="listaMusicasPedidos" placeholder="Músicas que cliente pode pedir - uma por linha - Ex: Todas do repertório" style="min-height:100px;margin-top:8px" oninput="salvarConfigProLiveSemAlert(); gerarQRCode()">Todas do repertório
+<div class="card-header">CONFIG PRO LIVE - NOME DO MÚSICO</div>
+<input type="text" id="codigoDono" value="ANDRÉ TAKI" style="margin-top:6px;color:var(--gold);font-weight:800" placeholder="Código - Ex: ANDRÉ TAKI">
+<input type="text" id="pixNome" placeholder="Seu nome artístico - Ex: Andre Furtado" style="margin-top:8px" value="Andre Furtado">
+<input type="text" id="pixKey" placeholder="Sua chave PIX - Ex: 30499462882" style="margin-top:8px" value="30499462882">
+<textarea id="listaMusicasPedidos" placeholder="Músicas" style="min-height:100px;margin-top:8px">Todas do repertório
 Evidências
-Boate Azul
-Faroeste Caboclo</textarea>
-<button class="btn gold big" style="margin-top:12px; padding:16px; background:var(--gold); color:#000; font-size:13px" onclick="botaoSalvarConectar()">💾 SALVAR E CONECTAR AO VIVO - CLIQUE AQUI</button>
-<small style="color:#00ff00;font-size:10px;display:block;margin-top:8px;text-align:center">✅ Ao clicar, seu nome Andre Furtado vai aparecer na tela do cliente: "Deixe uma caixinha para o músico Andre Furtado"</small>
+Boate Azul</textarea>
+
+<button id="btnSalvarPrincipal" class="btn gold big" style="margin-top:12px; padding:18px; background:var(--gold); color:#000; font-size:14px; font-weight:900; border:2px solid var(--gold)" onclick="botaoSalvarConectar()">💾 SALVAR E GERAR QR CODE COM SEU NOME</button>
+
+<small style="color:#00ff00;font-size:10px;display:block;margin-top:8px;text-align:center">✅ Clique no botão dourado acima - Seu nome Andre Furtado vai aparecer: "Deixe uma caixinha para o músico Andre Furtado"</small>
 </div>
 </div>
 
-<div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE - COM SEU NOME</div><div id="qrContainer" class="qr-box"></div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all;color:var(--gold);white-space:pre-line"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK COM SEU NOME</button><button class="btn big" onclick="compartilharLinkCliente()">📤 COMPARTILHAR LINK</button></div></div>
+<div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE - COM SEU NOME</div><div id="qrContainer" class="qr-box"></div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all;color:var(--gold);white-space:pre-line"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK</button></div></div>
 
 <div id="view-config" class="view">
 <div class="card">
-<div class="card-header">CONFIGURAÇÃO COMPLETA</div>
+<div class="card-header">CONFIGURAÇÃO</div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">TEMAS</b><div class="theme-grid" id="themeGrid"></div></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">FONTES</b><div class="font-grid" id="fontGrid"></div></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px"><b style="color:var(--gold);font-size:11px">TAMANHO</b><div style="display:flex;gap:6px;justify-content:center;margin-top:8px"><button class="small gold" onclick="changeBothSize(-3)">MICRO 6px</button><button class="small gold" onclick="changeBothSize(-1)">MENOR</button><div id="sizeInfoConfig" style="color:var(--gold);font-weight:900">16px</div><button class="small gold" onclick="changeBothSize(1)">MAIOR</button></div><input type="range" id="sizeSliderConfig" min="6" max="80" value="16" style="width:100%;margin-top:10px" oninput="letraSize=parseInt(this.value);cifraSize=Math.max(6,letraSize-4);renderCifra();updateSize()"></div>
-<div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:12px;border-left:3px solid var(--gold)"><b style="color:var(--gold);font-size:11px">ROLAGEM</b><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><button class="btn gold big" onclick="toggleScroll('normal')">▶️ INICIAR</button><button class="btn big" onclick="resetScroll('normal')">⏮️ TOPO</button><button class="btn big" onclick="stopScroll()">⏸️ PAUSAR</button></div><div style="margin-top:8px"><span id="scrollSpeedValConfig" style="color:var(--gold);font-weight:700">2</span><input type="range" id="scrollSpeedConfig" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value)"></div></div>
 <button class="btn big" style="margin-top:12px" onclick="showView('view-home')">← VOLTAR HOME</button>
 </div>
 </div>
 
-<div id="view-cifras" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>📄 MINHAS CIFRAS SALVAS - OFFLINE</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><div id="listaCifras" style="margin-top:12px"></div></div></div>
-<div id="view-cifras-vs" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>🎧 CIFRAS COM VS - OFFLINE</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><div id="listaCifrasVs" style="margin-top:12px"></div></div></div>
-<div id="view-pastas" class="view"><div class="card"><b>📁 PASTAS POR ARTISTA</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
+<div id="view-cifras" class="view"><div class="card"><b>📄 CIFRAS SALVAS - OFFLINE</b><div id="listaCifras" style="margin-top:12px"></div></div></div>
+<div id="view-cifras-vs" class="view"><div class="card"><b>🎧 CIFRAS COM VS</b><div id="listaCifrasVs" style="margin-top:12px"></div></div></div>
+<div id="view-pastas" class="view"><div class="card"><b>📁 PASTAS</b><div id="listaPastas" style="margin-top:12px"></div></div></div>
 
 <div id="view-admin" class="view">
 <div class="card pro">
 <div class="card-header">👑 CLIENTES CADASTRADOS - SENHAS VISÍVEIS</div>
-<small style="color:var(--muted)">Você vê todos com email e senha - Libera ou Bloqueia</small>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px">
 <div style="background:var(--card2);border:1px solid var(--gold);border-radius:8px;padding:10px;text-align:center"><small style="color:var(--muted)">TOTAL</small><div id="adminTotal" style="color:var(--gold);font-size:20px;font-weight:900">0</div></div>
 <div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center"><small style="color:var(--muted)">ATIVOS</small><div id="adminAtivos" style="color:#00ff00;font-size:20px;font-weight:900">0</div></div>
@@ -220,7 +200,7 @@ Faroeste Caboclo</textarea>
 
 </div>
 
-<div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent" onclick="showFloat()"></div><div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div><div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button><button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button><button class="small" onclick="stopScroll();resetHide()">⏸️</button></div><div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div><div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div></div><div style="display:flex;gap:6px"><button class="small gold" onclick="changeBothSize(-3);resetHide()" style="flex:1">MICRO</button><button class="small gold" onclick="changeBothSize(-1);resetHide()" style="flex:1">MENOR</button><button class="small gold" onclick="changeBothSize(1);resetHide()" style="flex:1">MAIOR</button></div><div style="display:flex;gap:6px"><button class="small gold" onclick="playBoth();resetHide()" style="flex:1">▶ PLAY 2</button><button class="small" onclick="pauseBoth();resetHide()" style="flex:1">⏸</button></div></div><button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button></div>
+<div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none';document.getElementById('showControlsBtn').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0 | 100 BPM</span> <span id="scrollStatusTela">• PARADO</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent" onclick="showFloat()"></div><div id="telaFloating" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(10,10,10,0.98);border:1px solid var(--gold);border-radius:14px;padding:14px;width:400px;max-width:94%;display:flex;flex-direction:column;gap:10px;z-index:30"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">TOM</b><div id="telaTom" style="background:var(--gold);color:var(--bg);padding:5px 12px;border-radius:20px;font-weight:800;font-size:11px">0</div><button class="btn" onclick="hideFloat()" style="padding:5px 10px">✕</button></div><div style="display:flex;gap:8px"><button class="small" onclick="changeTranspose(-1);resetHide()" style="flex:1">-1</button><button class="small gold" onclick="changeTranspose(0,true);resetHide()" style="flex:1">0</button><button class="small" onclick="changeTranspose(1);resetHide()" style="flex:1">+1</button></div><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:10px">ROLAGEM</b><span id="scrollStatus" style="color:var(--muted);font-size:10px">PARADO</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px"><button id="btnScrollTela" class="small gold" onclick="toggleScroll('tela');resetHide()">▶️ ROLAGEM</button><button class="small" onclick="resetScroll('tela');resetHide()">⏮️ TOPO</button><button class="small" onclick="stopScroll();resetHide()">⏸️</button></div><div style="margin-top:8px"><span id="scrollSpeedValTela" style="color:var(--gold);font-size:10px">2</span><input type="range" id="scrollSpeedTela" min="1" max="10" value="2" style="width:100%" oninput="setScrollSpeed(this.value);resetHide()"><input type="range" id="scrollSpeed" min="1" max="10" value="2" style="display:none"></div><div id="pedidosTelaGrande" style="margin-top:8px;max-height:80px;overflow-y:auto;background:var(--card3);border-radius:8px;padding:6px"></div></div></div><button id="showControlsBtn" onclick="showFloat()" style="display:none;position:fixed;bottom:20px;right:20px;background:var(--card2);color:var(--gold);border:2px solid var(--gold);border-radius:20px;padding:10px 18px;font-weight:800;font-size:11px;z-index:40">🎛️ CONTROLES</button></div>
 
 <textarea id="inputCifra" style="display:none"></textarea>
 <textarea id="inputFull" style="display:none"></textarea>
@@ -234,26 +214,16 @@ var THEMES=[
 {name:'Branco Leve',bg:'#f5f5f0',card:'#ffffff',card2:'#eeeeee',card3:'#e0e0e0',text:'#111111',muted:'#666',line:'#cccccc',line2:'#bbbbbb',cifra:'#b8860b',letra:'#000000',gold:'#c9a86a'},
 {name:'Preto Pro',bg:'#080808',card:'#121212',card2:'#181818',card3:'#1e1e1e',text:'#e8dcc0',muted:'#8a8a8a',line:'#232323',line2:'#2a2a2a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#c9a86a'},
 {name:'Azul Noite',bg:'#020a14',card:'#081428',card2:'#0c1e3a',card3:'#12284a',text:'#c0d6f0',muted:'#6a8aaa',line:'#1a2a4a',line2:'#2a3a5a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#4a9eff'},
-{name:'Rosa Show',bg:'#14020a',card:'#280814',card2:'#3a0c1e',card3:'#4a1028',text:'#f0c0d0',muted:'#aa6a8a',line:'#4a1a2a',line2:'#5a2a3a',cifra:'#FF69B4',letra:'#FFFFFF',gold:'#ff4a9a'},
 {name:'Verde Palco',bg:'#021408',card:'#081e10',card2:'#0c2814',card3:'#103a1e',text:'#c0f0c0',muted:'#6aaa6a',line:'#1a4a2a',line2:'#2a5a3a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#4aff6a'},
-{name:'Diplomata',bg:'#0a0a0a',card:'#141414',card2:'#1a1a1a',card3:'#202020',text:'#d4c4a0',muted:'#8a8a8a',line:'#2a2a2a',line2:'#3a3a3a',cifra:'#c9a86a',letra:'#e8dcc0',gold:'#c9a86a'},
-{name:'Vermelho Rock',bg:'#140202',card:'#280808',card2:'#3a0c0c',card3:'#4a1010',text:'#f0c0c0',muted:'#aa6a6a',line:'#4a1a1a',line2:'#5a2a2a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#ff4a4a'},
-{name:'Roxo Luxo',bg:'#0a0214',card:'#14082a',card2:'#1e0c3a',card3:'#28104a',text:'#d0c0f0',muted:'#8a6aaa',line:'#2a1a4a',line2:'#3a2a5a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#9a4aff'},
-{name:'Laranja Energia',bg:'#140a02',card:'#281408',card2:'#3a1e0c',card3:'#4a2810',text:'#f0d0b0',muted:'#aa8a6a',line:'#4a2a1a',line2:'#5a3a2a',cifra:'#FFD700',letra:'#FFFFFF',gold:'#ff8a2a'},
-{name:'Ouro Negro',bg:'#0a0a00',card:'#141400',card2:'#1e1e00',card3:'#2a2a00',text:'#e8e0a0',muted:'#8a8a4a',line:'#2a2a00',line2:'#3a3a00',cifra:'#FFD700',letra:'#FFFACD',gold:'#FFD700'}
+{name:'Diplomata',bg:'#0a0a0a',card:'#141414',card2:'#1a1a1a',card3:'#202020',text:'#d4c4a0',muted:'#8a8a8a',line:'#2a2a2a',line2:'#3a3a3a',cifra:'#c9a86a',letra:'#e8dcc0',gold:'#c9a86a'}
 ];
 var FONTS=[
 {name:'Montserrat',family:"'Montserrat',sans-serif"},
 {name:'Oswald',family:"'Oswald',sans-serif"},
 {name:'Bebas',family:"'Bebas Neue',cursive"},
-{name:'Inter',family:"'Inter',sans-serif"},
-{name:'Arial Black',family:"'Arial Black',sans-serif"},
-{name:'Courier',family:"'Courier New',monospace"},
-{name:'Times',family:"'Times New Roman',serif"},
-{name:'Verdana',family:"Verdana,sans-serif"},
-{name:'Impact',family:"Impact,sans-serif"},
-{name:'Comic',family:"'Comic Sans MS',cursive"}
+{name:'Inter',family:"'Inter',sans-serif"}
 ];
+
 function initUsers(){
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   if(users.length==0){
@@ -262,7 +232,7 @@ function initUsers(){
     localStorage.setItem('taki-users',JSON.stringify(users));
   }
 }
-function mostrarCadastro(){document.getElementById('loginForm').style.display='none';document.getElementById('cadastroForm').style.display='block';document.getElementById('loginMsg').innerText='';}
+function mostrarCadastro(){document.getElementById('loginForm').style.display='none';document.getElementById('cadastroForm').style.display='block';}
 function mostrarLogin(){document.getElementById('cadastroForm').style.display='none';document.getElementById('loginForm').style.display='block';}
 function fazerCadastro(){
   var nome=document.getElementById('cadNome').value.trim();
@@ -274,21 +244,16 @@ function fazerCadastro(){
   users.push({nome:nome,email:email,pass:pass,ativo:true,isAdmin:false,data:new Date().toISOString()});
   localStorage.setItem('taki-users',JSON.stringify(users));
   document.getElementById('loginMsg').style.color='#00ff00';
-  document.getElementById('loginMsg').innerText='✅ Conta criada! Faça login agora.';
+  document.getElementById('loginMsg').innerText='✅ Criado! Faça login.';
   mostrarLogin();
-  document.getElementById('loginEmail').value=email;
 }
 function fazerLogin(){
   var email=document.getElementById('loginEmail').value.trim().toLowerCase();
   var pass=document.getElementById('loginPass').value.trim();
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   var user=users.find(u=>u.email==email&&u.pass==pass);
-  if(!user){document.getElementById('loginMsg').style.color='#ff4a4a';document.getElementById('loginMsg').innerText='❌ E-mail ou senha errados!';return;}
-  if(!user.ativo){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('blockedScreen').style.display='flex';
-    return;
-  }
+  if(!user){document.getElementById('loginMsg').innerText='❌ Errado!';return;}
+  if(!user.ativo){document.getElementById('loginScreen').style.display='none';document.getElementById('blockedScreen').style.display='flex';return;}
   currentUser=user;
   localStorage.setItem('taki-currentUser',JSON.stringify(user));
   entrarSistema();
@@ -298,11 +263,7 @@ function entrarSistema(){
   if(!saved){document.getElementById('loginScreen').style.display='flex';return;}
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   var user=users.find(u=>u.email==saved.email);
-  if(!user||!user.ativo){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('blockedScreen').style.display='flex';
-    return;
-  }
+  if(!user||!user.ativo){document.getElementById('loginScreen').style.display='none';document.getElementById('blockedScreen').style.display='flex';return;}
   currentUser=user;
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('blockedScreen').style.display='none';
@@ -310,118 +271,105 @@ function entrarSistema(){
   document.getElementById('menuUserName').innerText=user.nome;
   document.getElementById('menuUserEmail').innerText=user.email+(user.isAdmin?' 👑 ADMIN':'');
   if(user.isAdmin){
-    document.getElementById('adminMenuTitle').style.display='block';
     document.getElementById('adminMenuBtn').style.display='block';
   }
-  carregar();gerarQRCode();conectarNtfy();renderPedidos();
-  atualizarContadoresOffline();
+  carregar();gerarQRCode();conectarNtfy();renderPedidos();atualizarContadoresOffline();
 }
-function fazerLogout(){localStorage.removeItem('taki-currentUser');currentUser=null;location.reload();}
+function fazerLogout(){localStorage.removeItem('taki-currentUser');location.reload();}
 function carregarUsuarios(){
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
   document.getElementById('adminTotal').innerText=users.length;
   document.getElementById('adminAtivos').innerText=users.filter(u=>u.ativo).length;
   document.getElementById('adminBloqueados').innerText=users.filter(u=>!u.ativo).length;
-  var html=users.map((u,i)=>'<div style="background:var(--card2);border:1px solid '+(u.ativo?'var(--line)':'#ff4a4a')+';border-radius:10px;padding:12px;margin:8px 0"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><b style="color:'+(u.isAdmin?'var(--gold)':'#fff')+'">👤 '+u.nome+' '+(u.isAdmin?'👑 ADMIN':'')+'</b><br><div style="background:var(--card3);border-radius:6px;padding:8px;margin:6px 0"><small style="color:var(--muted)">Email:</small><br><b style="color:var(--gold);font-size:12px">'+u.email+'</b><br><small style="color:var(--muted)">Senha visível:</small><br><b style="color:#00ff00;font-size:13px;font-family:monospace">🔑 '+u.pass+'</b></div><small style="color:'+(u.ativo?'#00ff00':'#ff4a4a')+'">'+(u.ativo?'✅ ATIVO':'🚫 BLOQUEADO')+' • '+new Date(u.data).toLocaleDateString()+'</small></div><div style="display:flex;flex-direction:column;gap:6px;margin-left:10px"><button class="small '+(u.ativo?'':'gold')+'" style="padding:10px 14px" onclick="toggleUser('+i+')">'+(u.ativo?'🚫 BLOQUEAR':'✅ LIBERAR')+'</button><button class="small" style="padding:10px 14px" onclick="removerUser('+i+')">🗑️</button></div></div></div>').join('');
-  document.getElementById('listaUsuariosAdmin').innerHTML=html||'<div style="text-align:center;color:var(--muted)">Nenhum usuário</div>';
+  var html=users.map((u,i)=>'<div style="background:var(--card2);border:1px solid '+(u.ativo?'var(--line)':'#ff4a4a')+';border-radius:10px;padding:12px;margin:8px 0"><div style="display:flex;justify-content:space-between"><div><b>👤 '+u.nome+'</b><br><small style="color:var(--muted)">'+u.email+'</small><br><b style="color:#00ff00">🔑 '+u.pass+'</b><br><small style="color:'+(u.ativo?'#00ff00':'#ff4a4a')+'">'+(u.ativo?'✅ ATIVO':'🚫 BLOQUEADO')+'</small></div><div style="display:flex;flex-direction:column;gap:6px"><button class="small '+(u.ativo?'':'gold')+'" onclick="toggleUser('+i+')">'+(u.ativo?'🚫 BLOQUEAR':'✅ LIBERAR')+'</button><button class="small" onclick="removerUser('+i+')">🗑️</button></div></div></div>').join('');
+  document.getElementById('listaUsuariosAdmin').innerHTML=html;
 }
 function toggleUser(i){
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
-  if(users[i].isAdmin&&users[i].email=='admin@taki'){alert('Não pode bloquear o admin principal!');return;}
+  if(users[i].email=='admin@taki'){alert('Não pode bloquear admin principal');return;}
   users[i].ativo=!users[i].ativo;
   localStorage.setItem('taki-users',JSON.stringify(users));
   carregarUsuarios();
 }
 function removerUser(i){
-  if(!confirm('Remover usuário?')) return;
+  if(!confirm('Remover?')) return;
   var users=JSON.parse(localStorage.getItem('taki-users')||'[]');
-  if(users[i].email=='admin@taki'){alert('Não pode remover admin principal!');return;}
+  if(users[i].email=='admin@taki'){alert('Não pode remover');return;}
   users.splice(i,1);
   localStorage.setItem('taki-users',JSON.stringify(users));
   carregarUsuarios();
 }
+
 window.applyTheme = function(idx){
   var t=THEMES[idx];
   var r=document.documentElement.style;
-  r.setProperty('--bg',t.bg);r.setProperty('--card',t.card);r.setProperty('--card2',t.card2);r.setProperty('--card3',t.card3);r.setProperty('--text',t.text);r.setProperty('--muted',t.muted);r.setProperty('--line',t.line);r.setProperty('--line2',t.line2);r.setProperty('--cifra',t.cifra);r.setProperty('--letra',t.letra);r.setProperty('--gold',t.gold);r.setProperty('--header-bg',t.card);
+  r.setProperty('--bg',t.bg);r.setProperty('--card',t.card);r.setProperty('--card2',t.card2);r.setProperty('--card3',t.card3);r.setProperty('--text',t.text);r.setProperty('--muted',t.muted);r.setProperty('--line',t.line);r.setProperty('--line2',t.line2);r.setProperty('--cifra',t.cifra);r.setProperty('--letra',t.letra);
   localStorage.setItem('taki-theme',idx);
-  document.querySelectorAll('#themeGrid .theme-btn').forEach((btn,i)=>{
-    btn.style.borderColor = (i==idx ? t.gold : t.line);
-    btn.style.boxShadow = (i==idx ? '0 0 10px '+t.gold : 'none');
-    btn.innerText=(i==idx?'✅ ':'')+THEMES[i].name;
-  });
 };
 window.applyFont = function(idx){
   var f=FONTS[idx];
   var r=document.documentElement.style;
   r.setProperty('--font-main',f.family);r.setProperty('--font-cifra',f.family);
   localStorage.setItem('taki-font',idx);
-  document.querySelectorAll('#fontGrid .small').forEach((btn,i)=>{
-    if(i==idx){btn.classList.add('gold','active'); btn.innerText='✅ '+FONTS[i].name;}
-    else{btn.classList.remove('gold','active'); btn.innerText=FONTS[i].name;}
-  });
   renderCifra();
 };
 function renderThemesInit(){
   var cur=parseInt(localStorage.getItem('taki-theme')||'1');
   var grid=document.getElementById('themeGrid');if(!grid) return;grid.innerHTML='';
   THEMES.forEach((t,i)=>{
-    var btn=document.createElement('button');btn.className='theme-btn';btn.style.background=t.bg;btn.style.color=t.letra;btn.style.borderColor=(i==cur?t.gold:t.line);btn.innerText=(i==cur?'✅ ':'')+t.name;btn.onclick=function(){ window.applyTheme(i); };grid.appendChild(btn);
+    var btn=document.createElement('button');btn.className='theme-btn';btn.style.background=t.bg;btn.style.color=t.letra;btn.style.borderColor=(i==cur?'#c9a86a':t.line);btn.innerText=(i==cur?'✅ ':'')+t.name;btn.onclick=function(){ window.applyTheme(i); };grid.appendChild(btn);
   });
 }
 function renderFontsInit(){
   var cur=parseInt(localStorage.getItem('taki-font')||'0');
   var grid=document.getElementById('fontGrid');if(!grid) return;grid.innerHTML='';
   FONTS.forEach((f,i)=>{
-    var btn=document.createElement('button');btn.className='small '+(i==cur?'gold active':'');btn.style.fontFamily=f.family;btn.style.padding='10px';btn.style.textAlign='left';btn.innerText=(i==cur?'✅ ':'')+f.name;btn.onclick=function(){ window.applyFont(i); };grid.appendChild(btn);
+    var btn=document.createElement('button');btn.className='small '+(i==cur?'gold active':'');btn.style.fontFamily=f.family;btn.style.padding='10px';btn.innerText=(i==cur?'✅ ':'')+f.name;btn.onclick=function(){ window.applyFont(i); };grid.appendChild(btn);
   });
 }
 function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='view-qr') gerarQRCode();}
-function loadVS(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioVS');a.src=url;a.volume=document.getElementById('volVS').value/100;a.load();a.play().catch(()=>{});document.getElementById('vsInfo').innerText=f.name.substring(0,20);updateRate();window._hasVS=true;window._hasVSName=f.name;var reader=new FileReader();reader.onload=function(e){var userKey=currentUser?currentUser.email:'geral';localStorage.setItem('taki-vs-data-'+userKey,e.target.result);localStorage.setItem('taki-vs-name-'+userKey,f.name);};reader.readAsDataURL(f);}
-function loadPlayback(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioPlayback');a.src=url;a.volume=document.getElementById('volPlayback').value/100;a.load();a.play().catch(()=>{});document.getElementById('playbackInfo').innerText=f.name.substring(0,20);updateRate();window._hasPlayback=true;window._hasPlaybackName=f.name;var reader=new FileReader();reader.onload=function(e){var userKey=currentUser?currentUser.email:'geral';localStorage.setItem('taki-playback-data-'+userKey,e.target.result);localStorage.setItem('taki-playback-name-'+userKey,f.name);};reader.readAsDataURL(f);}
-function playBoth(){var a1=document.getElementById('audioVS');var a2=document.getElementById('audioPlayback');if(a1.src){a1.currentTime=0;a1.play().catch(()=>{});}if(a2.src){a2.currentTime=0;a2.play().catch(()=>{});}}
+function loadVS(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioVS');a.src=url;a.volume=0.8;a.load();a.play().catch(()=>{});document.getElementById('vsInfo').innerText=f.name;window._hasVS=true;window._hasVSName=f.name;var reader=new FileReader();reader.onload=function(e){localStorage.setItem('taki-vs-data-'+(currentUser?currentUser.email:'geral'),e.target.result);localStorage.setItem('taki-vs-name-'+(currentUser?currentUser.email:'geral'),f.name);};reader.readAsDataURL(f);}
+function loadPlayback(input){var f=input.files[0];if(!f) return;var url=URL.createObjectURL(f);var a=document.getElementById('audioPlayback');a.src=url;a.volume=0.8;a.load();a.play().catch(()=>{});document.getElementById('playbackInfo').innerText=f.name;window._hasPlayback=true;window._hasPlaybackName=f.name;var reader=new FileReader();reader.onload=function(e){localStorage.setItem('taki-playback-data-'+(currentUser?currentUser.email:'geral'),e.target.result);localStorage.setItem('taki-playback-name-'+(currentUser?currentUser.email:'geral'),f.name);};reader.readAsDataURL(f);}
+function playBoth(){var a1=document.getElementById('audioVS');var a2=document.getElementById('audioPlayback');if(a1.src){a1.currentTime=0;a1.play();}if(a2.src){a2.currentTime=0;a2.play();}}
 function pauseBoth(){document.getElementById('audioVS').pause();document.getElementById('audioPlayback').pause();}
 function getRate(){return (bpm/100)*Math.pow(2,pitch/12);}
-function updateRate(){var a1=document.getElementById('audioVS');var a2=document.getElementById('audioPlayback');var r=getRate();if(a1 && a1.src) a1.playbackRate=Math.max(0.25,Math.min(4,r));if(a2 && a2.src) a2.playbackRate=Math.max(0.25,Math.min(4,r));}
+function updateRate(){var a1=document.getElementById('audioVS');var a2=document.getElementById('audioPlayback');var r=getRate();if(a1) a1.playbackRate=r;if(a2) a2.playbackRate=r;}
 function changeBPM(d){setBPM(bpm+d);}
-function setBPM(v){bpm=Math.max(40,Math.min(240,parseInt(v)||100));document.getElementById('bpmDisplay').innerText=bpm;document.getElementById('bpmRange').value=bpm;var el=document.getElementById('telaSync');if(el) el.innerText=transpose+' | '+bpm+' BPM';updateRate();localStorage.setItem('taki-bpm',bpm);}
+function setBPM(v){bpm=Math.max(40,Math.min(240,parseInt(v)||100));document.getElementById('bpmDisplay').innerText=bpm;document.getElementById('bpmRange').value=bpm;updateRate();localStorage.setItem('taki-bpm',bpm);}
 function changePitch(d,isReset){if(isReset) setPitch(0); else setPitch(pitch+d);}
 function setPitch(v){pitch=Math.max(-12,Math.min(12,parseInt(v)||0));document.getElementById('pitchDisplay').innerHTML=pitch;document.getElementById('pitchRange').value=pitch;updateRate();localStorage.setItem('taki-pitch',pitch);}
-function setScrollSpeed(v){scrollSpeed=parseInt(v);['scrollSpeedVal','scrollSpeedValTela','scrollSpeedValConfig'].forEach(id=>{var el=document.getElementById(id);if(el) el.innerText=scrollSpeed;});['scrollSpeed','scrollSpeedTela','scrollSpeedConfig'].forEach(id=>{var el=document.getElementById(id);if(el) el.value=scrollSpeed;});localStorage.setItem('taki-scrollSpeed',scrollSpeed);if(isScrolling){stopScroll();startScroll();}}
-function startScroll(){var container = scrollMode==='tela' ? document.getElementById('telaContent') : document.getElementById('output');if(!container) return;isScrolling=true;var speedMap={1:0.25,2:0.5,3:0.8,4:1.2,5:1.8,6:2.5,7:3.5,8:5,9:7,10:10};var pixels=speedMap[scrollSpeed]||0.5;var s1=document.getElementById('scrollStatus');var s2=document.getElementById('scrollStatusTela');if(s1) s1.innerText='ROLANDO';if(s2) s2.innerText='• ROLANDO';scrollInterval=setInterval(()=>{container.scrollTop+=pixels;if(container.scrollTop+container.clientHeight>=container.scrollHeight-2){stopScroll();}},40);}
-function stopScroll(){isScrolling=false;clearInterval(scrollInterval);scrollInterval=null;var s1=document.getElementById('scrollStatus');var s2=document.getElementById('scrollStatusTela');if(s1) s1.innerText='PARADO';if(s2) s2.innerText='• PARADO';}
+function setScrollSpeed(v){scrollSpeed=parseInt(v);var el=document.getElementById('scrollSpeedVal');if(el) el.innerText=scrollSpeed;localStorage.setItem('taki-scrollSpeed',scrollSpeed);if(isScrolling){stopScroll();startScroll();}}
+function startScroll(){var container = scrollMode==='tela' ? document.getElementById('telaContent') : document.getElementById('output');if(!container) return;isScrolling=true;var pixels={1:0.25,2:0.5,3:0.8,4:1.2,5:1.8,6:2.5,7:3.5,8:5,9:7,10:10}[scrollSpeed]||0.5;scrollInterval=setInterval(()=>{container.scrollTop+=pixels;if(container.scrollTop+container.clientHeight>=container.scrollHeight-2){stopScroll();}},40);}
+function stopScroll(){isScrolling=false;clearInterval(scrollInterval);}
 function toggleScroll(mode){if(mode) scrollMode=mode;if(isScrolling){stopScroll();}else{scrollMode=mode;startScroll();}}
 function resetScroll(mode){var c = mode==='tela' ? document.getElementById('telaContent') : document.getElementById('output');if(c) c.scrollTop=0;stopScroll();}
-function doShare(){var url=location.href;var text='TAKI PRO LIVE - '+url;if(navigator.share){navigator.share({title:'TAKI PRO LIVE',text:text,url:url}).catch(()=>{window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');});}else{window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');}}
-function isChordLine(line){var t=line.trim();if(!t) return false;if(t.length>55) return false;if(/^[A-G][#b]?[mM0-9\/\s\(\)\-]*$/.test(t.replace(/\s+/g,' ').trim()) && /[A-G]/.test(t)) return true;return false;}
-function isSection(line){var u=line.trim().toUpperCase();if(u.length>30) return false;return ['REFRÃO','REFRAO','PONTE','INTRO','VERSO','CHORUS','REFR','SOLO'].some(k=>u.includes(k));}
+function doShare(){var url=location.href;if(navigator.share){navigator.share({title:'TAKI PRO LIVE',url:url});}else{window.open('https://wa.me/?text='+encodeURIComponent(url),'_blank');}}
+function isChordLine(line){var t=line.trim();if(!t) return false;if(t.length>55) return false;return /[A-G]/.test(t) && /^[A-G][#b]?[mM0-9\/\s\(\)\-]*$/.test(t.replace(/\s+/g,' ').trim());}
+function isSection(line){var u=line.trim().toUpperCase();return ['REFRÃO','REFRAO','PONTE','INTRO','VERSO','CHORUS'].some(k=>u.includes(k)) && u.length<30;}
 function transposeNote(n,s){var idx=NOTES.indexOf(n);if(idx==-1) return n;var ni=(idx+s)%12;if(ni<0) ni+=12;return NOTES[ni];}
 function transposeChord(ch,s){if(s==0) return ch;var m=ch.match(/^([A-G][#b]?)(.*)$/);if(!m) return ch;return transposeNote(m[1].replace('b','#'),s)+m[2];}
 function transposeLine(line,s){if(s==0) return line;return line.split(/(\s+)/).map(tok=>{if(/^\s+$/.test(tok)) return tok;if(/^[A-G][#b]?/.test(tok)){return transposeChord(tok,s);}return tok;}).join('');}
-function parseBlocks(){var a=document.getElementById('inputCifra').value||'';var b=document.getElementById('inputFull').value||'';var c=document.getElementById('inputCifraHome').value||'';var raw=[a,b,c].sort((x,y)=>y.length-x.length)[0]||'';document.getElementById('inputCifra').value=raw;document.getElementById('inputFull').value=raw;document.getElementById('inputCifraHome').value=raw;if(!raw.trim()) return [];var lines=raw.split('\n');var blocks=[];for(var i=0;i<lines.length;i++){var l=lines[i];if(!l.trim()){blocks.push({type:'space'});continue;}if(isSection(l)){blocks.push({type:'section',text:l.trim()});continue;}if(isChordLine(l)){var next=lines[i+1]||'';if(next.trim() &&!isChordLine(next) &&!isSection(next)){blocks.push({type:'pair',cifra:l.trim(),letra:next.trim()});i++;continue;}else{blocks.push({type:'cifra',text:l.trim()});continue;}}blocks.push({type:'letra',text:l.trim()});}return blocks;}
-function renderCifra(){var blocks=parseBlocks();var out=document.getElementById('output');if(blocks.length==0){out.innerHTML='<div class="preview-empty">Cole a cifra acima</div>';renderTela();return;}out.innerHTML='';blocks.forEach(b=>{if(b.type==='space'){out.innerHTML+='<div style="height:8px"></div>';}else if(b.type==='section'){out.innerHTML+='<div style="margin:12px 0"><div class="section-label">'+b.text.toUpperCase()+'</div></div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);out.innerHTML+='<div style="margin:14px 0"><div class="cifra-line" style="font-size:'+cifraSize+'px">'+cifra+'</div><div class="letra-line" style="font-size:'+letraSize+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);out.innerHTML+='<div style="margin:14px 0"><div class="cifra-line" style="font-size:'+cifraSize+'px">'+txt+'</div></div>';}else{out.innerHTML+='<div style="margin:14px 0"><div class="letra-line" style="font-size:'+letraSize+'px">'+b.text.toUpperCase()+'</div></div>';}});renderTela();updateSize();}
-function renderTela(){var blocks=parseBlocks();var tg=document.getElementById('telaContent');if(!tg) return;if(blocks.length==0){tg.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px">Sem cifra</div>';return;}var h='';blocks.forEach(b=>{if(b.type==='space'){h+='<div style="height:8px"></div>';}else if(b.type==='section'){h+='<div style="margin:12px 0"><div class="section-label">'+b.text.toUpperCase()+'</div></div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+cifra+'</div><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+txt+'</div></div>';}else{h+='<div style="margin:16px 0"><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.text.toUpperCase()+'</div></div>';}});tg.innerHTML=h;var el=document.getElementById('telaSync');if(el) el.innerText=transpose+' | '+bpm+' BPM';}
-function showFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.display='flex';f.style.opacity='1';}if(btn) btn.style.display='none';resetHide();}
-function hideFloat(){var f=document.getElementById('telaFloating');var btn=document.getElementById('showControlsBtn');if(f){f.style.display='none';}if(btn) btn.style.display='block';clearTimeout(hideTimer);}
+function parseBlocks(){var c=document.getElementById('inputCifraHome').value||'';if(!c.trim()) return [];var lines=c.split('\n');var blocks=[];for(var i=0;i<lines.length;i++){var l=lines[i];if(!l.trim()){blocks.push({type:'space'});continue;}if(isSection(l)){blocks.push({type:'section',text:l.trim()});continue;}if(isChordLine(l)){var next=lines[i+1]||'';if(next.trim() &&!isChordLine(next) &&!isSection(next)){blocks.push({type:'pair',cifra:l.trim(),letra:next.trim()});i++;continue;}else{blocks.push({type:'cifra',text:l.trim()});continue;}}blocks.push({type:'letra',text:l.trim()});}return blocks;}
+function renderCifra(){var blocks=parseBlocks();var out=document.getElementById('output');if(blocks.length==0){out.innerHTML='<div style="text-align:center;color:var(--muted);padding:20px">Cole a cifra</div>';return;}out.innerHTML='';blocks.forEach(b=>{if(b.type==='space'){out.innerHTML+='<div style="height:8px"></div>';}else if(b.type==='section'){out.innerHTML+='<div class="section-label">'+b.text.toUpperCase()+'</div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);out.innerHTML+='<div style="margin:14px 0"><div class="cifra-line" style="font-size:'+cifraSize+'px">'+cifra+'</div><div class="letra-line" style="font-size:'+letraSize+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);out.innerHTML+='<div class="cifra-line" style="font-size:'+cifraSize+'px">'+txt+'</div>';}else{out.innerHTML+='<div class="letra-line" style="font-size:'+letraSize+'px">'+b.text.toUpperCase()+'</div>';}});renderTela();}
+function renderTela(){var blocks=parseBlocks();var tg=document.getElementById('telaContent');if(!tg) return;if(blocks.length==0){tg.innerHTML='<div style="text-align:center;color:var(--muted);padding:40px">Sem cifra</div>';return;}var h='';blocks.forEach(b=>{if(b.type==='space'){h+='<div style="height:8px"></div>';}else if(b.type==='section'){h+='<div class="section-label">'+b.text.toUpperCase()+'</div>';}else if(b.type==='pair'){var cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+cifra+'</div><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){var txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);h+='<div style="margin:16px 0"><div class="tela-cifra" style="font-size:'+(cifraSize+4)+'px">'+txt+'</div></div>';}else{h+='<div style="margin:16px 0"><div class="tela-letra" style="font-size:'+(letraSize+2)+'px">'+b.text.toUpperCase()+'</div></div>';}});tg.innerHTML=h;}
+function showFloat(){var f=document.getElementById('telaFloating');if(f) f.style.display='flex';}
+function hideFloat(){var f=document.getElementById('telaFloating');if(f) f.style.display='none';}
 function resetHide(){clearTimeout(hideTimer);hideTimer=setTimeout(()=>{hideFloat();},6000);}
-function changeTranspose(d,isReset){if(isReset) transpose=0; else transpose=Math.max(-7,Math.min(7,transpose+d));updateUI();renderCifra();}
-function updateUI(){var name=transpose==0?'0':transpose;var el=document.getElementById('transposeInfo');if(el) el.innerText=name;var el2=document.getElementById('telaTom');if(el2) el2.innerText=name;}
-function changeBothSize(d){letraSize=Math.max(6,Math.min(80,letraSize+d));cifraSize=Math.max(6,Math.min(80,cifraSize+d));renderCifra();updateSize();localStorage.setItem('taki-letraSize',letraSize);localStorage.setItem('taki-cifraSize',cifraSize);}
-function setSize(letra,cifra){letraSize=letra;cifraSize=cifra;renderCifra();updateSize();localStorage.setItem('taki-letraSize',letraSize);localStorage.setItem('taki-cifraSize',cifraSize);}
-function updateSize(){var el=document.getElementById('sizeInfo');var el2=document.getElementById('sizeInfoConfig');if(el) el.innerText=letraSize+'px';if(el2) el2.innerText=letraSize+'px';}
+function changeTranspose(d,isReset){if(isReset) transpose=0; else transpose=Math.max(-7,Math.min(7,transpose+d));document.getElementById('transposeInfo').innerText=transpose;document.getElementById('telaTom').innerText=transpose;renderCifra();}
+function changeBothSize(d){letraSize=Math.max(6,Math.min(80,letraSize+d));cifraSize=Math.max(6,Math.min(80,cifraSize+d));renderCifra();updateSize();}
+function setSize(letra,cifra){letraSize=letra;cifraSize=cifra;renderCifra();updateSize();}
+function updateSize(){var el=document.getElementById('sizeInfo');if(el) el.innerText=letraSize+'px';}
 function salvarMusica(){
   var nome=document.getElementById('nomeMusica').value.trim();
   var artista=document.getElementById('artistaMusica').value.trim();
   if(!nome){alert('Digite nome!');return;}
-  var cifra=document.getElementById('inputCifra').value||document.getElementById('inputCifraHome').value;
+  var cifra=document.getElementById('inputCifraHome').value;
   if(!cifra.trim()){alert('Cole cifra!');return;}
   var userKey=currentUser?currentUser.email:'geral';
   var lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');
-  var hasVS=document.getElementById('checkVS').checked && window._hasVS;
-  var hasPlayback=document.getElementById('checkPlayback').checked && window._hasPlayback;
-  lista.push({id:Date.now(),nome,artista:artista||'Sem Artista',cifra,bpm,pitch,transpose,letraSize,cifraSize,hasVS:hasVS,hasPlayback:hasPlayback,vsName:window._hasVSName||'',playbackName:window._hasPlaybackName||''});
+  lista.push({id:Date.now(),nome,artista:artista||'Sem Artista',cifra,bpm,pitch,transpose,letraSize,cifraSize,hasVS:document.getElementById('checkVS').checked&&window._hasVS,hasPlayback:document.getElementById('checkPlayback').checked&&window._hasPlayback});
   localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));
-  document.getElementById('saveStatus').innerText='✅ "'+nome+'" salvo OFFLINE!';
+  document.getElementById('saveStatus').innerText='✅ Salvo!';
   carregar();atualizarContadoresOffline();
 }
 function carregar(){
@@ -430,244 +378,181 @@ function carregar(){
   var c=document.getElementById('listaCifras');
   var cVs=document.getElementById('listaCifrasVs');
   var p=document.getElementById('listaPastas');
-  if(c){c.innerHTML=todas.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma</div>':todas.map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>'+m.nome+'</b><br><small>'+m.artista+'</small></div><div style="display:flex;gap:4px"><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');}
-  if(cVs){var comVS=todas.filter(m=>m.hasVS||m.hasPlayback);cVs.innerHTML=comVS.length==0?'<div style="text-align:center;padding:20px;color:var(--muted)">Nenhuma com VS</div>':comVS.map(m=>'<div style="background:var(--card2);border:1px solid var(--gold);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>🎧 '+m.nome+'</b><br><small>'+m.artista+'</small></div><div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button><button class="small" onclick="remover('+m.idLocal+')">🗑️</button></div></div>').join('');}
-  if(p){var grupos={};todas.forEach(m=>{var art=(m.artista||'Sem Artista').trim();if(!grupos[art]) grupos[art]=[];grupos[art].push(m);});p.innerHTML=Object.keys(grupos).length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma</div>':Object.keys(grupos).sort().map(art=>'<div style="border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden"><div style="padding:14px;background:var(--card2);display:flex;justify-content:space-between;cursor:pointer" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'"><b style="color:var(--gold)">📁 '+art+'</b><small>'+grupos[art].length+'</small></div><div style="display:none;padding:6px">'+grupos[art].map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>'+m.nome+'</div><div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div></div>').join('')+'</div></div>').join('');}
+  if(c){c.innerHTML=todas.length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma</div>':todas.map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>'+m.nome+'</div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div>').join('');}
+  if(cVs){var comVS=todas.filter(m=>m.hasVS||m.hasPlayback);cVs.innerHTML=comVS.length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma com VS</div>':comVS.map(m=>'<div style="background:var(--card2);border:1px solid var(--gold);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>🎧 '+m.nome+'</div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div>').join('');}
+  if(p){var grupos={};todas.forEach(m=>{var art=(m.artista||'Sem Artista').trim();if(!grupos[art]) grupos[art]=[];grupos[art].push(m);});p.innerHTML=Object.keys(grupos).length==0?'<div style="text-align:center;color:var(--muted)">Nenhuma</div>':Object.keys(grupos).sort().map(art=>'<div style="border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden"><div style="padding:14px;background:var(--card2);display:flex;justify-content:space-between" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'"><b style="color:var(--gold)">📁 '+art+'</b><small>'+grupos[art].length+'</small></div><div style="display:none;padding:6px">'+grupos[art].map(m=>'<div style="background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between"><div>'+m.nome+'</div><button class="small gold" onclick="tocar('+m.idLocal+')">▶</button></div>').join('')+'</div></div>').join('');}
 }
 function tocar(id){
   var userKey=currentUser?currentUser.email:'geral';
   var lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');
   var m=lista[id];if(!m) return;
-  document.getElementById('inputCifra').value=m.cifra;document.getElementById('inputCifraHome').value=m.cifra;bpm=m.bpm||100;pitch=m.pitch||0;transpose=m.transpose||0;if(m.letraSize){letraSize=m.letraSize;cifraSize=m.cifraSize||Math.max(6,m.letraSize-4);}
-  document.getElementById('nomeMusica').value=m.nome;document.getElementById('artistaMusica').value=m.artista;updateUI();renderCifra();showView('view-home');updateSize();setBPM(bpm);setPitch(pitch);
-  var userKey2=currentUser?currentUser.email:'geral';
-  var vsData=localStorage.getItem('taki-vs-data-'+userKey2);
-  var playbackData=localStorage.getItem('taki-playback-data-'+userKey2);
-  if(vsData){document.getElementById('audioVS').src=vsData;}
-  if(playbackData){document.getElementById('audioPlayback').src=playbackData;}
+  document.getElementById('inputCifraHome').value=m.cifra;
+  document.getElementById('nomeMusica').value=m.nome;
+  document.getElementById('artistaMusica').value=m.artista;
+  renderCifra();showView('view-home');
 }
 function remover(id){if(!confirm('Remover?')) return;var userKey=currentUser?currentUser.email:'geral';var lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');lista.splice(id,1);localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));carregar();atualizarContadoresOffline();}
-function atualizarContadoresOffline(){var userKey=currentUser?currentUser.email:'geral';var todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');var el=document.getElementById('cifrasOfflineCount');if(el) el.innerText=todas.length+' cifras offline';}
+function atualizarContadoresOffline(){var userKey=currentUser?currentUser.email:'geral';var todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');var el=document.getElementById('cifrasOfflineCount');if(el) el.innerText=todas.length+' cifras';}
 
-// === FUNÇÕES CORRIGIDAS - BOTÃO SALVAR E CONECTAR ===
+// === CORREÇÃO DEFINITIVA DO BOTÃO ===
 function salvarConfigProLiveSemAlert(){
-  var codigo = document.getElementById('codigoDono').value.trim() || 'TAKI123';
-  var pixNome = document.getElementById('pixNome').value.trim() || '';
-  var pixKey = document.getElementById('pixKey').value.trim() || '';
+  var codigo = document.getElementById('codigoDono').value.trim() || 'ANDRÉ TAKI';
+  var pixNome = document.getElementById('pixNome').value.trim() || 'Andre Furtado';
+  var pixKey = document.getElementById('pixKey').value.trim() || '30499462882';
   var musicas = document.getElementById('listaMusicasPedidos').value.trim() || 'Todas do repertório';
   var cfg={codigo:codigo,pixKey:pixKey,pixNome:pixNome,musicas:musicas};
   localStorage.setItem('taki-pro-live-config',JSON.stringify(cfg));
   return cfg;
 }
 
-function salvarConfigProLive(){
-  var cfg = salvarConfigProLiveSemAlert();
-  gerarQRCode();
-  alert('✅ Config salvo!\n\n👤 Músico: '+cfg.pixNome+'\n🏷️ Código: '+cfg.codigo+'\n💰 PIX: '+cfg.pixKey+'\n\nQR Code atualizado!');
-  return cfg;
-}
-
 function botaoSalvarConectar(){
-  try{
-    var cfg = salvarConfigProLiveSemAlert();
-    gerarQRCode();
+  var codigo = document.getElementById('codigoDono').value.trim();
+  var pixNome = document.getElementById('pixNome').value.trim();
+  var pixKey = document.getElementById('pixKey').value.trim();
+  
+  if(!codigo){alert('Digite o código! Ex: ANDRÉ TAKI');return;}
+  if(!pixNome){alert('Digite seu nome artístico! Ex: Andre Furtado');return;}
+  if(!pixKey){alert('Digite sua chave PIX!');return;}
+  
+  var cfg = salvarConfigProLiveSemAlert();
+  
+  var btn = document.getElementById('btnSalvarPrincipal');
+  btn.innerHTML = '✅ SALVANDO...';
+  btn.style.background = '#00ff00';
+  btn.style.color = '#000';
+  
+  gerarQRCode();
+  
+  setTimeout(function(){
+    conectarNtfy();
+    btn.innerHTML = '✅ CONECTADO! - '+cfg.codigo+' - '+cfg.pixNome;
+    btn.style.background = '#00ff00';
     
-    var btn = document.querySelector('button[onclick="botaoSalvarConectar()"]');
-    if(btn){
-      btn.innerHTML = '✅ SALVO! CONECTANDO AO VIVO...';
-      btn.style.background = '#00ff00';
-      btn.style.color = '#000';
-    }
+    alert('✅ SUCESSO TOTAL!\n\n👤 Músico: '+cfg.pixNome+'\n🏷️ Código: '+cfg.codigo+'\n💰 PIX: '+cfg.pixKey+'\n\n🔗 QR Code gerado com: Deixe uma caixinha para o músico '+cfg.pixNome+'\n\n📱 Topo agora: ● AO VIVO - '+cfg.codigo);
     
     setTimeout(function(){
-      conectarNtfy();
-      if(btn){
-        btn.innerHTML = '✅ CONECTADO AO VIVO - '+cfg.codigo;
-        setTimeout(function(){
-          btn.innerHTML = '💾 SALVAR E CONECTAR AO VIVO - CLIQUE AQUI';
-          btn.style.background = '';
-          btn.style.color = '';
-        },3000);
-      }
-      alert('🚀 AO VIVO CONECTADO!\n\nMúsico: '+cfg.pixNome+'\nCódigo: '+cfg.codigo+'\n\nCliente vai ver: Deixe uma caixinha para o músico '+cfg.pixNome);
-    },500);
-    
-  }catch(e){
-    alert('Erro: '+e.message);
-  }
+      btn.innerHTML = '💾 SALVAR E GERAR QR CODE COM SEU NOME';
+      btn.style.background = '#c9a86a';
+      btn.style.color = '#000';
+    },4000);
+  },800);
 }
 
 function carregarConfigProLive(){
   try{
     var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');
-    if(cfg.codigo && document.getElementById('codigoDono')) document.getElementById('codigoDono').value=cfg.codigo;
-    if(cfg.pixKey && document.getElementById('pixKey')) document.getElementById('pixKey').value=cfg.pixKey;
-    if(cfg.pixNome && document.getElementById('pixNome')) document.getElementById('pixNome').value=cfg.pixNome;
-    if(cfg.musicas && document.getElementById('listaMusicasPedidos')) document.getElementById('listaMusicasPedidos').value=cfg.musicas;
+    if(cfg.codigo) document.getElementById('codigoDono').value=cfg.codigo;
+    if(cfg.pixKey) document.getElementById('pixKey').value=cfg.pixKey;
+    if(cfg.pixNome) document.getElementById('pixNome').value=cfg.pixNome;
+    if(cfg.musicas) document.getElementById('listaMusicasPedidos').value=cfg.musicas;
     return cfg;
   }catch(e){ return {}; }
 }
-
 function gerarQRCode(){
   try{
     var cfg=carregarConfigProLive();
-    var codigo=cfg.codigo||document.getElementById('codigoDono').value||'TAKI123';
-    var nomeMusico = cfg.pixNome || (currentUser ? currentUser.nome : '') || 'o músico';
-    nomeMusico = nomeMusico.trim() || 'o músico';
+    var codigo=cfg.codigo||document.getElementById('codigoDono').value||'ANDRÉ TAKI';
+    var nomeMusico=cfg.pixNome||'Andre Furtado';
     var baseUrl=location.origin+location.pathname;
     var linkCliente=baseUrl+'?cliente='+encodeURIComponent(codigo)+'&musico='+encodeURIComponent(nomeMusico);
-    var linkEl = document.getElementById('linkCliente');
-    if(linkEl){
-      linkEl.innerText=linkCliente + '\n\n👤 Músico: '+nomeMusico+'\nCliente vai ver: Deixe uma caixinha para o músico '+nomeMusico;
-    }
+    var linkEl=document.getElementById('linkCliente');
+    if(linkEl) linkEl.innerText=linkCliente+'\n\n👤 Músico: '+nomeMusico+'\nCliente vai ver: Deixe uma caixinha para o músico '+nomeMusico;
     var qrDiv=document.getElementById('qrContainer');
-    if(qrDiv && typeof QRCode !== 'undefined'){
+    if(qrDiv){
       qrDiv.innerHTML='';
-      QRCode.toCanvas(linkCliente,{width:200,margin:2},function(err,canvas){if(!err && canvas) qrDiv.appendChild(canvas);});
+      QRCode.toCanvas(linkCliente,{width:200,margin:2},function(err,canvas){if(!err) qrDiv.appendChild(canvas);});
     }
-  }catch(e){ console.error(e); }
+  }catch(e){}
 }
-
 function copiarLinkCliente(){
-  var txt = document.getElementById('linkCliente').innerText;
-  var link = txt.split('\n')[0];
-  navigator.clipboard.writeText(link).then(()=>alert('Link com nome do músico copiado!')).catch(()=>{ prompt('Copie o link:', link); });
-}
-function compartilharLinkCliente(){
-  var txt = document.getElementById('linkCliente').innerText;
-  var link = txt.split('\n')[0];
-  if(navigator.share){navigator.share({title:'Pede música',url:link});}else{window.open('https://wa.me/?text='+encodeURIComponent('Pede sua música! '+link),'_blank');}
+  var txt=document.getElementById('linkCliente').innerText;
+  var link=txt.split('\n')[0];
+  navigator.clipboard.writeText(link).then(()=>alert('Link copiado com nome!'));
 }
 function renderPedidos(){
-  var countEl = document.getElementById('pedidosCount');
-  if(countEl) countEl.innerText=pedidos.length+' pedidos';
-  var filaEl = document.getElementById('filaDisplay');
-  if(filaEl) filaEl.innerText=pedidos.length;
-  var totEl = document.getElementById('caixinhaTotal');
-  if(totEl) totEl.innerText='R$ '+totalCaixinha.toFixed(2);
-  var displayEl = document.getElementById('caixinhaDisplay');
-  if(displayEl) displayEl.innerText='R$ '+totalCaixinha.toFixed(2);
+  var countEl=document.getElementById('pedidosCount');if(countEl) countEl.innerText=pedidos.length+' pedidos';
+  var filaEl=document.getElementById('filaDisplay');if(filaEl) filaEl.innerText=pedidos.length;
+  var totEl=document.getElementById('caixinhaTotal');if(totEl) totEl.innerText='R$ '+totalCaixinha.toFixed(2);
+  var displayEl=document.getElementById('caixinhaDisplay');if(displayEl) displayEl.innerText='R$ '+totalCaixinha.toFixed(2);
   var cont=document.getElementById('listaPedidosLive');
-  var mini=document.getElementById('pedidosTelaGrande');
   if(!cont) return;
-  if(pedidos.length==0){
-    cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)"><b>Aguardando pedidos online...</b><br><small>Cifras e VS funcionam offline</small></div>';
-    if(mini) mini.innerHTML='<small style="color:var(--muted)">Nenhum pedido</small>';
-    return;
-  }
-  cont.innerHTML=pedidos.map((p,i)=>'<div class="pedido-card"><div><b style="color:var(--gold)">🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small>'+(p.recado?'<br><small style="color:#fff">💬 "'+p.recado+'"</small>':'')+'<br><small style="color:var(--muted)">Para: '+(p.musico||'músico')+'</small></div><div><button class="small gold" onclick="removerPedido('+i+')">✅</button></div></div>').join('');
-  if(mini) mini.innerHTML=pedidos.slice(0,3).map(p=>'<div style="background:var(--card2);padding:6px;border-radius:6px;margin:4px 0"><small style="color:var(--gold)">🎵 '+p.musica+'</small></div>').join('');
-  var ultimoMini = document.getElementById('ultimoPedidoMini');
-  var ultimoTexto = document.getElementById('ultimoPedidoTexto');
-  if(ultimoMini) ultimoMini.style.display='block';
-  if(ultimoTexto && pedidos.length>0) ultimoTexto.innerText=pedidos[pedidos.length-1].musica;
+  if(pedidos.length==0){cont.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted)">Aguardando pedidos online...<br>Cifras e VS funcionam offline</div>';return;}
+  cont.innerHTML=pedidos.map((p,i)=>'<div class="pedido-card"><div><b style="color:var(--gold)">🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small>'+(p.recado?'<br><small style="color:#fff">💬 "'+p.recado+'"</small>':'')+'</div><div><button class="small gold" onclick="removerPedido('+i+')">✅</button></div></div>').join('');
 }
 function addPedido(musica,nome,gorjeta,mesa,recado,musico){
-  var now=new Date();var hora=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  var p={musica,nome:nome||'Cliente',gorjeta:parseFloat(gorjeta)||0,mesa:mesa||'-',recado:recado||'',musico:musico||'',hora, id:Date.now()};
+  var p={musica,nome:nome||'Cliente',gorjeta:parseFloat(gorjeta)||0,mesa:mesa||'-',recado:recado||'',musico:musico||'',hora:new Date().toLocaleTimeString(),id:Date.now()};
   pedidos.push(p);totalCaixinha+=p.gorjeta;
   localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());
-  renderPedidos();mostrarToast(p);playDing();if(navigator.vibrate) navigator.vibrate([200,100,200]);
+  renderPedidos();mostrarToast(p);playDing();
 }
-function mostrarToast(p){
-  var toastText = document.getElementById('toastText');
-  if(toastText) toastText.innerText='🎵 '+p.musica+' '+(p.recado?'💬 '+p.recado.substring(0,20):'')+' | R$ '+(p.gorjeta||0).toFixed(2);
-  var toast=document.getElementById('liveToast');
-  if(toast){ toast.style.display='block'; setTimeout(()=>{toast.style.display='none';},6000); }
-}
+function mostrarToast(p){var toastText=document.getElementById('toastText');if(toastText) toastText.innerText='🎵 '+p.musica+' | R$ '+(p.gorjeta||0).toFixed(2);var toast=document.getElementById('liveToast');if(toast){toast.style.display='block';setTimeout(()=>{toast.style.display='none';},5000);}}
 function playDing(){try{var ctx=new (window.AudioContext||window.webkitAudioContext)();var osc=ctx.createOscillator();var gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;gain.gain.value=0.3;osc.start();gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.6);osc.stop(ctx.currentTime+0.6);}catch(e){}}
 function removerPedido(i){totalCaixinha-=pedidos[i].gorjeta||0;pedidos.splice(i,1);localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());renderPedidos();}
 function limparPedidos(){if(!confirm('Limpar?')) return;pedidos=[];totalCaixinha=0;localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha','0');renderPedidos();}
-function testarPedido(){addPedido('Evidências','João M5',5,'M5','Toca pra minha esposa! Te amo!', currentUser?currentUser.nome:'Músico');}
+function testarPedido(){addPedido('Evidências','João M5',5,'M5','Toca pra minha esposa!');}
 function conectarNtfy(){
+  var cfg=salvarConfigProLiveSemAlert();
+  var codigo=cfg.codigo||'ANDRÉ TAKI';
+  var topic='taki-pro-live-'+codigo.toLowerCase().replace(/[^a-z0-9]/g,'-');
+  if(ntfySource) try{ntfySource.close();}catch(e){}
+  if(!navigator.onLine){
+    var ls=document.getElementById('liveStatus');if(ls){ls.innerText='● OFFLINE';ls.style.background='#8a8a8a';}
+    return;
+  }
   try{
-    var cfg=salvarConfigProLiveSemAlert();
-    var codigo=cfg.codigo||'TAKI123';
-    var topic='taki-pro-live-'+codigo.toLowerCase().replace(/[^a-z0-9]/g,'');
-    if(ntfySource) { try{ ntfySource.close(); }catch(e){} }
-    if(!navigator.onLine){
-      var liveStatus = document.getElementById('liveStatus');
-      if(liveStatus){ liveStatus.innerText='● OFFLINE'; liveStatus.style.background='#8a8a8a'; }
-      return;
-    }
     ntfySource=new EventSource('https://ntfy.sh/'+topic+'/sse');
     ntfySource.onmessage=function(e){
       try{
         var data=JSON.parse(e.data);
         if(data.event==='message'){
           var msg=data.message||'';
-          try{
-            var pedido=JSON.parse(msg);
-            if(pedido.musica){addPedido(pedido.musica,pedido.nome,pedido.gorjeta,pedido.mesa,pedido.recado,pedido.musico);}
-          }catch(err){}
+          try{var pedido=JSON.parse(msg);if(pedido.musica){addPedido(pedido.musica,pedido.nome,pedido.gorjeta,pedido.mesa,pedido.recado,pedido.musico);}}catch(err){}
         }
       }catch(err){}
     };
     ntfySource.onopen=function(){
-      var liveStatus = document.getElementById('liveStatus');
-      if(liveStatus){ liveStatus.innerText='● AO VIVO - '+codigo; liveStatus.style.background='#00ff00'; }
-      var badge = document.getElementById('offlineBadge');
-      if(badge) badge.innerText='ONLINE + '+cfg.pixNome;
+      var ls=document.getElementById('liveStatus');if(ls){ls.innerText='● AO VIVO - '+codigo;ls.style.background='#00ff00';}
+      var badge=document.getElementById('offlineBadge');if(badge) badge.innerText='AO VIVO - '+cfg.pixNome;
     };
-    ntfySource.onerror=function(){
-      var liveStatus = document.getElementById('liveStatus');
-      if(liveStatus){ liveStatus.innerText='● RECONECTANDO...'; liveStatus.style.background='#ffaa00'; }
-    };
-  }catch(e){ console.error(e); }
+  }catch(e){}
 }
-function exportarBackup(){
-  var userKey=currentUser?currentUser.email:'geral';
-  var data={cifras:localStorage.getItem('taki-pro-live-'+userKey),config:localStorage.getItem('taki-pro-live-config'),pedidos:localStorage.getItem('taki-pro-pedidos'),caixinha:localStorage.getItem('taki-pro-caixinha'),vsData:localStorage.getItem('taki-vs-data-'+userKey),playbackData:localStorage.getItem('taki-playback-data-'+userKey),tema:localStorage.getItem('taki-theme'),font:localStorage.getItem('taki-font'),letraSize:localStorage.getItem('taki-letraSize'),bpm:localStorage.getItem('taki-bpm'),pitch:localStorage.getItem('taki-pitch'),scrollSpeed:localStorage.getItem('taki-scrollSpeed'),date:new Date().toISOString()};
-  var blob=new Blob([JSON.stringify(data)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='TAKI-PRO-LIVE-BACKUP-'+userKey+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
-}
-function importarBackup(input){var f=input.files[0];if(!f) return;var reader=new FileReader();reader.onload=function(e){try{var data=JSON.parse(e.target.result);var userKey=currentUser?currentUser.email:'geral';if(data.cifras) localStorage.setItem('taki-pro-live-'+userKey,data.cifras);if(data.config) localStorage.setItem('taki-pro-live-config',data.config);if(data.pedidos) localStorage.setItem('taki-pro-pedidos',data.pedidos);if(data.caixinha) localStorage.setItem('taki-pro-caixinha',data.caixinha);if(data.vsData) localStorage.setItem('taki-vs-data-'+userKey,data.vsData);if(data.playbackData) localStorage.setItem('taki-playback-data-'+userKey,data.playbackData);if(data.tema) localStorage.setItem('taki-theme',data.tema);if(data.font) localStorage.setItem('taki-font',data.font);if(data.letraSize) localStorage.setItem('taki-letraSize',data.letraSize);if(data.bpm) localStorage.setItem('taki-bpm',data.bpm);if(data.pitch) localStorage.setItem('taki-pitch',data.pitch);if(data.scrollSpeed) localStorage.setItem('taki-scrollSpeed',data.scrollSpeed);alert('✅ Importado offline!');location.reload();}catch(err){alert('❌ Arquivo inválido!');}};reader.readAsText(f);}
+function exportarBackup(){var userKey=currentUser?currentUser.email:'geral';var data={cifras:localStorage.getItem('taki-pro-live-'+userKey),config:localStorage.getItem('taki-pro-live-config')};var blob=new Blob([JSON.stringify(data)],{type:'application/json'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='backup.json';a.click();}
+function importarBackup(input){var f=input.files[0];if(!f) return;var reader=new FileReader();reader.onload=function(e){try{var data=JSON.parse(e.target.result);var userKey=currentUser?currentUser.email:'geral';if(data.cifras) localStorage.setItem('taki-pro-live-'+userKey,data.cifras);if(data.config) localStorage.setItem('taki-pro-live-config',data.config);alert('✅ Importado!');location.reload();}catch(err){alert('❌ Inválido');}};reader.readAsText(f);}
 
 function handleClientePage(){
   var params=new URLSearchParams(window.location.search);
   if(!params.get('cliente')) return false;
   var codigo=params.get('cliente');
-  var nomeMusico = params.get('musico') || 'o músico';
-  try{ nomeMusico = decodeURIComponent(nomeMusico); }catch(e){}
+  var nomeMusico=params.get('musico')||'o músico';
+  try{nomeMusico=decodeURIComponent(nomeMusico);}catch(e){}
   document.getElementById('loginScreen').style.display='none';
   document.querySelector('.header').style.display='none';
   document.getElementById('menuOverlay').style.display='none';
-  document.querySelector('.main').innerHTML='<div class="card pro" style="text-align:center;padding:20px"><h2 style="color:var(--gold);font-weight:900">🎤 PEDE SUA MÚSICA</h2><p style="color:var(--muted);font-size:11px;margin:6px 0">Mesa: '+codigo+' • Tocando hoje: <b style="color:var(--gold)">'+nomeMusico+'</b></p><div style="text-align:left;margin-top:16px"><label style="color:var(--gold);font-size:11px;font-weight:800">🎵 Seu nome</label><input type="text" id="nomeCliente" placeholder="Digite seu nome" style="margin:6px 0 14px 0"></div><div style="text-align:left"><label style="color:var(--gold);font-size:11px;font-weight:800">🎵 Escolha a música para '+nomeMusico+' tocar</label><select id="musicaCliente" style="margin:6px 0 14px 0"></select></div><div style="text-align:left"><label style="color:var(--gold);font-size:11px;font-weight:800">💬 Deixe um recado para '+nomeMusico+'</label><textarea id="recadoCliente" placeholder="Ex: '+nomeMusico+' toca essa pra minha esposa, te amo!" style="margin:6px 0 16px 0;min-height:80px"></textarea></div><div style="background:linear-gradient(180deg,var(--card2),#1a1500);border:2px solid var(--gold);border-radius:12px;padding:14px;text-align:center"><b style="color:var(--gold);font-size:13px">Deixe uma caixinha para o músico '+nomeMusico+' 💰</b><p style="color:var(--muted);font-size:9px;margin:4px 0 10px 0">100% do valor vai direto para '+nomeMusico+'!</p><div class="caixinha-grid"><button class="caixinha-btn" onclick="selecionarGorjeta(2)">R$2</button><button class="caixinha-btn" onclick="selecionarGorjeta(5)">R$5</button><button class="caixinha-btn" onclick="selecionarGorjeta(10)">R$10</button><button class="caixinha-btn" onclick="selecionarGorjeta(20)">R$20</button><button class="caixinha-btn gold" onclick="selecionarGorjeta(0,true)">LIVRE</button></div><div id="gorjetaLivreDiv" style="display:none"><input type="number" id="gorjetaLivre" placeholder="Digite valor R$ ex: 15,50" style="margin-top:8px"></div><div id="gorjetaSelecionada" style="margin-top:10px;color:var(--gold);font-weight:800;font-size:12px">Nenhum valor selecionado (opcional)</div></div><button class="btn gold big" style="margin-top:16px;padding:18px;font-size:13px;background:var(--gold);color:#000" onclick="enviarTudoCliente()">🚀 ENVIAR PARA '+nomeMusico.toUpperCase()+'</button><div id="pixCliente" style="margin-top:20px;display:none;background:var(--card2);border:2px solid var(--gold);border-radius:12px;padding:14px"><b style="color:var(--gold)">✅ Enviado para '+nomeMusico+'!</b><br><small style="color:#fff">Resumo: <span id="resumoEnvio"></span></small><br><div id="pixInfoBox" style="margin-top:10px;background:var(--card3);border-radius:8px;padding:10px"><small id="pixInfo" style="color:#fff"></small></div><button class="btn gold big" style="margin-top:10px" onclick="copiarPix()">📋 COPIAR PIX DO '+nomeMusico.toUpperCase()+'</button></div></div>';
-  var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{"musicas":"Evidências\\nBoate Azul\\nFaroeste Caboclo","pixKey":"PIX não configurado","pixNome":""}');
-  var musicas=(cfg.musicas||'Evidências\nBoate Azul\nFaroeste Caboclo').split('\n');
-  var sel=document.getElementById('musicaCliente');sel.innerHTML='<option value="">Selecione a música...</option>';musicas.forEach(m=>{if(!m.trim()) return;var opt=document.createElement('option');opt.value=m.trim();opt.text=m.trim();sel.appendChild(opt);});
+  document.querySelector('.main').innerHTML='<div class="card pro" style="text-align:center;padding:20px"><h2 style="color:var(--gold)">🎤 PEDE SUA MÚSICA</h2><p style="color:var(--muted);font-size:11px">Mesa: '+codigo+' • <b style="color:var(--gold)">'+nomeMusico+'</b></p><div style="text-align:left;margin-top:16px"><label style="color:var(--gold);font-size:11px">🎵 Seu nome</label><input type="text" id="nomeCliente" placeholder="Digite seu nome" style="margin:6px 0 14px 0"></div><div style="text-align:left"><label style="color:var(--gold);font-size:11px">🎵 Música para '+nomeMusico+' tocar</label><select id="musicaCliente" style="margin:6px 0 14px 0"></select></div><div style="text-align:left"><label style="color:var(--gold);font-size:11px">💬 Recado para '+nomeMusico+'</label><textarea id="recadoCliente" placeholder="Ex: Toca pra minha esposa!" style="margin:6px 0 16px 0;min-height:80px"></textarea></div><div style="background:linear-gradient(180deg,var(--card2),#1a1500);border:2px solid var(--gold);border-radius:12px;padding:14px;text-align:center"><b style="color:var(--gold);font-size:13px">Deixe uma caixinha para o músico '+nomeMusico+' 💰</b><p style="color:var(--muted);font-size:9px;margin:4px 0 10px 0">100% vai para '+nomeMusico+'!</p><div class="caixinha-grid"><button class="caixinha-btn" onclick="selecionarGorjeta(2)">R$2</button><button class="caixinha-btn" onclick="selecionarGorjeta(5)">R$5</button><button class="caixinha-btn" onclick="selecionarGorjeta(10)">R$10</button><button class="caixinha-btn" onclick="selecionarGorjeta(20)">R$20</button><button class="caixinha-btn" onclick="selecionarGorjeta(0,true)">LIVRE</button></div><div id="gorjetaLivreDiv" style="display:none"><input type="number" id="gorjetaLivre" placeholder="Valor R$" style="margin-top:8px"></div><div id="gorjetaSelecionada" style="margin-top:10px;color:var(--gold);font-weight:800">Nenhum valor (opcional)</div></div><button class="btn gold big" style="margin-top:16px;padding:18px;background:var(--gold);color:#000" onclick="enviarTudoCliente()">🚀 ENVIAR PARA '+nomeMusico.toUpperCase()+'</button><div id="pixCliente" style="margin-top:20px;display:none;background:var(--card2);border:2px solid var(--gold);border-radius:12px;padding:14px"><b style="color:var(--gold)">✅ Enviado para '+nomeMusico+'!</b><br><small>Resumo: <span id="resumoEnvio"></span></small><br><small id="pixInfo" style="color:#fff"></small><br><button class="btn gold big" style="margin-top:10px" onclick="copiarPix()">📋 COPIAR PIX</button></div></div>';
+  var cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{"musicas":"Todas do repertório"}');
+  var musicas=(cfg.musicas||'Todas do repertório').split('\n');
+  var sel=document.getElementById('musicaCliente');sel.innerHTML='<option value="">Selecione...</option>';musicas.forEach(m=>{if(!m.trim()) return;var opt=document.createElement('option');opt.value=m.trim();opt.text=m.trim();sel.appendChild(opt);});
   window.selecionarGorjeta=function(valor,livre){
     document.querySelectorAll('.caixinha-btn').forEach(b=>b.classList.remove('active'));
-    if(livre){
-      document.getElementById('gorjetaLivreDiv').style.display='block';
-      document.getElementById('gorjetaSelecionada').innerText='LIVRE para '+nomeMusico+' - Digite abaixo';
-      gorjetaSelecionada=-1;
-    }else{
-      document.getElementById('gorjetaLivreDiv').style.display='none';
-      gorjetaSelecionada=valor;
-      document.getElementById('gorjetaSelecionada').innerText='Caixinha para '+nomeMusico+': R$ '+valor.toFixed(2)+' - Obrigado! 🙏';
-      if(event && event.target) event.target.classList.add('active');
-    }
+    if(livre){document.getElementById('gorjetaLivreDiv').style.display='block';document.getElementById('gorjetaSelecionada').innerText='LIVRE para '+nomeMusico;gorjetaSelecionada=-1;}
+    else{document.getElementById('gorjetaLivreDiv').style.display='none';gorjetaSelecionada=valor;document.getElementById('gorjetaSelecionada').innerText='Caixinha para '+nomeMusico+': R$ '+valor.toFixed(2);if(event&&event.target) event.target.classList.add('active');}
   };
   window.enviarTudoCliente=function(){
     var musica=document.getElementById('musicaCliente').value;
     var nome=document.getElementById('nomeCliente').value.trim();
     var recado=document.getElementById('recadoCliente').value.trim();
-    if(!nome){alert('Digite seu nome! O '+nomeMusico+' quer saber quem é você!');return;}
-    if(!musica){alert('Escolha a música para o '+nomeMusico+' tocar!');return;}
-    var gorjeta=gorjetaSelecionada;
-    if(gorjeta==-1){gorjeta=parseFloat(document.getElementById('gorjetaLivre').value)||0;}
-    if(gorjeta==-1) gorjeta=0;
-    var topic='taki-pro-live-'+codigo.toLowerCase().replace(/[^a-z0-9]/g,'');
-    var payload={musica:musica,nome:nome,gorjeta:gorjeta,mesa:codigo,recado:recado,musico:nomeMusico,tipo:'completo',data:new Date().toISOString()};
+    if(!nome){alert('Digite seu nome!');return;}
+    if(!musica){alert('Escolha a música!');return;}
+    var gorjeta=gorjetaSelecionada;if(gorjeta==-1){gorjeta=parseFloat(document.getElementById('gorjetaLivre').value)||0;}if(gorjeta==-1) gorjeta=0;
+    var topic='taki-pro-live-'+codigo.toLowerCase().replace(/[^a-z0-9]/g,'-');
+    var payload={musica:musica,nome:nome,gorjeta:gorjeta,mesa:codigo,recado:recado,musico:nomeMusico};
     fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify(payload)}).then(()=>{
       document.getElementById('pixCliente').style.display='block';
-      document.getElementById('resumoEnvio').innerText=musica+' para '+nomeMusico+' | '+(recado||'sem recado')+' | R$ '+gorjeta.toFixed(2);
-      var cfgLocal = JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');
-      document.getElementById('pixInfo').innerText=(cfgLocal.pixKey||'PIX não configurado')+' - '+(cfgLocal.pixNome||nomeMusico)+(gorjeta>0?' - Caixinha: R$ '+gorjeta.toFixed(2):'');
-      alert('🚀 Enviado para '+nomeMusico+'!\n\n🎵 '+musica+'\n👤 De: '+nome+'\n💬 '+ (recado||'sem recado')+'\n💰 R$ '+gorjeta.toFixed(2));
+      document.getElementById('resumoEnvio').innerText=musica+' | '+nome+' | R$ '+gorjeta.toFixed(2);
+      alert('🚀 Enviado para '+nomeMusico+'! 🎵 '+musica);
     });
   };
-  window.copiarPix=function(){var cfgLocal=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');navigator.clipboard.writeText(cfgLocal.pixKey||'').then(()=>alert('PIX do '+nomeMusico+' copiado!'));};
+  window.copiarPix=function(){var c=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');navigator.clipboard.writeText(c.pixKey||'').then(()=>alert('PIX copiado!'));};
   return true;
 }
 
@@ -677,28 +562,17 @@ document.addEventListener('DOMContentLoaded',function(){
   var savedUser=localStorage.getItem('taki-currentUser');
   if(savedUser){entrarSistema();}else{document.getElementById('loginScreen').style.display='flex';}
   var savedSizeL=parseInt(localStorage.getItem('taki-letraSize')||'16');letraSize=savedSizeL;cifraSize=Math.max(6,savedSizeL-4);
-  var savedSpeed=parseInt(localStorage.getItem('taki-scrollSpeed')||'2');setScrollSpeed(savedSpeed);
-  var savedBpm=parseInt(localStorage.getItem('taki-bpm')||'100');bpm=savedBpm;setBPM(bpm);
-  var savedPitch=parseInt(localStorage.getItem('taki-pitch')||'0');pitch=savedPitch;setPitch(pitch);
   renderThemesInit();renderFontsInit();
   var savedTheme=parseInt(localStorage.getItem('taki-theme')||'1');window.applyTheme(savedTheme);
   var savedFont=parseInt(localStorage.getItem('taki-font')||'0');window.applyFont(savedFont);
   carregarConfigProLive();
   var savedPedidos=JSON.parse(localStorage.getItem('taki-pro-pedidos')||'[]');pedidos=savedPedidos;
   totalCaixinha=parseFloat(localStorage.getItem('taki-pro-caixinha')||'0');
-  var userKey=JSON.parse(localStorage.getItem('taki-currentUser')||'{}').email||'geral';
-  var vsData=localStorage.getItem('taki-vs-data-'+userKey);
-  var playbackData=localStorage.getItem('taki-playback-data-'+userKey);
-  if(vsData){document.getElementById('audioVS').src=vsData;document.getElementById('vsInfo').innerText=localStorage.getItem('taki-vs-name-'+userKey)||'VS Offline OK';window._hasVS=true;window._hasVSName=localStorage.getItem('taki-vs-name-'+userKey);}
-  if(playbackData){document.getElementById('audioPlayback').src=playbackData;document.getElementById('playbackInfo').innerText=localStorage.getItem('taki-playback-name-'+userKey)||'Playback Offline OK';window._hasPlayback=true;window._hasPlaybackName=localStorage.getItem('taki-playback-name-'+userKey);}
-  renderPedidos();renderCifra();carregar();updateUI();updateSize();gerarQRCode();
-  document.getElementById('audioVS').volume=0.8;document.getElementById('audioPlayback').volume=0.8;
-  setTimeout(()=>{ conectarNtfy(); },1000);
-  window.addEventListener('online',()=>{conectarNtfy();var b=document.getElementById('offlineBadge'); if(b) b.innerText='ONLINE + OFFLINE OK';});
-  window.addEventListener('offline',()=>{var b=document.getElementById('offlineBadge'); if(b) b.innerText='OFFLINE - Cifra e VS OK'; var ls=document.getElementById('liveStatus'); if(ls) ls.innerText='● OFFLINE';});
+  renderPedidos();renderCifra();carregar();gerarQRCode();
+  setTimeout(()=>{conectarNtfy();},1000);
 });
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();window.deferredPrompt=e;});
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(()=>{console.log('SW OK');}).catch(()=>{});}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
 </html>
