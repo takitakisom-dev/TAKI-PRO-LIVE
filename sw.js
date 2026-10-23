@@ -1,21 +1,56 @@
-const CACHE_NAME='taki-pro-live-v3-3-letra-cifra-fix-simplificada-8-7-tons';
-const urlsToCache=['./','./index.html','./manifest.json'];
-self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(urlsToCache)));
-  self.skipWaiting();
-});
-self.addEventListener('fetch',e=>{
-  e.respondWith(
-    caches.match(e.request).then(r=>r||fetch(e.request).catch(()=>{
-      if(e.request.destination==='document') return caches.match('./index.html');
-    }))
+const CACHE_NAME = 'taki-pro-live-v3-4-vs-fix-menu-completo';
+const urlsToCache = [
+  './',
+  './index.html',
+  './manifest.json'
+];
+
+self.addEventListener('install', event => {
+  console.log('[SW v3.4] Install VS FIX');
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        console.log('[SW v3.4] Cache aberto');
+        return cache.addAll(urlsToCache);
+      })
+      .then(() => self.skipWaiting())
   );
 });
-self.addEventListener('activate',e=>{
-  e.waitUntil(
-    caches.keys().then(ns=>Promise.all(ns.map(n=>{
-      if(n!==CACHE_NAME) return caches.delete(n);
-    })))
+
+self.addEventListener('activate', event => {
+  console.log('[SW v3.4] Activate - limpando caches antigos');
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('[SW v3.4] Deletando cache antigo:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then(response => {
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          let responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+          return response;
+        });
+      })
+  );
 });
