@@ -1,21 +1,10 @@
 {
-  "name": "TAKI PRO LIVE v3.0 ULTIMATE - 10 Temas, VS, Playback, BKP",
-  "short_name": "TAKI PRO v3",
-  "description": "TAKI PRO LIVE v3.0 ULTIMATE - 10 Temas Premium, Meus VS, Meus Playbacks, Cifras com VS/Playback, BKP Export/Import, Instalar Direto, BPM, PITCH - Dados Nunca Expiram",
+  "name": "TAKI PRO LIVE v3.1 - Pitch Fix + Grave Agudo Delay",
+  "short_name": "TAKI PRO v3.1",
+  "description": "TAKI PRO v3.1 Pitch Real + Grave + Agudo + Delay + 10 Temas + BKP + VS Playback - Dados Nunca Expiram",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3A3A3A",
-  "orientation": "any",
-  "scope": "./",
-  "icons": [
-    {"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "512x512","type": "image/png","purpose": "any maskable"},
-    {"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "192x192","type": "image/png","purpose": "any maskable"},
-    {"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "512x512","type": "image/png","purpose": "maskable"}
-  ],
-  "shortcuts": [
-    {"name": "Home - Palco","short_name": "Palco","description": "Abrir palco com cifras","url": "./index.html","icons": [{"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "96x96"}]},
-    {"name": "Meus VS","short_name": "VS","description": "Ver meus VS salvos","url": "./index.html#vs","icons": [{"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "96x96"}]},
-    {"name": "Pedidos","short_name": "Pedidos","description": "Ver pedidos ao vivo","url": "./index.html#pedidos","icons": [{"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "96x96"}]}
-  ]
+  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "512x512","type": "image/png"}]
 }
