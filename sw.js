@@ -1,4 +1,4 @@
-const CACHE_NAME='taki-pro-live-v2-7-fix-2';
+const CACHE_NAME='taki-pro-live-v2-8-bpm-pitch';
 const urlsToCache=['./','./index.html','./manifest.json'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(urlsToCache)));
