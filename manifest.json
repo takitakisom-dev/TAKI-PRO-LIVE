@@ -1,10 +1,28 @@
 {
-  "name": "TAKI PRO LIVE v3.3 - LETRA CIFRA SEPARADOS + SIMPLIFICADA + 8-7 TONS",
-  "short_name": "TAKI PRO v3.3",
-  "description": "Controle separado letra e cifra + simplificada + 8 abaixo 7 acima + rolagem 1x2x3x",
+  "name": "TAKI PRO LIVE v3.4 VS FIX - MENU COMPLETO",
+  "short_name": "TAKI v3.4",
+  "description": "TAKI PRO LIVE v3.4 - VS FIX + MENU COMPLETO + -8 +7 TONS + SIMPLIFICADA COLADA + LETRA CIFRA SEPARADOS",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#FFFFFF",
   "theme_color": "#3A3A3A",
-  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes": "512x512","type": "image/png"}]
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3659/3659784.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3659/3659784.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["music", "entertainment"],
+  "lang": "pt-BR",
+  "dir": "ltr"
 }
