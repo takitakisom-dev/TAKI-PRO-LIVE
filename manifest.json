@@ -1,7 +1,7 @@
 {
-  "name": "TAKI PRO LIVE v3.1 - Pitch Fix + Grave Agudo Delay",
-  "short_name": "TAKI PRO v3.1",
-  "description": "TAKI PRO v3.1 Pitch Real + Grave + Agudo + Delay + 10 Temas + BKP + VS Playback",
+  "name": "TAKI PRO LIVE v3.3 - LETRA CIFRA SEPARADOS + SIMPLIFICADA + 8-7 TONS",
+  "short_name": "TAKI PRO v3.3",
+  "description": "Controle separado letra e cifra + simplificada + 8 abaixo 7 acima + rolagem 1x2x3x",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
