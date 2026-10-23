@@ -1,4 +1,4 @@
-const CACHE_NAME='taki-pro-live-v3-1-pitch-fix-grave-agudo-delay-final';
+const CACHE_NAME='taki-pro-live-v3-1-final-fix';
 const urlsToCache=['./','./index.html','./manifest.json'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(urlsToCache)));
