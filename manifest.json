@@ -1,16 +1,10 @@
 {
-  "name": "TAKI PRO LIVE v2.7 FIX",
+  "name": "TAKI PRO LIVE v2.8 BPM PITCH",
   "short_name": "TAKI PRO",
-  "description": "TAKI PRO LIVE v2.7 FIX ABRE SEMPRE",
+  "description": "TAKI PRO LIVE v2.8 com BPM e PITCH",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3A3A3A",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/138/138817.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "icons": [{"src":"https://cdn-icons-png.flaticon.com/512/138/138817.png","sizes":"512x512","type":"image/png"}]
 }
