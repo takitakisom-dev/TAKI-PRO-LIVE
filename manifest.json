@@ -1,1 +1,14 @@
-{"name":"TAKI v3.4.1 LOGIN FIX","short_name":"TAKI v3.4.1","start_url":"./index.html","display":"standalone","background_color":"#fff","theme_color":"#3A3A3A","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/3659/3659784.png","sizes":"512x512","type":"image/png"}]}
+{
+  "name": "TAKI PRO LIVE v3.4.3 LOGIN PRO FINAL",
+  "short_name": "TAKI v3.4.3",
+  "description": "TAKI v3.4.3 LOGIN PRO + VS FIX + CONTROLE DE CLIENTES + -8 +7 + SIMPLIFICADA",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3A3A3A",
+  "icons": [{
+    "src": "https://cdn-icons-png.flaticon.com/512/3659/3659784.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
