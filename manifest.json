@@ -1,7 +1,7 @@
 {
   "name": "TAKI PRO LIVE v3.1 - Pitch Fix + Grave Agudo Delay",
   "short_name": "TAKI PRO v3.1",
-  "description": "TAKI PRO v3.1 Pitch Real + Grave + Agudo + Delay + 10 Temas + BKP + VS Playback - Dados Nunca Expiram",
+  "description": "TAKI PRO v3.1 Pitch Real + Grave + Agudo + Delay + 10 Temas + BKP + VS Playback",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
