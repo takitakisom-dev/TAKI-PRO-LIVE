@@ -3,128 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAKI PRO LIVE</title>
-<meta name="theme-color" content="#1a1a2e">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
+<title>TAKI PRO LIVE v2.7 FIX</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#3A3A3A">
+<script>window.QRCodeLibOK=false;</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" onload="window.QRCodeLibOK=true" onerror="window.QRCodeLibOK=false"></script>
 <style>
-*{box-sizing:border-box;font-family:system-ui,Arial,sans-serif}
-body{margin:0;background:#f5f5f5;display:grid;place-items:center;min-height:100vh;padding:16px}
-.card{background:#fff;width:100%;max-width:400px;border-radius:24px;padding:28px 22px;box-shadow:0 8px 30px rgba(0,0,0,.12);border:2px solid #222}
-h1{margin:0;text-align:center;font-weight:900;font-size:28px;letter-spacing:-1px}
-.sub{font-size:12px;color:#666;text-align:center;margin:6px 0 18px 0}
-input{width:100%;padding:14px 16px;border:1.5px solid #ddd;border-radius:12px;margin:8px 0;font-size:15px;outline:none;background:#fff}
-input:focus{border-color:#7c6cff}
-input.email{background:#e8f0fe}
-.btn{width:100%;padding:14px;border:0;border-radius:14px;font-weight:800;font-size:14px;cursor:pointer;margin:8px 0}
-.btn-entrar{background:#222;color:#fff}
-.btn-criar{background:#f5f5f5;color:#000;border:1.5px solid #ddd}
-.btn-rec{background:#fff3b0;color:#7a5a00;border:1.5px dashed #e6c200}
-.msg{font-size:12px;text-align:center;padding:8px;border-radius:8px;display:none;margin:8px 0}
-.msg.ok{display:block;background:#e8ffe8;color:#0a7a0a;border:1px solid #b6e6b6}
-.msg.erro{display:block;background:#ffe3e3;color:#a00;border:1px solid #fecaca}
+:root{--gold:#3A3A3A;--bg:#fff;--card:#fff;--card2:#f8f8f8;--text:#000;--muted:#666;--line:#ddd}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{background:var(--bg);color:var(--text);padding-bottom:100px}
+.header{background:#fff;border-bottom:2px solid var(--gold);padding:14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+.header h1{color:var(--gold);font-size:13px;font-weight:900;width:100%;text-align:center}
+.hamburger{width:44px;height:44px;border:1px solid var(--gold);background:var(--card2);color:var(--gold);border-radius:8px;font-size:20px;cursor:pointer;position:absolute;left:12px}
+.btn{border:1px solid var(--line);background:var(--card2);color:var(--text);padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:11px}
+.btn.gold{background:var(--gold);color:#fff;border:2px solid var(--gold);font-weight:800}
+.btn.big{width:100%;padding:14px;font-size:12px;font-weight:800;border-radius:10px;margin:6px 0}
+.main{padding:12px;max-width:760px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.card.pro{border:2px solid var(--gold)}
+.card-header{color:var(--gold);font-weight:800;font-size:11px;margin-bottom:14px}
+.file-label{border:1px dashed #ccc;padding:16px;border-radius:10px;display:block;text-align:center;background:var(--card2);color:var(--muted);font-weight:700;font-size:11px;cursor:pointer;margin:8px 0}
+input,textarea,select{width:100%;background:var(--card2);color:var(--text);border:1px solid var(--line);padding:12px;border-radius:8px;font-size:14px}
+textarea{min-height:80px}
+.preview-wrapper{border:1px solid #ccc;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;margin-top:12px;max-height:55vh}
+.preview-top{background:var(--card);border-bottom:1px solid #ccc;padding:10px;display:flex;gap:6px}
+.preview-content{flex:1;overflow-y:auto;padding:16px}
+.cifra-line{color:#000!important;font-weight:800;display:block;margin-bottom:6px}
+.letra-line{color:#000!important;font-weight:800;text-transform:uppercase;display:block}
+.section-label{color:var(--gold);font-weight:700;font-size:10px;border:1px solid #ccc;padding:5px 12px;border-radius:20px;display:inline-block;margin:16px 0 8px 0;background:var(--card2)}
+.small{border:1px solid var(--line);background:var(--card2);color:var(--text);padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;font-size:11px}
+.small.gold{background:var(--gold);color:#fff}
+#menuOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:999}
+#menuPanel{background:var(--bg);border-right:2px solid var(--gold);width:88%;max-width:380px;height:100%;padding:16px;overflow-y:auto}
+.menu-title{color:var(--gold);font-weight:800;font-size:10px;margin:22px 0 8px 0;border-bottom:1px solid var(--line);padding-bottom:6px}
+.menu-item{width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);color:var(--text);padding:13px;border-radius:8px;margin:6px 0;font-weight:600;cursor:pointer;font-size:12px}
+.menu-item.gold{background:var(--gold);color:#fff}
+.view{display:none}.view.active{display:block}
+.pro-badge{background:var(--gold);color:#fff;padding:4px 10px;border-radius:20px;font-size:9px;font-weight:800}
+.pedido-card{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:12px;border-radius:10px;margin:8px 0;display:flex;justify-content:space-between}
+.qr-box{background:#fff;padding:12px;border-radius:12px;display:inline-block;margin:10px 0;border:1px solid var(--line)}
+#liveToast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--card);border:2px solid var(--gold);border-radius:14px;padding:14px 20px;width:90%;max-width:400px;display:none;z-index:100}
+#telaGrande{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:1000;flex-direction:column}
+.tela-header{background:var(--card);border-bottom:2px solid var(--gold);padding:12px;display:flex;justify-content:space-between}
+.tela-content{flex:1;overflow-y:auto;padding:20px 16px 200px 16px}
+#loginScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:5000;display:flex;align-items:center;justify-content:center;padding:20px}
+#blockedScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:6000;display:none;align-items:center;justify-content:center;padding:20px;text-align:center}
+.repertorio-item{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:6px 0;display:flex;justify-content:space-between}
 </style>
 </head>
 <body>
-<div class="card">
-<h1>TAKI PRO LIVE</h1>
-<div class="sub" id="versao">v2.8 - ADM: takitakisom@gmail.com</div>
-
-<div class="msg" id="msg"></div>
-
-<input class="email" id="email" type="email" placeholder="Seu e-mail" value="takitakisom@gmail.com" autocomplete="email">
-<input id="senha" type="password" placeholder="Sua senha" value="" autocomplete="current-password">
-
-<button class="btn btn-entrar" id="btnEntrar" onclick="fazerLogin()">ENTRAR</button>
-<button class="btn btn-criar" onclick="criarConta()">CRIAR CONTA GRÁTIS</button>
-<button class="btn btn-rec" onclick="recuperarSenha()">🔑 ESQUECEU A SENHA? RECUPERAR</button>
-
-<div style="font-size:10px;color:#999;text-align:center;margin-top:12px">Toque em ENTRAR. Se for seu primeiro acesso com takitakisom@gmail.com, qualquer senha com 4+ dígitos libera.</div>
+<div id="loginScreen"><div style="background:var(--card);border:2px solid var(--gold);border-radius:16px;padding:24px;width:100%;max-width:380px"><h2 style="color:var(--gold);text-align:center;font-weight:900">TAKI PRO LIVE</h2><p style="color:var(--muted);text-align:center;font-size:11px;margin:6px 0 20px 0">v2.7 FIX - ADM: takitakisom@gmail.com</p><div id="loginForm"><input type="email" id="loginEmail" placeholder="Seu e-mail" style="margin-bottom:10px" value="takitakisom@gmail.com"><input type="password" id="loginPass" placeholder="Sua senha" style="margin-bottom:14px" value="tete1212"><button class="btn gold big" onclick="fazerLogin()">ENTRAR</button><button class="btn big" onclick="mostrarCadastro()">CRIAR CONTA GRÁTIS</button><button class="btn big" style="background:#fff3cd;border:1px dashed #856404;color:#856404;margin-top:8px" onclick="mostrarRecuperar()">🔑 ESQUECEU A SENHA?</button></div><div id="cadastroForm" style="display:none"><input type="text" id="cadNome" placeholder="Seu nome" style="margin-bottom:10px"><input type="email" id="cadEmail" placeholder="Seu e-mail" style="margin-bottom:10px"><input type="password" id="cadPass" placeholder="Crie uma senha" style="margin-bottom:14px"><button class="btn gold big" onclick="fazerCadastro()">CRIAR CONTA</button><button class="btn big" onclick="mostrarLogin()">VOLTAR LOGIN</button></div><div id="recuperarForm" style="display:none"><b style="color:var(--gold);font-size:13px;display:block;margin-bottom:10px;text-align:center">🔑 RECUPERAR SENHA</b><input type="email" id="recEmail" placeholder="Seu e-mail" style="margin-bottom:10px"><div id="recResultado" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:12px;margin:10px 0;display:none;text-align:center"></div><input type="text" id="recNovaSenha" placeholder="Nova senha" style="margin-bottom:10px;display:none"><button class="btn gold big" id="btnRecuperar" onclick="recuperarSenha()">🔍 BUSCAR SENHA</button><button class="btn big" onclick="mostrarLogin()">VOLTAR</button></div><div id="loginMsg" style="margin-top:12px;text-align:center;color:#ff4a4a;font-size:12px;font-weight:700"></div><button class="btn big" style="margin-top:20px;background:#eee" onclick="localStorage.clear();location.reload()">🧹 LIMPAR TUDO E RECOMEÇAR</button></div></div>
+<div id="blockedScreen"><div style="background:#fff;border:2px solid #ff4a4a;border-radius:16px;padding:24px;max-width:400px;width:100%"><h2 style="color:#ff4a4a">🚫 BLOQUEADO</h2><button class="btn gold big" onclick="fazerLogout()">SAIR / LIMPAR</button></div></div>
+<div id="liveToast"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold)">🔔 NOVO PEDIDO!</b><br><span id="toastText"></span></div><button class="btn gold" onclick="document.getElementById('liveToast').style.display='none'">OK</button></div></div>
+<div class="header"><button class="hamburger" onclick="document.getElementById('menuOverlay').style.display='block'">☰</button><h1>TAKI PRO LIVE <span id="userInfoHeader"></span></h1><div style="width:44px;text-align:center"><span class="pro-badge">PRO v2.7</span></div></div>
+<div id="menuOverlay" onclick="if(event.target.id==='menuOverlay')this.style.display='none'"><div id="menuPanel"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold)">TAKI v2.7 FIX</b><button class="btn" onclick="document.getElementById('menuOverlay').style.display='none'">✕</button></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px"><b id="menuUserName">-</b><br><small id="menuUserEmail">-</small></div><div class="menu-title">NAVEGAÇÃO</div><button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-home')">🏠 HOME - PALCO</button><button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-prolive')">🎤 PEDIDOS + CAIXINHA</button><button class="menu-item gold" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-qr')">📱 QR CODE</button><button class="menu-item" onclick="document.getElementById('menuOverlay').style.display='none';showView('view-cifras');carregar()">📄 CIFRAS SALVAS</button><button class="menu-item" style="border:1px solid #ff4a4a;color:#ff4a4a;margin-top:20px" onclick="fazerLogout()">🚪 SAIR</button></div></div>
+<div class="main">
+<div id="view-home" class="view active">
+<div class="card pro" style="padding:10px"><div style="display:flex;justify-content:space-between"><div><b style="color:var(--gold);font-size:11px">🎤 PRO LIVE <span style="background:var(--gold);color:#fff;padding:2px 8px;border-radius:10px;font-size:8px">● AO VIVO</span></b><br><small style="color:var(--muted)"><span id="pedidosCount">0 pedidos</span> • <span id="caixinhaTotal">R$ 0,00</span> • <span id="cifrasOfflineCount">0 cifras</span></small></div><button class="small gold" onclick="showView('view-prolive')">VER 🔔</button></div></div>
+<div class="card"><div class="card-header">VS + PLAYBACK</div><div class="file-label" onclick="document.getElementById('fileVS').click()">CARREGAR VS</div><input type="file" id="fileVS" accept="audio/*" style="display:none"><audio id="audioVS" controls style="width:100%;margin-top:8px;height:36px"></audio><small id="vsInfo">Nenhum VS</small><div class="file-label" onclick="document.getElementById('filePlayback').click()" style="margin-top:10px">CARREGAR PLAYBACK</div><input type="file" id="filePlayback" accept="audio/*" style="display:none"><audio id="audioPlayback" controls style="width:100%;margin-top:8px;height:36px"></audio><small id="playbackInfo">Nenhum Playback</small><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><button class="btn gold big" onclick="playBoth()">▶ PLAY</button><button class="btn big" onclick="pauseBoth()">⏸ PAUSE</button></div></div>
+<div class="card" style="border:1px dashed var(--line)"><div class="card-header">CIFRA - TOM + TAMANHO</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input type="text" id="artistaMusica" placeholder="Artista"><input type="text" id="nomeMusica" placeholder="Música"></div><textarea id="inputCifraHome" placeholder="Cole a cifra aqui..." oninput="renderCifra()"></textarea><div style="display:flex;gap:6px;background:var(--card2);padding:10px;margin-top:8px;border-radius:8px"><button class="small" onclick="changeTranspose(-1)">-1 TOM</button><div id="transposeInfo" style="background:var(--gold);color:#fff;padding:5px 12px;border-radius:20px;font-weight:800">0</div><button class="small" onclick="changeTranspose(1)">+1 TOM</button><button class="small gold" onclick="changeTranspose(0,true)" style="margin-left:auto">0 RESET</button></div><div style="display:flex;gap:6px;background:var(--card2);padding:10px;margin-top:6px;border-radius:8px"><button class="small gold" onclick="changeBothSize(-1)">A-</button><button class="small gold" onclick="changeBothSize(1)">A+</button><span id="sizeInfo" style="color:var(--gold);margin-left:auto;font-weight:800">16px</span></div><button class="btn gold big" onclick="salvarMusica()">💾 SALVAR CIFRA OFFLINE</button><button class="btn big" onclick="document.getElementById('telaGrande').style.display='flex';renderTela()">⛶ TELA CHEIA</button><div id="saveStatus" style="margin-top:10px;color:var(--gold);text-align:center;font-weight:700"></div></div>
+<div class="card" style="padding:0;overflow:hidden"><div class="preview-wrapper"><div class="preview-top"><b style="color:var(--gold);font-size:10px">PRÉVIA:</b><button class="small gold" onclick="toggleScroll()" style="margin-left:auto">▶️ ROLAGEM</button><button class="small" onclick="resetScroll()">⏹ RESET</button></div><div class="preview-content" id="output"><div style="text-align:center;color:var(--muted);padding:20px">Cole a cifra acima</div></div></div></div>
 </div>
-
+<div id="view-prolive" class="view">
+<div class="card pro"><div class="card-header">PEDIDOS AO VIVO + CAIXINHA</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;text-align:center"><small>CAIXINHA</small><div id="caixinhaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">R$ 0,00</div></div><div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center"><small>FILA</small><div id="filaDisplay" style="color:var(--gold);font-size:24px;font-weight:900">0</div></div></div><div style="margin-top:14px"><div style="display:flex;justify-content:space-between"><b style="color:var(--gold);font-size:11px">PEDIDOS</b><button class="small gold" onclick="limparPedidos()">🗑️ LIMPAR</button></div><div id="listaPedidosLive" style="min-height:100px;margin-top:8px"></div></div><button class="btn gold big" onclick="testarPedido()">🔔 TESTAR PEDIDO</button></div>
+<div class="card" style="border:2px solid var(--gold)"><div class="card-header">CONFIG PRO LIVE</div><label style="color:var(--muted);font-size:10px">CÓDIGO DA MESA</label><input type="text" id="codigoDono" value="ANDRÉ TAKI" style="margin:4px 0 10px 0;color:var(--gold);font-weight:800"><label style="color:var(--muted);font-size:10px">CHAVE PIX</label><input type="text" id="pixKey" placeholder="Ex: 30499462882" style="margin:4px 0 10px 0" value="30499462882"><label style="color:var(--gold);font-size:10px;font-weight:800">⭐ NOME ARTÍSTICO</label><input type="text" id="pixNome" placeholder="Ex: ANDRÉ TAKI" style="margin:4px 0 14px 0;border:2px solid var(--gold);font-weight:800" value="ANDRÉ TAKI"><div style="background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px;margin-top:8px"><b style="color:var(--gold);font-size:11px">🎵 REPERTÓRIO</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><input type="text" id="inputNomeMusicaRep" placeholder="Música"><input type="text" id="inputArtistaRep" placeholder="Artista"></div><button class="btn gold big" style="margin-top:8px" onclick="adicionarMusicaRepertorio()">+ ADICIONAR</button><div id="listaRepertorioConfig" style="margin-top:12px;max-height:220px;overflow-y:auto"></div></div><button class="btn gold big" style="margin-top:16px;padding:18px;font-size:14px;font-weight:900" onclick="botaoSalvarConectar()">💾 SALVAR E CONECTAR</button></div>
+</div>
+<div id="view-qr" class="view"><div class="card pro" style="text-align:center"><div class="card-header">QR CODE</div><div id="qrContainer" class="qr-box">Gerando...</div><br><div id="linkCliente" style="background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;margin:10px 0;font-size:11px;word-break:break-all"></div><button class="btn gold big" onclick="copiarLinkCliente()">📋 COPIAR LINK</button><button class="btn big" onclick="compartilharLinkCliente()">📤 COMPARTILHAR</button><div style="margin-top:20px;border-top:2px solid var(--gold);padding-top:14px"><button class="btn gold big" onclick="imprimirQR(1)">🖨️ CARTÃO PEQUENO</button><button class="btn gold big" onclick="imprimirQR(2)" style="margin-top:8px">🖨️ CARTAZ A4</button><button class="btn gold big" onclick="imprimirQR(3)" style="margin-top:8px;background:#000;border-color:#000">🖨️ DISPLAY GRANDE</button></div></div></div>
+<div id="view-cifras" class="view"><div class="card"><div style="display:flex;justify-content:space-between"><b>📄 MINHAS CIFRAS</b><button class="small gold" onclick="showView('view-home')">+ NOVA</button></div><div id="listaCifras" style="margin-top:12px"></div></div></div>
+</div>
+<div id="telaGrande"><div class="tela-header"><button class="btn" onclick="stopScroll();document.getElementById('telaGrande').style.display='none'">✕ FECHAR</button><small style="color:var(--gold);font-weight:800">PRO LIVE <span id="telaSync">0</span></small><button class="btn gold" onclick="document.getElementById('telaContent').scrollBy(0,120)">▼</button></div><div class="tela-content" id="telaContent"></div></div>
 <script>
-// BANCO LOCAL - NUNCA MAIS TRAVA
-function getUsers(){try{return JSON.parse(localStorage.getItem('taki_users')||'{}')}catch{return {}}}
-function saveUsers(u){localStorage.setItem('taki_users', JSON.stringify(u))}
-function showMsg(tipo, texto){
- const el=document.getElementById('msg');
- el.className='msg '+(tipo==='ok'?'ok':'erro');
- el.innerText=texto;
- el.style.display='block';
- setTimeout(()=>el.style.display='none', 4000);
+let letraSize=16,cifraSize=12,transpose=0,scrollInterval=null,isScrolling=false;
+let pedidos=[],totalCaixinha=0,currentUser=null,repertorioProLive=[];
+const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function initUsers(){try{let users=JSON.parse(localStorage.getItem('taki-users')||'[]');let idx=users.findIndex(u=>u.email==='takitakisom@gmail.com');if(idx===-1){users.push({nome:'ADMIN TAKI',email:'takitakisom@gmail.com',pass:'tete1212',ativo:true,isAdmin:true});}else{users[idx].pass='tete1212';users[idx].ativo=true;users[idx].isAdmin=true;}localStorage.setItem('taki-users',JSON.stringify(users));}catch(e){localStorage.setItem('taki-users',JSON.stringify([{nome:'ADMIN TAKI',email:'takitakisom@gmail.com',pass:'tete1212',ativo:true,isAdmin:true}]));}}
+function mostrarCadastro(){document.getElementById('loginForm').style.display='none';document.getElementById('cadastroForm').style.display='block';document.getElementById('recuperarForm').style.display='none';}
+function mostrarLogin(){document.getElementById('cadastroForm').style.display='none';document.getElementById('recuperarForm').style.display='none';document.getElementById('loginForm').style.display='block';}
+function mostrarRecuperar(){document.getElementById('loginForm').style.display='none';document.getElementById('cadastroForm').style.display='none';document.getElementById('recuperarForm').style.display='block';document.getElementById('recResultado').style.display='none';document.getElementById('recNovaSenha').style.display='none';document.getElementById('btnRecuperar').innerText='🔍 BUSCAR SENHA';document.getElementById('btnRecuperar').onclick=recuperarSenha;}
+function recuperarSenha(){let email=document.getElementById('recEmail').value.trim().toLowerCase();let novaInput=document.getElementById('recNovaSenha');let res=document.getElementById('recResultado');let btn=document.getElementById('btnRecuperar');if(!email){alert('Digite e-mail');return;}let users=JSON.parse(localStorage.getItem('taki-users')||'[]');let idx=users.findIndex(u=>u.email===email);if(idx===-1){res.style.display='block';res.innerHTML='<b style=color:#ff4a4a>❌ Não encontrado</b>';return;}let user=users[idx];if(novaInput.style.display==='none'){res.style.display='block';res.innerHTML='<b style=color:#00aa00>✅ Encontrado!</b><br><b style=color:var(--gold)>🔑 Senha: '+user.pass+'</b>';novaInput.style.display='block';btn.innerText='💾 SALVAR NOVA SENHA';btn.onclick=salvarNovaSenha;}}
+function salvarNovaSenha(){let email=document.getElementById('recEmail').value.trim().toLowerCase();let nova=document.getElementById('recNovaSenha').value.trim();let res=document.getElementById('recResultado');if(!nova||nova.length<3){alert('Mínimo 3');return;}let users=JSON.parse(localStorage.getItem('taki-users')||'[]');let idx=users.findIndex(u=>u.email===email);if(idx===-1)return;users[idx].pass=nova;localStorage.setItem('taki-users',JSON.stringify(users));res.innerHTML='<b style=color:#00aa00>✅ Alterada! Nova: '+nova+'</b>';document.getElementById('recNovaSenha').style.display='none';let btn=document.getElementById('btnRecuperar');btn.innerText='🔍 BUSCAR SENHA';btn.onclick=recuperarSenha;setTimeout(()=>{mostrarLogin();document.getElementById('loginEmail').value=email;document.getElementById('loginPass').value=nova;},1500);}
+function fazerCadastro(){let nome=document.getElementById('cadNome').value.trim();let email=document.getElementById('cadEmail').value.trim().toLowerCase();let pass=document.getElementById('cadPass').value.trim();if(!nome||!email||!pass){alert('Preencha tudo');return;}let users=JSON.parse(localStorage.getItem('taki-users')||'[]');if(users.find(u=>u.email==email)){alert('Já cadastrado');return;}users.push({nome,email,pass,ativo:true});localStorage.setItem('taki-users',JSON.stringify(users));alert('Criado! Faça login');mostrarLogin();}
+function fazerLogin(){let email=document.getElementById('loginEmail').value.trim().toLowerCase();let pass=document.getElementById('loginPass').value.trim();let users=JSON.parse(localStorage.getItem('taki-users')||'[]');let user=users.find(u=>u.email==email && u.pass==pass);if(!user){document.getElementById('loginMsg').innerText='❌ E-mail ou senha errados!';return;}if(!user.ativo){document.getElementById('blockedScreen').style.display='flex';return;}currentUser=user;localStorage.setItem('taki-currentUser',JSON.stringify(user));entrarSistema();}
+function entrarSistema(){let saved=JSON.parse(localStorage.getItem('taki-currentUser')||'null');if(!saved){document.getElementById('loginScreen').style.display='flex';return;}let users=JSON.parse(localStorage.getItem('taki-users')||'[]');let user=users.find(u=>u.email==saved.email);if(!user||!user.ativo){document.getElementById('blockedScreen').style.display='flex';return;}currentUser=user;document.getElementById('loginScreen').style.display='none';document.getElementById('userInfoHeader').innerText='Olá, '+user.nome.split(' ')[0];document.getElementById('menuUserName').innerText=user.nome;document.getElementById('menuUserEmail').innerText=user.email;carregar();gerarQRCode();renderPedidos();carregarRepertorio();atualizarContadores();}
+function fazerLogout(){localStorage.removeItem('taki-currentUser');location.reload();}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);if(id==='view-qr') gerarQRCode();}
+function isChordLine(line){let t=line.trim();if(!t||t.length>55) return false; if(/^[A-G][#b]?[mM0-9\\/\\s\\(\\)\\-]*$/.test(t.replace(/\\s+/g,' ').trim()) && /[A-G]/.test(t)) return true; return false;}
+function isSection(line){let u=line.trim().toUpperCase();if(u.length>30) return false;return ['REFRÃO','REFRAO','PONTE','INTRO','VERSO','CHORUS'].some(k=>u.includes(k));}
+function transposeNote(n,s){let idx=NOTES.indexOf(n);if(idx==-1) return n;let ni=(idx+s)%12;if(ni<0) ni+=12;return NOTES[ni];}
+function transposeChord(ch,s){if(s==0) return ch;let m=ch.match(/^([A-G][#b]?)(.*)$/);if(!m) return ch;return transposeNote(m[1].replace('b','#'),s)+m[2];}
+function transposeLine(line,s){if(s==0) return line;return line.split(/(\s+)/).map(tok=>{if(/^\s+$/.test(tok)) return tok;if(/^[A-G][#b]?/.test(tok)){return transposeChord(tok,s);}return tok;}).join('');}
+function parseBlocks(){let raw=document.getElementById('inputCifraHome').value||'';if(!raw.trim()) return [];let lines=raw.split('\n');let blocks=[];for(let i=0;i<lines.length;i++){let l=lines[i];if(!l.trim()){blocks.push({type:'space'});continue;}if(isSection(l)){blocks.push({type:'section',text:l.trim()});continue;}if(isChordLine(l)){let next=lines[i+1]||'';if(next.trim()&&!isChordLine(next)&&!isSection(next)){blocks.push({type:'pair',cifra:l.trim(),letra:next.trim()});i++;continue;}else{blocks.push({type:'cifra',text:l.trim()});continue;}}blocks.push({type:'letra',text:l.trim()});}return blocks;}
+function renderCifra(){let blocks=parseBlocks();let out=document.getElementById('output');if(blocks.length==0){out.innerHTML='<div style=text-align:center;color:var(--muted);padding:20px>Cole a cifra</div>';renderTela();return;}out.innerHTML='';blocks.forEach(b=>{if(b.type==='space'){out.innerHTML+='<div style=height:8px></div>';}else if(b.type==='section'){out.innerHTML+='<div class=section-label>'+b.text.toUpperCase()+'</div>';}else if(b.type==='pair'){let cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);out.innerHTML+='<div style=margin:14px 0><div class=cifra-line style=font-size:'+cifraSize+'px>'+cifra+'</div><div class=letra-line style=font-size:'+letraSize+'px>'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){let txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);out.innerHTML+='<div style=margin:14px 0><div class=cifra-line style=font-size:'+cifraSize+'px>'+txt+'</div></div>';}else{out.innerHTML+='<div style=margin:14px 0><div class=letra-line style=font-size:'+letraSize+'px>'+b.text.toUpperCase()+'</div></div>';}});renderTela();updateUI();}
+function renderTela(){let blocks=parseBlocks();let tg=document.getElementById('telaContent');if(!tg) return;if(blocks.length==0){tg.innerHTML='<div style=text-align:center;padding:40px>Sem cifra</div>';return;}let h='';blocks.forEach(b=>{if(b.type==='space'){h+='<div style=height:8px></div>';}else if(b.type==='section'){h+='<div class=section-label>'+b.text.toUpperCase()+'</div>';}else if(b.type==='pair'){let cifra=b.cifra;if(transpose!=0) cifra=transposeLine(cifra,transpose);h+='<div style=margin:16px 0><div style=font-weight:900;font-size:'+(cifraSize+4)+'px;color:var(--cifra)>'+cifra+'</div><div style=font-weight:900;font-size:'+(letraSize+4)+'px>'+b.letra.toUpperCase()+'</div></div>';}else if(b.type==='cifra'){let txt=b.text;if(transpose!=0) txt=transposeLine(txt,transpose);h+='<div style=margin:16px 0><div style=font-weight:900;font-size:'+(cifraSize+4)+'px;color:var(--cifra)>'+txt+'</div></div>';}else{h+='<div style=margin:16px 0><div style=font-weight:900;font-size:'+(letraSize+4)+'px>'+b.text.toUpperCase()+'</div></div>';}});tg.innerHTML=h;}
+function updateUI(){document.getElementById('transposeInfo').innerText=transpose;document.getElementById('sizeInfo').innerText=letraSize+'px';}
+function changeTranspose(d,isReset){if(isReset) transpose=0; else transpose=Math.max(-7,Math.min(7,transpose+d));updateUI();renderCifra();}
+function changeBothSize(d){letraSize=Math.max(6,Math.min(80,letraSize+d));cifraSize=Math.max(6,Math.min(80,cifraSize+d));updateUI();renderCifra();}
+function toggleScroll(){let cont=document.getElementById('output');if(isScrolling){isScrolling=false;clearInterval(scrollInterval);}else{isScrolling=true;scrollInterval=setInterval(()=>{cont.scrollTop+=1;},40);}}
+function resetScroll(){document.getElementById('output').scrollTop=0;stopScroll();}
+function stopScroll(){isScrolling=false;clearInterval(scrollInterval);}
+function playBoth(){let a1=document.getElementById('audioVS');let a2=document.getElementById('audioPlayback');if(a1.src) a1.play().catch(()=>{});if(a2.src) a2.play().catch(()=>{});}
+function pauseBoth(){document.getElementById('audioVS').pause();document.getElementById('audioPlayback').pause();}
+function carregar(){let userKey=currentUser?currentUser.email:'geral';let todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');let c=document.getElementById('listaCifras');if(c){c.innerHTML=todas.length==0?'<div style=text-align:center;color:var(--muted)>Nenhuma</div>':todas.map((m,i)=>'<div style=background:var(--card2);border:1px solid var(--line);padding:10px;border-radius:8px;margin:6px 0;display:flex;justify-content:space-between><div><b>'+m.artista+'</b> - '+m.nome+'</div><div><button class=small gold onclick=tocar('+i+')>▶</button> <button class=small onclick=removerCifra('+i+')>🗑️</button></div></div>').join('');}}
+function salvarMusica(){let artista=document.getElementById('artistaMusica').value.trim()||'Sem Artista';let nome=document.getElementById('nomeMusica').value.trim()||'Sem Nome';let cifra=document.getElementById('inputCifraHome').value.trim();if(!cifra){alert('Cole a cifra!');return;}let userKey=currentUser?currentUser.email:'geral';let todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');todas.push({artista,nome,cifra});localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(todas));document.getElementById('saveStatus').innerText='✅ Salvo! '+todas.length+' cifras';carregar();atualizarContadores();}
+function tocar(id){let userKey=currentUser?currentUser.email:'geral';let lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');let m=lista[id];document.getElementById('artistaMusica').value=m.artista;document.getElementById('nomeMusica').value=m.nome;document.getElementById('inputCifraHome').value=m.cifra;renderCifra();showView('view-home');}
+function removerCifra(id){if(!confirm('Remover?')) return;let userKey=currentUser?currentUser.email:'geral';let lista=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');lista.splice(id,1);localStorage.setItem('taki-pro-live-'+userKey,JSON.stringify(lista));carregar();atualizarContadores();}
+function atualizarContadores(){let userKey=currentUser?currentUser.email:'geral';let todas=JSON.parse(localStorage.getItem('taki-pro-live-'+userKey)||'[]');let el=document.getElementById('cifrasOfflineCount');if(el) el.innerText=todas.length+' cifras';}
+function carregarRepertorio(){try{let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');repertorioProLive=cfg.repertorio||[];renderRepertorioLista();}catch(e){repertorioProLive=[];}}
+function adicionarMusicaRepertorio(){let musica=document.getElementById('inputNomeMusicaRep').value.trim();let artista=document.getElementById('inputArtistaRep').value.trim();if(!musica||!artista){alert('Digite música e artista!');return;}repertorioProLive.push({musica,artista:artista.toUpperCase()});document.getElementById('inputNomeMusicaRep').value='';document.getElementById('inputArtistaRep').value='';salvarRepertorioNoStorage();renderRepertorioLista();}
+function removerMusicaRepertorio(i){repertorioProLive.splice(i,1);salvarRepertorioNoStorage();renderRepertorioLista();}
+function salvarRepertorioNoStorage(){let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');cfg.repertorio=repertorioProLive;localStorage.setItem('taki-pro-live-config',JSON.stringify(cfg));}
+function renderRepertorioLista(){let container=document.getElementById('listaRepertorioConfig');if(!container) return;if(repertorioProLive.length==0){container.innerHTML='<div style=text-align:center;color:var(--muted);padding:10px>Nenhuma</div>';return;}container.innerHTML=repertorioProLive.map((r,i)=>'<div class=repertorio-item><div><b>🎵 '+r.musica+'</b><br><small>👤 '+r.artista+'</small></div><button class=small style=background:#ff4a4a;color:#fff onclick=removerMusicaRepertorio('+i+')>🗑️</button></div>').join('');}
+function salvarConfigProLiveSemAlert(){let codigo=document.getElementById('codigoDono').value.trim()||'ANDRÉ TAKI';let pixNome=document.getElementById('pixNome').value.trim()||'ANDRÉ TAKI';let pixKey=document.getElementById('pixKey').value.trim()||'';let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');cfg.codigo=codigo;cfg.pixKey=pixKey;cfg.pixNome=pixNome;cfg.repertorio=repertorioProLive;localStorage.setItem('taki-pro-live-config',JSON.stringify(cfg));return cfg;}
+function botaoSalvarConectar(){let codigo=document.getElementById('codigoDono').value.trim();let pixNome=document.getElementById('pixNome').value.trim();let pixKey=document.getElementById('pixKey').value.trim();if(!codigo||!pixNome||!pixKey){alert('Preencha tudo!');return;}let cfg=salvarConfigProLiveSemAlert();gerarQRCode();alert('✅ CONECTADO! '+cfg.pixNome+' • '+repertorioProLive.length+' músicas');}
+function gerarQRCode(){try{let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');let codigo=cfg.codigo||document.getElementById('codigoDono')?.value||'ANDRÉ TAKI';let nomeMusico=cfg.pixNome||document.getElementById('pixNome')?.value||'ANDRÉ TAKI';let baseUrl=location.origin+location.pathname;let linkCliente=baseUrl+'?cliente='+encodeURIComponent(codigo)+'&musico='+encodeURIComponent(nomeMusico);let linkEl=document.getElementById('linkCliente');if(linkEl) linkEl.innerText=linkCliente;let qrDiv=document.getElementById('qrContainer');if(!qrDiv) return;qrDiv.innerHTML='';if(window.QRCode && window.QRCodeLibOK){QRCode.toCanvas(linkCliente,{width:220,margin:2},function(err,canvas){if(!err){qrDiv.appendChild(canvas);window._qrCanvas=canvas;}else{qrDiv.innerHTML='<div style=padding:20px>'+linkCliente+'</div>';}});}else{qrDiv.innerHTML='<canvas id=qrFallback width=220 height=220 style=border:1px solid #ddd></canvas><br><small>Offline</small>';window._qrCanvas=document.getElementById('qrFallback');}}catch(e){}}
+function copiarLinkCliente(){let txt=document.getElementById('linkCliente').innerText;let link=txt.split('\n')[0];navigator.clipboard.writeText(link).then(()=>alert('Copiado!')).catch(()=>{prompt('Copie:',link);});}
+function compartilharLinkCliente(){let txt=document.getElementById('linkCliente').innerText;let link=txt.split('\n')[0];if(navigator.share){navigator.share({title:'Pede música',url:link});}else{window.open('https://wa.me/?text='+encodeURIComponent('Pede sua música! '+link),'_blank');}}
+function imprimirQR(tipo){let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');let codigo=cfg.codigo||'ANDRÉ TAKI';let nomeMusico=cfg.pixNome||'ANDRÉ TAKI';let pixKey=cfg.pixKey||'';let linkEl=document.getElementById('linkCliente');let link=linkEl?linkEl.innerText.split('\n')[0]:location.href;let qrCanvas=window._qrCanvas;let qrDataUrl=qrCanvas?qrCanvas.toDataURL('image/png'):'';
+let printWindow=window.open('', '_blank');let htmlContent='';
+if(tipo==1){htmlContent='<html><head><title>Cartão - '+nomeMusico+'</title><style>@page{size:A4;margin:10mm} body{font-family:Arial;margin:0;padding:10mm} .grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10mm;height:100vh} .card{border:2px solid #3A3A3A;border-radius:12px;padding:10mm;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center} .qr{width:90mm;height:90mm;margin:5mm 0;border:1px solid #ddd;border-radius:8px}</style></head><body><div class=grid>'+[1,2,3,4].map(()=>'<div class=card><h2>🎤 PEDE SUA MÚSICA</h2><h3>'+nomeMusico+'</h3><img class=qr src='+qrDataUrl+' /><p>Deixe uma caixinha para '+nomeMusico+' 💰</p></div>').join('')+'</div><script>window.print();<\/script></body></html>';}
+else if(tipo==2){htmlContent='<html><head><title>Cartaz A4 - '+nomeMusico+'</title><style>@page{size:A4;margin:15mm} body{font-family:Arial;text-align:center;padding:15mm} .qr{width:150mm;height:150mm;margin:10mm auto;border:3px solid #3A3A3A;border-radius:16px;padding:5mm}</style></head><body><h1>🎤 '+nomeMusico+'</h1><img class=qr src='+qrDataUrl+' /><p>PIX: '+pixKey+'</p><p>'+link+'</p><script>window.print();<\/script></body></html>';}
+else{htmlContent='<html><head><title>Display - '+nomeMusico+'</title><style>@page{size:A3;margin:10mm} body{font-family:Arial Black;text-align:center;padding:10mm} .qr{width:200mm;height:200mm;margin:10mm auto;border:5px solid #000;border-radius:20px;padding:8mm} .caixinha{background:#000;color:#fff;padding:10mm;border-radius:16px;font-size:28px;font-weight:900;margin:10mm 0}</style></head><body><h1>🎤 '+nomeMusico+'</h1><img class=qr src='+qrDataUrl+' /><div class=caixinha>💰 DEIXE UMA CAIXINHA PARA '+nomeMusico.toUpperCase()+' 💰</div><script>window.print();<\/script></body></html>';}
+printWindow.document.write(htmlContent);printWindow.document.close();}
+function renderPedidos(){let countEl=document.getElementById('pedidosCount');if(countEl) countEl.innerText=pedidos.length+' pedidos';let filaEl=document.getElementById('filaDisplay');if(filaEl) filaEl.innerText=pedidos.length;let totEl=document.getElementById('caixinhaTotal');if(totEl) totEl.innerText='R$ '+totalCaixinha.toFixed(2);let displayEl=document.getElementById('caixinhaDisplay');if(displayEl) displayEl.innerText='R$ '+totalCaixinha.toFixed(2);let cont=document.getElementById('listaPedidosLive');if(!cont) return;if(pedidos.length==0){cont.innerHTML='<div style=text-align:center;padding:30px;color:var(--muted)><b>Aguardando pedidos...</b></div>';return;}cont.innerHTML=pedidos.map((p,i)=>'<div class=pedido-card><div><b style=color:var(--gold)>🎵 '+p.musica+'</b><br><small>👤 '+p.nome+' • R$ '+(p.gorjeta||0).toFixed(2)+'</small></div><div><button class=small gold onclick=removerPedido('+i+')>✅</button></div></div>').join('');}
+function addPedido(musica,nome,gorjeta,mesa,recado,musico){let p={musica,nome:nome||'Cliente',gorjeta:parseFloat(gorjeta)||0,mesa:mesa||'-',recado:recado||'',musico:musico||'',hora:new Date().toLocaleTimeString()};pedidos.push(p);totalCaixinha+=p.gorjeta;localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());renderPedidos();mostrarToast(p);playDing();}
+function mostrarToast(p){let t=document.getElementById('toastText');if(t) t.innerText='🎵 '+p.musica+' | R$ '+(p.gorjeta||0).toFixed(2);let toast=document.getElementById('liveToast');if(toast){toast.style.display='block';setTimeout(()=>{toast.style.display='none';},6000);}}
+function playDing(){try{let ctx=new (window.AudioContext||window.webkitAudioContext)();let osc=ctx.createOscillator();let gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;gain.gain.value=0.3;osc.start();gain.gain.exponentialRampToValueAtTime(0.01,ctx.currentTime+0.6);osc.stop(ctx.currentTime+0.6);}catch(e){}}
+function removerPedido(i){totalCaixinha-=pedidos[i].gorjeta||0;pedidos.splice(i,1);localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha',totalCaixinha.toString());renderPedidos();}
+function limparPedidos(){if(!confirm('Limpar?')) return;pedidos=[];totalCaixinha=0;localStorage.setItem('taki-pro-pedidos',JSON.stringify(pedidos));localStorage.setItem('taki-pro-caixinha','0');renderPedidos();}
+function testarPedido(){let musicaTeste=repertorioProLive.length>0?repertorioProLive[0].musica+' - '+repertorioProLive[0].artista:'Eu Sei - LEGIÃO URBANA';addPedido(musicaTeste,'João M5',5,'M5','Toca pra minha esposa!', currentUser?currentUser.nome:'Músico');}
+function handleClientePage(){let params=new URLSearchParams(window.location.search);if(!params.get('cliente')) return false;let codigo=params.get('cliente');let nomeMusico=params.get('musico')||'o músico';try{ nomeMusico=decodeURIComponent(nomeMusico); }catch(e){}document.getElementById('loginScreen').style.display='none';document.querySelector('.header').style.display='none';document.getElementById('menuOverlay').style.display='none';let cfg=JSON.parse(localStorage.getItem('taki-pro-live-config')||'{}');let repertorio=cfg.repertorio||[];let options='<option value="">Selecione...</option>';if(repertorio.length==0){options+='<option value="Todas">Todas</option>';}else{repertorio.forEach(r=>{let label=r.musica+' - '+r.artista;options+='<option value="'+label+'">'+label+'</option>';});}document.querySelector('.main').innerHTML='<div class="card pro" style="text-align:center;padding:20px"><h2>🎤 PEDE SUA MÚSICA</h2><p>Mesa: '+codigo+' • '+nomeMusico+'</p><div style="text-align:left;margin-top:16px"><label>Seu nome</label><input type="text" id="nomeCliente" placeholder="Nome"></div><div style="text-align:left"><label>Escolha música</label><select id="musicaCliente">'+options+'</select></div><div style="text-align:left"><label>Recado</label><textarea id="recadoCliente" placeholder="Recado"></textarea></div><button class="btn gold big" style="margin-top:16px" onclick="enviarTudoCliente()">🚀 ENVIAR PARA '+nomeMusico.toUpperCase()+'</button><div id="pixCliente" style="display:none;margin-top:20px"><b>✅ Enviado!</b></div></div>';window.enviarTudoCliente=function(){let musica=document.getElementById('musicaCliente').value;let nome=document.getElementById('nomeCliente').value.trim();if(!nome||!musica){alert('Preencha nome e música');return;}let topic='taki-pro-live-'+codigo.toLowerCase().replace(/[^a-z0-9]/g,'-');let payload={musica,nome,gorjeta:0,mesa:codigo,recado:document.getElementById('recadoCliente').value,musico:nomeMusico};fetch('https://ntfy.sh/'+topic,{method:'POST',body:JSON.stringify(payload)}).then(()=>{document.getElementById('pixCliente').style.display='block';alert('🚀 Enviado para '+nomeMusico+'!');});};return true;}
+document.addEventListener('DOMContentLoaded',function(){try{initUsers();if(handleClientePage()) return;let savedUser=localStorage.getItem('taki-currentUser');if(savedUser){entrarSistema();}else{document.getElementById('loginScreen').style.display='flex';}carregarRepertorio();let savedPedidos=JSON.parse(localStorage.getItem('taki-pro-pedidos')||'[]');pedidos=savedPedidos;totalCaixinha=parseFloat(localStorage.getItem('taki-pro-caixinha')||'0');renderPedidos();document.getElementById('fileVS').addEventListener('change',function(){let f=this.files[0];if(!f) return;let url=URL.createObjectURL(f);document.getElementById('audioVS').src=url;document.getElementById('vsInfo').innerText=f.name;});document.getElementById('filePlayback').addEventListener('change',function(){let f=this.files[0];if(!f) return;let url=URL.createObjectURL(f);document.getElementById('audioPlayback').src=url;document.getElementById('playbackInfo').innerText=f.name;});}catch(err){document.getElementById('loginScreen').style.display='flex';}});
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => console.log('SW OK')).catch(()=>{});
+  });
 }
-
-// Inicializa ADM se não existir
-(function initAdmin(){
- let users=getUsers();
- if(!users['takitakisom@gmail.com']){
-  users['takitakisom@gmail.com']={senha:'taki123', nome:'ADM Taki', data: new Date().toISOString()};
-  saveUsers(users);
- }
-})();
-
-function fazerLogin(){
- const email=document.getElementById('email').value.trim().toLowerCase();
- const senha=document.getElementById('senha').value.trim();
- if(!email || !senha){showMsg('erro','Digite e-mail e senha');return;}
-
- let users=getUsers();
- // LIBERAÇÃO ESPECIAL PRO SEU ADM - pra destravar agora
- if(email==='takitakisom@gmail.com'){
-  if(senha.length>=4){
-   // atualiza senha e entra
-   users[email]={...users[email], senha:senha};
-   saveUsers(users);
-   localStorage.setItem('taki_logado', email);
-   showMsg('ok','Bem-vindo ADM! Entrando...');
-   setTimeout(()=>{window.location.href='agenda.html';},800);
-   return;
-  }
- }
-
- if(users[email] && users[email].senha===senha){
-  localStorage.setItem('taki_logado', email);
-  showMsg('ok','Login OK! Entrando...');
-  setTimeout(()=>{window.location.href='agenda.html';},600);
- }else{
-  showMsg('erro','E-mail ou senha incorretos. Clique em RECUPERAR se esqueceu.');
- }
-}
-
-function criarConta(){
- const email=document.getElementById('email').value.trim().toLowerCase();
- const senha=document.getElementById('senha').value.trim();
- if(!email || senha.length<4){showMsg('erro','Digite um e-mail válido e senha com no mínimo 4 dígitos');return;}
- let users=getUsers();
- if(users[email]){showMsg('erro','Este e-mail já existe. Clique em ENTRAR');return;}
- users[email]={senha:senha, nome:email.split('@')[0], data:new Date().toISOString()};
- saveUsers(users);
- localStorage.setItem('taki_logado', email);
- showMsg('ok','Conta criada! Entrando...');
- setTimeout(()=>{window.location.href='agenda.html';},800);
-}
-
-function recuperarSenha(){
- const email=document.getElementById('email').value.trim().toLowerCase();
- if(!email){showMsg('erro','Digite seu e-mail no campo acima');return;}
- let users=getUsers();
- if(!users[email]){showMsg('erro','E-mail não encontrado. Crie uma conta grátis.');return;}
- const nova=prompt('Digite uma NOVA senha (4+ dígitos) para '+email+':');
- if(nova && nova.length>=4){
-  users[email].senha=nova;
-  saveUsers(users);
-  document.getElementById('senha').value=nova;
-  showMsg('ok','Senha alterada! Agora clique em ENTRAR');
- }else if(nova){
-  showMsg('erro','Senha muito curta');
- }
-}
-
-// Enter pra logar
-document.getElementById('senha').addEventListener('keydown', e=>{if(e.key==='Enter')fazerLogin()});
-document.getElementById('email').addEventListener('keydown', e=>{if(e.key==='Enter')fazerLogin()});
-
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
 </html>
