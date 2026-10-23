@@ -3,39 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME PRO v3.10 - AUDIO REAL</title>
+<title>SHOWTIME PRO v4.0 - COMPLETO</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden!important;width:100%;max-width:100vw}
-:root{--bg:#0A0A0A;--card:#141414;--card2:#1C1C1C;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#888;--border:#2A2A2A}
+*{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%;max-width:100vw}
+:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#888;--border:#2A2A2A}
 body{background:var(--bg);color:var(--white);font-family:Inter,system-ui}
 aside{width:240px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:fixed;height:100vh;z-index:100;transition:.3s}
 aside .logo{padding:0 20px 20px;color:var(--gold);font-weight:900;letter-spacing:2px;border-bottom:1px solid var(--border);margin-bottom:20px}
-aside nav a{display:flex;gap:10px;padding:12px 20px;color:var(--gray);text-decoration:none;font-size:13px;border-left:3px solid transparent}
-main{margin-left:240px;padding:14px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px;max-width:100%;overflow-x:hidden}
+aside nav a{display:block;padding:12px 20px;color:var(--gray);font-size:13px;cursor:pointer}
+aside nav a.active{color:var(--gold)}
+main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
 .topbar{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);padding:12px 16px;border-radius:12px}
 .hamburger{display:none;font-size:22px;background:none;border:none;color:var(--gold);cursor:pointer}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;width:100%;max-width:100%;overflow:hidden}
-.card h3{color:var(--gold);font-size:12px;display:flex;justify-content:space-between;align-items:center}
-.btn{padding:7px 14px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;width:100%;overflow:hidden}
+.card h3{color:var(--gold);font-size:13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.btn{padding:8px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:12px;font-weight:700;cursor:pointer}
 .btn.gold{background:var(--gold);color:#000}
-.btn.small{padding:5px 10px;font-size:10px}
-.file{font-size:11px;color:var(--gray);margin:8px 0;background:#111;padding:8px;border-radius:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
-.wave{height:36px;background:#1a1a1a;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:10px;width:100%}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:6px;width:100%}
-.ctrl{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:8px;min-width:0}
-.ctrl label{font-size:8px;color:var(--gray);display:flex;justify-content:space-between;margin-bottom:4px}
+.btn.big{width:100%;padding:12px;font-size:13px;margin-bottom:10px;display:flex;justify-content:center;align-items:center;gap:8px}
+.file{font-size:11px;color:var(--gray);background:#111;padding:8px 10px;border-radius:8px;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ctrl{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px}
+.ctrl label{font-size:9px;color:var(--gray);display:flex;justify-content:space-between;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.ctrl label b{color:var(--gold);font-size:13px}
 .ctrl input{width:100%;accent-color:var(--gold);height:4px}
-.ctrl.active{border-color:var(--gold);background:rgba(212,180,131,.1)}
+.ctrl.on{border-color:var(--gold);background:rgba(212,180,131,.08)}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
-.cifra-card{grid-row:span 2;display:flex;flex-direction:column}
-.tom-controls{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
-.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:12px;flex:1;overflow:auto;width:100%}
+.cifra-card{grid-row:span 2}
+.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:12px;min-height:120px}
 .chord{color:var(--orange);font-weight:800;font-size:var(--chord-size,14px)}
 .lyric{color:#fff;font-size:var(--lyric-size,16px);display:block;margin-top:2px}
+audio{width:100%;height:36px;margin-bottom:8px}
 @media(max-width:900px){
   aside{transform:translateX(-100%)} aside.open{transform:translateX(0)}
-  main{margin-left:0;grid-template-columns:1fr!important;gap:10px;padding:10px;width:100vw;max-width:100vw}
+  main{margin-left:0;grid-template-columns:1fr!important;gap:10px;padding:10px;width:100vw}
   .hamburger{display:block}
   .overlay.open{display:block}
   .cifra-card{grid-column:1;grid-row:auto}
@@ -44,156 +44,105 @@ main{margin-left:240px;padding:14px;display:grid;grid-template-columns:1fr 1fr 4
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-<aside id="sidebar"><div class="logo">SHOWTIME PRO</div><nav><a class="active">🎤 Palco</a><a>🎼 Cifras</a><a>🎧 VS</a><a>▶️ Playback</a><a>👥 Clientes</a></nav></aside>
+<aside id="sidebar"><div class="logo">SHOWTIME PRO</div><nav><a class="active">🎤 Palco Ao Vivo</a><a>🎼 Cifras</a><a>🎧 VS</a><a>▶️ Playback</a></nav></aside>
 <main>
-<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b> • 3 pedidos</div><div>🔔<span style="background:var(--orange);color:#000;font-size:10px;padding:2px 5px;border-radius:10px">3</span></div></div>
+<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b> • 3 pedidos</div><div>🔔 3</div></div>
 
 <div class="card">
-<h3>VS PLAYER <button class="btn" onclick="document.getElementById('fVS').click()">Buscar VS</button></h3>
-<input type="file" id="fVS" hidden accept=".wav,.mp3,.m4a" onchange="loadFile(this,'vs')">
-<div class="file" id="fVSName">📁 Nenhum - clique Buscar VS</div>
-<audio id="aVS" controls style="width:100%;margin-bottom:8px;display:none"></audio>
+<button class="btn big gold" onclick="document.getElementById('fVS').click()">🔍 Buscar VS</button>
+<input type="file" id="fVS" hidden accept=".wav,.mp3,.m4a,.ogg" onchange="loadFile(this,'vs')">
+<h3>VS PLAYER <span id="vsStatus" style="color:#4ade80;font-size:10px">• PRONTO</span></h3>
+<div class="file" id="fVSName">📁 Nenhum arquivo carregado</div>
+<audio id="aVS" controls playsinline></audio>
 <div class="controls">
-<div class="ctrl"><label><span>▶️ BPM</span><span id="vsB">100%</span></label><input type="range" id="vsBpm" min="50" max="200" value="100" oninput="setBPM('vs',this.value)"></div>
-<div class="ctrl"><label><span>🎵 PITCH</span><span id="vsP">0st</span></label><input type="range" id="vsPitch" min="-12" max="12" value="0" step="1" oninput="setPitch('vs',this.value)"></div>
-<div class="ctrl" id="vsGraveBox"><label><span>🔊 GRAVES</span><span id="vsG">0dB</span></label><input type="range" id="vsBass" min="-15" max="15" value="0" step="1" oninput="setBass('vs',this.value)"></div>
-<div class="ctrl" id="vsAgudoBox"><label><span>🔊 AGUDOS</span><span id="vsA">0dB</span></label><input type="range" id="vsTreble" min="-15" max="15" value="0" step="1" oninput="setTreble('vs',this.value)"></div>
-<div class="ctrl" id="vsRevBox"><label><span>🎛️ REVERB</span><span id="vsR">0%</span></label><input type="range" id="vsReverb" min="0" max="100" value="0" oninput="setReverb('vs',this.value)"></div>
-<div class="ctrl"><label><span>🔊 VOLUME</span><span id="vsV">80%</span></label><input type="range" id="vsVol" min="0" max="100" value="80" oninput="setVol('vs',this.value)"></div>
+<div class="ctrl"><label><span>BPM</span><b id="vsB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="setBPM('vs',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="vsP">0</b></label><input type="range" min="-12" max="12" value="0" step="1" oninput="setPitch('vs',this.value)"></div>
+<div class="ctrl" id="vsGb"><label><span>GRAVES</span><b id="vsG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setBass('vs',this.value)"></div>
+<div class="ctrl" id="vsAb"><label><span>AGUDOS</span><b id="vsA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setTreble('vs',this.value)"></div>
+<div class="ctrl" id="vsRb"><label><span>REVERB</span><b id="vsR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="setReverb('vs',this.value)"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="vsV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="setVol('vs',this.value)"></div>
 </div>
 </div>
 
 <div class="card">
-<h3>PB PLAYER <button class="btn" onclick="document.getElementById('fPB').click()">Buscar Playback</button></h3>
-<input type="file" id="fPB" hidden accept=".wav,.mp3,.m4a" onchange="loadFile(this,'pb')">
-<div class="file" id="fPBName">📁 Nenhum - clique Buscar Playback</div>
-<audio id="aPB" controls style="width:100%;margin-bottom:8px;display:none"></audio>
+<button class="btn big" onclick="document.getElementById('fPB').click()">🔍 Buscar Playback</button>
+<input type="file" id="fPB" hidden accept=".wav,.mp3,.m4a,.ogg" onchange="loadFile(this,'pb')">
+<h3>PB PLAYER <span id="pbStatus" style="color:var(--gray);font-size:10px">• VAZIO</span></h3>
+<div class="file" id="fPBName">📁 Nenhum arquivo carregado</div>
+<audio id="aPB" controls playsinline></audio>
 <div class="controls">
-<div class="ctrl"><label><span>▶️ BPM</span><span id="pbB">100%</span></label><input type="range" id="pbBpm" min="50" max="200" value="100" oninput="setBPM('pb',this.value)"></div>
-<div class="ctrl"><label><span>🎵 PITCH</span><span id="pbP">0st</span></label><input type="range" id="pbPitch" min="-12" max="12" value="0" step="1" oninput="setPitch('pb',this.value)"></div>
-<div class="ctrl" id="pbGraveBox"><label><span>🔊 GRAVES</span><span id="pbG">0dB</span></label><input type="range" id="pbBass" min="-15" max="15" value="0" step="1" oninput="setBass('pb',this.value)"></div>
-<div class="ctrl" id="pbAgudoBox"><label><span>🔊 AGUDOS</span><span id="pbA">0dB</span></label><input type="range" id="pbTreble" min="-15" max="15" value="0" step="1" oninput="setTreble('pb',this.value)"></div>
-<div class="ctrl" id="pbRevBox"><label><span>🎛️ REVERB</span><span id="pbR">0%</span></label><input type="range" id="pbReverb" min="0" max="100" value="0" oninput="setReverb('pb',this.value)"></div>
-<div class="ctrl"><label><span>🔊 VOLUME</span><span id="pbV">80%</span></label><input type="range" id="pbVol" min="0" max="100" value="80" oninput="setVol('pb',this.value)"></div>
+<div class="ctrl"><label><span>BPM</span><b id="pbB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="setBPM('pb',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="pbP">0</b></label><input type="range" min="-12" max="12" value="0" step="1" oninput="setPitch('pb',this.value)"></div>
+<div class="ctrl" id="pbGb"><label><span>GRAVES</span><b id="pbG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setBass('pb',this.value)"></div>
+<div class="ctrl" id="pbAb"><label><span>AGUDOS</span><b id="pbA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setTreble('pb',this.value)"></div>
+<div class="ctrl" id="pbRb"><label><span>REVERB</span><b id="pbR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="setReverb('pb',this.value)"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="pbV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="setVol('pb',this.value)"></div>
 </div>
 </div>
 
 <div class="card cifra-card">
-<h3>CIFRA - IN MY LIFE</h3>
-<div class="tom-controls"><span style="font-size:10px;color:var(--gray)">TOM:</span><button class="btn small" onclick="chgTom(-7)">-7</button><button class="btn small" onclick="chgTom(-1)">-1</button><button class="btn small gold" id="tom">G</button><button class="btn small" onclick="chgTom(1)">+1</button><button class="btn small" onclick="chgTom(7)">+7</button><span style="font-size:10px;color:var(--gray)">CAPO:</span><button class="btn small" onclick="chgCapo(-1)">-1</button><button class="btn small gold" id="capo">0</button><button class="btn small" onclick="chgCapo(1)">+1</button></div>
-<div class="tom-controls"><span style="font-size:10px;color:var(--gray)">ACORDE:</span><button class="btn small" onclick="chgSz('c',-1)">A-</button><button class="btn small gold" id="cSz">14px</button><button class="btn small" onclick="chgSz('c',1)">A+</button><span style="font-size:10px;color:var(--gray)">LETRA:</span><button class="btn small" onclick="chgSz('l',-1)">A-</button><button class="btn small gold" id="lSz">16px</button><button class="btn small" onclick="chgSz('l',1)">A+</button></div>
-<div class="cifra-box"><div><span class="chord">G D5/F# Em F</span><span class="lyric">There are places I'll remember</span></div><div><span class="chord">C Cm G</span><span class="lyric">All my life though some have changed</span></div></div>
+<h3>CIFRA - IN MY LIFE <span style="font-size:10px;color:var(--gray)">TOM: G</span></h3>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
+<button class="btn small" onclick="chgTom(-7)">-7</button><button class="btn small" onclick="chgTom(-1)">-1</button><button class="btn small gold" id="tom">G</button><button class="btn small" onclick="chgTom(1)">+1</button><button class="btn small" onclick="chgTom(7)">+7</button>
+<button class="btn small" onclick="cs=Math.max(10,cs-1);setCSize()">A- ACORDE</button><button class="btn small gold" id="cSz">14px</button><button class="btn small" onclick="cs=Math.min(28,cs+1);setCSize()">A+</button>
+<button class="btn small" onclick="ls=Math.max(10,ls-1);setLSize()">A- LETRA</button><button class="btn small gold" id="lSz">16px</button><button class="btn small" onclick="ls=Math.min(28,ls+1);setLSize()">A+</button>
+</div>
+<div class="cifra-box"><div><span class="chord">G D5/F# Em F</span><span class="lyric">There are places I'll remember</span></div></div>
 </div>
 </main>
 <script>
-// AUDIO ENGINE REAL
-let audioCtx=null;
-let vsNodes={}, pbNodes={};
-
-function initAudio(){
-  if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); }
-  if(audioCtx.state==='suspended') audioCtx.resume();
+let audioCtx=null, vs={}, pb={}, cs=14, ls=16;
+function ensureCtx(){ if(!audioCtx){ audioCtx=new (window.AudioContext||window.webkitAudioContext)(); } if(audioCtx.state==='suspended') audioCtx.resume(); }
+function makeChain(){
+  const bass=audioCtx.createBiquadFilter(); bass.type='lowshelf'; bass.frequency.value=250; bass.gain.value=0;
+  const treb=audioCtx.createBiquadFilter(); treb.type='highshelf'; treb.frequency.value=3500; treb.gain.value=0;
+  const gain=audioCtx.createGain(); gain.gain.value=0.8;
+  const dry=audioCtx.createGain(); dry.gain.value=1;
+  const revGain=audioCtx.createGain(); revGain.gain.value=0;
+  const rev=audioCtx.createConvolver();
+  const len=audioCtx.sampleRate*1.5, buf=audioCtx.createBuffer(2,len,audioCtx.sampleRate);
+  for(let c=0;c<2;c++){const d=buf.getChannelData(c); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5)*0.6}
+  rev.buffer=buf;
+  return {bass,treb,gain,dry,revGain,rev,src:null};
 }
-
-function createNodesFor(type){
-  const nodes={};
-  nodes.bass=audioCtx.createBiquadFilter(); nodes.bass.type='lowshelf'; nodes.bass.frequency.value=200;
-  nodes.treble=audioCtx.createBiquadFilter(); nodes.treble.type='highshelf'; nodes.treble.frequency.value=3000;
-  nodes.gain=audioCtx.createGain(); nodes.gain.gain.value=0.8;
-  nodes.reverbGain=audioCtx.createGain(); nodes.reverbGain.gain.value=0;
-  nodes.reverb=audioCtx.createConvolver();
-  // criar impulse simples para reverb
-  const len=audioCtx.sampleRate*2; const imp=audioCtx.createBuffer(2,len,audioCtx.sampleRate);
-  for(let ch=0;ch<2;ch++){const d=imp.getChannelData(ch); for(let i=0;i<len;i++){d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2)}}
-  nodes.reverb.buffer=imp;
-  nodes.dryGain=audioCtx.createGain(); nodes.dryGain.gain.value=1;
-  return nodes;
-}
-
-function connectChain(type){
+function connect(type){
+  const n=type==='vs'?vs:pb;
+  if(!n.bass) return;
+  try{ if(n.src) n.src.disconnect(); }catch(e){}
   const audio=document.getElementById(type==='vs'?'aVS':'aPB');
-  const nodes=type==='vs'?vsNodes:pbNodes;
-  if(nodes.source) try{nodes.source.disconnect()}catch(e){}
-  nodes.source=audioCtx.createMediaElementSource(audio);
-  // chain: source -> bass -> treble -> split to dry + reverb
-  nodes.source.connect(nodes.bass);
-  nodes.bass.connect(nodes.treble);
-  nodes.treble.connect(nodes.dryGain);
-  nodes.treble.connect(nodes.reverb);
-  nodes.reverb.connect(nodes.reverbGain);
-  nodes.dryGain.connect(nodes.gain);
-  nodes.reverbGain.connect(nodes.gain);
-  nodes.gain.connect(audioCtx.destination);
+  n.src=audioCtx.createMediaElementSource(audio);
+  n.src.connect(n.bass); n.bass.connect(n.treb); n.treb.connect(n.dry); n.treb.connect(n.rev); n.rev.connect(n.revGain);
+  n.dry.connect(n.gain); n.revGain.connect(n.gain); n.gain.connect(audioCtx.destination);
 }
-
 function loadFile(input,type){
-  initAudio();
+  ensureCtx();
   const f=input.files[0]; if(!f) return;
   const url=URL.createObjectURL(f);
-  const audio=document.getElementById(type==='vs'?'aVS':'aPB');
-  audio.src=url; audio.style.display='block';
-  document.getElementById(type==='vs'?'fVSName':'fPBName').innerText='📁 '+f.name;
-  audio.oncanplay=()=>{
-    if(type==='vs' && !vsNodes.bass){ vsNodes=createNodesFor('vs'); connectChain('vs'); }
-    if(type==='pb' && !pbNodes.bass){ pbNodes=createNodesFor('pb'); connectChain('pb'); }
-    if(type==='vs' && vsNodes.bass) connectChain('vs');
-    if(type==='pb' && pbNodes.bass) connectChain('pb');
+  const a=document.getElementById(type==='vs'?'aVS':'aPB');
+  a.src=url; a.load();
+  document.getElementById(type==='vs'?'fVSName':'fPBName').innerText='📁 '+f.name+' • '+(f.size/1024/1024).toFixed(1)+'MB';
+  document.getElementById(type==='vs'?'vsStatus':'pbStatus').innerText='• CARREGADO'; 
+  document.getElementById(type==='vs'?'vsStatus':'pbStatus').style.color='#4ade80';
+  a.oncanplay=()=>{
+    try{
+      if(type==='vs'){ if(!vs.bass) Object.assign(vs,makeChain()); connect('vs'); }
+      else { if(!pb.bass) Object.assign(pb,makeChain()); connect('pb'); }
+    }catch(e){ console.log('Audio chain fallback',e); }
   };
 }
-
-// CONTROLES REAIS
-function setBPM(t,v){
-  document.getElementById(t==='vs'?'vsB':'pbB').innerText=v+'%';
-  const a=document.getElementById(t==='vs'?'aVS':'aPB');
-  a.playbackRate=v/100;
-  a.preservesPitch=false;
-}
-function setPitch(t,v){
-  const label=document.getElementById(t==='vs'?'vsP':'pbP');
-  label.innerText=(v>0?'+':'')+v+'st';
-  const a=document.getElementById(t==='vs'?'aVS':'aPB');
-  // pitch shift aproximado usando playbackRate + detune preservation
-  const rate=Math.pow(2, v/12);
-  a.playbackRate=rate * (document.getElementById(t==='vs'?'vsBpm':'pbBpm').value/100);
-  document.getElementById(t+'GraveBox')?.classList.toggle('active', Math.abs(v)>0);
-  a.preservesPitch=true; // tenta preservar tempo quando muda pitch
-  if(!a.preservesPitch){ /* fallback: só playbackRate */ }
-}
-function setBass(t,v){
-  document.getElementById(t==='vs'?'vsG':'pbG').innerText=v+'dB';
-  const nodes=t==='vs'?vsNodes:pbNodes;
-  if(nodes.bass) nodes.bass.gain.value=parseInt(v);
-  document.getElementById(t==='vs'?'vsGraveBox':'pbGraveBox').classList.toggle('active', v!=0);
-}
-function setTreble(t,v){
-  document.getElementById(t==='vs'?'vsA':'pbA').innerText=v+'dB';
-  const nodes=t==='vs'?vsNodes:pbNodes;
-  if(nodes.treble) nodes.treble.gain.value=parseInt(v);
-  document.getElementById(t==='vs'?'vsAgudoBox':'pbAgudoBox').classList.toggle('active', v!=0);
-}
-function setReverb(t,v){
-  document.getElementById(t==='vs'?'vsR':'pbR').innerText=v+'%';
-  const nodes=t==='vs'?vsNodes:pbNodes;
-  if(nodes.reverbGain && nodes.dryGain){
-    nodes.reverbGain.gain.value=v/100;
-    nodes.dryGain.gain.value=1 - (v/200);
-  }
-  document.getElementById(t==='vs'?'vsRevBox':'pbRevBox').classList.toggle('active', v>0);
-}
-function setVol(t,v){
-  document.getElementById(t==='vs'?'vsV':'pbV').innerText=v+'%';
-  const nodes=t==='vs'?vsNodes:pbNodes;
-  if(nodes.gain) nodes.gain.gain.value=v/100;
-  else document.getElementById(t==='vs'?'aVS':'aPB').volume=v/100;
-}
-
-function toggleMenu(){sidebar.classList.toggle('open');overlay.classList.toggle('open')}
-let cs=14,ls=16;const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-function chgSz(t,d){if(t==='c'){cs=Math.max(10,Math.min(28,cs+d));document.documentElement.style.setProperty('--chord-size',cs+'px');cSz.innerText=cs+'px'}else{ls=Math.max(10,Math.min(28,ls+d));document.documentElement.style.setProperty('--lyric-size',ls+'px');lSz.innerText=ls+'px'}}
-function chgTom(d){let i=tons.indexOf(tom.innerText);i=(i+d+12)%12;tom.innerText=tons[i]}
-function chgCapo(d){capo.innerText=parseInt(capo.innerText)+d}
-document.documentElement.style.setProperty('--chord-size','14px');document.documentElement.style.setProperty('--lyric-size','16px');
-document.addEventListener('click',()=>{ if(!audioCtx) initAudio(); },{once:true});
+function setBPM(t,v){ document.getElementById(t==='vs'?'vsB':'pbB').innerText=v+'%'; const a=document.getElementById(t==='vs'?'aVS':'aPB'); a.playbackRate=v/100; }
+function setPitch(t,v){ document.getElementById(t==='vs'?'vsP':'pbP').innerText=(v>0?'+':'')+v; const a=document.getElementById(t==='vs'?'aVS':'aPB'); const base=document.getElementById(t==='vs'?'aVS':'aPB').playbackRate; /* pitch via detune not supported on media element, using rate */ const rate=Math.pow(2,parseInt(v)/12); a.preservesPitch=false; const bpm=document.getElementById(t==='vs'?'vsB':'pbB').innerText; const bpmVal=parseInt(bpm); a.playbackRate=rate*(bpmVal/100); }
+function setBass(t,v){ document.getElementById(t==='vs'?'vsG':'pbG').innerText=v+'dB'; const n=t==='vs'?vs:pb; if(n.bass) n.bass.gain.value=parseInt(v); document.getElementById(t==='vs'?'vsGb':'pbGb').classList.toggle('on',v!=0); }
+function setTreble(t,v){ document.getElementById(t==='vs'?'vsA':'pbA').innerText=v+'dB'; const n=t==='vs'?vs:pb; if(n.treb) n.treb.gain.value=parseInt(v); document.getElementById(t==='vs'?'vsAb':'pbAb').classList.toggle('on',v!=0); }
+function setReverb(t,v){ document.getElementById(t==='vs'?'vsR':'pbR').innerText=v+'%'; const n=t==='vs'?vs:pb; if(n.revGain&&n.dry){ n.revGain.gain.value=v/100; n.dry.gain.value=1-(v/200); } document.getElementById(t==='vs'?'vsRb':'pbRb').classList.toggle('on',v>0); }
+function setVol(t,v){ document.getElementById(t==='vs'?'vsV':'pbV').innerText=v+'%'; const n=t==='vs'?vs:pb; if(n.gain) n.gain.gain.value=v/100; else document.getElementById(t==='vs'?'aVS':'aPB').volume=v/100; }
+function toggleMenu(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
+const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]; }
+function setCSize(){ document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; }
+function setLSize(){ document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; }
+document.documentElement.style.setProperty('--chord-size','14px'); document.documentElement.style.setProperty('--lyric-size','16px');
+document.body.addEventListener('click',()=>{ try{ensureCtx()}catch(e){} },{once:true});
+document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
 </script>
 </body>
 </html>
