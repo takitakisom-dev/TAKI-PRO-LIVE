@@ -2,62 +2,45 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME PRO v3.7 - Mobile Fix</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SHOWTIME PRO v3.8</title>
 <style>
 :root{--bg:#0A0A0A;--card:#141414;--card2:#1C1C1C;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#888;--border:#2A2A2A}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui; -webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui}
 body{background:var(--bg);color:var(--white);min-height:100vh}
 aside{width:240px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:fixed;height:100vh;z-index:100;transition:.3s}
 aside .logo{padding:0 20px 20px;color:var(--gold);font-weight:900;letter-spacing:2px;border-bottom:1px solid var(--border);margin-bottom:20px}
 aside nav a{display:flex;gap:10px;padding:12px 20px;color:var(--gray);text-decoration:none;font-size:13px;border-left:3px solid transparent;cursor:pointer}
 aside nav a.active,aside nav a:hover{background:rgba(212,180,131,.08);color:var(--gold);border-left-color:var(--gold)}
-main{margin-left:240px;padding:16px;display:grid;grid-template-columns:1fr 1fr 420px;gap:14px}
+main{margin-left:240px;padding:14px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
 .topbar{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);padding:12px 16px;border-radius:12px}
-.bell{position:relative} .bell span{position:absolute;top:-6px;right:-8px;background:var(--orange);color:#000;font-size:10px;font-weight:800;padding:2px 5px;border-radius:10px}
 .hamburger{display:none;font-size:22px;background:none;border:none;color:var(--gold);cursor:pointer}
 .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
-.card h3{color:var(--gold);font-size:12px;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase;display:flex;justify-content:space-between}
-.file{font-size:10px;color:var(--gray);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wave{height:48px;background:#1a1a1a;border-radius:8px;margin-bottom:10px;position:relative;overflow:hidden}
-.wave::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(212,180,131,.15) 2px,rgba(212,180,131,.15) 3px)}
+.card h3{color:var(--gold);font-size:12px;letter-spacing:1px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.btn{padding:6px 12px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer}
+.btn.gold{background:var(--gold);color:#000;border-color:var(--gold)}
+.btn.small{padding:4px 8px;font-size:10px}
+.file{font-size:11px;color:var(--gray);margin-bottom:8px;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#111;padding:6px 8px;border-radius:6px}
+.wave{height:40px;background:#1a1a1a;border-radius:8px;margin-bottom:10px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:10px}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .ctrl{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:6px 8px}
-.ctrl label{font-size:8px;color:var(--gray);display:block;margin-bottom:2px}
-.ctrl .val{font-size:12px;font-weight:700}
+.ctrl label{font-size:8px;color:var(--gray);display:block;margin-bottom:2px;display:flex;justify-content:space-between}
 .ctrl input{width:100%;margin-top:4px;accent-color:var(--gold);height:3px}
-.btn{padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card2);color:#fff;font-size:11px;cursor:pointer}
-.btn.gold{background:var(--gold);color:#000;font-weight:700;border-color:var(--gold)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
 .cifra-card{grid-row:span 2;display:flex;flex-direction:column}
 .cifra-header{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.tag{font-size:10px;color:var(--gray)} 
-.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:12px;flex:1;min-height:200px;overflow:auto}
-.line-cifra{line-height:18px;margin-bottom:4px}
+.tom-controls{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.tag{font-size:10px;color:var(--gray)}
+.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:12px;flex:1;min-height:180px;overflow:auto}
 .chord{color:var(--orange);font-weight:800;font-size:var(--chord-size,14px)}
 .lyric{color:#fff;font-size:var(--lyric-size,16px);margin-top:2px;display:block}
-.compact-info{font-size:10px;color:var(--gray);margin-top:8px;padding-top:6px;border-top:1px dashed var(--border)}
-.tom-controls{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
-body.fullscreen-mode aside,body.fullscreen-mode .topbar,body.fullscreen-mode .player{display:none!important}
-body.fullscreen-mode main{display:block;margin:0;padding:0}
-body.fullscreen-mode .cifra-card{height:100vh;justify-content:center;align-items:center;background:#000;border:none;border-radius:0}
-body.fullscreen-mode .cifra-header,body.fullscreen-mode .compact-info,body.fullscreen-mode .chord{display:none!important}
-body.fullscreen-mode .cifra-box{border:none;background:#000;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-body.fullscreen-mode .lyric{font-size:42px!important}
-
-/* MOBILE FIX */
+.line-cifra{line-height:18px;margin-bottom:4px}
 @media(max-width:900px){
   aside{transform:translateX(-100%)} aside.open{transform:translateX(0)}
   main{margin-left:0;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-  .topbar{position:sticky;top:0;z-index:50}
   .hamburger{display:block}
   .overlay.open{display:block}
   .cifra-card{grid-column:1/-1;grid-row:auto}
-  .wave{height:36px}
-}
-@media(max-width:600px){
-  main{grid-template-columns:1fr 1fr}
-  .controls{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -66,79 +49,87 @@ body.fullscreen-mode .lyric{font-size:42px!important}
 <aside id="sidebar">
 <div class="logo">SHOWTIME PRO</div>
 <nav>
-<a class="active" onclick="toggleMenu()">🎤 Home-Palco</a>
-<a onclick="toggleMenu()">🎼 Cifras</a>
-<a onclick="toggleMenu()">🎧 Meus VS</a>
-<a onclick="toggleMenu()">▶️ Playbacks</a>
-<a onclick="toggleMenu()">👥 Gerenciar Clientes</a>
-<a onclick="toggleMenu()">➕ Criar Cliente</a>
-<a onclick="toggleMenu()">👤 Perfil do Artista</a>
-<a onclick="toggleMenu()">💰 PIX</a>
+<a class="active">🎤 Home-Palco</a>
+<a>🎼 Cifras</a>
+<a>🎧 Meus VS</a>
+<a>▶️ Playbacks</a>
+<a>👥 Gerenciar Clientes</a>
+<a>➕ Criar Cliente</a>
+<a>👤 Perfil do Artista</a>
 </nav>
 </aside>
 <main>
 <div class="topbar">
 <button class="hamburger" onclick="toggleMenu()">☰</button>
 <div><b style="color:var(--gold)">PALCO AO VIVO</b> <small style="color:var(--gray)">• 3 pedidos</small></div>
-<div style="display:flex;gap:12px;align-items:center"><button class="btn" onclick="toggleFull()">⛶</button><div class="bell">🔔<span>3</span></div></div>
+<div>🔔<span style="background:var(--orange);color:#000;font-size:10px;padding:2px 5px;border-radius:10px">3</span></div>
 </div>
 
-<div class="card player">
-<h3>VS PLAYER <span>⏸</span></h3>
-<div class="file">vocal_demo_TAKI_take03.wav • 3:24</div>
-<div class="wave"></div>
+<div class="card">
+<h3>VS PLAYER <button class="btn" onclick="document.getElementById('fileVS').click()">Buscar VS</button></h3>
+<input type="file" id="fileVS" accept=".wav,.mp3,.m4a" style="display:none" onchange="loadFile(this,'vs')">
+<div class="file" id="fileVSName">📁 Nenhum arquivo - clique em Buscar VS</div>
+<audio id="audioVS" style="display:none" controls></audio>
+<div class="wave" id="waveVS">waveform</div>
 <div class="controls">
-<div class="ctrl"><label>BPM</label><div class="val">100%</div><input type="range" value="100" min="50" max="200"></div>
-<div class="ctrl"><label>PITCH</label><div class="val">0</div><input type="range" value="0" min="-12" max="12"></div>
-<div class="ctrl"><label>GRAVES</label><div class="val">0dB</div><input type="range"></div>
-<div class="ctrl"><label>AGUDOS</label><div class="val">0dB</div><input type="range"></div>
-<div class="ctrl"><label>REVERB</label><div class="val">0%</div><input type="range"></div>
-<div class="ctrl"><label>VOLUME</label><div class="val">80%</div><input type="range" value="80"></div>
+<div class="ctrl"><label><span>BPM</span><span id="vsBpmVal">100%</span></label><input type="range" id="vsBpm" min="50" max="200" value="100" oninput="setBpm('vs',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><span id="vsPitchVal">0</span></label><input type="range" id="vsPitch" min="-12" max="12" value="0" oninput="setPitch('vs',this.value)"></div>
+<div class="ctrl"><label><span>GRAVES</span><span id="vsBassVal">0dB</span></label><input type="range" id="vsBass" min="-12" max="12" value="0" oninput="setEQ('vs','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><span id="vsTrebleVal">0dB</span></label><input type="range" id="vsTreble" min="-12" max="12" value="0" oninput="setEQ('vs','treble',this.value)"></div>
+<div class="ctrl"><label><span>REVERB</span><span id="vsReverbVal">0%</span></label><input type="range" id="vsReverb" min="0" max="100" value="0" oninput="setReverb('vs',this.value)"></div>
+<div class="ctrl"><label><span>VOLUME</span><span id="vsVolVal">80%</span></label><input type="range" id="vsVol" min="0" max="100" value="80" oninput="setVol('vs',this.value)"></div>
 </div>
 </div>
 
-<div class="card player">
-<h3>PB PLAYER <span>▶️</span></h3>
-<div class="file">playback_instrumental_v3.wav</div>
-<div class="wave"></div>
+<div class="card">
+<h3>PB PLAYER <button class="btn" onclick="document.getElementById('filePB').click()">Buscar Playback</button></h3>
+<input type="file" id="filePB" accept=".wav,.mp3,.m4a" style="display:none" onchange="loadFile(this,'pb')">
+<div class="file" id="filePBName">📁 Nenhum arquivo - clique em Buscar Playback</div>
+<audio id="audioPB" style="display:none" controls></audio>
+<div class="wave" id="wavePB">waveform</div>
 <div class="controls">
-<div class="ctrl"><label>BPM</label><div class="val">100%</div><input type="range" value="100"></div>
-<div class="ctrl"><label>PITCH</label><div class="val">0</div><input type="range"></div>
-<div class="ctrl"><label>GRAVES</label><div class="val">0dB</div><input type="range"></div>
-<div class="ctrl"><label>AGUDOS</label><div class="val">0dB</div><input type="range"></div>
-<div class="ctrl"><label>REVERB</label><div class="val">0%</div><input type="range"></div>
-<div class="ctrl"><label>VOLUME</label><div class="val">80%</div><input type="range" value="80"></div>
+<div class="ctrl"><label><span>BPM</span><span id="pbBpmVal">100%</span></label><input type="range" id="pbBpm" min="50" max="200" value="100" oninput="setBpm('pb',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><span id="pbPitchVal">0</span></label><input type="range" id="pbPitch" min="-12" max="12" value="0" oninput="setPitch('pb',this.value)"></div>
+<div class="ctrl"><label><span>GRAVES</span><span id="pbBassVal">0dB</span></label><input type="range" id="pbBass" min="-12" max="12" value="0" oninput="setEQ('pb','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><span id="pbTrebleVal">0dB</span></label><input type="range" id="pbTreble" min="-12" max="12" value="0" oninput="setEQ('pb','treble',this.value)"></div>
+<div class="ctrl"><label><span>REVERB</span><span id="pbReverbVal">0%</span></label><input type="range" id="pbReverb" min="0" max="100" value="0" oninput="setReverb('pb',this.value)"></div>
+<div class="ctrl"><label><span>VOLUME</span><span id="pbVolVal">80%</span></label><input type="range" id="pbVol" min="0" max="100" value="80" oninput="setVol('pb',this.value)"></div>
 </div>
 </div>
 
 <div class="card cifra-card">
-<h3>CIFRA - In My Life</h3>
+<h3>CIFRA - IN MY LIFE</h3>
 <div class="cifra-header">
-<div class="tom-controls"><span class="tag"><b>TOM:</b></span><button class="btn" onclick="trans(-7)">-7</button><button class="btn" onclick="trans(-1)">-1</button><button class="btn gold" id="tom">G</button><button class="btn" onclick="trans(1)">+1</button><button class="btn" onclick="trans(7)">+7</button></div>
-<div class="tom-controls"><span class="tag"><b>CAPO:</b></span><button class="btn" onclick="capo(-1)">-1</button><button class="btn gold" id="capo">0</button><button class="btn" onclick="capo(1)">+1</button></div>
-<div class="tom-controls"><span class="tag"><b>ACORDE:</b></span><button class="btn" onclick="changeSize('chord',-1)">A-</button><button class="btn gold" id="chordSize">14px</button><button class="btn" onclick="changeSize('chord',1)">A+</button></div>
-<div class="tom-controls"><span class="tag"><b>LETRA:</b></span><button class="btn" onclick="changeSize('lyric',-1)">A-</button><button class="btn gold" id="lyricSize">16px</button><button class="btn" onclick="changeSize('lyric',1)">A+</button></div>
-<div class="tom-controls"><span class="tag"><b>Simp:</b></span><button class="btn gold" id="simpBtn" onclick="toggleSimp()">ON</button></div>
+<div class="tom-controls"><span class="tag">TOM:</span><button class="btn small" onclick="trans(-7)">-7</button><button class="btn small" onclick="trans(-1)">-1</button><button class="btn small gold" id="tom">G</button><button class="btn small" onclick="trans(1)">+1</button><button class="btn small" onclick="trans(7)">+7</button><span class="tag">CAPO:</span><button class="btn small" onclick="capo(-1)">-1</button><button class="btn small gold" id="capo">0</button><button class="btn small" onclick="capo(1)">+1</button></div>
+<div class="tom-controls"><span class="tag">ACORDE:</span><button class="btn small" onclick="changeSize('chord',-1)">A-</button><button class="btn small gold" id="chordSize">14px</button><button class="btn small" onclick="changeSize('chord',1)">A+</button><span class="tag">LETRA:</span><button class="btn small" onclick="changeSize('lyric',-1)">A-</button><button class="btn small gold" id="lyricSize">16px</button><button class="btn small" onclick="changeSize('lyric',1)">A+</button><span class="tag">Simp:</span><button class="btn small gold" id="simpBtn" onclick="toggleSimp()">ON</button></div>
 </div>
-<div class="cifra-box" id="cifraBox">
-<div class="line-cifra"><span class="chord" data-orig="G D5/F# Em F5-(9/13)">G D5/F# Em F</span><span class="lyric">There are places I'll remember</span></div>
-<div class="line-cifra"><span class="chord" data-orig="C Cm G">C Cm G</span><span class="lyric">All my life though some have changed</span></div>
-<div class="line-cifra"><span class="chord">G D5/F# Em F</span><span class="lyric">Some forever, not for better</span></div>
-<div class="line-cifra"><span class="chord">C Cm G</span><span class="lyric">Some have gone and some remain</span></div>
+<div class="cifra-box">
+<div class="line-cifra"><span class="chord">G D5/F# Em F</span><span class="lyric">There are places I'll remember</span></div>
+<div class="line-cifra"><span class="chord">C Cm G</span><span class="lyric">All my life though some have changed</span></div>
 </div>
-<div class="compact-info"><span id="infoSizes">ACORDE 14px • LETRA 16px</span> • Role pro lado se precisar</div>
 </div>
 </main>
 <script>
-let chordSize=14,lyricSize=16,simp=true,tomIdx=7,capoV=0;const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+let chordSize=14,lyricSize=16;
 function toggleMenu(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
-function changeSize(t,d){if(t==='chord'){chordSize=Math.max(10,Math.min(28,chordSize+d));setSize(t,chordSize)}else{lyricSize=Math.max(10,Math.min(28,lyricSize+d));setSize(t,lyricSize)}}
-function setSize(t,v){if(t==='chord'){chordSize=parseInt(v);document.documentElement.style.setProperty('--chord-size',chordSize+'px');document.getElementById('chordSize').innerText=chordSize+'px'}else{lyricSize=parseInt(v);document.documentElement.style.setProperty('--lyric-size',lyricSize+'px');document.getElementById('lyricSize').innerText=lyricSize+'px'}document.getElementById('infoSizes').innerText=`ACORDE ${chordSize}px • LETRA ${lyricSize}px`}
-function toggleSimp(){simp=!simp;document.getElementById('simpBtn').innerText=simp?'ON':'OFF';document.getElementById('simpBtn').className=simp?'btn gold':'btn';document.querySelectorAll('.chord').forEach(el=>{let o=el.dataset.orig||el.innerText;if(simp)el.innerText=o.replace(/F5-\(9\/13\)/g,'F').replace(/D5\/F#/g,'D');else el.innerText=o;})}
-function trans(d){tomIdx=(tomIdx+d+12)%12;document.getElementById('tom').innerText=tons[tomIdx]}
-function capo(d){capoV+=d;document.getElementById('capo').innerText=capoV}
-function toggleFull(){document.body.classList.toggle('fullscreen-mode')}
-document.documentElement.style.setProperty('--chord-size',chordSize+'px');document.documentElement.style.setProperty('--lyric-size',lyricSize+'px');
+function loadFile(input,type){
+  const file=input.files[0]; if(!file) return;
+  const url=URL.createObjectURL(file);
+  const audio=document.getElementById(type==='vs'?'audioVS':'audioPB');
+  audio.src=url; audio.style.display='block';
+  document.getElementById(type==='vs'?'fileVSName':'filePBName').innerText='📁 '+file.name+' • '+(file.size/1024/1024).toFixed(1)+'MB';
+  document.getElementById(type==='vs'?'waveVS':'wavePB').innerText='▶️ '+file.name;
+}
+function setBpm(t,v){document.getElementById(t+'BpmVal').innerText=v+'%'; const a=document.getElementById(t==='vs'?'audioVS':'audioPB'); a.playbackRate=v/100}
+function setPitch(t,v){document.getElementById(t+'PitchVal').innerText=v; }
+function setEQ(t,b,v){document.getElementById(t+(b==='bass'?'Bass':'Treble')+'Val').innerText=v+'dB'}
+function setReverb(t,v){document.getElementById(t+'ReverbVal').innerText=v+'%'}
+function setVol(t,v){document.getElementById(t+'VolVal').innerText=v+'%'; document.getElementById(t==='vs'?'audioVS':'audioPB').volume=v/100}
+function changeSize(t,d){if(t==='chord'){chordSize=Math.max(10,Math.min(28,chordSize+d));document.documentElement.style.setProperty('--chord-size',chordSize+'px');document.getElementById('chordSize').innerText=chordSize+'px'}else{lyricSize=Math.max(10,Math.min(28,lyricSize+d));document.documentElement.style.setProperty('--lyric-size',lyricSize+'px');document.getElementById('lyricSize').innerText=lyricSize+'px'}}
+function trans(d){const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]}
+function capo(d){let v=parseInt(document.getElementById('capo').innerText); v+=d; document.getElementById('capo').innerText=v}
+function toggleSimp(){const b=document.getElementById('simpBtn'); b.innerText=b.innerText==='ON'?'OFF':'ON'; b.className=b.innerText==='ON'?'btn small gold':'btn small'}
+document.documentElement.style.setProperty('--chord-size','14px');document.documentElement.style.setProperty('--lyric-size','16px');
 </script>
 </body>
 </html>
