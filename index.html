@@ -3,70 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME PRO v4.2 - CIFRA COMPLETA</title>
+<title>SHOWTIME PRO v4.4 FINAL</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%}
-:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#888;--border:#2A2A2A}
+:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:18px;--lyric-size:16px}
 body{background:var(--bg);color:var(--white);font-family:Inter,system-ui}
 aside{width:240px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:fixed;height:100vh;z-index:100;transition:.3s}
-aside .logo{padding:0 20px 20px;color:var(--gold);font-weight:900;letter-spacing:2px;border-bottom:1px solid var(--border);margin-bottom:20px}
 main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
 .topbar{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--border);padding:12px 16px;border-radius:12px}
 .hamburger{display:none;font-size:22px;background:none;border:none;color:var(--gold);cursor:pointer}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;width:100%;overflow:hidden}
-.card h3{color:var(--gold);font-size:13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.btn{padding:8px 14px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn{padding:8px 14px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer}
 .btn.gold{background:var(--gold);color:#000}
-.btn.small{padding:6px 12px;font-size:11px}
+.btn.small{padding:8px 14px;font-size:11px}
 .btn.big{width:100%;padding:12px;font-size:13px;margin-bottom:8px;display:flex;justify-content:center;gap:8px}
-.file{font-size:11px;color:var(--gray);background:#111;padding:8px 10px;border-radius:8px;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file{font-size:11px;color:var(--gray);background:#111;padding:8px 10px;border-radius:8px;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ctrl{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:10px}
 .ctrl label{font-size:9px;color:var(--gray);display:flex;justify-content:space-between;margin-bottom:6px}
 .ctrl input{width:100%;accent-color:var(--gold);height:4px}
-.ctrl.on{border-color:var(--gold);background:rgba(212,180,131,.08)}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90}
-.cifra-header{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
-.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:14px;height:420px;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
-.chord{color:var(--orange);font-weight:800;font-size:var(--chord-size,14px)}
-.lyric{color:#fff;font-size:var(--lyric-size,16px);display:block;margin-top:2px}
-.line{line-height:22px;margin-bottom:6px}
-.collapsible{overflow:hidden;transition:.3s max-height}
-.collapsible.closed{max-height:0!important}
-.collapsible.open{max-height:600px}
-.arrow{cursor:pointer;font-size:18px;color:var(--gold);transition:.3s}
-.arrow.closed{transform:rotate(-90deg)}
-.scroll-ctrls{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap}
-.speed-btn{padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card2);color:var(--gray);font-size:12px;cursor:pointer;min-width:44px;text-align:center}
-.speed-btn.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:800}
-.speed-label{font-size:8px;color:var(--gray);display:block;margin-top:2px;text-align:center}
+.cifra-top{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.cifra-title{font-size:18px;font-weight:900}
+.ctrl-row{display:flex;align-items:center;justify-content:space-between;background:#111;border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+.ctrl-row .label{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.stepper .val{min-width:40px;text-align:center;font-weight:800;font-size:14px}
+.stepper .val.gold{background:var(--gold);color:#000;padding:4px 10px;border-radius:20px;font-size:12px}
+.cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:12px;padding:20px;height:420px;overflow-y:auto;scroll-behavior:smooth}
+.cifra-line{display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px}
+.pair{display:inline-flex;flex-direction:column;align-items:flex-start;margin-right:2px}
+.chord{color:var(--orange);font-weight:900;font-size:var(--chord-size);margin-bottom:5px;min-height:var(--chord-size)}
+.lyric{color:#E8E8E8;font-size:var(--lyric-size);line-height:1.4;white-space:pre-wrap}
+.collapsible{overflow:hidden;transition:.35s max-height}
+.collapsible.closed{max-height:0}
+.collapsible.open{max-height:900px}
+.arrow{cursor:pointer;color:var(--gold);font-size:14px}
+.scroll-bar{display:flex;align-items:center;gap:8px;background:#111;border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-top:8px;flex-wrap:wrap}
+.speed{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--gray);cursor:pointer;font-weight:700}
+.speed.active{background:var(--gold);color:#000;border-color:var(--gold)}
 audio{width:100%;height:32px;margin-bottom:8px}
-/* FULLSCREEN SÓ LETRA */
 body.fullscreen-cifra aside,body.fullscreen-cifra .topbar,body.fullscreen-cifra .player-card{display:none!important}
 body.fullscreen-cifra main{margin:0;padding:0;display:block;height:100vh;background:#000}
-body.fullscreen-cifra .cifra-card{height:100vh;border:none;border-radius:0;background:#000;display:flex;flex-direction:column;justify-content:center}
-body.fullscreen-cifra .cifra-header{display:none!important}
-body.fullscreen-cifra .cifra-box{border:none;background:#000;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px}
-body.fullscreen-cifra .chord{display:none!important}
-body.fullscreen-cifra .lyric{font-size:48px!important;line-height:1.4}
-body.fullscreen-cifra .exit-full{position:fixed;top:20px;right:20px;z-index:200;display:block!important}
-.exit-full{display:none}
-@media(max-width:900px){
-  aside{transform:translateX(-100%)} aside.open{transform:translateX(0)}
-  main{margin-left:0;grid-template-columns:1fr!important;gap:10px;padding:10px;width:100vw}
-  .hamburger{display:block}
-  .overlay.open{display:block}
-  .cifra-card{grid-column:1}
-  .cifra-box{height:380px}
-  body.fullscreen-cifra .lyric{font-size:32px!important}
-}
+body.fullscreen-cifra .cifra-card{height:100vh;border:none;border-radius:0;background:#000;padding:0;display:flex;flex-direction:column}
+body.fullscreen-cifra .cifra-top{padding:16px;background:#0A0A0A;border-bottom:1px solid var(--border);display:flex!important}
+body.fullscreen-cifra .cifra-box{flex:1;border:none;background:#000;height:auto;padding:32px 24px}
+body.fullscreen-cifra .chord{font-size:calc(var(--chord-size) * 1.7)!important}
+body.fullscreen-cifra .lyric{font-size:calc(var(--lyric-size) * 1.9)!important}
+body.fullscreen-cifra .float-tools{position:fixed;right:16px;top:50%;transform:translateY(-50%);background:rgba(20,20,20,.95);border:1px solid var(--gold);border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;z-index:50}
+.float-tools{display:none}
+.float-tools button{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:20px;cursor:pointer}
+@media(max-width:900px){aside{transform:translateX(-100%)} aside.open{transform:translateX(0)} main{margin-left:0;grid-template-columns:1fr!important;gap:10px;padding:10px;width:100vw} .hamburger{display:block} .overlay.open{display:block} .cifra-box{height:380px}}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-<aside id="sidebar"><div class="logo">SHOWTIME PRO</div><nav><a class="active">🎤 Palco</a><a>🎼 Cifras</a><a>🎧 VS</a><a>▶️ Playback</a></nav></aside>
+<aside id="sidebar"><div class="logo">SHOWTIME PRO</div></aside>
 <main>
-<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b> • 3 pedidos</div><div>🔔 3</div></div>
+<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b></div><div>🔔 3</div></div>
 
 <div class="card player-card">
 <button class="btn big gold" onclick="fVS.click()">🔍 Buscar VS</button>
@@ -76,8 +71,8 @@ body.fullscreen-cifra .exit-full{position:fixed;top:20px;right:20px;z-index:200;
 <div class="controls">
 <div class="ctrl"><label><span>BPM</span><b id="vsB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="aVS.playbackRate=this.value/100;vsB.innerText=this.value+'%'"></div>
 <div class="ctrl"><label><span>VOLUME</span><b id="vsV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="aVS.volume=this.value/100;vsV.innerText=this.value+'%'"></div>
-<div class="ctrl"><label><span>GRAVES</span><b id="vsG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('vs','bass',this.value,'vsG')"></div>
-<div class="ctrl"><label><span>AGUDOS</span><b id="vsA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('vs','treble',this.value,'vsA')"></div>
+<div class="ctrl"><label><span>GRAVES</span><b id="vsG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('vs','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><b id="vsA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('vs','treble',this.value)"></div>
 <div class="ctrl"><label><span>REVERB</span><b id="vsR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="setRev('vs',this.value)"></div>
 <div class="ctrl"><label><span>PITCH</span><b id="vsP">0</b></label><input type="range" min="-12" max="12" value="0" oninput="vsP.innerText=this.value"></div>
 </div>
@@ -91,88 +86,99 @@ body.fullscreen-cifra .exit-full{position:fixed;top:20px;right:20px;z-index:200;
 <div class="controls">
 <div class="ctrl"><label><span>BPM</span><b id="pbB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="aPB.playbackRate=this.value/100;pbB.innerText=this.value+'%'"></div>
 <div class="ctrl"><label><span>VOLUME</span><b id="pbV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="aPB.volume=this.value/100;pbV.innerText=this.value+'%'"></div>
-<div class="ctrl"><label><span>GRAVES</span><b id="pbG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('pb','bass',this.value,'pbG')"></div>
-<div class="ctrl"><label><span>AGUDOS</span><b id="pbA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('pb','treble',this.value,'pbA')"></div>
+<div class="ctrl"><label><span>GRAVES</span><b id="pbG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('pb','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><b id="pbA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="setEQ('pb','treble',this.value)"></div>
 <div class="ctrl"><label><span>REVERB</span><b id="pbR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="setRev('pb',this.value)"></div>
 <div class="ctrl"><label><span>PITCH</span><b id="pbP">0</b></label><input type="range" min="-12" max="12" value="0" oninput="pbP.innerText=this.value"></div>
 </div>
 </div>
 
 <div class="card cifra-card">
-<div class="cifra-header">
-<div style="font-size:20px;font-weight:900;color:var(--gold)">Cifra</div>
+<div class="cifra-top">
+<div class="cifra-title">Cifra</div>
 <button class="btn small gold" onclick="fCifra.click()">+ Nova Cifra</button>
-<button class="btn small" onclick="toggleFullscreen()">⛶ Tela Cheia Só Letra</button>
+<button class="btn small" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
 <input type="file" id="fCifra" hidden accept=".txt,.cifra" onchange="loadCifra(this)">
-<div style="margin-left:auto;display:flex;align-items:center;gap:8px">
-<span style="font-size:12px;color:var(--gold)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span>
+<div style="margin-left:auto;display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--gray)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span></div>
 </div>
-</div>
-
 <div class="collapsible open" id="controles">
-<div style="background:#111;border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:10px">
-<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">
-<span style="font-size:10px;color:var(--gray)">TOM:</span><button class="btn small" onclick="chgTom(-7)">-7</button><button class="btn small" onclick="chgTom(-1)">-1</button><button class="btn small gold" id="tom">G</button><button class="btn small" onclick="chgTom(1)">+1</button><button class="btn small" onclick="chgTom(7)">+7</button>
-<span style="font-size:10px;color:var(--gray)">CAPO:</span><button class="btn small" onclick="chgCapo(-1)">-1</button><button class="btn small gold" id="capo">0</button><button class="btn small" onclick="chgCapo(1)">+1</button>
-</div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-<span style="font-size:10px;color:var(--gray)">ACORDE:</span><button class="btn small" onclick="chgSz('c',-1)">A-</button><button class="btn small gold" id="cSz">14px</button><button class="btn small" onclick="chgSz('c',1)">A+</button>
-<span style="font-size:10px;color:var(--gray)">LETRA:</span><button class="btn small" onclick="chgSz('l',-1)">A-</button><button class="btn small gold" id="lSz">16px</button><button class="btn small" onclick="chgSz('l',1)">A+</button>
-<button class="btn small" id="simpBtn" onclick="toggleSimp()">Simp ON</button>
-</div>
-<div style="border-top:1px dashed var(--border);padding-top:10px">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:10px;color:var(--gold);font-weight:800">AUTO-SCROLL</span><span style="font-size:10px;color:var(--gray)">Velocidade</span></div>
-<div class="scroll-ctrls">
-<button class="speed-btn active" id="sp1" onclick="setSpeed(1)">1<div class="speed-label">muito lento</div></button>
-<button class="speed-btn" id="sp2" onclick="setSpeed(2)">2<div class="speed-label">lento</div></button>
-<button class="speed-btn" id="sp3" onclick="setSpeed(3)">3<div class="speed-label">médio</div></button>
-<button class="speed-btn" id="sp4" onclick="setSpeed(4)">4<div class="speed-label">rápido</div></button>
-<button class="btn small gold" id="playScroll" onclick="toggleScroll()" style="margin-left:auto">▶️ PLAY</button>
+<div class="ctrl-row"><span class="label">Tom</span><div class="stepper"><button onclick="chgTom(-1)">−</button><span class="val gold" id="tom">G</span><button onclick="chgTom(1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Capo</span><div class="stepper"><button onclick="chgCapo(-1)">−</button><span class="val" id="capo">0</span><button onclick="chgCapo(1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Acorde</span><div class="stepper"><button onclick="chgSz('c',-1)">−</button><span class="val" id="cSz">18px</span><button onclick="chgSz('c',1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Letra</span><div class="stepper"><button onclick="chgSz('l',-1)">−</button><span class="val" id="lSz">16px</span><button onclick="chgSz('l',1)">+</button></div></div>
+<div class="scroll-bar">
+<span style="font-size:10px;color:var(--gold);font-weight:800">AUTO-SCROLL</span>
+<div style="display:flex;gap:6px"><button class="speed active" id="sp1" onclick="setSpeed(1)">1</button><button class="speed" id="sp2" onclick="setSpeed(2)">2</button><button class="speed" id="sp3" onclick="setSpeed(3)">3</button><button class="speed" id="sp4" onclick="setSpeed(4)">4</button></div>
+<span style="font-size:9px;color:var(--gray)" id="speedLabel">muito lento</span>
+<button class="btn small gold" id="playScroll" onclick="toggleScroll()" style="margin-left:auto">▶ PLAY</button>
 </div>
 </div>
+<div class="cifra-box" id="cifraBox"></div>
+<div class="float-tools">
+<button onclick="chgSz('l',-1)">−</button><div style="text-align:center;color:var(--gold);font-size:10px">LETRA</div><button onclick="chgSz('l',1)">+</button>
+<div style="height:1px;background:var(--border);margin:6px 0"></div>
+<button onclick="chgSz('c',-1)" style="font-size:12px">C-</button><div style="text-align:center;color:var(--gold);font-size:10px">ACORDE</div><button onclick="chgSz('c',1)" style="font-size:12px">C+</button>
+<button onclick="toggleFullscreen()" style="margin-top:12px;background:var(--gold);color:#000">✕</button>
 </div>
-</div>
-
-<div class="cifra-box" id="cifraBox">
-<div class="line"><span class="chord">[G]</span><span class="lyric">Como é grande o meu amor por você,</span></div>
-<div class="line"><span class="chord">[C]</span><span class="lyric">Meu coração é tão pequeno,</span></div>
-<div class="line"><span class="chord">[G]</span><span class="lyric">Só agora é que eu vi,</span></div>
-<div class="line"><span class="chord">[D]</span><span class="lyric">Que esse amor por você é demais,</span></div>
-<div class="line"><span class="chord">[Em]</span><span class="lyric">Como é grande o meu amor por você</span></div>
-<div class="line"><span class="chord">[G]</span><span class="lyric">Nem mesmo o céu nem as estrelas,</span></div>
-<div class="line"><span class="chord">[C]</span><span class="lyric">Nem mesmo o mar e o infinito,</span></div>
-<div class="line"><span class="chord">[D]</span><span class="lyric">Nada é maior que o meu amor,</span></div>
-<div class="line"><span class="chord">[G]</span><span class="lyric">Nem mais bonito...</span></div>
-</div>
-<button class="btn small gold exit-full" onclick="toggleFullscreen()">✕ Sair Tela Cheia</button>
 </div>
 </main>
 <script>
-let audioCtx=null, vs={}, pb={}, cs=14, ls=16, scrollId=null, speed=1, isScrolling=false;
-const speeds=[0, 0.3, 0.8, 1.8, 3.2]; // 1 muito lento, 2 lento, 3 medio, 4 rapido
-
+let audioCtx=null,vs={},pb={},cs=18,ls=16,scrollId=null,speed=1,isScrolling=false;
+const speeds=[0,0.25,0.7,1.6,3.0]; const labels=['','muito lento','lento','medio','rapido'];
+let originalCifra="[G]Como e grande o meu amor por voce,\n[C]Meu coracao e tao pequeno,\n[G]So agora e que eu vi,\n[D]Que esse amor por voce e demais,\n[Em]Como e grande o meu amor por voce\n[G]Nem mesmo o ceu nem as estrelas,\n[C]Nem mesmo o mar e o infinito,\n[D]Nada e maior que o meu amor,\n[G]Nem mais bonito...";
 function ensureCtx(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); if(audioCtx.state==='suspended') audioCtx.resume(); }
 function makeChain(){ const b=audioCtx.createBiquadFilter(); b.type='lowshelf'; b.frequency.value=250; const t=audioCtx.createBiquadFilter(); t.type='highshelf'; t.frequency.value=3500; const g=audioCtx.createGain(); g.gain.value=0.8; const dry=audioCtx.createGain(); dry.gain.value=1; const rg=audioCtx.createGain(); rg.gain.value=0; const rv=audioCtx.createConvolver(); const len=audioCtx.sampleRate*1.5, buf=audioCtx.createBuffer(2,len,audioCtx.sampleRate); for(let c=0;c<2;c++){const d=buf.getChannelData(c); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5)*0.5} rv.buffer=buf; return {bass:b,treb:t,gain:g,dry,revGain:rg,rev:rv,src:null}; }
 function connect(type){ const n=type==='vs'?vs:pb; if(!n.bass) return; try{if(n.src) n.src.disconnect()}catch(e){} const a=document.getElementById(type==='vs'?'aVS':'aPB'); n.src=audioCtx.createMediaElementSource(a); n.src.connect(n.bass); n.bass.connect(n.treb); n.treb.connect(n.dry); n.treb.connect(n.rev); n.rev.connect(n.revGain); n.dry.connect(n.gain); n.revGain.connect(n.gain); n.gain.connect(audioCtx.destination); }
 function loadFile(input,type){ ensureCtx(); const f=input.files[0]; if(!f) return; const url=URL.createObjectURL(f); const a=document.getElementById(type==='vs'?'aVS':'aPB'); a.src=url; a.load(); document.getElementById(type==='vs'?'fVSName':'fPBName').innerText='📁 '+f.name; a.oncanplay=()=>{ try{ if(type==='vs'){ if(!vs.bass) Object.assign(vs,makeChain()); connect('vs'); } else { if(!pb.bass) Object.assign(pb,makeChain()); connect('pb'); } }catch(e){} }; }
-function setEQ(t,type,v,label){ ensureCtx(); document.getElementById(label).innerText=v+'dB'; const n=t==='vs'?vs:pb; if(type==='bass'&&n.bass) n.bass.gain.value=parseInt(v); if(type==='treble'&&n.treb) n.treb.gain.value=parseInt(v); }
-function setRev(t,v){ ensureCtx(); document.getElementById(t==='vs'?'vsR':'pbR').innerText=v+'%'; const n=t==='vs'?vs:pb; if(n.revGain&&n.dry){ n.revGain.gain.value=v/100; n.dry.gain.value=1-(v/200); } }
-
-function toggleMenu(){ sidebar.classList.toggle('open'); overlay.classList.toggle('open'); }
-function toggleControles(){ const c=document.getElementById('controles'); const ar=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); ar.classList.add('closed'); ar.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); ar.classList.remove('closed'); ar.innerText='▼'; } }
-function chgSz(t,d){ if(t==='c'){ cs=Math.max(10,Math.min(28,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); cSz.innerText=cs+'px'; } else { ls=Math.max(10,Math.min(28,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); lSz.innerText=ls+'px'; } }
-const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(tom.innerText); i=(i+d+12)%12; tom.innerText=tons[i]; } function chgCapo(d){ capo.innerText=parseInt(capo.innerText)+d; } function toggleSimp(){ const b=simpBtn; b.innerText=b.innerText.includes('ON')?'Simp OFF':'Simp ON'; b.classList.toggle('gold'); }
-
-function setSpeed(s){ speed=s; document.querySelectorAll('.speed-btn').forEach(el=>el.classList.remove('active')); document.getElementById('sp'+s).classList.add('active'); if(isScrolling){ clearInterval(scrollId); startScroll(); } }
-function toggleScroll(){ if(isScrolling){ stopScroll(); } else { startScroll(); } }
-function startScroll(){ isScrolling=true; document.getElementById('playScroll').innerText='⏸ PAUSE'; const box=document.getElementById('cifraBox'); scrollId=setInterval(()=>{ box.scrollTop+=speeds[speed]; if(box.scrollTop+box.clientHeight>=box.scrollHeight-2) stopScroll(); }, 40); }
-function stopScroll(){ isScrolling=false; document.getElementById('playScroll').innerText='▶️ PLAY'; clearInterval(scrollId); }
-
-function toggleFullscreen(){ document.body.classList.toggle('fullscreen-cifra'); if(document.body.classList.contains('fullscreen-cifra')){ document.documentElement.requestFullscreen?.(); } else { document.exitFullscreen?.(); } }
-function loadCifra(input){ const f=input.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>{ const box=document.getElementById('cifraBox'); const lines=e.target.result.split('\n'); box.innerHTML=''; lines.forEach(l=>{ const m=l.match(/(\[.*?\])/g); let html='<div class=line>'; if(m){ m.forEach(ch=>{ html+=`<span class=chord>${ch}</span>`; }); const lyric=l.replace(/\[.*?\]/g,'').trim(); html+=`<span class=lyric>${lyric}</span>`; } else { html+=`<span class=lyric>${l}</span>`; } html+='</div>'; box.innerHTML+=html; }); }; r.readAsText(f); }
-
-document.documentElement.style.setProperty('--chord-size','14px'); document.documentElement.style.setProperty('--lyric-size','16px');
-aVS.volume=0.8; aPB.volume=0.8;
+function setEQ(t,type,v){ ensureCtx(); const n=t==='vs'?vs:pb; if(type==='bass'&&n.bass) n.bass.gain.value=parseInt(v); if(type==='treble'&&n.treb) n.treb.gain.value=parseInt(v); document.getElementById(t==='vs'?'vs'+(type==='bass'?'G':'A'):'pb'+(type==='bass'?'G':'A')).innerText=v+'dB'; }
+function setRev(t,v){ ensureCtx(); const n=t==='vs'?vs:pb; if(n.revGain&&n.dry){ n.revGain.gain.value=v/100; n.dry.gain.value=1-(v/200); } document.getElementById(t==='vs'?'vsR':'pbR').innerText=v+'%'; }
+function parseCifra(text){
+  const box=document.getElementById('cifraBox'); box.innerHTML='';
+  const lines=text.split('\n');
+  lines.forEach(rawLine=>{
+    if(!rawLine.trim()){ box.innerHTML+='<div style="height:12px"></div>'; return; }
+    const lineDiv=document.createElement('div'); lineDiv.className='cifra-line';
+    const allMatches=[...rawLine.matchAll(/\[([^\]]+)\]/g)];
+    if(allMatches.length===0){
+      const pair=document.createElement('span'); pair.className='pair';
+      const chordSpan=document.createElement('span'); chordSpan.className='chord'; chordSpan.innerHTML='&nbsp;';
+      const lyricSpan=document.createElement('span'); lyricSpan.className='lyric'; lyricSpan.textContent=rawLine;
+      pair.appendChild(chordSpan); pair.appendChild(lyricSpan); lineDiv.appendChild(pair);
+    } else {
+      allMatches.forEach((m,i)=>{
+        const chord=m[1];
+        const nextStart=i+1<allMatches.length?allMatches[i+1].index:rawLine.length;
+        const lyricText=rawLine.substring(m.index+m[0].length, nextStart);
+        const pair=document.createElement('span'); pair.className='pair';
+        const chordSpan=document.createElement('span'); chordSpan.className='chord'; chordSpan.textContent=chord;
+        const lyricSpan=document.createElement('span'); lyricSpan.className='lyric'; lyricSpan.textContent=lyricText||' ';
+        pair.appendChild(chordSpan); pair.appendChild(lyricSpan); lineDiv.appendChild(pair);
+        if(i===0 && m.index>0){
+          const firstPair=lineDiv.firstChild;
+          const before=document.createElement('span'); before.className='pair';
+          const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
+          const l=document.createElement('span'); l.className='lyric'; l.textContent=rawLine.substring(0,m.index);
+          before.appendChild(c); before.appendChild(l);
+          lineDiv.insertBefore(before, firstPair);
+        }
+      });
+    }
+    box.appendChild(lineDiv);
+  });
+}
+function toggleMenu(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
+function toggleControles(){ const c=document.getElementById('controles'); const ar=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); ar.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); ar.innerText='▼'; } }
+function chgSz(t,d){ if(t==='c'){ cs=Math.max(10,Math.min(36,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(10,Math.min(48,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
+const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]; } function chgCapo(d){ document.getElementById('capo').innerText=parseInt(document.getElementById('capo').innerText)+d; }
+function setSpeed(s){ speed=s; document.querySelectorAll('.speed').forEach(el=>el.classList.remove('active')); document.getElementById('sp'+s).classList.add('active'); document.getElementById('speedLabel').innerText=labels[s]; if(isScrolling){ clearInterval(scrollId); startScroll(); } }
+function toggleScroll(){ if(isScrolling) stopScroll(); else startScroll(); }
+function startScroll(){ isScrolling=true; document.getElementById('playScroll').innerText='⏸ PAUSE'; const box=document.getElementById('cifraBox'); scrollId=setInterval(()=>{ box.scrollTop+=speeds[speed]; if(box.scrollTop+box.clientHeight>=box.scrollHeight-2) stopScroll(); },40); }
+function stopScroll(){ isScrolling=false; document.getElementById('playScroll').innerText='▶ PLAY'; clearInterval(scrollId); }
+function toggleFullscreen(){ document.body.classList.toggle('fullscreen-cifra'); }
+function loadCifra(input){ const f=input.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>{ parseCifra(e.target.result); }; r.readAsText(f); }
+document.documentElement.style.setProperty('--chord-size','18px'); document.documentElement.style.setProperty('--lyric-size','16px');
+document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
+parseCifra(originalCifra);
 document.body.addEventListener('click',()=>{ try{ensureCtx()}catch(e){} },{once:true});
 </script>
 </body>
