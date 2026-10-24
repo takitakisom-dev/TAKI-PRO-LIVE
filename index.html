@@ -2,82 +2,95 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SHOWTIME v50 FINAL - TUDO FUNCIONANDO</title>
+<title>SHOWTIME v51 FINAL RESTAURADO</title>
 <style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--border:#D6E6FF;--c:9px;--l:11px}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);font-family:Inter,Arial,sans-serif}
-.card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:0;overflow:hidden;margin:10px}
-.cifraHeader{background:var(--blue);color:#fff;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
-.cifraInfo{background:#F1F5F9;border:1px solid #E2E8F0;padding:8px 10px;margin:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-radius:8px}
-.zoomRow{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;margin:0 8px 8px 8px;border-radius:8px;border:1px solid #D6E6FF;flex-wrap:wrap}
-.cifraDisplay{width:100%;height:62vh;border:2px solid var(--border);margin:0 8px;border-radius:12px;padding:14px;background:#fff;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.lineGroup{margin-bottom:3px} 
-/* V50 - CIFRA AZUL NEGRITO */
-.chordLine{color:#2563EB;font-weight:800;font-size:var(--c);line-height:1.1;font-family:'Courier New',monospace;white-space:pre-wrap;letter-spacing:0.3px}
+:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--c:9px;--l:11px}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:80px}
+.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:0;overflow:hidden;margin:10px}
+.cifraInfo{background:#F1F5F9;padding:8px 10px;margin:8px;border-radius:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #E2E8F0}
+.zoomRow{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;margin:0 8px 8px 8px;border-radius:8px;border:1px solid var(--border);flex-wrap:wrap}
+.cifraDisplay{margin:0 8px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;height:60vh;-webkit-overflow-scrolling:touch}
+.chordLine{color:#2563EB;font-weight:800;font-size:var(--c);font-family:'Courier New',monospace;line-height:1.1;white-space:pre-wrap}
 .lyricLine{color:#111;font-weight:600;font-size:var(--l);margin-top:2px;line-height:1.3;white-space:pre-wrap}
-.sectionLine{color:#16A34A;font-weight:800;font-size:10px;margin:10px 0 3px;text-transform:uppercase}
-.btn{padding:7px 12px;border-radius:8px;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;font-size:12px}
-.btn.blue{background:var(--blue);color:#fff}
-.btn.yellow{background:#FFC107;color:#000;border-color:#FFC107}
-.btn.black{background:#111;color:#fff;border-color:#111}
-.btn.small{padding:6px 10px;font-size:11px}
-.tomVal{background:#FFC107;color:#000;padding:6px 14px;border-radius:10px;font-weight:800;font-size:14px;min-width:44px;text-align:center;display:inline-block}
-.zoomVal{background:#fff;border:1px solid var(--border);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800;color:var(--blue);min-width:100px;text-align:center}
-
-/* TELA CHEIA REAL */
+.sectionLine{color:#16A34A;font-weight:800;font-size:10px;margin:8px 0 2px;text-transform:uppercase}
+.btn{padding:6px 11px;border-radius:8px;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;font-size:11px}
+.btn.blue{background:var(--blue);color:#fff}.btn.yellow{background:#FFC107;color:#000;border-color:#FFC107}.btn.black{background:#111;color:#fff;border-color:#111}
+.tomVal{background:#FFC107;color:#000;padding:6px 14px;border-radius:10px;font-weight:800;font-size:14px;min-width:42px;text-align:center}
+#menu{position:fixed;inset:0;z-index:500;display:none}#menu.open{display:block}
+#menuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+#menuPanel{position:absolute;top:0;left:0;bottom:0;width:88%;max-width:380px;background:#fff;overflow-y:auto}
+.menuHead{background:var(--blue);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
+.menuSec{color:var(--blue);font-size:11px;font-weight:800;padding:14px 16px 6px;text-transform:uppercase;border-top:1px solid var(--border);background:#F8FAFF}
+.menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
+.menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:#6B8BB0}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:68px;border-top:2px solid var(--border)}
+.bottom button{flex:1;border:none;background:#fff;color:#6B8BB0;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.bottom button.active{background:var(--blue);color:#fff}
 .card.fullscreen{position:fixed!important;inset:0!important;z-index:9999!important;margin:0!important;border-radius:0!important;width:100vw!important;height:100vh!important;display:flex!important;flex-direction:column!important}
 .card.fullscreen .cifraDisplay{flex:1;height:auto!important;border:none!important;border-radius:0!important;padding:70px 16px 140px 16px}
-.fullTop{position:fixed;top:0;left:0;right:0;background:var(--blue);color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;z-index:10000;display:none}
-.fullBottom{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px;display:flex;justify-content:space-between;align-items:center;z-index:10000;flex-wrap:wrap;gap:8px;display:none}
+.fullTop,.fullBottom{position:fixed;left:0;right:0;z-index:10000;display:none}
+.fullTop{top:0;background:var(--blue);color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.fullBottom{bottom:0;background:#fff;border-top:2px solid var(--border);padding:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .card.fullscreen .fullTop{display:flex!important}
 .card.fullscreen .fullBottom{display:flex!important}
-.scrollSide{position:fixed;right:12px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:10px;z-index:10001}
+.scrollSide{position:fixed;right:10px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:8px;z-index:10001}
 .card.fullscreen .scrollSide{display:flex!important}
-.scrollSide button{width:48px;height:48px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:22px;font-weight:800;box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.speedBtn{border:1.5px solid var(--blue)!important;background:#fff!important;color:var(--blue)!important}
+.scrollSide button{width:46px;height:46px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:20px;font-weight:800}
 .speedBtn.on{background:var(--blue)!important;color:#fff!important}
 </style>
 </head>
 <body>
 
+<div id="menu"><div id="menuBg" onclick="closeMenu()"></div><div id="menuPanel">
+<div class="menuHead"><div><b>SHOWTIME v51</b><br><small id="artistMenu">André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
+<div class="menuSec">🎤 PEDE AÍ COM PASTAS</div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small>0 pedidos</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">📁</div><div><b>Repertório por Pastas</b><small id="repCount">Pastas por artista</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b></div></div>
+<div class="menuSec">📚 CIFRAS EM PASTAS</div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small>Você, Leãozinho, Caetano</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S. até 50MB</b><small>10MB a 21MB OK</small></div></div>
+<div class="menuSec">🎨 SISTEMA</div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">⬆️</div><div><b>Exportar BKP Pastas</b></div></div>
+<div style="height:90px"></div>
+</div></div>
+
+<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v51 MENU RESTAURADO</b></div></div>
+
 <div class="card" id="cifraCard">
-  <div class="fullTop" id="fullTop">
-    <b id="fullTitle" style="font-size:13px">Primeiros Erros</b>
+  <div class="fullTop">
+    <b>Primeiros Erros</b>
     <div style="display:flex;gap:4px;align-items:center;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:20px">
-      <button class="btn small" onclick="mudaTom(-1)">-1</button>
-      <span class="tomVal" id="tomFull">D</span>
-      <button class="btn small" onclick="mudaTom(1)">+1</button>
-      <button class="btn yellow small" onclick="mudaTom(-7)" style="margin-left:6px">-7</button>
-      <button class="btn yellow small" onclick="mudaTom(7)">+7</button>
+      <button class="btn small" onclick="mudaTom(-1)">-1</button><span class="tomVal" id="tomFull">D</span><button class="btn small" onclick="mudaTom(1)">+1</button>
+      <button class="btn yellow small" onclick="mudaTom(-7)">-7</button><button class="btn yellow small" onclick="mudaTom(7)">+7</button>
     </div>
     <button class="btn black small" onclick="saiFull()">✕ Sair</button>
   </div>
 
-  <div class="cifraHeader"><b>Primeiros Erros - Capital Inicial</b><span style="font-size:11px;opacity:.8">v50 FINAL</span></div>
+  <div style="background:var(--blue);color:#fff;padding:12px 14px;display:flex;justify-content:space-between"><b>Primeiros Erros - Capital Inicial</b><small>v51</small></div>
   
   <div class="cifraInfo">
     <div style="display:flex;gap:4px;align-items:center">
-      <span style="font-size:11px">Tom:</span>
       <button class="btn small" onclick="mudaTom(-1)">-1</button>
       <span class="tomVal" id="tomLabel">D</span>
       <button class="btn small" onclick="mudaTom(1)">+1</button>
       <button class="btn yellow small" onclick="mudaTom(-7)">-7</button>
       <button class="btn yellow small" onclick="mudaTom(7)">+7</button>
-      <span style="font-size:10px;margin-left:8px;color:#666" id="tomInfo">original D</span>
+      <span id="tomInfo" style="font-size:10px;color:#666;margin-left:6px">original D</span>
     </div>
-    <div style="display:flex;gap:6px">
-      <button id="btnSimples" class="btn small" onclick="toggleSimples()">🎵 Simples</button>
-      <button class="btn small" onclick="toggleHide()">👁️ Esconder</button>
+    <div style="display:flex;gap:6px;margin-left:auto">
+      <button id="btnSimples" class="btn small" onclick="toggleSimples()">🎵 Cifra Simples</button>
+      <button id="btnEsconder" class="btn small" onclick="toggleEsconder()">👁️ Esconder Cifra</button>
     </div>
   </div>
 
   <div class="zoomRow">
     <b style="font-size:11px;color:var(--blue)">Tamanho:</b>
     <button class="btn small" onclick="mudaSize(-1)">A-</button>
-    <span class="zoomVal" id="zoomLabel">Cifra 9px / Letra 11px</span>
+    <span id="zoomLabel" style="background:#fff;border:1px solid var(--border);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800;color:var(--blue)">Cifra 9px / Letra 11px</span>
     <button class="btn blue small" onclick="mudaSize(1)">A+</button>
-    <span style="font-size:10px;color:#666">cifra azul negrito</span>
     <button class="btn black small" style="margin-left:auto" onclick="entraFull()">⛶ Tela Grande</button>
   </div>
 
@@ -85,7 +98,6 @@ body{background:var(--bg);font-family:Inter,Arial,sans-serif}
 [INTRO] D5 D E/B
       D5   D   E/B
     D9  A11/C#  G/B
-         D9   A11/C#   G/B
 [PRIMEIRA PARTE]
 D5              D7M(9)                  D5
     Meu caminho é cada manhã
@@ -100,30 +112,13 @@ D5
     Se você não entende não vê
                      D7M(9)                       Bm7(11)
     Se não me vê não entende
-                  Bm7(9/11)                    Bm7(11)
-    Não procure saber onde estou
-                    Bm7(9/11)              G7M
-    Se o meu jeito te surpreende
-[SEGUNDA PARTE]
-                     G4+(6)               G7M
-    Se o meu corpo virasse sol
-                      G4+(6)                   Em7(9)
-    Se a minha mente virasse sol
 </textarea>
 
   <div id="cifraDisplay" class="cifraDisplay"></div>
 
-  <div style="padding:10px;display:flex;gap:8px">
-    <button class="btn blue" style="flex:1" onclick="editar()">✏️ Editar</button>
-    <button class="btn" style="flex:1" onclick="novaCifra()">+ Nova Cifra</button>
-  </div>
+  <div class="scrollSide"><button onclick="rolar(-150)">▲</button><button onclick="rolar(150)">▼</button></div>
 
-  <div class="scrollSide" id="scrollSide">
-    <button onclick="rolar(-150)">▲</button>
-    <button onclick="rolar(150)">▼</button>
-  </div>
-
-  <div class="fullBottom" id="fullBottom">
+  <div class="fullBottom">
     <div style="display:flex;gap:4px;align-items:center;background:#E3F0FF;padding:6px 10px;border-radius:20px">
       <b style="font-size:10px;color:var(--blue)">Rolagem:</b>
       <button class="btn small speedBtn on" id="sp0" onclick="velocidade(0)">0 OFF</button>
@@ -134,187 +129,39 @@ D5
     <div style="display:flex;gap:6px">
       <button class="btn blue small" onclick="rolar(-120)">▲ Subir</button>
       <button class="btn blue small" onclick="rolar(120)">▼ Descer</button>
+      <button class="btn small" onclick="novaCifra()">+ Nova Cifra</button>
     </div>
   </div>
 </div>
 
+<div class="bottom">
+<button onclick="openMenu()"><span style="font-size:20px">☰</span>Menu</button>
+<button><span style="font-size:20px">📁</span>Pastas</button>
+<button class="active" onclick="entraFull()"><span style="font-size:20px">⛶</span>Tela Cheia</button>
+<button><span style="font-size:20px">💾</span>Salvar</button>
+<button><span style="font-size:20px">📤</span>Compartilhar</button>
+</div>
+
 <script>
-// v50 - TUDO FUNCIONANDO - TESTADO
 let tomLista=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-let tomAtualIdx=2; // D
-let offset=0; // quantos semitons transportou
-let cifraSize=9, letraSize=11;
-let simples=false, esconde=false;
-let scrollTimer=null;
-let original = document.getElementById('cifraOriginal').value;
-let display = document.getElementById('cifraDisplay');
-
-function applySize(){
-  document.documentElement.style.setProperty('--c', cifraSize+'px');
-  document.documentElement.style.setProperty('--l', letraSize+'px');
-  document.getElementById('zoomLabel').innerText = `Cifra ${cifraSize}px / Letra ${letraSize}px`;
-  localStorage.setItem('v50c', cifraSize);
-  localStorage.setItem('v50l', letraSize);
-}
-let sc=localStorage.getItem('v50c'), sl=localStorage.getItem('v50l');
-if(sc){ cifraSize=parseInt(sc); letraSize=parseInt(sl); }
-applySize();
-
-function mudaSize(d){
-  cifraSize+=d; letraSize+=d;
-  if(cifraSize<7) cifraSize=7;
-  if(cifraSize>20) cifraSize=20;
-  if(letraSize<9) letraSize=9;
-  if(letraSize>22) letraSize=22;
-  applySize();
-}
-
-// TRANSPOSIÇÃO QUE FUNCIONA
-function transposeNote(nota, steps){
-  let n = nota.replace('b','#b').split('#')[0] + (nota.includes('#') ? '#' : '');
-  // normaliza bemol
-  const bemolParaSustenido={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
-  if(bemolParaSustenido[nota]) nota = bemolParaSustenido[nota];
-  if(bemolParaSustenido[n]) n = bemolParaSustenido[n];
-  let idx = tomLista.indexOf(n);
-  if(idx===-1) return nota;
-  let novoIdx = (idx + steps + 120) % 12;
-  return tomLista[novoIdx];
-}
-function transposeChord(acorde, steps){
-  // pega a nota base e o baixo se tiver /
-  return acorde.replace(/([A-G][#b]?)/g, (match)=>{
-    // evita trocar dentro de coisa que não é nota? Mas acorde sempre começa com nota
-    let base = match;
-    const map={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
-    if(map[base]) base = map[base];
-    let idx = tomLista.indexOf(base);
-    if(idx===-1) return match;
-    return tomLista[(idx + steps + 120) % 12];
-  });
-}
-
-function mudaTom(dir){
-  offset += dir;
-  tomAtualIdx = (2 + offset + 120) % 12; // 2 = D original
-  document.getElementById('tomLabel').innerText = tomLista[tomAtualIdx];
-  document.getElementById('tomFull').innerText = tomLista[tomAtualIdx];
-  document.getElementById('tomInfo').innerText = (offset>0?'+'+offset:offset) + ' semitons';
-  desenha();
-}
-
-function simplifyChord(ch){
-  let m = ch.match(/^([A-G][#b]?)/);
-  if(!m) return ch;
-  let slash = ch.match(/\/([A-G][#b]?)/);
-  if(slash){
-    return m[1] + '/' + slash[1];
-  }
-  return m[1];
-}
-function toggleSimples(){
-  simples = !simples;
-  let b=document.getElementById('btnSimples');
-  b.style.background = simples ? '#1E5AA7' : '#fff';
-  b.style.color = simples ? '#fff' : '#1E5AA7';
-  b.innerText = simples ? '🎵 Completa' : '🎵 Simples';
-  desenha();
-}
-function toggleHide(){
-  esconde = !esconde;
-  desenha();
-}
-
-function desenha(){
-  let raw = original;
-  let linhas = raw.split('\n');
-  let html='';
-  for(let i=0;i<linhas.length;i++){
-    let line = linhas[i];
-    if(!line.trim()){ html+='<div style="height:6px"></div>'; continue; }
-    if(line.trim().startsWith('[') || line.trim().startsWith('Tom:')){
-      if(line.trim().startsWith('Tom:')) continue;
-      html+=`<div class="sectionLine">${line.trim()}</div>`; continue;
-    }
-    let next = linhas[i+1]||'';
-    let isChord = /[A-G]/.test(line) && line.trim().length < 80;
-    let nextIsLyric = next && /[a-z]{2,}/i.test(next);
-    
-    if(isChord && nextIsLyric){
-      let ch = line;
-      if(offset!==0) ch = transposeChord(ch, offset);
-      if(simples) ch = ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplifyChord(p):p).join(' ');
-      if(esconde){
-        html+=`<div class="lineGroup"><div class="lyricLine">${next}</div></div>`;
-      } else {
-        html+=`<div class="lineGroup"><div class="chordLine">${ch}</div><div class="lyricLine">${next}</div></div>`;
-      }
-      i++;
-    } else if(isChord){
-      let ch = line;
-      if(offset!==0) ch = transposeChord(ch, offset);
-      if(simples) ch = ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplifyChord(p):p).join(' ');
-      if(!esconde) html+=`<div class="lineGroup"><div class="chordLine">${ch}</div></div>`;
-    } else {
-      html+=`<div class="lineGroup"><div class="lyricLine">${line}</div></div>`;
-    }
-  }
-  display.innerHTML = html;
-}
-
-// ROLAGEM QUE FUNCIONA
-function rolar(qtd){
-  display.scrollBy({top:qtd, behavior:'smooth'});
-}
-function velocidade(v){
-  document.querySelectorAll('.speedBtn').forEach(b=>b.classList.remove('on'));
-  document.getElementById('sp'+v).classList.add('on');
-  if(scrollTimer){ clearInterval(scrollTimer); scrollTimer=null; }
-  if(v===0) return;
-  let delay = v===1 ? 180 : v===2 ? 80 : 35; // 1 bem devagarzinho
-  scrollTimer = setInterval(()=>{
-    display.scrollTop += 1;
-    if(display.scrollTop + display.clientHeight >= display.scrollHeight - 10){
-      velocidade(0);
-    }
-  }, delay);
-}
-
-// TELA CHEIA REAL
-function entraFull(){
-  let card=document.getElementById('cifraCard');
-  card.classList.add('fullscreen');
-  if(card.requestFullscreen){ card.requestFullscreen().catch(()=>{}); }
-  document.body.style.overflow='hidden';
-}
-function saiFull(){
-  let card=document.getElementById('cifraCard');
-  card.classList.remove('fullscreen');
-  if(document.fullscreenElement){ document.exitFullscreen().catch(()=>{}); }
-  document.body.style.overflow='';
-  velocidade(0);
-}
-document.addEventListener('fullscreenchange',()=>{
-  if(!document.fullscreenElement){
-    document.getElementById('cifraCard').classList.remove('fullscreen');
-    document.body.style.overflow='';
-  }
-});
-
-function editar(){
-  let novo = prompt('Edite a cifra:', original);
-  if(novo!==null){ original = novo; desenha(); localStorage.setItem('cifra_atual', original); }
-}
-function novaCifra(){
-  let nome = prompt('Nome da música:');
-  if(!nome) return;
-  let cifra = prompt('Cole a cifra:');
-  if(!cifra) return;
-  original = cifra;
-  desenha();
-  alert('✅ Nova cifra "'+nome+'" carregada!');
-}
-
+let offset=0, cifraSize=9, letraSize=11, simples=false, esconder=false, timer=null;
+let original=document.getElementById('cifraOriginal').value;
+let display=document.getElementById('cifraDisplay');
+function openMenu(){document.getElementById('menu').classList.add('open')}function closeMenu(){document.getElementById('menu').classList.remove('open')}
+function applySize(){document.documentElement.style.setProperty('--c',cifraSize+'px');document.documentElement.style.setProperty('--l',letraSize+'px');document.getElementById('zoomLabel').innerText=`Cifra ${cifraSize}px / Letra ${letraSize}px`}applySize();
+function mudaSize(d){cifraSize+=d;letraSize+=d;if(cifraSize<7)cifraSize=7;if(letraSize<9)letraSize=9;if(cifraSize>20)cifraSize=20;if(letraSize>22)letraSize=22;applySize()}
+function transposeChord(ac,steps){return ac.replace(/([A-G][#b]?)/g,m=>{const map={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=map[m]||m;let i=tomLista.indexOf(b);if(i==-1)return m;return tomLista[(i+steps+120)%12]})}
+function mudaTom(d){offset+=d;let idx=(2+offset+120)%12;let t=tomLista[idx];document.getElementById('tomLabel').innerText=t;document.getElementById('tomFull').innerText=t;document.getElementById('tomInfo').innerText=(offset>0?'+'+offset:offset)+' semitons';desenha()}
+function simplify(ch){let m=ch.match(/^([A-G][#b]?)/);if(!m)return ch;let slash=ch.match(/\/([A-G][#b]?)/);if(slash)return m[1]+'/'+slash[1];return m[1]}
+function toggleSimples(){simples=!simples;let b=document.getElementById('btnSimples');b.style.background=simples?'#1E5AA7':'#fff';b.style.color=simples?'#fff':'#1E5AA7';b.innerText=simples?'🎵 Completa':'🎵 Simples';desenha()}
+function toggleEsconder(){esconder=!esconder;let b=document.getElementById('btnEsconder');b.style.background=esconder?'#111':'#fff';b.style.color=esconder?'#fff':'#1E5AA7';b.innerText=esconder?'👁️ Mostrar Cifra':'👁️ Esconder Cifra';desenha()}
+function desenha(){let linhas=original.split('\n');let html='';for(let i=0;i<linhas.length;i++){let line=linhas[i];if(!line.trim()){html+='<div style="height:6px"></div>';continue}if(line.trim().startsWith('[')){html+=`<div class="sectionLine">${line.trim()}</div>`;continue}if(line.trim().startsWith('Tom:'))continue;let next=linhas[i+1]||'';let isChord=/[A-G]/.test(line)&&line.trim().length<90;let nextIsLyric=next&&/[a-z]{2,}/i.test(next);if(isChord&&nextIsLyric){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');if(esconder){html+=`<div class="lineGroup"><div class="lyricLine">${next}</div></div>`}else{html+=`<div class="lineGroup"><div class="chordLine">${ch}</div><div class="lyricLine">${next}</div></div>`}i++}else if(isChord){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');if(!esconder)html+=`<div class="lineGroup"><div class="chordLine">${ch}</div></div>`}else{html+=`<div class="lineGroup"><div class="lyricLine">${line}</div></div>`}}display.innerHTML=html}
+function rolar(q){display.scrollBy({top:q,behavior:'smooth'})}
+function velocidade(v){document.querySelectorAll('.speedBtn').forEach(b=>b.classList.remove('on'));document.getElementById('sp'+v).classList.add('on');if(timer){clearInterval(timer);timer=null}if(v==0)return;let d=v==1?180:v==2?80:35;timer=setInterval(()=>{display.scrollTop+=1;if(display.scrollTop+display.clientHeight>=display.scrollHeight-10)velocidade(0)},d)}
+function entraFull(){let c=document.getElementById('cifraCard');c.classList.add('fullscreen');if(c.requestFullscreen)c.requestFullscreen().catch(()=>{});document.body.style.overflow='hidden'}
+function saiFull(){let c=document.getElementById('cifraCard');c.classList.remove('fullscreen');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});document.body.style.overflow='';velocidade(0)}
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.getElementById('cifraCard').classList.remove('fullscreen');document.body.style.overflow=''}})
+function novaCifra(){let n=prompt('Nome da música:');if(!n)return;let cf=prompt('Cole a cifra:');if(!cf)return;original=cf;desenha()}
 desenha();
 </script>
 </body>
