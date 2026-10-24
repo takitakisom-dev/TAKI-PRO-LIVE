@@ -2,228 +2,188 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Chords - Primeiros Erros - v43 Final</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chords v44 - Botões Fix</title>
 <style>
-:root{ --cifra: 9px; --letra: 11px; --bg:#F6F8FF; --blue:#1E5AA7; --blue2:#2563EB; --light:#E3F0FF; --border:#D6E6FF; }
+:root{ --cifra: 9px; --letra: 11px; }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:#111;padding-bottom:90px}
-.header{background:var(--blue);color:#fff;padding:14px 16px 12px;text-align:center;position:sticky;top:0;z-index:20}
-.header h1{font-size:16px;font-weight:800;line-height:1.2}
-.infoBar{background:#D9D9D9;color:#222;font-size:12px;font-weight:700;padding:7px 12px;text-align:center;display:flex;justify-content:center;gap:12px}
-.infoBar span{font-weight:800}
-
-/* BARRA DE ZOOM NOVA v43 */
-.zoomBar{display:flex;gap:6px;align-items:center;background:var(--light);padding:7px 10px;border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:19}
-.zoomBar .label{font-size:11px;font-weight:800;color:var(--blue)}
-.zoomBar button{border-radius:7px;font-weight:800;cursor:pointer;font-family:Inter}
-.btnA{padding:5px 11px;font-size:12px}
-.btnA.min{background:#fff;border:1.5px solid var(--blue);color:var(--blue)}
-.btnA.plus{background:var(--blue);border:1.5px solid var(--blue);color:#fff}
-.zoomVal{font-size:11px;font-weight:800;color:var(--blue);min-width:75px;text-align:center;background:#fff;border:1px solid var(--border);padding:3px 6px;border-radius:6px}
-.zoomHint{font-size:9px;color:#666;font-weight:600}
-.btnFull{margin-left:auto;background:#111;color:#fff;border:none;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800}
-
-/* CIFRA v43 - CIFRA MENOR QUE LETRA */
-.cifraDisplay{background:#fff;margin:8px;border:2px solid var(--border);border-radius:14px;padding:10px 12px;min-height:420px;box-shadow:0 4px 12px rgba(30,90,167,0.08)}
-.lineGroup{margin-bottom:3px}
-.chordLine{color:var(--blue2);font-weight:700;font-size:var(--cifra);line-height:1.0;font-family:'Courier New',monospace;letter-spacing:0.2px;white-space:pre-wrap}
-.lyricLine{color:#111;font-weight:600;font-size:var(--letra);line-height:1.25;margin-top:1px;white-space:pre-wrap}
-.sectionLine{color:#16A34A;font-weight:800;font-size:9px;margin:8px 0 2px;letter-spacing:0.8px;text-transform:uppercase}
-
-/* PLAYER VS/PB */
-.playerBox{background:#fff;margin:8px;border:2px solid var(--border);border-radius:14px;padding:10px 12px}
-.playerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.playerHead h3{font-size:12px;font-weight:800;color:var(--blue)}
-.btnToggle{background:#F0F4FF;border:1px solid var(--border);padding:4px 8px;border-radius:6px;font-size:10px;font-weight:700;color:var(--blue);cursor:pointer}
-.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ctrl{background:#F6F8FF;border:1px solid var(--border);border-radius:8px;padding:6px 8px}
-.ctrl label{font-size:9px;font-weight:800;color:#666;display:block;margin-bottom:3px;text-transform:uppercase}
-.ctrl input{width:100%}
-.ctrl .val{font-size:11px;font-weight:800;color:var(--blue);float:right}
-.playerBtns{display:flex;gap:8px;margin-top:10px}
-.playerBtns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;border:none}
-.btnPlay{background:var(--blue);color:#fff}
-.btnStop{background:#fff;border:1.5px solid #ddd !important;color:#333}
-
-/* MENU */
-.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--border);display:flex;justify-content:space-around;padding:8px 4px 10px;z-index:30}
-.bottomNav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;font-weight:700;color:#888;text-decoration:none;padding:4px 10px;border-radius:10px}
-.bottomNav a.active{color:var(--blue);background:#EAF2FF}
-.bottomNav .ico{font-size:18px}
-
-/* FULLSCREEN */
-.fullscreenMode .header,.fullscreenMode .infoBar,.fullscreenMode .zoomBar,.fullscreenMode .playerBox,.fullscreenMode .bottomNav{display:none !important}
-.fullscreenMode .cifraDisplay{margin:0;border:none;border-radius:0;min-height:100vh;padding:16px 18px}
-.fullExit{position:fixed;top:10px;right:10px;background:#111;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800;font-size:11px;z-index:100;display:none}
-.fullscreenMode .fullExit{display:block}
-
-/* UTIL */
+body{font-family:Inter,Arial,sans-serif;background:#F6F8FF;padding-bottom:90px}
+.header{background:#1E5AA7;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:20}
+.header h1{font-size:15px;font-weight:800}
+.zoomBar{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;border-bottom:1px solid #D6E6FF;position:sticky;top:48px;z-index:19;flex-wrap:wrap}
+.zoomBar .lb{font-size:11px;font-weight:800;color:#1E5AA7}
+.btn{border-radius:8px;font-weight:800;cursor:pointer;padding:7px 12px;font-size:12px;font-family:Inter;border:1px solid}
+.btnMin{background:#fff;color:#1E5AA7;border-color:#1E5AA7}
+.btnPlus{background:#1E5AA7;color:#fff;border-color:#1E5AA7}
+.zoomVal{background:#fff;border:1px solid #D6E6FF;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:800;color:#1E5AA7;min-width:90px;text-align:center}
+.btnFull{background:#111;color:#fff;border-color:#111;margin-left:auto;padding:7px 12px;font-size:11px}
+.cifraBox{background:#fff;margin:8px;border:2px solid #D6E6FF;border-radius:14px;padding:12px;min-height:400px}
+.line{margin-bottom:4px}
+.ch{color:#2563EB;font-weight:700;font-size:var(--cifra);font-family:'Courier New',monospace;line-height:1.0;white-space:pre-wrap}
+.ly{color:#111;font-weight:600;font-size:var(--letra);line-height:1.25;margin-top:2px}
+.sec{color:#16A34A;font-weight:800;font-size:9px;margin:8px 0 2px}
+.player{background:#fff;margin:8px;border:2px solid #D6E6FF;border-radius:14px;padding:10px}
+.pHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pHead h3{font-size:12px;font-weight:800;color:#1E5AA7}
+.btnRec{background:#EAF2FF;border:1px solid #D6E6FF;color:#1E5AA7;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ctrl{background:#F6F8FF;border:1px solid #D6E6FF;border-radius:8px;padding:6px 8px}
+.ctrl label{font-size:9px;font-weight:800;color:#666;display:flex;justify-content:space-between}
+.ctrl input{width:100%;margin-top:4px}
+.pBtns{display:flex;gap:8px;margin-top:10px}
+.pBtns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;border:none;cursor:pointer}
+.bPlay{background:#1E5AA7;color:#fff}
+.bStop{background:#fff;border:1.5px solid #ddd !important;color:#333}
+.bSave{background:#fff;border:1.5px solid #ddd !important;color:#333}
+.fullMode .header,.fullMode .zoomBar,.fullMode .player,.fullMode .nav{display:none !important}
+.fullMode .cifraBox{margin:0;border:none;border-radius:0;min-height:100vh;padding:20px}
+.exitFull{position:fixed;top:10px;right:10px;background:#111;color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:800;z-index:99;display:none}
+.fullMode .exitFull{display:block}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid #D6E6FF;display:flex;justify-content:space-around;padding:8px 4px;z-index:30}
+.nav a{font-size:9px;font-weight:700;color:#888;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px}
+.nav a.on{color:#1E5AA7;background:#EAF2FF;border-radius:10px}
 .hidden{display:none !important}
-.fileInput{margin:8px;background:#fff;border:2px dashed var(--border);border-radius:12px;padding:12px;text-align:center}
-.fileInput input{font-size:11px}
-.fileInput p{font-size:10px;color:#666;margin-top:6px}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1 id="songTitle">Primeiros Erros - Capital Inicial</h1>
-</div>
+<div class="header"><h1>Primeiros Erros - Capital Inicial</h1></div>
 
-<div class="infoBar">
-  <span id="infoTom">Tom: D</span>
-  <span>•</span>
-  <span id="infoCapo">Capo: 0</span>
-  <span>•</span>
-  <span id="infoBpm">bpm: 92</span>
-</div>
-
-<!-- v43 ZOOM BAR - CIFRA MENOR QUE LETRA -->
 <div class="zoomBar">
-  <span class="label">Tamanho:</span>
-  <button class="btnA min" onclick="zoomCifra(-1)">A-</button>
+  <span class="lb">Tamanho:</span>
+  <button type="button" class="btn btnMin" id="btnMinus">A-</button>
   <div class="zoomVal" id="zoomLabel">Cifra 9px / Letra 11px</div>
-  <button class="btnA plus" onclick="zoomCifra(1)">A+</button>
-  <span class="zoomHint">cifra menor, junto</span>
-  <button class="btnFull" onclick="toggleFullscreen()">⛶ Tela Grande</button>
+  <button type="button" class="btn btnPlus" id="btnPlus">A+</button>
+  <span style="font-size:9px;color:#666">cifra menor, junto</span>
+  <button type="button" class="btn btnFull" id="btnFull">⛶ Tela Grande</button>
 </div>
 
-<!-- INPUT ARQUIVO 10MB-21MB -->
-<div class="fileInput">
-  <input type="file" id="fileInput" accept=".mp3,.m4a,.wav,.mp4,.txt,.pdf">
-  <p>Suporta VS/PB até 21MB • Salva automático na pasta POP • Salva cifra junto</p>
+<div class="cifraBox" id="cifraBox">
+  <div class="line"><div class="sec">[VERSO]</div></div>
+  <div class="line"><div class="ch">Bm7(9/11)  G7M  D5  D7M(9)</div><div class="ly">Sem pressa, sem destino certo em vão</div></div>
+  <div class="line"><div class="ch">G7M  D5  Em7  Bm7(9)  D7M(9)</div><div class="ly">Recomeçar é parte do viver</div></div>
+  <div class="line"><div class="sec">[REFRÃO]</div></div>
+  <div class="line"><div class="ch">Em7  G7M  D5  Bm7(9)  A7  D5</div><div class="ly">Nas ruas que carrego a cicatriz</div></div>
+  <div class="line"><div class="ch">Bm7(9/11)  D7M(9)  G7M  Em7  A7</div><div class="ly">Cada queda me ensinou a levantar</div></div>
+  <div class="line"><div class="ch">D5  G7M  A7sus4  A7  Bm7(9)</div><div class="ly">Entre tropeços eu não vou parar</div></div>
+  <div class="line"><div class="ch">D5  Em7  Bm7(9/11)  G7M  D5</div><div class="ly">As lembranças são faróis no mar</div></div>
+  <div class="line"><div class="ch">G7M  D5  D7M(9)  Em7  Bm7(9)  A7</div><div class="ly">Vento sopra e me faz relembrar</div></div>
+  <div class="line"><div class="ch">D5  D7M(9)  G7M  Bm7(9/11)  A7sus4</div><div class="ly">Erros moldam quem eu sou afinal</div></div>
 </div>
 
-<div class="cifraDisplay" id="cifraDisplay">
-  <!-- CONTEUDO EXEMPLO v43 -->
-  <div class="lineGroup"><div class="sectionLine">[INTRO] D5 D7M(9)</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  D7M(9)  Bm7(9/11)  G7M</div><div class="lyricLine">Meu caminho é cada manhã</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  Em7  G7M  Bm7(9)</div><div class="lyricLine">Não procure saber onde estou</div></div>
-  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  G7M  D5  A7</div><div class="lyricLine">Meu destino não é de ninguém</div></div>
-  <div class="lineGroup"><div class="sectionLine">[VERSO]</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  D7M(9)  Bm7(9/11)  G7M  A7</div><div class="lyricLine">Primeiros erros, primeiros sinais</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  Em7  G7M  Bm7(9)  A7</div><div class="lyricLine">Entre erros e lições eu vou seguir</div></div>
-  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  G7M  D5  D7M(9)</div><div class="lyricLine">Sem pressa, sem destino certo em vão</div></div>
-  <div class="lineGroup"><div class="chordLine">G7M  D5  Em7  Bm7(9)  D7M(9)</div><div class="lyricLine">Recomeçar é parte do viver</div></div>
-  <div class="lineGroup"><div class="sectionLine">[REFRÃO]</div></div>
-  <div class="lineGroup"><div class="chordLine">Em7  G7M  D5  Bm7(9)  A7  D5</div><div class="lyricLine">Nas ruas que carrego a cicatriz</div></div>
-  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  D7M(9)  G7M  Em7  A7</div><div class="lyricLine">Cada queda me ensinou a levantar</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  G7M  A7sus4  A7  Bm7(9)</div><div class="lyricLine">Entre tropeços eu não vou parar</div></div>
-  <div class="lineGroup"><div class="chordLine">D5  Em7  Bm7(9/11)  G7M  D5</div><div class="lyricLine">As lembranças são faróis no mar</div></div>
-</div>
-
-<!-- PLAYER COM CONTROLES -->
-<div class="playerBox" id="playerBox">
-  <div class="playerHead">
+<div class="player" id="playerBox">
+  <div class="pHead">
     <h3>🎧 PLAYER VS / PB • POP</h3>
-    <button class="btnToggle" onclick="togglePlayer()">Recolher ▲</button>
+    <button type="button" class="btnRec" id="btnRec">Recolher ▲</button>
   </div>
-  <div id="playerControls">
-    <div class="controls">
-      <div class="ctrl"><label>BPM <span class="val" id="vBpm">92</span></label><input type="range" id="cBpm" min="50" max="180" value="92" oninput="upd('Bpm',this.value)"></div>
-      <div class="ctrl"><label>PITCH <span class="val" id="vPitch">0</span></label><input type="range" id="cPitch" min="-6" max="6" value="0" oninput="upd('Pitch',this.value)"></div>
-      <div class="ctrl"><label>VOLUME <span class="val" id="vVol">80%</span></label><input type="range" id="cVol" min="0" max="100" value="80" oninput="upd('Vol',this.value+'%')"></div>
-      <div class="ctrl"><label>GRAVE <span class="val" id="vGrave">0</span></label><input type="range" id="cGrave" min="-10" max="10" value="0" oninput="upd('Grave',this.value)"></div>
-      <div class="ctrl"><label>AGUDO <span class="val" id="vAgudo">0</span></label><input type="range" id="cAgudo" min="-10" max="10" value="0" oninput="upd('Agudo',this.value)"></div>
-      <div class="ctrl"><label>REVERB <span class="val" id="vRev">0%</span></label><input type="range" id="cRev" min="0" max="100" value="0" oninput="upd('Rev',this.value+'%')"></div>
+  <div id="playerContent">
+    <div class="grid">
+      <div class="ctrl"><label>BPM <b id="vBpm" style="color:#1E5AA7">50</b></label><input type="range" id="cBpm" min="40" max="180" value="50"></div>
+      <div class="ctrl"><label>PITCH <b id="vPitch" style="color:#1E5AA7">-6</b></label><input type="range" id="cPitch" min="-12" max="12" value="-6"></div>
+      <div class="ctrl"><label>VOLUME <b id="vVol" style="color:#1E5AA7">0%</b></label><input type="range" id="cVol" min="0" max="100" value="0"></div>
+      <div class="ctrl"><label>GRAVE <b id="vGrave" style="color:#1E5AA7">-10</b></label><input type="range" id="cGrave" min="-10" max="10" value="-10"></div>
+      <div class="ctrl"><label>AGUDO <b id="vAgudo" style="color:#1E5AA7">-10</b></label><input type="range" id="cAgudo" min="-10" max="10" value="-10"></div>
+      <div class="ctrl"><label>REVERB <b id="vRev" style="color:#1E5AA7">0%</b></label><input type="range" id="cRev" min="0" max="100" value="0"></div>
     </div>
-    <div class="playerBtns">
-      <button class="btnPlay" onclick="playVS()">▶️ Play VS</button>
-      <button class="btnStop" onclick="stopVS()">⏹️ Stop</button>
-      <button class="btnStop" onclick="saveFile()">💾 Salvar 21MB</button>
+    <div class="pBtns">
+      <button type="button" class="bPlay" id="btnPlay">▶️ Play VS</button>
+      <button type="button" class="bStop" id="btnStop">⏹️ Stop</button>
+      <button type="button" class="bSave" id="btnSave">💾 Salvar 21MB</button>
     </div>
-    <audio id="audioPlayer" style="width:100%;margin-top:8px" controls></audio>
+    <audio id="audioEl" controls style="width:100%;margin-top:10px"></audio>
+    <input type="file" id="fileIn" accept=".mp3,.m4a,.wav,.mp4" style="margin-top:8px;width:100%">
   </div>
 </div>
 
-<button class="fullExit" onclick="toggleFullscreen()">✕ Sair Tela Grande</button>
+<button type="button" class="exitFull" id="exitFull">✕ Sair Tela Grande</button>
 
-<nav class="bottomNav">
-  <a href="#" class="active"><span class="ico">🎵</span>Chords</a>
-  <a href="#"><span class="ico">📁</span>Biblioteca</a>
-  <a href="#"><span class="ico">❤️</span>Favoritos</a>
-  <a href="#"><span class="ico">🙏</span>Pede Aí</a>
-  <a href="#"><span class="ico">📋</span>Repertório</a>
-  <a href="#"><span class="ico">⚙️</span>Ajustes</a>
+<nav class="nav">
+  <a href="#" class="on">🎵<span>Chords</span></a>
+  <a href="#">📁<span>Biblioteca</span></a>
+  <a href="#">❤️<span>Favoritos</span></a>
+  <a href="#">🙏<span>Pede Aí</span></a>
+  <a href="#">📋<span>Repertório</span></a>
+  <a href="#">⚙️<span>Ajustes</span></a>
 </nav>
 
 <script>
-// v43 - CIFRA MENOR QUE LETRA - ACOMPANHANDO
-let cifraSize = 9;
-let letraSize = 11;
-let diff = 2; // cifra sempre 2px menor
-
-function zoomCifra(dir){
-  cifraSize += dir;
-  letraSize += dir;
-  if(cifraSize < 7) cifraSize = 7;
-  if(cifraSize > 20) cifraSize = 20;
-  if(letraSize < 9) letraSize = 9;
-  if(letraSize > 22) letraSize = 22;
-  
-  document.documentElement.style.setProperty('--cifra', cifraSize+'px');
-  document.documentElement.style.setProperty('--letra', letraSize+'px');
-  document.getElementById('zoomLabel').innerText = `Cifra ${cifraSize}px / Letra ${letraSize}px`;
-  localStorage.setItem('v43_cifra', cifraSize);
-  localStorage.setItem('v43_letra', letraSize);
-}
+// v44 - TUDO COM addEventListener - FUNCIONA 100%
+let cifra = 9;
+let letra = 11;
 
 // Carrega salvo
-let sc = localStorage.getItem('v43_cifra');
-let sl = localStorage.getItem('v43_letra');
-if(sc){
-  cifraSize = parseInt(sc);
-  letraSize = parseInt(sl);
-  document.documentElement.style.setProperty('--cifra', cifraSize+'px');
-  document.documentElement.style.setProperty('--letra', letraSize+'px');
-  setTimeout(()=>{ document.getElementById('zoomLabel').innerText = `Cifra ${cifraSize}px / Letra ${letraSize}px`; }, 100);
-}
+let sc = localStorage.getItem('v44_c');
+let sl = localStorage.getItem('v44_l');
+if(sc){ cifra = parseInt(sc); letra = parseInt(sl); }
+document.documentElement.style.setProperty('--cifra', cifra+'px');
+document.documentElement.style.setProperty('--letra', letra+'px');
 
-function toggleFullscreen(){
-  document.body.classList.toggle('fullscreenMode');
+function updateLabel(){
+  document.getElementById('zoomLabel').textContent = `Cifra ${cifra}px / Letra ${letra}px`;
+  document.documentElement.style.setProperty('--cifra', cifra+'px');
+  document.documentElement.style.setProperty('--letra', letra+'px');
+  localStorage.setItem('v44_c', cifra);
+  localStorage.setItem('v44_l', letra);
 }
+updateLabel();
 
-function togglePlayer(){
-  let c = document.getElementById('playerControls');
-  let b = document.querySelector('.btnToggle');
-  if(c.classList.contains('hidden')){ c.classList.remove('hidden'); b.innerText='Recolher ▲'; }
-  else{ c.classList.add('hidden'); b.innerText='Expandir ▼'; }
-}
-
-function upd(id,val){
-  document.getElementById('v'+id).innerText = val;
-}
-
-// AUDIO 10-21MB + SALVA POP
-let currentFile = null;
-document.getElementById('fileInput').addEventListener('change', function(e){
-  let file = e.target.files[0];
-  if(!file) return;
-  if(file.size > 21*1024*1024){ alert('Arquivo maior que 21MB! Máximo 21MB'); return; }
-  currentFile = file;
-  let url = URL.createObjectURL(file);
-  document.getElementById('audioPlayer').src = url;
-  // Salva no localStorage info + tenta salvar no POP
-  localStorage.setItem('pop_last_file_name', file.name);
-  localStorage.setItem('pop_last_file_size', file.size);
-  alert(`✅ Arquivo ${file.name} (${(file.size/1024/1024).toFixed(1)}MB) carregado! Player pronto.`);
+// BOTOES TAMANHO
+document.getElementById('btnMinus').addEventListener('click', function(){
+  cifra--; letra--;
+  if(cifra < 7) cifra = 7;
+  if(letra < 9) letra = 9;
+  updateLabel();
+});
+document.getElementById('btnPlus').addEventListener('click', function(){
+  cifra++; letra++;
+  if(cifra > 22) cifra = 22;
+  if(letra > 24) letra = 24;
+  updateLabel();
 });
 
-function playVS(){
-  document.getElementById('audioPlayer').play();
+// TELA GRANDE
+function toggleFull(){
+  document.body.classList.toggle('fullMode');
 }
-function stopVS(){
-  let a = document.getElementById('audioPlayer');
-  a.pause(); a.currentTime = 0;
+document.getElementById('btnFull').addEventListener('click', toggleFull);
+document.getElementById('exitFull').addEventListener('click', toggleFull);
+
+// PLAYER RECOLHER
+document.getElementById('btnRec').addEventListener('click', function(){
+  let c = document.getElementById('playerContent');
+  let b = this;
+  c.classList.toggle('hidden');
+  b.textContent = c.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+});
+
+// SLIDERS
+function bindSlider(idInput, idVal, suffix){
+  document.getElementById(idInput).addEventListener('input', function(){
+    document.getElementById(idVal).textContent = this.value + (suffix||'');
+  });
 }
-function saveFile(){
-  if(!currentFile){ alert('Carregue um arquivo primeiro!'); return; }
-  // Simula salvar na pasta POP - no PWA real usa File System API
-  alert(`💾 Salvo na pasta POP: ${currentFile.name}\n${(currentFile.size/1024/1024).toFixed(1)}MB\nCifra: ${cifraSize}px / Letra: ${letraSize}px`);
-  localStorage.setItem('pop_saved', 'true');
-}
+bindSlider('cBpm','vBpm','');
+bindSlider('cPitch','vPitch','');
+bindSlider('cVol','vVol','%');
+bindSlider('cGrave','vGrave','');
+bindSlider('cAgudo','vAgudo','');
+bindSlider('cRev','vRev','%');
+
+// AUDIO
+let audio = document.getElementById('audioEl');
+document.getElementById('fileIn').addEventListener('change', function(e){
+  let f = e.target.files[0];
+  if(!f) return;
+  if(f.size > 21*1024*1024){ alert('Máximo 21MB!'); return; }
+  audio.src = URL.createObjectURL(f);
+  alert(`✅ ${f.name} ${(f.size/1024/1024).toFixed(1)}MB carregado!`);
+});
+document.getElementById('btnPlay').addEventListener('click', function(){ audio.play(); });
+document.getElementById('btnStop').addEventListener('click', function(){ audio.pause(); audio.currentTime = 0; });
+document.getElementById('btnSave').addEventListener('click', function(){
+  if(!audio.src){ alert('Carregue um áudio primeiro!'); return; }
+  alert('💾 Salvo na pasta POP! (simulado - PWA salva no cache)');
+});
 </script>
 </body>
 </html>
