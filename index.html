@@ -2,15 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SHOWTIME v51 FINAL RESTAURADO</title>
+<title>SHOWTIME v52 MENU RESTAURADO</title>
 <style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--c:9px;--l:11px}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:80px}
+:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--border:#D6E6FF;--c:9px;--l:11px}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:75px}
 .top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:0;overflow:hidden;margin:10px}
+.card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:0;overflow:hidden;margin:10px}
 .cifraInfo{background:#F1F5F9;padding:8px 10px;margin:8px;border-radius:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #E2E8F0}
 .zoomRow{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;margin:0 8px 8px 8px;border-radius:8px;border:1px solid var(--border);flex-wrap:wrap}
-.cifraDisplay{margin:0 8px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;height:60vh;-webkit-overflow-scrolling:touch}
+.cifraDisplay{margin:0 8px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;height:62vh;-webkit-overflow-scrolling:touch}
 .chordLine{color:#2563EB;font-weight:800;font-size:var(--c);font-family:'Courier New',monospace;line-height:1.1;white-space:pre-wrap}
 .lyricLine{color:#111;font-weight:600;font-size:var(--l);margin-top:2px;line-height:1.3;white-space:pre-wrap}
 .sectionLine{color:#16A34A;font-weight:800;font-size:10px;margin:8px 0 2px;text-transform:uppercase}
@@ -25,6 +25,7 @@
 .menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
 .menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:#6B8BB0}
+.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}
 .bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:68px;border-top:2px solid var(--border)}
 .bottom button{flex:1;border:none;background:#fff;color:#6B8BB0;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .bottom button.active{background:var(--blue);color:#fff}
@@ -39,25 +40,36 @@
 .card.fullscreen .scrollSide{display:flex!important}
 .scrollSide button{width:46px;height:46px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:20px;font-weight:800}
 .speedBtn.on{background:var(--blue)!important;color:#fff!important}
+.hideComandos .cifraInfo,.hideComandos .zoomRow,.hideComandos .top{display:none!important}
+.hideComandos .card{margin:0;border:none;border-radius:0}
+.hideComandos .cifraDisplay{margin:0;border:none;border-radius:0;height:100vh;padding:20px 16px}
 </style>
 </head>
-<body>
+<body id="body">
 
 <div id="menu"><div id="menuBg" onclick="closeMenu()"></div><div id="menuPanel">
-<div class="menuHead"><div><b>SHOWTIME v51</b><br><small id="artistMenu">André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
+<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v52</b><br><small>André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
+
 <div class="menuSec">🎤 PEDE AÍ COM PASTAS</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small>0 pedidos</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">📁</div><div><b>Repertório por Pastas</b><small id="repCount">Pastas por artista</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small>0 pedidos - AO VIVO</small></div><span class="badge" style="background:#16A34A">AO VIVO</span></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">📁</div><div><b>Repertório por Pastas</b><small>Você, Leãozinho, Caetano, Tim Maia</small></div><span class="badge">NOVO</span></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">📱</div><div><b>QR Code da Mesa</b><small>Com sua foto</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small>Foto, Nome Artístico, PIX</small></div></div>
+
 <div class="menuSec">📚 CIFRAS EM PASTAS</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small>Você, Leãozinho, Caetano</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S. até 50MB</b><small>10MB a 21MB OK</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small>Em pastas por artista</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎬</div><div><b>Cifras com VS</b><small>Por artista</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎹</div><div><b>Cifras com Playback</b><small>Por artista</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S. até 50MB</b><small>10MB a 21MB OK - POP</small></div><span class="badge" style="background:#16A34A">GRANDE</span></div>
+
 <div class="menuSec">🎨 SISTEMA</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">⬆️</div><div><b>Exportar BKP Pastas</b></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">🎨</div><div><b>10 Temas</b><small>Azul Clean</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">⬆️</div><div><b>Exportar BKP Pastas</b><small>JSON completo</small></div></div>
+<div class="menuItem" onclick="closeMenu()"><div class="ico">⬇️</div><div><b>Importar BKP</b></div></div>
 <div style="height:90px"></div>
 </div></div>
 
-<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v51 MENU RESTAURADO</b></div></div>
+<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v52 MENU PERFEITO</b></div></div>
 
 <div class="card" id="cifraCard">
   <div class="fullTop">
@@ -69,7 +81,7 @@
     <button class="btn black small" onclick="saiFull()">✕ Sair</button>
   </div>
 
-  <div style="background:var(--blue);color:#fff;padding:12px 14px;display:flex;justify-content:space-between"><b>Primeiros Erros - Capital Inicial</b><small>v51</small></div>
+  <div style="background:var(--blue);color:#fff;padding:12px 14px;display:flex;justify-content:space-between"><b>Primeiros Erros - Capital Inicial</b><small>v52 FINAL</small></div>
   
   <div class="cifraInfo">
     <div style="display:flex;gap:4px;align-items:center">
@@ -82,7 +94,7 @@
     </div>
     <div style="display:flex;gap:6px;margin-left:auto">
       <button id="btnSimples" class="btn small" onclick="toggleSimples()">🎵 Cifra Simples</button>
-      <button id="btnEsconder" class="btn small" onclick="toggleEsconder()">👁️ Esconder Cifra</button>
+      <button id="btnEscondeComando" class="btn small black" onclick="toggleEscondeComando()">🙈 Esconder Comandos</button>
     </div>
   </div>
 
@@ -98,6 +110,7 @@
 [INTRO] D5 D E/B
       D5   D   E/B
     D9  A11/C#  G/B
+         D9   A11/C#   G/B
 [PRIMEIRA PARTE]
 D5              D7M(9)                  D5
     Meu caminho é cada manhã
@@ -112,6 +125,15 @@ D5
     Se você não entende não vê
                      D7M(9)                       Bm7(11)
     Se não me vê não entende
+                  Bm7(9/11)                    Bm7(11)
+    Não procure saber onde estou
+                    Bm7(9/11)              G7M
+    Se o meu jeito te surpreende
+[SEGUNDA PARTE]
+                     G4+(6)               G7M
+    Se o meu corpo virasse sol
+                      G4+(6)                   Em7(9)
+    Se a minha mente virasse sol
 </textarea>
 
   <div id="cifraDisplay" class="cifraDisplay"></div>
@@ -130,6 +152,7 @@ D5
       <button class="btn blue small" onclick="rolar(-120)">▲ Subir</button>
       <button class="btn blue small" onclick="rolar(120)">▼ Descer</button>
       <button class="btn small" onclick="novaCifra()">+ Nova Cifra</button>
+      <button class="btn small black" onclick="toggleEscondeComando()">🙈 Esconder</button>
     </div>
   </div>
 </div>
@@ -144,7 +167,7 @@ D5
 
 <script>
 let tomLista=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-let offset=0, cifraSize=9, letraSize=11, simples=false, esconder=false, timer=null;
+let offset=0,cifraSize=9,letraSize=11,simples=false,timer=null,comandosEscondidos=false;
 let original=document.getElementById('cifraOriginal').value;
 let display=document.getElementById('cifraDisplay');
 function openMenu(){document.getElementById('menu').classList.add('open')}function closeMenu(){document.getElementById('menu').classList.remove('open')}
@@ -154,8 +177,13 @@ function transposeChord(ac,steps){return ac.replace(/([A-G][#b]?)/g,m=>{const ma
 function mudaTom(d){offset+=d;let idx=(2+offset+120)%12;let t=tomLista[idx];document.getElementById('tomLabel').innerText=t;document.getElementById('tomFull').innerText=t;document.getElementById('tomInfo').innerText=(offset>0?'+'+offset:offset)+' semitons';desenha()}
 function simplify(ch){let m=ch.match(/^([A-G][#b]?)/);if(!m)return ch;let slash=ch.match(/\/([A-G][#b]?)/);if(slash)return m[1]+'/'+slash[1];return m[1]}
 function toggleSimples(){simples=!simples;let b=document.getElementById('btnSimples');b.style.background=simples?'#1E5AA7':'#fff';b.style.color=simples?'#fff':'#1E5AA7';b.innerText=simples?'🎵 Completa':'🎵 Simples';desenha()}
-function toggleEsconder(){esconder=!esconder;let b=document.getElementById('btnEsconder');b.style.background=esconder?'#111':'#fff';b.style.color=esconder?'#fff':'#1E5AA7';b.innerText=esconder?'👁️ Mostrar Cifra':'👁️ Esconder Cifra';desenha()}
-function desenha(){let linhas=original.split('\n');let html='';for(let i=0;i<linhas.length;i++){let line=linhas[i];if(!line.trim()){html+='<div style="height:6px"></div>';continue}if(line.trim().startsWith('[')){html+=`<div class="sectionLine">${line.trim()}</div>`;continue}if(line.trim().startsWith('Tom:'))continue;let next=linhas[i+1]||'';let isChord=/[A-G]/.test(line)&&line.trim().length<90;let nextIsLyric=next&&/[a-z]{2,}/i.test(next);if(isChord&&nextIsLyric){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');if(esconder){html+=`<div class="lineGroup"><div class="lyricLine">${next}</div></div>`}else{html+=`<div class="lineGroup"><div class="chordLine">${ch}</div><div class="lyricLine">${next}</div></div>`}i++}else if(isChord){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');if(!esconder)html+=`<div class="lineGroup"><div class="chordLine">${ch}</div></div>`}else{html+=`<div class="lineGroup"><div class="lyricLine">${line}</div></div>`}}display.innerHTML=html}
+function toggleEscondeComando(){
+  comandosEscondidos=!comandosEscondidos;
+  document.getElementById('body').classList.toggle('hideComandos', comandosEscondidos);
+  document.getElementById('btnEscondeComando').innerText = comandosEscondidos ? '👁️ Mostrar Comandos' : '🙈 Esconder Comandos';
+  if(comandosEscondidos){ velocidade(0); } 
+}
+function desenha(){let linhas=original.split('\n');let html='';for(let i=0;i<linhas.length;i++){let line=linhas[i];if(!line.trim()){html+='<div style="height:6px"></div>';continue}if(line.trim().startsWith('[')){html+=`<div class="sectionLine">${line.trim()}</div>`;continue}if(line.trim().startsWith('Tom:'))continue;let next=linhas[i+1]||'';let isChord=/[A-G]/.test(line)&&line.trim().length<90;let nextIsLyric=next&&/[a-z]{2,}/i.test(next);if(isChord&&nextIsLyric){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');html+=`<div class="lineGroup"><div class="chordLine">${ch}</div><div class="lyricLine">${next}</div></div>`;i++}else if(isChord){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');html+=`<div class="lineGroup"><div class="chordLine">${ch}</div></div>`}else{html+=`<div class="lineGroup"><div class="lyricLine">${line}</div></div>`}}display.innerHTML=html}
 function rolar(q){display.scrollBy({top:q,behavior:'smooth'})}
 function velocidade(v){document.querySelectorAll('.speedBtn').forEach(b=>b.classList.remove('on'));document.getElementById('sp'+v).classList.add('on');if(timer){clearInterval(timer);timer=null}if(v==0)return;let d=v==1?180:v==2?80:35;timer=setInterval(()=>{display.scrollTop+=1;if(display.scrollTop+display.clientHeight>=display.scrollHeight-10)velocidade(0)},d)}
 function entraFull(){let c=document.getElementById('cifraCard');c.classList.add('fullscreen');if(c.requestFullscreen)c.requestFullscreen().catch(()=>{});document.body.style.overflow='hidden'}
