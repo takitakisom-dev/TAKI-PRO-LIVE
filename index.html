@@ -1,116 +1,109 @@
-<div class="card">
-  <div style="display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:10px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
-    <div>
-      <input id="cifraMusica" value="Será - Legião Urbana" style="background:transparent;border:none;color:#fff;font-weight:800;font-size:15px;width:200px">
-      <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
-        <span style="font-size:12px">Tom:</span>
-        <button class="btn small" style="background:#fff;color:var(--blue);padding:4px 10px" onclick="changeTom(-1)">-1</button>
-        <b id="tomAtual" style="background:#fff;color:var(--blue);padding:4px 12px;border-radius:20px;font-size:13px">D</b>
-        <button class="btn small" style="background:#fff;color:var(--blue);padding:4px 10px" onclick="changeTom(1)">+1</button>
-        <button class="btn small" style="background:#E3F0FF;color:var(--blue);padding:4px 10px" onclick="toggleSimplificada()" id="btnSimp">Simplificar</button>
+<div class="card" style="border:2px solid #1E5AA7">
+  <!-- CABEÇALHO AZUL COM TOM VISÍVEL -->
+  <div style="display:flex;justify-content:space-between;align-items:center;background:#1E5AA7;color:#fff;padding:12px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
+    <div style="flex:1">
+      <input id="cifraMusica" value="Será - Legião Urbana" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:#fff;font-weight:800;font-size:15px;width:100%;padding:6px 10px;border-radius:6px">
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <span style="font-size:12px;font-weight:700">Tom:</span>
+        <button onclick="changeTom(-1)" style="background:#fff;color:#1E5AA7;border:none;padding:8px 14px;border-radius:8px;font-weight:800;font-size:16px;cursor:pointer">-1</button>
+        <b id="tomAtual" style="background:#FFC107;color:#000;padding:8px 16px;border-radius:20px;font-size:16px;min-width:50px;text-align:center">D</b>
+        <button onclick="changeTom(1)" style="background:#fff;color:#1E5AA7;border:none;padding:8px 14px;border-radius:8px;font-weight:800;font-size:16px;cursor:pointer">+1</button>
+        <button onclick="toggleSimplificada()" id="btnSimp" style="background:#E3F0FF;color:#1E5AA7;border:2px solid #1E5AA7;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer">Simplificar</button>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <button class="btn small" style="background:#fff;color:var(--blue)" onclick="openMenu()">☰</button>
-      <button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="toggleScroll()" id="btnScroll">▶ Rolagem</button>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-left:10px">
+      <button class="btn small" style="background:#fff;color:#1E5AA7" onclick="openMenu()">☰</button>
     </div>
   </div>
 
-  <!-- Controles de rolagem -->
-  <div style="display:flex;gap:8px;align-items:center;background:var(--light);padding:8px 12px;border-radius:10px;margin-bottom:10px">
-    <span style="font-size:11px;font-weight:800;color:var(--blue)">Rolagem:</span>
-    <input type="range" id="velScroll" min="0" max="10" value="0" oninput="setVelScroll(this.value)" style="flex:1;accent-color:var(--blue)">
-    <b id="velLabel" style="font-size:11px;color:var(--blue)">0 - Parado</b>
-    <button class="btn small" style="background:var(--blue);color:#fff" onclick="toggleScroll()" id="btnPlayScroll">▶</button>
+  <!-- ROLAGEM VISÍVEL -->
+  <div style="display:flex;gap:10px;align-items:center;background:#E3F0FF;padding:10px 12px;border-radius:10px;margin-bottom:10px;border:1px solid #D6E6FF">
+    <span style="font-size:12px;font-weight:800;color:#1E5AA7">Rolagem:</span>
+    <input type="range" id="velScroll" min="0" max="10" value="0" oninput="setVelScroll(this.value)" style="flex:1;accent-color:#1E5AA7;height:20px">
+    <b id="velLabel" style="font-size:11px;color:#1E5AA7;min-width:70px">0 - Parado</b>
+    <button onclick="toggleScroll()" id="btnPlayScroll" style="background:#1E5AA7;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800">▶</button>
   </div>
 
-  <!-- Área de edição da cifra -->
-  <textarea id="cifraTexto" style="width:100%;height:260px;border:1px solid var(--border);border-radius:10px;padding:12px;font-family:monospace;font-weight:600;font-size:14px;white-space:pre;overflow-y:auto" 
-oninput="saveCifraAuto()">[Intro] D  A/C#  Bm  G
+  <!-- TEXTO DA CIFRA EDITÁVEL -->
+  <textarea id="cifraTexto" style="width:100%;height:300px;border:2px solid #D6E6FF;border-radius:10px;padding:14px;font-family:'Courier New',monospace;font-weight:700;font-size:15px;line-height:1.6;background:#fff;color:#000;white-space:pre;overflow-y:auto" oninput="saveCifraAuto()">[Intro] D  A/C#  Bm  G
 D               A/C#
 Será que eu sou o único...
 Bm              G
 Que não tem nada pra fazer...
-  </textarea>
 
-  <div style="display:flex;gap:8px;margin-top:10px">
-    <button class="btn blue" onclick="shareApp()">📤 Compartilhar Cifra</button>
-    <button class="btn" onclick="openRep()">💾 Salvar na pasta</button>
-    <button class="btn green" onclick="adicionarNovaCifra()">+ Nova Cifra</button>
+[D  A/C#  Bm  G]
+</textarea>
+
+  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+    <button style="flex:1;background:#1E5AA7;color:#fff;border:none;padding:12px;border-radius:22px;font-weight:800" onclick="shareApp()">📤 Compartilhar Cifra</button>
+    <button style="flex:1;background:#fff;color:#1E5AA7;border:2px solid #1E5AA7;padding:12px;border-radius:22px;font-weight:800" onclick="openRep()">💾 Salvar na pasta</button>
+    <button style="background:#16A34A;color:#fff;border:none;padding:12px 16px;border-radius:22px;font-weight:800" onclick="adicionarNovaCifra()">+ Nova Cifra</button>
   </div>
 </div>
 
 <script>
 let tomList = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-let tomIndex = 2; // D
+let tomIndex = 2;
 let scrollInterval = null;
-let simplificada = false;
 
 function changeTom(dir){
   tomIndex = (tomIndex + dir + 12) % 12;
   document.getElementById('tomAtual').innerText = tomList[tomIndex];
-  // Aqui faz a transposição da cifra no textarea (simplificado)
-  alert('Tom mudado para: '+tomList[tomIndex]+' - Na v36 final transpoe automatico a cifra toda!');
   saveCifraAuto();
 }
 
 function toggleSimplificada(){
-  simplificada = !simplificada;
-  document.getElementById('btnSimp').innerText = simplificada ? 'Original' : 'Simplificar';
-  document.getElementById('btnSimp').style.background = simplificada ? '#16A34A' : '#E3F0FF';
-  document.getElementById('btnSimp').style.color = simplificada ? '#fff' : 'var(--blue)';
-  // Aqui remove 7, 9, 13, etc
-  if(simplificada){
-    alert('Modo simplificado: D7M(9) vira D - Vou implementar na v36 final!');
+  let btn = document.getElementById('btnSimp');
+  if(btn.innerText === 'Simplificar'){
+    btn.innerText = 'Original';
+    btn.style.background = '#16A34A';
+    btn.style.color = '#fff';
+  } else {
+    btn.innerText = 'Simplificar';
+    btn.style.background = '#E3F0FF';
+    btn.style.color = '#1E5AA7';
   }
 }
 
 function setVelScroll(v){
-  document.getElementById('velLabel').innerText = v==0 ? '0 - Parado' : v+' - Velocidade';
+  document.getElementById('velLabel').innerText = v==0 ? '0 - Parado' : v+' - Vel.';
   if(scrollInterval){ clearInterval(scrollInterval); scrollInterval=null; }
-  if(v>0){ startScroll(v); }
+  if(v>0) startScroll(v);
 }
 
 function toggleScroll(){
-  let vel = document.getElementById('velScroll').value;
+  let vel = document.getElementById('velScroll');
   if(scrollInterval){
     clearInterval(scrollInterval); scrollInterval=null;
-    document.getElementById('btnScroll').innerText='▶ Rolagem';
     document.getElementById('btnPlayScroll').innerText='▶';
-    document.getElementById('velScroll').value=0;
     document.getElementById('velLabel').innerText='0 - Parado';
+    vel.value=0;
   } else {
-    if(vel==0) document.getElementById('velScroll').value=3;
-    startScroll(document.getElementById('velScroll').value);
-    document.getElementById('btnScroll').innerText='⏸ Parar';
+    if(vel.value==0) vel.value=3;
+    startScroll(vel.value);
     document.getElementById('btnPlayScroll').innerText='⏸';
+    document.getElementById('velLabel').innerText=vel.value+' - Rolando';
   }
 }
 
 function startScroll(vel){
   let ta = document.getElementById('cifraTexto');
   if(scrollInterval) clearInterval(scrollInterval);
-  let speed = 11 - vel; // 10 = lento, 1 = rapido
+  let speed = 11 - vel;
   scrollInterval = setInterval(()=>{
     ta.scrollTop += 1;
     if(ta.scrollTop + ta.clientHeight >= ta.scrollHeight){
       clearInterval(scrollInterval); scrollInterval=null;
-      document.getElementById('btnScroll').innerText='▶ Rolagem';
       document.getElementById('btnPlayScroll').innerText='▶';
     }
-  }, speed*50);
+  }, speed*60);
 }
 
-function saveCifraAuto(){
-  localStorage.setItem('cifra_atual', document.getElementById('cifraTexto').value);
-}
-
+function saveCifraAuto(){ localStorage.setItem('cifra_atual', document.getElementById('cifraTexto').value); }
 function adicionarNovaCifra(){
-  let nome = prompt('Nome da nova cifra? Ex: Garota de Ipanema - Tom Jobim');
+  let nome = prompt('Nome da nova cifra?');
   if(!nome) return;
   document.getElementById('cifraMusica').value = nome;
-  document.getElementById('cifraTexto').value = '[Intro]\n\n[Verso]\nDigite sua cifra aqui...\n\n[Refrão]\n';
-  tomIndex = 0; document.getElementById('tomAtual').innerText='C';
-  alert('✅ Nova cifra criada! Agora é só colar a cifra e salvar na pasta');
+  document.getElementById('cifraTexto').value = '[Intro]\n\n[Verso]\n\n[Refrão]\n';
 }
 </script>
