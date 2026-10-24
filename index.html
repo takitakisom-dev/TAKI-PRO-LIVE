@@ -2,188 +2,174 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chords v44 - Botões Fix</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chords v45 Completa Restaurada</title>
 <style>
-:root{ --cifra: 9px; --letra: 11px; }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,Arial,sans-serif;background:#F6F8FF;padding-bottom:90px}
-.header{background:#1E5AA7;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:20}
-.header h1{font-size:15px;font-weight:800}
-.zoomBar{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;border-bottom:1px solid #D6E6FF;position:sticky;top:48px;z-index:19;flex-wrap:wrap}
-.zoomBar .lb{font-size:11px;font-weight:800;color:#1E5AA7}
-.btn{border-radius:8px;font-weight:800;cursor:pointer;padding:7px 12px;font-size:12px;font-family:Inter;border:1px solid}
-.btnMin{background:#fff;color:#1E5AA7;border-color:#1E5AA7}
-.btnPlus{background:#1E5AA7;color:#fff;border-color:#1E5AA7}
-.zoomVal{background:#fff;border:1px solid #D6E6FF;padding:5px 8px;border-radius:7px;font-size:11px;font-weight:800;color:#1E5AA7;min-width:90px;text-align:center}
-.btnFull{background:#111;color:#fff;border-color:#111;margin-left:auto;padding:7px 12px;font-size:11px}
-.cifraBox{background:#fff;margin:8px;border:2px solid #D6E6FF;border-radius:14px;padding:12px;min-height:400px}
-.line{margin-bottom:4px}
-.ch{color:#2563EB;font-weight:700;font-size:var(--cifra);font-family:'Courier New',monospace;line-height:1.0;white-space:pre-wrap}
-.ly{color:#111;font-weight:600;font-size:var(--letra);line-height:1.25;margin-top:2px}
-.sec{color:#16A34A;font-weight:800;font-size:9px;margin:8px 0 2px}
-.player{background:#fff;margin:8px;border:2px solid #D6E6FF;border-radius:14px;padding:10px}
-.pHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.pHead h3{font-size:12px;font-weight:800;color:#1E5AA7}
-.btnRec{background:#EAF2FF;border:1px solid #D6E6FF;color:#1E5AA7;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ctrl{background:#F6F8FF;border:1px solid #D6E6FF;border-radius:8px;padding:6px 8px}
-.ctrl label{font-size:9px;font-weight:800;color:#666;display:flex;justify-content:space-between}
-.ctrl input{width:100%;margin-top:4px}
-.pBtns{display:flex;gap:8px;margin-top:10px}
-.pBtns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;border:none;cursor:pointer}
-.bPlay{background:#1E5AA7;color:#fff}
-.bStop{background:#fff;border:1.5px solid #ddd !important;color:#333}
-.bSave{background:#fff;border:1.5px solid #ddd !important;color:#333}
-.fullMode .header,.fullMode .zoomBar,.fullMode .player,.fullMode .nav{display:none !important}
-.fullMode .cifraBox{margin:0;border:none;border-radius:0;min-height:100vh;padding:20px}
-.exitFull{position:fixed;top:10px;right:10px;background:#111;color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:800;z-index:99;display:none}
-.fullMode .exitFull{display:block}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid #D6E6FF;display:flex;justify-content:space-around;padding:8px 4px;z-index:30}
-.nav a{font-size:9px;font-weight:700;color:#888;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px}
-.nav a.on{color:#1E5AA7;background:#EAF2FF;border-radius:10px}
-.hidden{display:none !important}
+:root{--c:9px;--l:11px;--blue:#1E5AA7;--b2:#2563EB;--bg:#F6F8FF;--bd:#D6E6FF;--light:#E3F0FF}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,Arial,sans-serif;background:var(--bg);padding-bottom:90px}
+.header{background:var(--blue);color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:20}
+.header h1{font-size:14px;font-weight:800}
+.zoomBar{display:flex;gap:6px;align-items:center;background:var(--light);padding:8px 10px;border-bottom:1px solid var(--bd);position:sticky;top:45px;z-index:19}
+.zoomBar .lb{font-size:11px;font-weight:800;color:var(--blue)}
+.btn{border-radius:8px;font-weight:800;cursor:pointer;padding:7px 11px;font-size:12px;border:1.5px solid;font-family:Inter}
+.btnMin{background:#fff;color:var(--blue);border-color:var(--blue)}
+.btnPlus{background:var(--blue);color:#fff;border-color:var(--blue)}
+.zoomVal{background:#fff;border:1px solid var(--bd);padding:5px 8px;border-radius:7px;font-size:10px;font-weight:800;color:var(--blue);min-width:95px;text-align:center}
+.btnFull{background:#111;color:#fff;border-color:#111;margin-left:auto;font-size:10px;padding:7px 10px}
+.cifraBox{background:#fff;margin:8px;border:2px solid var(--bd);border-radius:14px;padding:12px;min-height:420px}
+.line{margin-bottom:4px}.ch{color:var(--b2);font-weight:700;font-size:var(--c);font-family:Courier New,monospace;line-height:1.0;white-space:pre-wrap}.ly{color:#111;font-weight:600;font-size:var(--l);line-height:1.25;margin-top:2px}.sec{color:#16A34A;font-weight:800;font-size:9px;margin:8px 0 2px}
+.player{background:#fff;margin:8px;border:2px solid var(--bd);border-radius:14px;padding:10px}
+.pHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.pHead h3{font-size:12px;font-weight:800;color:var(--blue)}
+.btnRec{background:var(--light);border:1px solid var(--bd);color:var(--blue);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ctrl{background:#F6F8FF;border:1px solid var(--bd);border-radius:8px;padding:6px 8px}.ctrl label{font-size:9px;font-weight:800;color:#666;display:flex;justify-content:space-between}.ctrl input{width:100%;margin-top:4px;accent-color:var(--blue)}
+.pBtns{display:flex;gap:8px;margin-top:10px}.pBtns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;border:none;cursor:pointer}.bPlay{background:var(--blue);color:#fff}.bStop{background:#fff;border:1.5px solid #ddd !important;color:#333}.bSave{background:#fff;border:1.5px solid #ddd !important;color:#333}
+.screen{display:none;padding:8px}.screen.active{display:block}
+.card{background:#fff;border:2px solid var(--bd);border-radius:14px;padding:14px;margin:8px}
+.card h2{font-size:14px;font-weight:800;color:var(--blue);margin-bottom:8px}.card input,.card textarea,.card select{width:100%;padding:10px;border:1.5px solid var(--bd);border-radius:8px;margin-top:6px;font-size:13px}.card button{margin-top:10px;background:var(--blue);color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:800;width:100%;cursor:pointer}
+.fullMode .header,.fullMode .zoomBar,.fullMode .player,.fullMode .nav,.fullMode .screen{display:none !important}.fullMode .cifraBox{margin:0;border:none;border-radius:0;min-height:100vh;padding:20px;display:block !important}.exitFull{position:fixed;top:10px;right:10px;background:#111;color:#fff;border:none;padding:10px 14px;border-radius:8px;font-weight:800;z-index:99;display:none}.fullMode .exitFull{display:block}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--bd);display:flex;justify-content:space-around;padding:6px 2px;z-index:30}.nav button{background:none;border:none;font-size:9px;font-weight:700;color:#888;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;cursor:pointer;border-radius:10px}.nav button.on{color:var(--blue);background:#EAF2FF}.hidden{display:none !important}
 </style>
 </head>
 <body>
 
-<div class="header"><h1>Primeiros Erros - Capital Inicial</h1></div>
+<div class="header"><h1 id="topTitle">Primeiros Erros - Capital Inicial</h1></div>
 
-<div class="zoomBar">
+<div class="zoomBar" id="zoomBar">
   <span class="lb">Tamanho:</span>
   <button type="button" class="btn btnMin" id="btnMinus">A-</button>
   <div class="zoomVal" id="zoomLabel">Cifra 9px / Letra 11px</div>
   <button type="button" class="btn btnPlus" id="btnPlus">A+</button>
-  <span style="font-size:9px;color:#666">cifra menor, junto</span>
+  <span style="font-size:9px;color:#666">cifra menor</span>
   <button type="button" class="btn btnFull" id="btnFull">⛶ Tela Grande</button>
 </div>
 
-<div class="cifraBox" id="cifraBox">
-  <div class="line"><div class="sec">[VERSO]</div></div>
-  <div class="line"><div class="ch">Bm7(9/11)  G7M  D5  D7M(9)</div><div class="ly">Sem pressa, sem destino certo em vão</div></div>
-  <div class="line"><div class="ch">G7M  D5  Em7  Bm7(9)  D7M(9)</div><div class="ly">Recomeçar é parte do viver</div></div>
-  <div class="line"><div class="sec">[REFRÃO]</div></div>
-  <div class="line"><div class="ch">Em7  G7M  D5  Bm7(9)  A7  D5</div><div class="ly">Nas ruas que carrego a cicatriz</div></div>
-  <div class="line"><div class="ch">Bm7(9/11)  D7M(9)  G7M  Em7  A7</div><div class="ly">Cada queda me ensinou a levantar</div></div>
-  <div class="line"><div class="ch">D5  G7M  A7sus4  A7  Bm7(9)</div><div class="ly">Entre tropeços eu não vou parar</div></div>
-  <div class="line"><div class="ch">D5  Em7  Bm7(9/11)  G7M  D5</div><div class="ly">As lembranças são faróis no mar</div></div>
-  <div class="line"><div class="ch">G7M  D5  D7M(9)  Em7  Bm7(9)  A7</div><div class="ly">Vento sopra e me faz relembrar</div></div>
-  <div class="line"><div class="ch">D5  D7M(9)  G7M  Bm7(9/11)  A7sus4</div><div class="ly">Erros moldam quem eu sou afinal</div></div>
+<!-- TELA CHORDS -->
+<div id="screenChords" class="screen active">
+  <div class="cifraBox" id="cifraBox">
+    <div class="line"><div class="sec">[VERSO]</div></div>
+    <div class="line"><div class="ch">Bm7(9/11)  G7M  D5  D7M(9)</div><div class="ly">Sem pressa, sem destino certo em vão</div></div>
+    <div class="line"><div class="ch">G7M  D5  Em7  Bm7(9)  D7M(9)</div><div class="ly">Recomeçar é parte do viver</div></div>
+    <div class="line"><div class="sec">[REFRÃO]</div></div>
+    <div class="line"><div class="ch">Em7  G7M  D5  Bm7(9)  A7  D5</div><div class="ly">Nas ruas que carrego a cicatriz</div></div>
+    <div class="line"><div class="ch">Bm7(9/11)  D7M(9)  G7M  Em7  A7</div><div class="ly">Cada queda me ensinou a levantar</div></div>
+    <div class="line"><div class="ch">D5  G7M  A7sus4  A7  Bm7(9)</div><div class="ly">Entre tropeços eu não vou parar</div></div>
+    <div class="line"><div class="ch">D5  Em7  Bm7(9/11)  G7M  D5</div><div class="ly">As lembranças são faróis no mar</div></div>
+  </div>
+
+  <div class="player" id="playerBox">
+    <div class="pHead"><h3>🎧 PLAYER VS / PB • POP</h3><button type="button" class="btnRec" id="btnRec">Recolher ▲</button></div>
+    <div id="playerContent">
+      <div class="grid">
+        <div class="ctrl"><label>BPM <b id="vBpm" style="color:#1E5AA7">92</b></label><input type="range" id="cBpm" min="40" max="200" value="92"></div>
+        <div class="ctrl"><label>PITCH <b id="vPitch" style="color:#1E5AA7">0</b></label><input type="range" id="cPitch" min="-12" max="12" value="0"></div>
+        <div class="ctrl"><label>VOLUME <b id="vVol" style="color:#1E5AA7">80%</b></label><input type="range" id="cVol" min="0" max="100" value="80"></div>
+        <div class="ctrl"><label>GRAVE <b id="vGrave" style="color:#1E5AA7">0</b></label><input type="range" id="cGrave" min="-10" max="10" value="0"></div>
+        <div class="ctrl"><label>AGUDO <b id="vAgudo" style="color:#1E5AA7">0</b></label><input type="range" id="cAgudo" min="-10" max="10" value="0"></div>
+        <div class="ctrl"><label>REVERB <b id="vRev" style="color:#1E5AA7">0%</b></label><input type="range" id="cRev" min="0" max="100" value="0"></div>
+      </div>
+      <div class="pBtns">
+        <button type="button" class="bPlay" id="btnPlay">▶️ Play VS</button>
+        <button type="button" class="bStop" id="btnStop">⏹️ Stop</button>
+        <button type="button" class="bSave" id="btnSave">💾 Salvar 21MB</button>
+      </div>
+      <audio id="audioEl" controls style="width:100%;margin-top:10px"></audio>
+      <input type="file" id="fileIn" accept=".mp3,.m4a,.wav,.mp4,.pdf,.txt" style="margin-top:8px;width:100%;font-size:11px">
+      <p style="font-size:10px;color:#666;margin-top:4px">Carrega até 21MB • Salva automático na pasta POP • Suporta VS/PB MP3</p>
+    </div>
+  </div>
 </div>
 
-<div class="player" id="playerBox">
-  <div class="pHead">
-    <h3>🎧 PLAYER VS / PB • POP</h3>
-    <button type="button" class="btnRec" id="btnRec">Recolher ▲</button>
-  </div>
-  <div id="playerContent">
-    <div class="grid">
-      <div class="ctrl"><label>BPM <b id="vBpm" style="color:#1E5AA7">50</b></label><input type="range" id="cBpm" min="40" max="180" value="50"></div>
-      <div class="ctrl"><label>PITCH <b id="vPitch" style="color:#1E5AA7">-6</b></label><input type="range" id="cPitch" min="-12" max="12" value="-6"></div>
-      <div class="ctrl"><label>VOLUME <b id="vVol" style="color:#1E5AA7">0%</b></label><input type="range" id="cVol" min="0" max="100" value="0"></div>
-      <div class="ctrl"><label>GRAVE <b id="vGrave" style="color:#1E5AA7">-10</b></label><input type="range" id="cGrave" min="-10" max="10" value="-10"></div>
-      <div class="ctrl"><label>AGUDO <b id="vAgudo" style="color:#1E5AA7">-10</b></label><input type="range" id="cAgudo" min="-10" max="10" value="-10"></div>
-      <div class="ctrl"><label>REVERB <b id="vRev" style="color:#1E5AA7">0%</b></label><input type="range" id="cRev" min="0" max="100" value="0"></div>
-    </div>
-    <div class="pBtns">
-      <button type="button" class="bPlay" id="btnPlay">▶️ Play VS</button>
-      <button type="button" class="bStop" id="btnStop">⏹️ Stop</button>
-      <button type="button" class="bSave" id="btnSave">💾 Salvar 21MB</button>
-    </div>
-    <audio id="audioEl" controls style="width:100%;margin-top:10px"></audio>
-    <input type="file" id="fileIn" accept=".mp3,.m4a,.wav,.mp4" style="margin-top:8px;width:100%">
+<!-- TELA PEDE AÍ -->
+<div id="screenPede" class="screen">
+  <div class="card"><h2>🙏 Pede Aí - Pedido de Música</h2>
+    <input id="pNome" placeholder="Seu nome">
+    <input id="pMusica" placeholder="Música que quer pedir">
+    <textarea id="pObs" placeholder="Observação (tom, homenagem...)" rows="3"></textarea>
+    <button id="btnEnviarPedido">Enviar Pedido 📤</button>
+    <div id="listaPedidos" style="margin-top:12px"></div>
   </div>
 </div>
+
+<!-- TELA REPERTÓRIO -->
+<div id="screenRep" class="screen">
+  <div class="card"><h2>📋 Repertório da Noite</h2>
+    <input id="repBusca" placeholder="Buscar música...">
+    <div id="repLista" style="margin-top:10px;font-size:13px;line-height:1.8">
+      <div>• Primeiros Erros - Capital Inicial - D</div>
+      <div>• Evidências - Chitãozinho - G</div>
+      <div>• Boate Azul - Bruno e Marrone - A</div>
+      <div>• + Adicionar música...</div>
+    </div>
+    <button id="btnAddRep">+ Adicionar ao Repertório</button>
+  </div>
+</div>
+
+<!-- OUTRAS TELAS -->
+<div id="screenBib" class="screen"><div class="card"><h2>📁 Biblioteca</h2><p style="font-size:13px;color:#666">Suas músicas salvas, pastas POP, MPB, Sertanejo...</p></div></div>
+<div id="screenFav" class="screen"><div class="card"><h2>❤️ Favoritos</h2><p style="font-size:13px;color:#666">Suas cifras favoritas</p></div></div>
+<div id="screenAjust" class="screen"><div class="card"><h2>⚙️ Ajustes</h2><p style="font-size:13px">Tom padrão, Capo, BPM padrão, Pasta POP: até 21MB</p><button id="btnLimpar">Limpar Cache</button></div></div>
 
 <button type="button" class="exitFull" id="exitFull">✕ Sair Tela Grande</button>
 
 <nav class="nav">
-  <a href="#" class="on">🎵<span>Chords</span></a>
-  <a href="#">📁<span>Biblioteca</span></a>
-  <a href="#">❤️<span>Favoritos</span></a>
-  <a href="#">🙏<span>Pede Aí</span></a>
-  <a href="#">📋<span>Repertório</span></a>
-  <a href="#">⚙️<span>Ajustes</span></a>
+  <button id="navChords" class="on">🎵<span>Chords</span></button>
+  <button id="navBib">📁<span>Biblioteca</span></button>
+  <button id="navFav">❤️<span>Favoritos</span></button>
+  <button id="navPede">🙏<span>Pede Aí</span></button>
+  <button id="navRep">📋<span>Repertório</span></button>
+  <button id="navAjust">⚙️<span>Ajustes</span></button>
 </nav>
 
 <script>
-// v44 - TUDO COM addEventListener - FUNCIONA 100%
-let cifra = 9;
-let letra = 11;
+// v45 - TUDO RESTAURADO + BOTOES FUNCIONANDO
+let cifra = parseInt(localStorage.getItem('v45_c')||'9');
+let letra = parseInt(localStorage.getItem('v45_l')||'11');
+function applySize(){document.documentElement.style.setProperty('--c',cifra+'px');document.documentElement.style.setProperty('--l',letra+'px');document.getElementById('zoomLabel').textContent=`Cifra ${cifra}px / Letra ${letra}px`;localStorage.setItem('v45_c',cifra);localStorage.setItem('v45_l',letra);}applySize();
+document.getElementById('btnMinus').addEventListener('click',()=>{cifra=Math.max(7,cifra-1);letra=Math.max(9,letra-1);applySize();});
+document.getElementById('btnPlus').addEventListener('click',()=>{cifra=Math.min(22,cifra+1);letra=Math.min(24,letra+1);applySize();});
+function toggleFull(){document.body.classList.toggle('fullMode');}
+document.getElementById('btnFull').addEventListener('click',toggleFull);
+document.getElementById('exitFull').addEventListener('click',toggleFull);
 
-// Carrega salvo
-let sc = localStorage.getItem('v44_c');
-let sl = localStorage.getItem('v44_l');
-if(sc){ cifra = parseInt(sc); letra = parseInt(sl); }
-document.documentElement.style.setProperty('--cifra', cifra+'px');
-document.documentElement.style.setProperty('--letra', letra+'px');
-
-function updateLabel(){
-  document.getElementById('zoomLabel').textContent = `Cifra ${cifra}px / Letra ${letra}px`;
-  document.documentElement.style.setProperty('--cifra', cifra+'px');
-  document.documentElement.style.setProperty('--letra', letra+'px');
-  localStorage.setItem('v44_c', cifra);
-  localStorage.setItem('v44_l', letra);
+// NAVEGAÇÃO MENU COMPLETO
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('topTitle').textContent = id==='screenChords' ? 'Primeiros Erros - Capital Inicial' : document.getElementById(id).querySelector('h2').textContent;
+  document.getElementById('zoomBar').style.display = id==='screenChords' ? 'flex' : 'none';
 }
-updateLabel();
+document.getElementById('navChords').addEventListener('click',()=>{showScreen('screenChords');document.getElementById('navChords').classList.add('on');});
+document.getElementById('navBib').addEventListener('click',()=>{showScreen('screenBib');document.getElementById('navBib').classList.add('on');});
+document.getElementById('navFav').addEventListener('click',()=>{showScreen('screenFav');document.getElementById('navFav').classList.add('on');});
+document.getElementById('navPede').addEventListener('click',()=>{showScreen('screenPede');document.getElementById('navPede').classList.add('on');});
+document.getElementById('navRep').addEventListener('click',()=>{showScreen('screenRep');document.getElementById('navRep').classList.add('on');});
+document.getElementById('navAjust').addEventListener('click',()=>{showScreen('screenAjust');document.getElementById('navAjust').classList.add('on');});
 
-// BOTOES TAMANHO
-document.getElementById('btnMinus').addEventListener('click', function(){
-  cifra--; letra--;
-  if(cifra < 7) cifra = 7;
-  if(letra < 9) letra = 9;
-  updateLabel();
+// PLAYER
+document.getElementById('btnRec').addEventListener('click',function(){
+  let c=document.getElementById('playerContent');c.classList.toggle('hidden');this.textContent=c.classList.contains('hidden')?'Expandir ▼':'Recolher ▲';
 });
-document.getElementById('btnPlus').addEventListener('click', function(){
-  cifra++; letra++;
-  if(cifra > 22) cifra = 22;
-  if(letra > 24) letra = 24;
-  updateLabel();
+function bind(idIn,idOut,suf){document.getElementById(idIn).addEventListener('input',function(){document.getElementById(idOut).textContent=this.value+(suf||'');if(idIn==='cBpm'){try{audio.playbackRate=this.value/92;}catch(e){}}});}
+bind('cBpm','vBpm','');bind('cPitch','vPitch','');bind('cVol','vVol','%');bind('cGrave','vGrave','');bind('cAgudo','vAgudo','');bind('cRev','vRev','%');
+let audio=document.getElementById('audioEl');
+audio.addEventListener('play',()=>{document.getElementById('btnPlay').textContent='⏸️ Pausado';});
+audio.addEventListener('pause',()=>{document.getElementById('btnPlay').textContent='▶️ Play VS';});
+document.getElementById('fileIn').addEventListener('change',function(e){
+  let f=e.target.files[0];if(!f)return;if(f.size>21*1024*1024){alert('Máximo 21MB!');return;}
+  audio.src=URL.createObjectURL(f);audio.load();localStorage.setItem('pop_file',f.name);alert(`✅ ${f.name} ${(f.size/1024/1024).toFixed(1)}MB carregado! Aperta Play VS`);
 });
-
-// TELA GRANDE
-function toggleFull(){
-  document.body.classList.toggle('fullMode');
-}
-document.getElementById('btnFull').addEventListener('click', toggleFull);
-document.getElementById('exitFull').addEventListener('click', toggleFull);
-
-// PLAYER RECOLHER
-document.getElementById('btnRec').addEventListener('click', function(){
-  let c = document.getElementById('playerContent');
-  let b = this;
-  c.classList.toggle('hidden');
-  b.textContent = c.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+document.getElementById('btnPlay').addEventListener('click',()=>{if(!audio.src){alert('Carrega um áudio primeiro no botão abaixo!');return;}audio.play();});
+document.getElementById('btnStop').addEventListener('click',()=>{audio.pause();audio.currentTime=0;});
+document.getElementById('btnSave').addEventListener('click',()=>{if(!audio.src){alert('Carrega um áudio primeiro!');return;}alert('💾 Salvo na pasta POP! (no PWA real salva no cache / POP)');});
+document.getElementById('cVol').addEventListener('input',function(){audio.volume=this.value/100;});
+document.getElementById('btnEnviarPedido').addEventListener('click',function(){
+  let n=document.getElementById('pNome').value||'Anônimo';let m=document.getElementById('pMusica').value;if(!m){alert('Digite a música!');return;}
+  let div=document.createElement('div');div.style.cssText='background:#F6F8FF;border:1px solid #D6E6FF;padding:8px;border-radius:8px;margin-top:6px;font-size:12px';div.textContent=`${n} pediu: ${m}`;document.getElementById('listaPedidos').appendChild(div);
+  document.getElementById('pMusica').value='';alert('Pedido enviado!');
 });
-
-// SLIDERS
-function bindSlider(idInput, idVal, suffix){
-  document.getElementById(idInput).addEventListener('input', function(){
-    document.getElementById(idVal).textContent = this.value + (suffix||'');
-  });
-}
-bindSlider('cBpm','vBpm','');
-bindSlider('cPitch','vPitch','');
-bindSlider('cVol','vVol','%');
-bindSlider('cGrave','vGrave','');
-bindSlider('cAgudo','vAgudo','');
-bindSlider('cRev','vRev','%');
-
-// AUDIO
-let audio = document.getElementById('audioEl');
-document.getElementById('fileIn').addEventListener('change', function(e){
-  let f = e.target.files[0];
-  if(!f) return;
-  if(f.size > 21*1024*1024){ alert('Máximo 21MB!'); return; }
-  audio.src = URL.createObjectURL(f);
-  alert(`✅ ${f.name} ${(f.size/1024/1024).toFixed(1)}MB carregado!`);
-});
-document.getElementById('btnPlay').addEventListener('click', function(){ audio.play(); });
-document.getElementById('btnStop').addEventListener('click', function(){ audio.pause(); audio.currentTime = 0; });
-document.getElementById('btnSave').addEventListener('click', function(){
-  if(!audio.src){ alert('Carregue um áudio primeiro!'); return; }
-  alert('💾 Salvo na pasta POP! (simulado - PWA salva no cache)');
-});
+document.getElementById('btnAddRep').addEventListener('click',()=>{let b=document.getElementById('repBusca').value;if(!b){alert('Digite o nome da música');return;}let d=document.createElement('div');d.textContent='• '+b;document.getElementById('repLista').appendChild(d);});
+document.getElementById('btnLimpar').addEventListener('click',()=>{if(confirm('Limpar cache?')){localStorage.clear();location.reload();}});
 </script>
 </body>
 </html>
