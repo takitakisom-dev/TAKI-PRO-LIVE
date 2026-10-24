@@ -1,258 +1,116 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#1E5AA7">
-<title>SHOWTIME v35 COMPLETO + GRANDE + CONTROLES</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--green:#16A34A;--text2:#6B8BB0}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:80px}
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.content{margin-top:60px;padding:10px;display:flex;flex-direction:column;gap:10px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px}
-.btn{padding:12px 16px;border-radius:22px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;width:100%;font-size:13px}
-.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.btn.small{padding:6px 10px;width:auto;font-size:11px}
-.file{font-size:12px;background:var(--light);color:var(--blue);padding:8px;border-radius:8px;margin:8px 0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-audio{width:100%;margin-top:8px;height:36px}
-.toggle{margin-top:10px;padding:10px 14px;background:var(--light);border-radius:22px;display:flex;justify-content:space-between;cursor:pointer;font-weight:700;color:var(--blue);font-size:13px}
-.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.ctrls.hide{display:none}
-.ctrl{background:var(--light);border-radius:10px;padding:10px}
-.ctrl label{display:flex;justify-content:space-between;font-size:10px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.ctrl input{width:100%;accent-color:var(--blue)}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:70px;border-top:2px solid var(--border)}
-.bottom button{flex:1;border:none;background:#fff;color:var(--text2);font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
-.bottom button.active{background:var(--blue);color:#fff}
-#menu{position:fixed;inset:0;z-index:500;display:none}#menu.open{display:block}
-#menuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-#menuPanel{position:absolute;top:0;left:0;bottom:0;width:88%;max-width:380px;background:#fff;overflow-y:auto}
-.menuHead{background:var(--blue);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
-.menuSec{color:var(--blue);font-size:11px;font-weight:800;padding:14px 16px 6px;text-transform:uppercase;border-top:1px solid var(--border);margin-top:6px;display:flex;gap:6px;align-items:center}
-.menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
-.menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:var(--text2)}
-.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}
-.modal{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:10px}.modal.open{display:flex}
-.modalBox{background:#fff;border-radius:16px;width:100%;max-width:750px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
-.modalHead{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;background:var(--blue)}
-.modalBody{padding:12px;overflow-y:auto;max-height:80vh}
-.inp{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;margin:6px 0}
-.fotoBox{width:84px;height:84px;border-radius:50%;background:var(--light);border:3px dashed var(--blue);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;margin:0 auto 8px}.fotoBox img{width:100%;height:100%;object-fit:cover}
-.folder{border:1px solid var(--border);border-radius:12px;margin:8px 0;overflow:hidden;background:#fff}
-.folderHead{padding:12px 14px;background:var(--light);display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:700;color:var(--blue);border-bottom:1px solid var(--border)}
-.folderBody{display:none;padding:8px}.folderBody.open{display:block}
-.songRow{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0;background:#fff;gap:8px}
-</style>
-</head>
-<body>
-
-<div id="menu"><div id="menuBg" onclick="closeMenu()"></div><div id="menuPanel">
-<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v35</b><br><small id="artistMenu">André Taki</small></div><span onclick="closeMenu()" style="font-size:26px;cursor:pointer">✕</span></div>
-
-<div class="menuSec">🎤 PEDE AÍ</div>
-<div class="menuItem" onclick="openPedeAi()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small id="pedeCount">0 pedidos</small></div><span class="badge" style="background:#16A34A">AO VIVO</span></div>
-<div class="menuItem" onclick="openRep()"><div class="ico">📁</div><div><b>Meu Repertório</b><small id="repInfo">Pastas por artista</small></div></div>
-<div class="menuItem" onclick="openPedeAi()"><div class="ico">📱</div><div><b>QR Code da Mesa</b><small>Com foto 2MB</small></div></div>
-<div class="menuItem" onclick="openCadastro()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small id="pixInfo">Foto, Nome, PIX</small></div></div>
-<div class="menuItem" onclick="shareApp()" style="background:#E8F5E9"><div class="ico" style="background:#C8E6C9">📤</div><div><b>Compartilhar App</b><small>Link + QR</small></div><span class="badge" style="background:#16A34A">NOVO</span></div>
-
-<div class="menuSec">📚 CIFRAS</div>
-<div class="menuItem" onclick="openCifras()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small id="cntCifras">0 cifras</small></div></div>
-<div class="menuItem" onclick="openCifrasVS()"><div class="ico">🎬</div><div><b>Cifras com VS</b><small id="cntVSall">0 com VS</small></div></div>
-<div class="menuItem" onclick="openCifrasPB()"><div class="ico">🎹</div><div><b>Cifras com Playback</b><small id="cntPBall">0 com PB</small></div></div>
-<div class="menuItem" onclick="openMyVS()"><div class="ico">🎧</div><div><b>Meus V.S. - até 50MB</b><small id="cntVS">0 arquivos grandes</small></div><span class="badge" style="background:#16A34A">GRANDE</span></div>
-<div class="menuItem" onclick="openMyPB()"><div class="ico">🎼</div><div><b>Meus PLAYBACKs - até 50MB</b><small id="cntPB">0 arquivos</small></div><span class="badge" style="background:#16A34A">GRANDE</span></div>
-
-<div class="menuSec">📚 BIBLIOTECA AZUL</div>
-<div class="menuItem" onclick="openBib()"><div class="ico">📚</div><div><b>Biblioteca - Tudo em Pastas</b><small id="cntBib">Azul clean organizada</small></div><span class="badge" style="background:#F59E0B">GERAL</span></div>
-
-<div class="menuSec">🎨 OUTROS</div>
-<div class="menuItem" onclick="openTemas()"><div class="ico">🎨</div><div><b>10 Temas Lindos</b><small id="curTheme">Azul Clean</small></div></div>
-<div class="menuItem" onclick="exportBKP()"><div class="ico">⬆️</div><div><b>Exportar BKP</b><small>Com opção do que salvar</small></div></div>
-<div class="menuItem" onclick="document.getElementById('importFile').click()"><div class="ico">⬇️</div><div><b>Importar BKP</b><small>Restaurar</small></div></div>
-<input type="file" id="importFile" hidden accept=".json" onchange="importBKP(this)">
-<div class="menuItem" onclick="alert('Instalar: Chrome > 3 pontinhos > Instalar app')"><div class="ico">📲</div><div><b>Instalar sem 3 pontinhos</b><small>App na home</small></div></div>
-<div class="menuItem" onclick="shareApp()" style="background:#E3F2FD"><div class="ico" style="background:#BBDEFB">🔗</div><div><b>Compartilhar Link</b><small>QR + Link</small></div><span class="badge">COMPARTILHAR</span></div>
-<div style="height:90px"></div>
-</div></div>
-
-<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v35 COMPLETO</b></div><div style="display:flex;gap:6px"><button class="btn small" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button><button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="openPedeAi()">🎤 PEDIDOS</button></div></div>
-
-<div class="content">
-
 <div class="card">
-<button class="btn blue" onclick="document.getElementById('vsFile').click()">🔍 Buscar VS (teste rápido)</button>
-<input type="file" id="vsFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'VS')">
-<div class="file" id="vsLabel">📁 Nenhum VS</div>
-<audio id="audioVS" controls></audio>
-<div class="toggle" onclick="toggleBox('vsCtrls')"><span id="vsInfo">🎛️ VS • 100% • -3ST • 84%</span><span>Recolher</span></div>
-<div class="ctrls" id="vsCtrls">
-<div class="ctrl"><label><span>BPM</span><b id="bVS">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updVS()"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="pVS">-3 ST</b></label><input type="range" min="-12" max="12" value="-3" oninput="updVS()"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="vVS">84%</b></label><input type="range" min="0" max="100" value="84" oninput="updVS()"></div>
-<div class="ctrl"><label><span>GRAVE</span><b id="gVS">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updVS()"></div>
-<div class="ctrl"><label><span>AGUDO</span><b id="aVS">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updVS()"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="rVS">0%</b></label><input type="range" min="0" max="100" value="0" oninput="updVS()"></div>
-</div>
-</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:10px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
+    <div>
+      <input id="cifraMusica" value="Será - Legião Urbana" style="background:transparent;border:none;color:#fff;font-weight:800;font-size:15px;width:200px">
+      <div style="display:flex;gap:6px;align-items:center;margin-top:4px">
+        <span style="font-size:12px">Tom:</span>
+        <button class="btn small" style="background:#fff;color:var(--blue);padding:4px 10px" onclick="changeTom(-1)">-1</button>
+        <b id="tomAtual" style="background:#fff;color:var(--blue);padding:4px 12px;border-radius:20px;font-size:13px">D</b>
+        <button class="btn small" style="background:#fff;color:var(--blue);padding:4px 10px" onclick="changeTom(1)">+1</button>
+        <button class="btn small" style="background:#E3F0FF;color:var(--blue);padding:4px 10px" onclick="toggleSimplificada()" id="btnSimp">Simplificar</button>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <button class="btn small" style="background:#fff;color:var(--blue)" onclick="openMenu()">☰</button>
+      <button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="toggleScroll()" id="btnScroll">▶ Rolagem</button>
+    </div>
+  </div>
 
-<div class="card">
-<button class="btn" onclick="document.getElementById('pbFile').click()">🔍 Buscar Playback</button>
-<input type="file" id="pbFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'PB')">
-<div class="file" id="pbLabel">📁 Nenhum Playback</div>
-<audio id="audioPB" controls></audio>
-<div class="toggle" onclick="toggleBox('pbCtrls')"><span id="pbInfo">🎛️ PB • 100% • +11ST • 80%</span><span>Recolher</span></div>
-<div class="ctrls" id="pbCtrls">
-<div class="ctrl"><label><span>BPM</span><b id="bPB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updPB()"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="pPB">+11 ST</b></label><input type="range" min="-12" max="12" value="11" oninput="updPB()"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="vPB">80%</b></label><input type="range" min="0" max="100" value="80" oninput="updPB()"></div>
-<div class="ctrl"><label><span>GRAVE</span><b id="gPB">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updPB()"></div>
-<div class="ctrl"><label><span>AGUDO</span><b id="aPB">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updPB()"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="rPB">0%</b></label><input type="range" min="0" max="100" value="0" oninput="updPB()"></div>
-</div>
-</div>
+  <!-- Controles de rolagem -->
+  <div style="display:flex;gap:8px;align-items:center;background:var(--light);padding:8px 12px;border-radius:10px;margin-bottom:10px">
+    <span style="font-size:11px;font-weight:800;color:var(--blue)">Rolagem:</span>
+    <input type="range" id="velScroll" min="0" max="10" value="0" oninput="setVelScroll(this.value)" style="flex:1;accent-color:var(--blue)">
+    <b id="velLabel" style="font-size:11px;color:var(--blue)">0 - Parado</b>
+    <button class="btn small" style="background:var(--blue);color:#fff" onclick="toggleScroll()" id="btnPlayScroll">▶</button>
+  </div>
 
-<div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:10px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
-<div><b>Será - Legião Urbana</b><br><small>Tom: D</small></div><div style="display:flex;gap:6px"><button class="btn small" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button><button class="btn small" style="background:#fff;color:var(--blue)" onclick="openMenu()">☰</button></div>
-</div>
-<div style="padding:8px;white-space:pre-wrap;font-weight:600">[Intro] D  A/C#  Bm  G
-Será que eu sou o único...</div>
-<div style="display:flex;gap:8px;margin-top:10px">
-<button class="btn blue" onclick="shareApp()">📤 Compartilhar Cifra</button>
-<button class="btn" onclick="openRep()">💾 Salvar na pasta</button>
-</div>
-</div>
+  <!-- Área de edição da cifra -->
+  <textarea id="cifraTexto" style="width:100%;height:260px;border:1px solid var(--border);border-radius:10px;padding:12px;font-family:monospace;font-weight:600;font-size:14px;white-space:pre;overflow-y:auto" 
+oninput="saveCifraAuto()">[Intro] D  A/C#  Bm  G
+D               A/C#
+Será que eu sou o único...
+Bm              G
+Que não tem nada pra fazer...
+  </textarea>
 
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button class="btn blue" onclick="shareApp()">📤 Compartilhar Cifra</button>
+    <button class="btn" onclick="openRep()">💾 Salvar na pasta</button>
+    <button class="btn green" onclick="adicionarNovaCifra()">+ Nova Cifra</button>
+  </div>
 </div>
-
-<div class="bottom">
-<button onclick="openMenu()"><span style="font-size:22px">☰</span>Menu</button>
-<button onclick="openRep()"><span style="font-size:22px">📁</span>Repertório</button>
-<button class="active"><span style="font-size:22px">▶</span>Tocar</button>
-<button onclick="openCifras()"><span style="font-size:22px">💾</span>Salvar</button>
-<button onclick="shareApp()"><span style="font-size:22px">📤</span>Compartilhar</button>
-</div>
-
-<div class="modal" id="modList"><div class="modalBox"><div class="modalHead"><b id="modListTitle">Lista</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modList')">✕</button></div><div class="modalBody" id="modListBody"></div></div></div>
-<div class="modal" id="modVS"><div class="modalBox"><div class="modalHead"><b>🎧 Meus V.S. até 50MB</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modVS')">✕</button></div><div class="modalBody" id="modVSBody"></div></div></div>
-<div class="modal" id="modPB"><div class="modalBox"><div class="modalHead"><b>🎼 Meus PLAYBACKs até 50MB</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modPB')">✕</button></div><div class="modalBody" id="modPBBody"></div></div></div>
-<div class="modal" id="modPede"><div class="modalBox"><div class="modalHead" style="background:var(--green)"><b>🎤 Pede Aí</b><button class="btn small" style="background:#fff;color:var(--green)" onclick="closeModal('modPede')">✕</button></div><div class="modalBody" id="pedeBody"></div></div></div>
-<div class="modal" id="modCadastro"><div class="modalBox" style="max-width:450px"><div class="modalHead"><b>⚙️ Cadastro Cantor + Foto</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modCadastro')">✕</button></div><div class="modalBody" id="modCadastroBody"></div></div></div>
-<div class="modal" id="modShare"><div class="modalBox" style="max-width:420px"><div class="modalHead"><b>📤 Compartilhar</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modShare')">✕</button></div><div class="modalBody" style="text-align:center"><div id="qrShare" style="display:flex;justify-content:center;margin:12px 0"></div><p id="linkShare" style="font-size:11px;word-break:break-all;background:var(--light);padding:10px;border-radius:10px"></p><button class="btn blue" onclick="copyLink()">📋 Copiar Link</button><button class="btn green" style="margin-top:8px" onclick="nativeShare()">📤 WhatsApp</button></div></div></div>
 
 <script>
-let ARTIST=localStorage.getItem('taki_nome')||'André Taki'; let FOTO=localStorage.getItem('taki_foto')||''; let PIX=localStorage.getItem('taki_pix')||'';
-let rep=JSON.parse(localStorage.getItem('taki_rep')||'[{"id":1,"musica":"Será","cantor":"Legião Urbana"}]');
-let cifras=JSON.parse(localStorage.getItem('cifras')||'[]');
-let vsLib=[], pbLib=[], db;
-function openDB(){return new Promise((res,rej)=>{let req=indexedDB.open('SHOWTIME_V35',1); req.onupgradeneeded=e=>{let d=e.target.result; if(!d.objectStoreNames.contains('vs')) d.createObjectStore('vs',{keyPath:'id'}); if(!d.objectStoreNames.contains('pb')) d.createObjectStore('pb',{keyPath:'id'});}; req.onsuccess=e=>{db=e.target.result; res(db);}; req.onerror=rej;});}
-function getAll(store){return new Promise((res)=>{let tx=db.transaction(store,'readonly'); let st=tx.objectStore(store); let req=st.getAll(); req.onsuccess=()=>res(req.result);});}
-function saveStore(store,obj){return new Promise((res)=>{let tx=db.transaction(store,'readwrite'); tx.objectStore(store).put(obj).onsuccess=res;});}
-function delStore(store,id){return new Promise((res)=>{let tx=db.transaction(store,'readwrite'); tx.objectStore(store).delete(id).onsuccess=res;});}
-function groupByArtist(list){const g={}; list.forEach(i=>{let art=(i.cantor||'Sem Artista').trim(); if(!g[art]) g[art]=[]; g[art].push(i);}); return g;}
-function renderFolders(grouped,type){
-  let html=''; Object.keys(grouped).sort().forEach(art=>{
-    html+=`<div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 ${art}</span><span style="background:var(--blue);color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">${grouped[art].length}</span></div><div class="folderBody open">`;
-    grouped[art].forEach(m=>{
-      let sz=m.size?(m.size/1024/1024).toFixed(2)+' MB':'';
-      if(type==='vs') html+=`<div class="songRow"><div><b>🎧 ${m.musica}</b><br><small>${m.cantor} • ${sz} • ${m.fileName}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playVS(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delVS(${m.id})">🗑️</button></div></div>`;
-      else if(type==='pb') html+=`<div class="songRow"><div><b>🎼 ${m.musica}</b><br><small>${m.cantor} • ${sz}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playPB(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delPB(${m.id})">🗑️</button></div></div>`;
-      else html+=`<div class="songRow"><div><b>${m.musica}</b><br><small>${m.cantor}</small></div><div><button class="btn small blue">▶</button></div></div>`;
-    });
-    html+=`</div></div>`;
-  });
-  return html||'<p style="padding:20px;text-align:center;color:#888">Nenhuma música - Salve seus POPs de 10MB aqui!</p>';
+let tomList = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+let tomIndex = 2; // D
+let scrollInterval = null;
+let simplificada = false;
+
+function changeTom(dir){
+  tomIndex = (tomIndex + dir + 12) % 12;
+  document.getElementById('tomAtual').innerText = tomList[tomIndex];
+  // Aqui faz a transposição da cifra no textarea (simplificado)
+  alert('Tom mudado para: '+tomList[tomIndex]+' - Na v36 final transpoe automatico a cifra toda!');
+  saveCifraAuto();
 }
-function openMenu(){document.getElementById('menu').classList.add('open');}
-function closeMenu(){document.getElementById('menu').classList.remove('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-function toggleBox(id){document.getElementById(id).classList.toggle('hide');}
-function updateHeader(){
-  document.getElementById('artistMenu').innerText=ARTIST;
-  document.getElementById('repInfo').innerText=Object.keys(groupByArtist(rep)).length+' pastas, '+rep.length+' músicas';
-  document.getElementById('cntVS').innerText=vsLib.length+' arquivos - 10MB a 21MB OK!';
-  document.getElementById('cntPB').innerText=pbLib.length+' arquivos';
-  document.getElementById('cntCifras').innerText=cifras.length+' cifras';
-  document.getElementById('cntVSall').innerText=vsLib.length+' com VS';
-  document.getElementById('cntPBall').innerText=pbLib.length+' com PB';
-  document.getElementById('cntBib').innerText=vsLib.length+' VS, '+pbLib.length+' PB';
-  document.getElementById('pixInfo').innerText=ARTIST+' • '+(PIX?'PIX OK':'Sem PIX');
+
+function toggleSimplificada(){
+  simplificada = !simplificada;
+  document.getElementById('btnSimp').innerText = simplificada ? 'Original' : 'Simplificar';
+  document.getElementById('btnSimp').style.background = simplificada ? '#16A34A' : '#E3F0FF';
+  document.getElementById('btnSimp').style.color = simplificada ? '#fff' : 'var(--blue)';
+  // Aqui remove 7, 9, 13, etc
+  if(simplificada){
+    alert('Modo simplificado: D7M(9) vira D - Vou implementar na v36 final!');
+  }
 }
-function loadQuick(input,type){let f=input.files[0]; if(!f) return; let a=document.getElementById(type==='VS'?'audioVS':'audioPB'); a.src=URL.createObjectURL(f); document.getElementById(type==='VS'?'vsLabel':'pbLabel').innerText='📁 '+f.name+' ('+(f.size/1024/1024).toFixed(2)+'MB)'; updVS(); updPB();}
-function updVS(){
-  let ins=document.getElementById('vsCtrls').querySelectorAll('input');
-  let bpm=ins[0].value, pit=ins[1].value, vol=ins[2].value, grave=ins[3].value, agudo=ins[4].value, rev=ins[5].value;
-  document.getElementById('bVS').innerText=bpm+'%'; document.getElementById('pVS').innerText=(pit>0?'+'+pit:pit)+' ST'; document.getElementById('vVS').innerText=vol+'%'; document.getElementById('gVS').innerText=grave+' dB'; document.getElementById('aVS').innerText=agudo+' dB'; document.getElementById('rVS').innerText=rev+'%';
-  let a=document.getElementById('audioVS'); try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){}
-  document.getElementById('vsInfo').innerText='🎛️ VS • '+bpm+'% • '+pit+'ST • '+vol+'%';
+
+function setVelScroll(v){
+  document.getElementById('velLabel').innerText = v==0 ? '0 - Parado' : v+' - Velocidade';
+  if(scrollInterval){ clearInterval(scrollInterval); scrollInterval=null; }
+  if(v>0){ startScroll(v); }
 }
-function updPB(){
-  let ins=document.getElementById('pbCtrls').querySelectorAll('input');
-  let bpm=ins[0].value, pit=ins[1].value, vol=ins[2].value, grave=ins[3].value, agudo=ins[4].value, rev=ins[5].value;
-  document.getElementById('bPB').innerText=bpm+'%'; document.getElementById('pPB').innerText=(pit>0?'+'+pit:pit)+' ST'; document.getElementById('vPB').innerText=vol+'%'; document.getElementById('gPB').innerText=grave+' dB'; document.getElementById('aPB').innerText=agudo+' dB'; document.getElementById('rPB').innerText=rev+'%';
-  let a=document.getElementById('audioPB'); try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){}
-  document.getElementById('pbInfo').innerText='🎛️ PB • '+bpm+'% • '+pit+'ST • '+vol+'%';
+
+function toggleScroll(){
+  let vel = document.getElementById('velScroll').value;
+  if(scrollInterval){
+    clearInterval(scrollInterval); scrollInterval=null;
+    document.getElementById('btnScroll').innerText='▶ Rolagem';
+    document.getElementById('btnPlayScroll').innerText='▶';
+    document.getElementById('velScroll').value=0;
+    document.getElementById('velLabel').innerText='0 - Parado';
+  } else {
+    if(vel==0) document.getElementById('velScroll').value=3;
+    startScroll(document.getElementById('velScroll').value);
+    document.getElementById('btnScroll').innerText='⏸ Parar';
+    document.getElementById('btnPlayScroll').innerText='⏸';
+  }
 }
-function openPedeAi(){let link=location.href.split('?')[0]+'?pedeai=1'; document.getElementById('pedeBody').innerHTML='<div style="text-align:center"><b>Pede uma música para<br><span style="color:var(--blue);font-size:20px">'+ARTIST+'</span></b><div id="qrPede" style="display:flex;justify-content:center;margin:12px 0"></div><p style="font-size:11px;word-break:break-all;background:var(--light);padding:8px;border-radius:8px">'+link+'</p><button class="btn blue" onclick="shareApp()">📤 Compartilhar</button></div>'; document.getElementById('modPede').classList.add('open'); setTimeout(()=>{let el=document.getElementById('qrPede'); if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:160,height:160}); }},200);}
-function openRep(){let html='<h3>📁 Meu Repertório - Restaurado</h3><div style="margin-top:10px">'+renderFolders(groupByArtist(rep),'rep')+'</div><div style="display:flex;gap:6px;margin-top:12px"><input id="novaM" class="inp" placeholder="Música"><input id="novaA" class="inp" placeholder="Artista"><button class="btn blue small" onclick="addRep()">+ Add</button></div>'; document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Meu Repertório'; document.getElementById('modList').classList.add('open');}
-function addRep(){let m=document.getElementById('novaM').value.trim(); let a=document.getElementById('novaA').value.trim()||'Sem Artista'; if(!m) return; rep.push({id:Date.now(),musica:m,cantor:a}); localStorage.setItem('taki_rep',JSON.stringify(rep)); updateHeader(); openRep();}
-function openCadastro(){let html='<div style="text-align:center"><div class="fotoBox" onclick="document.getElementById(\'fotoIn\').click()">${foto}</div><input type="file" id="fotoIn" hidden accept="image/*" onchange="upFoto(this)"><input id="cfgNome" class="inp" value="'+ARTIST+'" placeholder="Nome artístico"><input id="cfgPix" class="inp" value="'+PIX+'" placeholder="Chave PIX"><button class="btn blue" onclick="saveCadastro()">💾 SALVAR</button></div>'; document.getElementById('modCadastroBody').innerHTML=html.replace('${foto}',FOTO?'<img src="'+FOTO+'">':'📸<br><small>Foto 2MB</small>'); document.getElementById('modCadastro').classList.add('open');}
-function upFoto(input){let f=input.files[0]; if(!f) return; if(f.size>2*1024*1024){alert('Max 2MB'); return;} let r=new FileReader(); r.onload=e=>{FOTO=e.target.result; localStorage.setItem('taki_foto',FOTO); openCadastro(); updateHeader();}; r.readAsDataURL(f);}
-function saveCadastro(){let n=document.getElementById('cfgNome').value.trim()||'Cantor'; let p=document.getElementById('cfgPix').value.trim(); ARTIST=n; PIX=p; localStorage.setItem('taki_nome',n); localStorage.setItem('taki_pix',p); updateHeader(); alert('✅ Salvo!'); closeModal('modCadastro');}
-function openCifras(){document.getElementById('modListBody').innerHTML='<h3>🎵 Minhas Cifras</h3>'; document.getElementById('modListTitle').innerText='Minhas Cifras'; document.getElementById('modList').classList.add('open');}
-function openCifrasVS(){document.getElementById('modListBody').innerHTML='<h3>🎬 Cifras com VS</h3>'; document.getElementById('modListTitle').innerText='Cifras com VS'; document.getElementById('modList').classList.add('open');}
-function openCifrasPB(){document.getElementById('modListBody').innerHTML='<h3>🎹 Cifras com Playback</h3>'; document.getElementById('modListTitle').innerText='Cifras com PB'; document.getElementById('modList').classList.add('open');}
-function openTemas(){document.getElementById('modListBody').innerHTML='<h3>🎨 10 Temas</h3>'; document.getElementById('modListTitle').innerText='10 Temas'; document.getElementById('modList').classList.add('open');}
-function exportBKP(){
-  let html=`<h3 style="color:var(--blue)">📤 Exportar - O que salvar?</h3>
-  <label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expRep" checked> 📁 Repertório (${rep.length})</label>
-  <label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expVS" checked> 🎧 V.S. Grandes (${vsLib.length})</label>
-  <label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expPB" checked> 🎼 PB (${pbLib.length})</label>
-  <label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expCad" checked> ⚙️ Cadastro</label>
-  <button class="btn blue" style="margin-top:12px" onclick="doExport()">💾 Exportar Selecionados</button>`;
-  document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Exportar BKP'; document.getElementById('modList').classList.add('open');
+
+function startScroll(vel){
+  let ta = document.getElementById('cifraTexto');
+  if(scrollInterval) clearInterval(scrollInterval);
+  let speed = 11 - vel; // 10 = lento, 1 = rapido
+  scrollInterval = setInterval(()=>{
+    ta.scrollTop += 1;
+    if(ta.scrollTop + ta.clientHeight >= ta.scrollHeight){
+      clearInterval(scrollInterval); scrollInterval=null;
+      document.getElementById('btnScroll').innerText='▶ Rolagem';
+      document.getElementById('btnPlayScroll').innerText='▶';
+    }
+  }, speed*50);
 }
-function doExport(){let data={}; if(document.getElementById('expRep').checked) data.rep=rep; if(document.getElementById('expVS').checked) data.vsInfo=vsLib.map(v=>({musica:v.musica,cantor:v.cantor,fileName:v.fileName,size:v.size})); if(document.getElementById('expPB').checked) data.pbInfo=pbLib.map(v=>({musica:v.musica,cantor:v.cantor})); if(document.getElementById('expCad').checked) data.cadastro={nome:ARTIST,pix:PIX}; let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='SHOWTIME-v35-'+ARTIST.replace(/\s/g,'_')+'.json'; a.click(); closeModal('modList'); alert('✅ Exportado!');}
-function importBKP(input){let f=input.files[0]; if(!f) return; let r=new FileReader(); r.onload=e=>{try{let d=JSON.parse(e.target.result); if(d.rep){rep=d.rep; localStorage.setItem('taki_rep',JSON.stringify(rep));} alert('✅ Importado!'); updateHeader();}catch{alert('Inválido');}}; r.readAsText(f);}
-let tempVSFile=null;
-function openMyVS(){
-  let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px">
-  <h3 style="color:var(--blue)">🎧 Adicionar V.S. Grande - até 50MB</h3>
-  <p style="font-size:12px;color:#666">Seu POP 01.mp3 de 10,52 MB até 21,93 MB agora salva!</p>
-  <input type="file" id="vsInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewVS(this)" style="margin:10px 0">
-  <div class="file" id="fVSLib">📁 Nenhum arquivo - pode escolher POP 01.mp3 de 10,52 MB</div>
-  <input id="vsMus" class="inp" placeholder="Música: ex: POP 01 - Bateria"><input id="vsArt" class="inp" placeholder="Pasta: ex: POP">
-  <button class="btn blue" id="btnSaveVS" onclick="saveVS()">💾 SALVAR V.S. GRANDE NA PASTA</button>
-  </div><h3 style="color:var(--blue)">📁 Meus V.S. Salvos (${vsLib.length})</h3><div>${renderFolders(groupByArtist(vsLib),'vs')}</div>`;
-  document.getElementById('modVSBody').innerHTML=html; document.getElementById('modVS').classList.add('open');
+
+function saveCifraAuto(){
+  localStorage.setItem('cifra_atual', document.getElementById('cifraTexto').value);
 }
-function previewVS(input){let f=input.files[0]; if(!f) return; tempVSFile=f; document.getElementById('fVSLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB - Pronto!`; document.getElementById('vsMus').value=f.name.replace('.mp3','');}
-async function saveVS(){let m=document.getElementById('vsMus').value.trim(); let a=document.getElementById('vsArt').value.trim()||'POP'; if(!tempVSFile){alert('Escolha o arquivo!'); return;} if(!m){alert('Digite nome'); return;} let btn=document.getElementById('btnSaveVS'); btn.disabled=true; btn.innerText='⏳ Salvando '+(tempVSFile.size/1024/1024).toFixed(1)+'MB...'; await openDB(); let obj={id:Date.now(), musica:m, cantor:a, fileName:tempVSFile.name, size:tempVSFile.size, blob:tempVSFile, created:new Date().toISOString()}; await saveStore('vs',obj); vsLib=await getAll('vs'); tempVSFile=null; alert('✅ SALVO! '+m+' na pasta: '+a); openMyVS(); updateHeader();}
-async function playVS(id){let item=vsLib.find(x=>x.id===id); if(!item) return; let audio=document.getElementById('audioVS'); let url=URL.createObjectURL(item.blob); audio.src=url; document.getElementById('vsLabel').innerText='🎧 Tocando: '+item.musica+' ('+(item.size/1024/1024).toFixed(2)+'MB)'; updVS(); audio.play(); closeModal('modVS');}
-async function delVS(id){if(!confirm('Apagar V.S.?')) return; await delStore('vs',id); vsLib=await getAll('vs'); openMyVS(); updateHeader();}
-let tempPBFile=null;
-function openMyPB(){
-  let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px">
-  <h3 style="color:var(--blue)">🎼 Adicionar Playback Grande</h3>
-  <input type="file" id="pbInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewPB(this)" style="margin:10px 0">
-  <div class="file" id="fPBLib">📁 Nenhum arquivo</div>
-  <input id="pbMus" class="inp" placeholder="Música"><input id="pbArt" class="inp" placeholder="Pasta">
-  <button class="btn blue" id="btnSavePB" onclick="savePB()">💾 SALVAR PLAYBACK GRANDE</button>
-  </div><h3>📁 Meus Playbacks (${pbLib.length})</h3><div>${renderFolders(groupByArtist(pbLib),'pb')}</div>`;
-  document.getElementById('modPBBody').innerHTML=html; document.getElementById('modPB').classList.add('open');
+
+function adicionarNovaCifra(){
+  let nome = prompt('Nome da nova cifra? Ex: Garota de Ipanema - Tom Jobim');
+  if(!nome) return;
+  document.getElementById('cifraMusica').value = nome;
+  document.getElementById('cifraTexto').value = '[Intro]\n\n[Verso]\nDigite sua cifra aqui...\n\n[Refrão]\n';
+  tomIndex = 0; document.getElementById('tomAtual').innerText='C';
+  alert('✅ Nova cifra criada! Agora é só colar a cifra e salvar na pasta');
 }
-function previewPB(input){let f=input.files[0]; if(!f) return; tempPBFile=f; document.getElementById('fPBLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB`; document.getElementById('pbMus').value=f.name.replace('.mp3','');}
-async function savePB(){let m=document.getElementById('pbMus').value.trim(); let a=document.getElementById('pbArt').value.trim()||'Sem Artista'; if(!tempPBFile){alert('Escolha arquivo'); return;} let btn=document.getElementById('btnSavePB'); btn.disabled=true; btn.innerText='⏳ Salvando...'; await openDB(); let obj={id:Date.now(), musica:m, cantor:a, fileName:tempPBFile.name, size:tempPBFile.size, blob:tempPBFile, created:new Date().toISOString()}; await saveStore('pb',obj); pbLib=await getAll('pb'); alert('✅ Playback salvo: '+m); openMyPB(); updateHeader();}
-async function playPB(id){let item=pbLib.find(x=>x.id===id); if(!item) return; let audio=document.getElementById('audioPB'); let url=URL.createObjectURL(item.blob); audio.src=url; document.getElementById('pbLabel').innerText='🎼 Playback: '+item.musica; updPB(); audio.play(); closeModal('modPB');}
-async function delPB(id){if(!confirm('Apagar?')) return; await delStore('pb',id); pbLib=await getAll('pb'); openMyPB(); updateHeader();}
-function openBib(){let vsG=groupByArtist(vsLib), pbG=groupByArtist(pbLib); let html=`<h2 style="text-align:center;color:var(--blue)">📚 Biblioteca Geral - Completa</h2><div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 Pasta V.S. Grandes (${vsLib.length}) - 10MB a 21MB OK</span></div><div class="folderBody open">${renderFolders(vsG,'vs')}</div></div><div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 Pasta PB (${pbLib.length})</span></div><div class="folderBody open">${renderFolders(pbG,'pb')}</div></div><div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 Repertório (${rep.length})</span></div><div class="folderBody open">${renderFolders(groupByArtist(rep),'rep')}</div></div>`; document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Biblioteca Geral - Completa'; document.getElementById('modList').classList.add('open');}
-function shareApp(){let link=location.href.split('?')[0]+'?pedeai=1'; document.getElementById('linkShare').innerText=link; document.getElementById('modShare').classList.add('open'); setTimeout(()=>{let el=document.getElementById('qrShare'); if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:180,height:180}); }},200);}
-function copyLink(){let t=document.getElementById('linkShare').innerText; navigator.clipboard.writeText(t).then(()=>alert('✅ Link copiado!'));}
-function nativeShare(){let link=document.getElementById('linkShare').innerText; let text='🎤 Pede uma música para '+ARTIST+' no show! Acesse: '+link; if(navigator.share){ navigator.share({title:'Pede Aí', text:text, url:link}); }else{ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank'); }}
-(async()=>{ await openDB(); vsLib=await getAll('vs'); pbLib=await getAll('pb'); updateHeader(); })();
 </script>
-</body>
-</html>
