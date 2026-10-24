@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME v4.7 PLAY FIX</title>
+<title>SHOWTIME v4.8 REVERB PITCH FIX</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%}
 :root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#B45309;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:15px;--lyric-size:17px}
@@ -66,39 +66,39 @@ body.fullscreen-cifra .cifra-line{margin-bottom:16px!important}
 <div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b></div><div>🔔</div></div>
 
 <div class="card player-card">
-<button class="btn big gold" onclick="document.getElementById('fVS').click()">🔍 Buscar VS</button>
+<button class="btn big gold" onclick="fVS.click()">🔍 Buscar VS</button>
 <input type="file" id="fVS" hidden accept=".mp3,.wav,.m4a" onchange="loadVS(this)">
 <div class="file" id="fVSName">📁 Nenhum VS</div>
-<audio id="aVS" controls playsinline preload="metadata"></audio>
+<audio id="aVS" controls playsinline preload="metadata" crossorigin="anonymous"></audio>
 <div class="controls">
-<div class="ctrl"><label><span>BPM</span><b id="vsB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="changeBPM('vs',this.value)"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="vsV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="changeVol('vs',this.value)"></div>
-<div class="ctrl"><label><span>GRAVES</span><b id="vsG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="changeEQ('vs','bass',this.value)"></div>
-<div class="ctrl"><label><span>AGUDOS</span><b id="vsA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="changeEQ('vs','treble',this.value)"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="vsR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="vsR.innerText=this.value+'%'"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="vsP">0</b></label><input type="range" min="-12" max="12" value="0" oninput="vsP.innerText=this.value"></div>
+<div class="ctrl"><label><span>BPM</span><b id="vsB">100%</b></label><input type="range" id="vsBpm" min="50" max="200" value="100" oninput="updateRate('vs')"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="vsV">80%</b></label><input type="range" id="vsVol" min="0" max="100" value="80" oninput="changeVol('vs',this.value)"></div>
+<div class="ctrl"><label><span>GRAVES</span><b id="vsG">0dB</b></label><input type="range" id="vsBass" min="-15" max="15" value="0" oninput="changeEQ('vs','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><b id="vsA">0dB</b></label><input type="range" id="vsTreb" min="-15" max="15" value="0" oninput="changeEQ('vs','treble',this.value)"></div>
+<div class="ctrl"><label><span>REVERB</span><b id="vsR">0%</b></label><input type="range" id="vsRev" min="0" max="100" value="0" oninput="changeReverb('vs',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="vsP">0</b></label><input type="range" id="vsPit" min="-12" max="12" value="0" oninput="updateRate('vs')"></div>
 </div>
 </div>
 
 <div class="card player-card">
-<button class="btn big" onclick="document.getElementById('fPB').click()">🔍 Buscar Playback</button>
+<button class="btn big" onclick="fPB.click()">🔍 Buscar Playback</button>
 <input type="file" id="fPB" hidden accept=".mp3,.wav,.m4a" onchange="loadPB(this)">
 <div class="file" id="fPBName">📁 Nenhum Playback</div>
-<audio id="aPB" controls playsinline preload="metadata"></audio>
+<audio id="aPB" controls playsinline preload="metadata" crossorigin="anonymous"></audio>
 <div class="controls">
-<div class="ctrl"><label><span>BPM</span><b id="pbB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="changeBPM('pb',this.value)"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="pbV">80%</b></label><input type="range" min="0" max="100" value="80" oninput="changeVol('pb',this.value)"></div>
-<div class="ctrl"><label><span>GRAVES</span><b id="pbG">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="changeEQ('pb','bass',this.value)"></div>
-<div class="ctrl"><label><span>AGUDOS</span><b id="pbA">0dB</b></label><input type="range" min="-15" max="15" value="0" oninput="changeEQ('pb','treble',this.value)"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="pbR">0%</b></label><input type="range" min="0" max="100" value="0" oninput="pbR.innerText=this.value+'%'"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="pbP">0</b></label><input type="range" min="-12" max="12" value="0" oninput="pbP.innerText=this.value"></div>
+<div class="ctrl"><label><span>BPM</span><b id="pbB">100%</b></label><input type="range" id="pbBpm" min="50" max="200" value="100" oninput="updateRate('pb')"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="pbV">80%</b></label><input type="range" id="pbVol" min="0" max="100" value="80" oninput="changeVol('pb',this.value)"></div>
+<div class="ctrl"><label><span>GRAVES</span><b id="pbG">0dB</b></label><input type="range" id="pbBass" min="-15" max="15" value="0" oninput="changeEQ('pb','bass',this.value)"></div>
+<div class="ctrl"><label><span>AGUDOS</span><b id="pbA">0dB</b></label><input type="range" id="pbTreb" min="-15" max="15" value="0" oninput="changeEQ('pb','treble',this.value)"></div>
+<div class="ctrl"><label><span>REVERB</span><b id="pbR">0%</b></label><input type="range" id="pbRev" min="0" max="100" value="0" oninput="changeReverb('pb',this.value)"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="pbP">0</b></label><input type="range" id="pbPit" min="-12" max="12" value="0" oninput="updateRate('pb')"></div>
 </div>
 </div>
 
 <div class="card cifra-card">
 <div class="cifra-top">
 <div class="cifra-title">Cifra</div>
-<button class="btn small gold" onclick="document.getElementById('fCifra').click()">+ Nova Cifra</button>
+<button class="btn small gold" onclick="fCifra.click()">+ Nova Cifra</button>
 <button class="btn small" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
 <input type="file" id="fCifra" hidden accept=".txt" onchange="loadCifra(this)">
 <div style="margin-left:auto;display:flex;gap:8px;align-items:center"><span style="font-size:11px;color:var(--gray)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span></div>
@@ -132,91 +132,129 @@ let cs=15,ls=17,scrollId=null,speed=1,isScrolling=false,toolsVisible=false;
 const speeds=[0,0.25,0.7,1.6,3.0]; const labels=['','muito lento','lento','medio','rapido'];
 let originalCifra="[G]Como e grande o meu amor por voce,\n[C]Meu coracao e tao pequeno,\n[G]So agora e que eu vi,\n[D]Que esse amor por voce e demais,\n[Em]Como e grande o meu amor por voce\n[G]Nem mesmo o ceu nem as estrelas,\n[C]Nem mesmo o mar e o infinito,\n[D]Nada e maior que o meu amor,\n[G]Nem mais bonito...";
 
-let ctx=null, vsChain=null, pbChain=null;
+let ctx=null;
+let vs={chain:null, bpm:100, pitch:0, rev:0};
+let pb={chain:null, bpm:100, pitch:0, rev:0};
 
 function ensureCtx(){
   if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)();
   if(ctx.state==='suspended') ctx.resume();
+  return ctx;
 }
 
-function makeSimpleChain(audioEl){
-  ensureCtx();
+function createChain(audioEl){
+  const c=ensureCtx();
   try{
-    const src=ctx.createMediaElementSource(audioEl);
-    const bass=ctx.createBiquadFilter(); bass.type='lowshelf'; bass.frequency.value=250;
-    const treb=ctx.createBiquadFilter(); treb.type='highshelf'; treb.frequency.value=3500;
-    const gain=ctx.createGain(); gain.gain.value=1;
-    src.connect(bass); bass.connect(treb); treb.connect(gain); gain.connect(ctx.destination);
-    return {src,bass,treb,gain,connected:true};
-  }catch(e){ console.log('WebAudio falhou, usando audio nativo',e); return null; }
+    const src=c.createMediaElementSource(audioEl);
+    const bass=c.createBiquadFilter(); bass.type='lowshelf'; bass.frequency.value=250; bass.gain.value=0;
+    const treble=c.createBiquadFilter(); treble.type='highshelf'; treble.frequency.value=3500; treble.gain.value=0;
+    const dry=c.createGain(); dry.gain.value=1;
+    const wet=c.createGain(); wet.gain.value=0;
+    const convolver=c.createConvolver();
+    // reverb leve - 1s decay
+    const rate=c.sampleRate, len=rate*1.2, buf=c.createBuffer(2,len,rate);
+    for(let ch=0;ch<2;ch++){ const d=buf.getChannelData(ch); for(let i=0;i<len;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2)*0.35; } }
+    convolver.buffer=buf;
+    const master=c.createGain(); master.gain.value=1;
+    
+    src.connect(bass); bass.connect(treble);
+    treble.connect(dry); treble.connect(convolver);
+    convolver.connect(wet);
+    dry.connect(master); wet.connect(master);
+    master.connect(c.destination);
+    
+    return {src,bass,treble,dry,wet,convolver,master, ok:true};
+  }catch(e){ console.warn('WebAudio falhou',e); return {ok:false}; }
 }
 
 function loadVS(input){
   const f=input.files[0]; if(!f) return;
   const a=document.getElementById('aVS');
-  a.src=URL.createObjectURL(f);
-  a.load();
+  a.src=URL.createObjectURL(f); a.load();
   document.getElementById('fVSName').innerText='📁 '+f.name;
-  a.oncanplay=()=>{ 
-    if(!vsChain){ vsChain=makeSimpleChain(a); }
+  a.oncanplay=()=>{
+    if(!vs.chain) vs.chain=createChain(a);
     a.play().catch(()=>{});
   };
 }
 function loadPB(input){
   const f=input.files[0]; if(!f) return;
   const a=document.getElementById('aPB');
-  a.src=URL.createObjectURL(f);
-  a.load();
+  a.src=URL.createObjectURL(f); a.load();
   document.getElementById('fPBName').innerText='📁 '+f.name;
-  a.oncanplay=()=>{ 
-    if(!pbChain){ pbChain=makeSimpleChain(a); }
+  a.oncanplay=()=>{
+    if(!pb.chain) pb.chain=createChain(a);
     a.play().catch(()=>{});
   };
 }
-function changeBPM(type,val){
-  const a=document.getElementById(type==='vs'?'aVS':'aPB');
-  a.playbackRate=val/100;
-  document.getElementById(type==='vs'?'vsB':'pbB').innerText=val+'%';
+
+function updateRate(type){
+  const isVS=type==='vs';
+  const bpmEl=document.getElementById(isVS?'vsBpm':'pbBpm');
+  const pitEl=document.getElementById(isVS?'vsPit':'pbPit');
+  const bpm=parseInt(bpmEl.value); const pitch=parseInt(pitEl.value);
+  const a=document.getElementById(isVS?'aVS':'aPB');
+  
+  // pitch: cada semitom = 2^(n/12)
+  const pitchFactor=Math.pow(2, pitch/12);
+  const bpmFactor=bpm/100;
+  const total=bpmFactor*pitchFactor;
+  
+  a.playbackRate=total;
+  a.preservesPitch=false; // deixa mudar o tom junto
+  document.getElementById(isVS?'vsB':'pbB').innerText=bpm+'%';
+  document.getElementById(isVS?'vsP':'pbP').innerText=(pitch>0?'+'+pitch:pitch);
+  
+  if(isVS){ vs.bpm=bpm; vs.pitch=pitch; } else { pb.bpm=bpm; pb.pitch=pitch; }
 }
+
 function changeVol(type,val){
-  const a=document.getElementById(type==='vs'?'aVS':'aPB');
-  a.volume=val/100;
+  document.getElementById(type==='vs'?'aVS':'aPB').volume=val/100;
   document.getElementById(type==='vs'?'vsV':'pbV').innerText=val+'%';
 }
 function changeEQ(type,band,val){
   ensureCtx();
-  const chain=type==='vs'?vsChain:pbChain;
-  if(!chain) return;
+  const chain=type==='vs'?vs.chain:pb.chain;
+  if(!chain||!chain.ok) return;
   if(band==='bass') chain.bass.gain.value=parseInt(val);
-  else chain.treb.gain.value=parseInt(val);
+  else chain.treble.gain.value=parseInt(val);
   document.getElementById((type==='vs'?'vs':'pb')+(band==='bass'?'G':'A')).innerText=val+'dB';
 }
+function changeReverb(type,val){
+  ensureCtx();
+  const chain=type==='vs'?vs.chain:pb.chain;
+  const v=parseInt(val)/100;
+  if(chain&&chain.ok){
+    chain.wet.gain.value=v*0.6;
+    chain.dry.gain.value=1 - v*0.4;
+  }
+  document.getElementById(type==='vs'?'vsR':'pbR').innerText=val+'%';
+}
+
 function parseCifra(text){
   const box=document.getElementById('cifraBox'); box.innerHTML='';
-  const lines=text.split('\n');
-  lines.forEach(rawLine=>{
+  text.split('\n').forEach(rawLine=>{
     if(!rawLine.trim()){ box.innerHTML+='<div style="height:8px"></div>'; return; }
     const lineDiv=document.createElement('div'); lineDiv.className='cifra-line';
-    const allMatches=[...rawLine.matchAll(/\[([^\]]+)\]/g)];
-    if(allMatches.length===0){
-      const pair=document.createElement('span'); pair.className='pair';
+    const ms=[...rawLine.matchAll(/\[([^\]]+)\]/g)];
+    if(ms.length===0){
+      const p=document.createElement('span'); p.className='pair';
       const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
       const l=document.createElement('span'); l.className='lyric'; l.textContent=rawLine;
-      pair.appendChild(c); pair.appendChild(l); lineDiv.appendChild(pair);
+      p.append(c,l); lineDiv.appendChild(p);
     } else {
-      allMatches.forEach((m,i)=>{
-        const nextStart=i+1<allMatches.length?allMatches[i+1].index:rawLine.length;
-        const lyricText=rawLine.substring(m.index+m[0].length, nextStart);
-        const pair=document.createElement('span'); pair.className='pair';
-        const cs=document.createElement('span'); cs.className='chord'; cs.textContent=m[1];
-        const ls=document.createElement('span'); ls.className='lyric'; ls.textContent=lyricText||' ';
-        pair.appendChild(cs); pair.appendChild(ls); lineDiv.appendChild(pair);
+      ms.forEach((m,i)=>{
+        const next= i+1<ms.length?ms[i+1].index:rawLine.length;
+        const lyric=rawLine.substring(m.index+m[0].length, next);
+        const p=document.createElement('span'); p.className='pair';
+        const cc=document.createElement('span'); cc.className='chord'; cc.textContent=m[1];
+        const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=lyric||' ';
+        p.append(cc,ll); lineDiv.appendChild(p);
         if(i===0 && m.index>0){
-          const before=document.createElement('span'); before.className='pair';
-          const cc=document.createElement('span'); cc.className='chord'; cc.innerHTML='&nbsp;';
-          const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=rawLine.substring(0,m.index);
-          before.appendChild(cc); before.appendChild(ll);
-          lineDiv.insertBefore(before, lineDiv.firstChild);
+          const b=document.createElement('span'); b.className='pair';
+          const bc=document.createElement('span'); bc.className='chord'; bc.innerHTML='&nbsp;';
+          const bl=document.createElement('span'); bl.className='lyric'; bl.textContent=rawLine.substring(0,m.index);
+          b.append(bc,bl); lineDiv.insertBefore(b, lineDiv.firstChild);
         }
       });
     }
@@ -231,13 +269,7 @@ function setSpeed(s){ speed=s; document.querySelectorAll('.speed').forEach(e=>e.
 function toggleScroll(){ isScrolling?stopScroll():startScroll(); }
 function startScroll(){ isScrolling=true; document.getElementById('playScroll').innerText='⏸ PAUSE'; const b=document.getElementById('cifraBox'); scrollId=setInterval(()=>{ b.scrollTop+=speeds[speed]; if(b.scrollTop+b.clientHeight>=b.scrollHeight-2) stopScroll(); },40); }
 function stopScroll(){ isScrolling=false; document.getElementById('playScroll').innerText='▶ PLAY'; clearInterval(scrollId); }
-function toggleFullscreen(){ 
-  document.body.classList.toggle('fullscreen-cifra'); 
-  if(document.body.classList.contains('fullscreen-cifra')){
-    setTimeout(()=>{ document.getElementById('hint').classList.add('show'); setTimeout(()=>document.getElementById('hint').classList.remove('show'),2500); },400);
-    hideTools();
-  } else { hideTools(); }
-}
+function toggleFullscreen(){ document.body.classList.toggle('fullscreen-cifra'); if(document.body.classList.contains('fullscreen-cifra')){ setTimeout(()=>{ document.getElementById('hint').classList.add('show'); setTimeout(()=>document.getElementById('hint').classList.remove('show'),2500); },400); hideTools(); } else hideTools(); }
 function handleTap(){ if(!document.body.classList.contains('fullscreen-cifra')) return; toolsVisible?hideTools():showTools(); }
 function showTools(){ document.getElementById('floatTools').classList.add('show'); toolsVisible=true; setTimeout(hideTools,4000); }
 function hideTools(){ document.getElementById('floatTools').classList.remove('show'); toolsVisible=false; }
@@ -246,11 +278,7 @@ function loadCifra(i){ const f=i.files[0]; if(!f) return; const r=new FileReader
 document.documentElement.style.setProperty('--chord-size','15px'); document.documentElement.style.setProperty('--lyric-size','17px');
 document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
 parseCifra(originalCifra);
-
-// Libera audio no primeiro toque no celular
 document.body.addEventListener('click',()=>{ try{ ensureCtx(); }catch(e){} },{once:true});
-document.getElementById('aVS').addEventListener('play',()=>{ try{ ensureCtx(); if(!vsChain) vsChain=makeSimpleChain(document.getElementById('aVS')); }catch(e){} });
-document.getElementById('aPB').addEventListener('play',()=>{ try{ ensureCtx(); if(!pbChain) pbChain=makeSimpleChain(document.getElementById('aPB')); }catch(e){} });
 </script>
 </body>
 </html>
