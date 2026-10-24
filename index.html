@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME v4.8 REVERB PITCH FIX</title>
+<title>SHOWTIME v4.9 COLAR CIFRA</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%}
 :root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#B45309;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:15px;--lyric-size:17px}
@@ -41,6 +41,22 @@ main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 4
 .speed{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--gray);cursor:pointer;font-weight:700}
 .speed.active{background:var(--gold);color:#000;border-color:var(--gold)}
 audio{width:100%;height:38px;margin-bottom:8px;border-radius:8px}
+
+/* MODAL COLAR CIFRA - NOVO */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#1A1A1A;border:1px solid var(--border);border-radius:16px;width:100%;max-width:500px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.modal-head{padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);background:#161616}
+.modal-head b{color:var(--gold);font-size:14px;letter-spacing:1px}
+.modal-body{padding:16px;flex:1;overflow-y:auto}
+.modal-body label{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;display:block}
+.modal-body textarea{width:100%;height:280px;background:#0E0E0E;border:1px solid var(--border);border-radius:12px;padding:14px;color:#E8E8E8;font-family:monospace;font-size:14px;line-height:1.5;resize:none;outline:none}
+.modal-body textarea:focus{border-color:var(--gold)}
+.hint-box{background:#111;border:1px dashed var(--border);border-radius:10px;padding:12px;margin-top:12px;font-size:11px;color:var(--gray);line-height:1.4}
+.hint-box b{color:var(--gold)}
+.modal-foot{padding:14px 16px;display:flex;gap:10px;border-top:1px solid var(--border);background:#161616}
+.modal-foot .btn{flex:1;padding:12px;font-size:12px}
+
 body.fullscreen-cifra aside,body.fullscreen-cifra .topbar,body.fullscreen-cifra .player-card{display:none!important}
 body.fullscreen-cifra main{margin:0;padding:0;display:block;height:100vh;background:#FFFBF0}
 body.fullscreen-cifra .cifra-card{height:100vh;border:none;border-radius:0;background:#FFFBF0;padding:0;display:flex;flex-direction:column}
@@ -98,9 +114,8 @@ body.fullscreen-cifra .cifra-line{margin-bottom:16px!important}
 <div class="card cifra-card">
 <div class="cifra-top">
 <div class="cifra-title">Cifra</div>
-<button class="btn small gold" onclick="fCifra.click()">+ Nova Cifra</button>
+<button class="btn small gold" onclick="openCifraModal()">+ Nova Cifra</button>
 <button class="btn small" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
-<input type="file" id="fCifra" hidden accept=".txt" onchange="loadCifra(this)">
 <div style="margin-left:auto;display:flex;gap:8px;align-items:center"><span style="font-size:11px;color:var(--gray)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span></div>
 </div>
 <div class="collapsible open" id="controles">
@@ -119,6 +134,38 @@ body.fullscreen-cifra .cifra-line{margin-bottom:16px!important}
 </div>
 </main>
 
+<div class="modal-overlay" id="cifraModal" onclick="if(event.target===this)closeCifraModal()">
+<div class="modal">
+<div class="modal-head"><b>✍️ COLAR / ESCREVER CIFRA</b><button class="btn small" onclick="closeCifraModal()">✕</button></div>
+<div class="modal-body">
+<label>Digite ou cole sua cifra aqui</label>
+<textarea id="cifraInput" placeholder="[G]Como é grande o meu amor por você
+[C]Meu coração é tão pequeno
+[G]Só agora é que eu vi
+[D]Que esse amor...
+
+Você pode escrever direto aqui ou colar do Cifra Club!"></textarea>
+<div class="hint-box">
+<b>💡 Como usar:</b><br>
+• Escreva acorde entre colchetes: <b>[G]</b> <b>[C]</b> <b>[Am]</b><br>
+• Exemplo: <b>[G]Como é grande</b> o meu amor <b>[C]por você</b><br>
+• Pode colar direto do Cifra Club que funciona!<br>
+• Linha vazia = quebra de estrofe
+</div>
+<div style="margin-top:12px;display:flex;gap:8px">
+<button class="btn small" onclick="document.getElementById('fCifraFile').click()">📁 Buscar arquivo .txt</button>
+<input type="file" id="fCifraFile" hidden accept=".txt,.cifra" onchange="loadCifraFile(this)">
+<button class="btn small" onclick="pasteExample()">📋 Usar exemplo</button>
+<button class="btn small" onclick="clearCifra()">🗑️ Limpar</button>
+</div>
+</div>
+<div class="modal-foot">
+<button class="btn" onclick="closeCifraModal()">Cancelar</button>
+<button class="btn gold" onclick="saveCifra()">💾 SALVAR CIFRA</button>
+</div>
+</div>
+</div>
+
 <div class="float-tools" id="floatTools">
 <button onclick="chgSz('l',-1)">−</button><div class="label">LETRA</div><button onclick="chgSz('l',1)">+</button>
 <div style="height:1px;background:#EDE3D0;margin:4px 0"></div>
@@ -131,106 +178,45 @@ body.fullscreen-cifra .cifra-line{margin-bottom:16px!important}
 let cs=15,ls=17,scrollId=null,speed=1,isScrolling=false,toolsVisible=false;
 const speeds=[0,0.25,0.7,1.6,3.0]; const labels=['','muito lento','lento','medio','rapido'];
 let originalCifra="[G]Como e grande o meu amor por voce,\n[C]Meu coracao e tao pequeno,\n[G]So agora e que eu vi,\n[D]Que esse amor por voce e demais,\n[Em]Como e grande o meu amor por voce\n[G]Nem mesmo o ceu nem as estrelas,\n[C]Nem mesmo o mar e o infinito,\n[D]Nada e maior que o meu amor,\n[G]Nem mais bonito...";
+let ctx=null; let vs={chain:null,bpm:100,pitch:0,rev:0}; let pb={chain:null,bpm:100,pitch:0,rev:0};
 
-let ctx=null;
-let vs={chain:null, bpm:100, pitch:0, rev:0};
-let pb={chain:null, bpm:100, pitch:0, rev:0};
-
-function ensureCtx(){
-  if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)();
-  if(ctx.state==='suspended') ctx.resume();
-  return ctx;
-}
-
+function ensureCtx(){ if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)(); if(ctx.state==='suspended') ctx.resume(); return ctx; }
 function createChain(audioEl){
   const c=ensureCtx();
   try{
     const src=c.createMediaElementSource(audioEl);
     const bass=c.createBiquadFilter(); bass.type='lowshelf'; bass.frequency.value=250; bass.gain.value=0;
     const treble=c.createBiquadFilter(); treble.type='highshelf'; treble.frequency.value=3500; treble.gain.value=0;
-    const dry=c.createGain(); dry.gain.value=1;
-    const wet=c.createGain(); wet.gain.value=0;
+    const dry=c.createGain(); dry.gain.value=1; const wet=c.createGain(); wet.gain.value=0;
     const convolver=c.createConvolver();
-    // reverb leve - 1s decay
     const rate=c.sampleRate, len=rate*1.2, buf=c.createBuffer(2,len,rate);
     for(let ch=0;ch<2;ch++){ const d=buf.getChannelData(ch); for(let i=0;i<len;i++){ d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2)*0.35; } }
-    convolver.buffer=buf;
-    const master=c.createGain(); master.gain.value=1;
-    
-    src.connect(bass); bass.connect(treble);
-    treble.connect(dry); treble.connect(convolver);
-    convolver.connect(wet);
-    dry.connect(master); wet.connect(master);
-    master.connect(c.destination);
-    
+    convolver.buffer=buf; const master=c.createGain(); master.gain.value=1;
+    src.connect(bass); bass.connect(treble); treble.connect(dry); treble.connect(convolver); convolver.connect(wet); dry.connect(master); wet.connect(master); master.connect(c.destination);
     return {src,bass,treble,dry,wet,convolver,master, ok:true};
-  }catch(e){ console.warn('WebAudio falhou',e); return {ok:false}; }
+  }catch(e){ return {ok:false}; }
 }
-
-function loadVS(input){
-  const f=input.files[0]; if(!f) return;
-  const a=document.getElementById('aVS');
-  a.src=URL.createObjectURL(f); a.load();
-  document.getElementById('fVSName').innerText='📁 '+f.name;
-  a.oncanplay=()=>{
-    if(!vs.chain) vs.chain=createChain(a);
-    a.play().catch(()=>{});
-  };
-}
-function loadPB(input){
-  const f=input.files[0]; if(!f) return;
-  const a=document.getElementById('aPB');
-  a.src=URL.createObjectURL(f); a.load();
-  document.getElementById('fPBName').innerText='📁 '+f.name;
-  a.oncanplay=()=>{
-    if(!pb.chain) pb.chain=createChain(a);
-    a.play().catch(()=>{});
-  };
-}
-
+function loadVS(input){ const f=input.files[0]; if(!f) return; const a=document.getElementById('aVS'); a.src=URL.createObjectURL(f); a.load(); document.getElementById('fVSName').innerText='📁 '+f.name; a.oncanplay=()=>{ if(!vs.chain) vs.chain=createChain(a); a.play().catch(()=>{}); }; }
+function loadPB(input){ const f=input.files[0]; if(!f) return; const a=document.getElementById('aPB'); a.src=URL.createObjectURL(f); a.load(); document.getElementById('fPBName').innerText='📁 '+f.name; a.oncanplay=()=>{ if(!pb.chain) pb.chain=createChain(a); a.play().catch(()=>{}); }; }
 function updateRate(type){
-  const isVS=type==='vs';
-  const bpmEl=document.getElementById(isVS?'vsBpm':'pbBpm');
-  const pitEl=document.getElementById(isVS?'vsPit':'pbPit');
-  const bpm=parseInt(bpmEl.value); const pitch=parseInt(pitEl.value);
-  const a=document.getElementById(isVS?'aVS':'aPB');
-  
-  // pitch: cada semitom = 2^(n/12)
-  const pitchFactor=Math.pow(2, pitch/12);
-  const bpmFactor=bpm/100;
-  const total=bpmFactor*pitchFactor;
-  
-  a.playbackRate=total;
-  a.preservesPitch=false; // deixa mudar o tom junto
-  document.getElementById(isVS?'vsB':'pbB').innerText=bpm+'%';
-  document.getElementById(isVS?'vsP':'pbP').innerText=(pitch>0?'+'+pitch:pitch);
-  
+  const isVS=type==='vs'; const bpmEl=document.getElementById(isVS?'vsBpm':'pbBpm'); const pitEl=document.getElementById(isVS?'vsPit':'pbPit');
+  const bpm=parseInt(bpmEl.value); const pitch=parseInt(pitEl.value); const a=document.getElementById(isVS?'aVS':'aPB');
+  const pitchFactor=Math.pow(2, pitch/12); const bpmFactor=bpm/100; const total=bpmFactor*pitchFactor;
+  a.playbackRate=total; a.preservesPitch=false;
+  document.getElementById(isVS?'vsB':'pbB').innerText=bpm+'%'; document.getElementById(isVS?'vsP':'pbP').innerText=(pitch>0?'+'+pitch:pitch);
   if(isVS){ vs.bpm=bpm; vs.pitch=pitch; } else { pb.bpm=bpm; pb.pitch=pitch; }
 }
-
-function changeVol(type,val){
-  document.getElementById(type==='vs'?'aVS':'aPB').volume=val/100;
-  document.getElementById(type==='vs'?'vsV':'pbV').innerText=val+'%';
-}
+function changeVol(type,val){ document.getElementById(type==='vs'?'aVS':'aPB').volume=val/100; document.getElementById(type==='vs'?'vsV':'pbV').innerText=val+'%'; }
 function changeEQ(type,band,val){
-  ensureCtx();
-  const chain=type==='vs'?vs.chain:pb.chain;
-  if(!chain||!chain.ok) return;
-  if(band==='bass') chain.bass.gain.value=parseInt(val);
-  else chain.treble.gain.value=parseInt(val);
+  ensureCtx(); const chain=type==='vs'?vs.chain:pb.chain; if(!chain||!chain.ok) return;
+  if(band==='bass') chain.bass.gain.value=parseInt(val); else chain.treble.gain.value=parseInt(val);
   document.getElementById((type==='vs'?'vs':'pb')+(band==='bass'?'G':'A')).innerText=val+'dB';
 }
 function changeReverb(type,val){
-  ensureCtx();
-  const chain=type==='vs'?vs.chain:pb.chain;
-  const v=parseInt(val)/100;
-  if(chain&&chain.ok){
-    chain.wet.gain.value=v*0.6;
-    chain.dry.gain.value=1 - v*0.4;
-  }
+  ensureCtx(); const chain=type==='vs'?vs.chain:pb.chain; const v=parseInt(val)/100;
+  if(chain&&chain.ok){ chain.wet.gain.value=v*0.6; chain.dry.gain.value=1 - v*0.4; }
   document.getElementById(type==='vs'?'vsR':'pbR').innerText=val+'%';
 }
-
 function parseCifra(text){
   const box=document.getElementById('cifraBox'); box.innerHTML='';
   text.split('\n').forEach(rawLine=>{
@@ -261,6 +247,46 @@ function parseCifra(text){
     box.appendChild(lineDiv);
   });
 }
+
+// NOVAS FUNÇÕES - MODAL COLAR
+function openCifraModal(){
+  document.getElementById('cifraModal').classList.add('open');
+  document.getElementById('cifraInput').value=document.getElementById('cifraBox').innerText || originalCifra.replace(/\\n/g,'\n').replace(/\[|\]/g, match=>match);
+  // pega texto atual da cifra se já tem
+  const current=document.getElementById('cifraInput').value;
+  if(!current.trim()) document.getElementById('cifraInput').value=originalCifra;
+  setTimeout(()=>document.getElementById('cifraInput').focus(),100);
+}
+function closeCifraModal(){ document.getElementById('cifraModal').classList.remove('open'); }
+function saveCifra(){
+  const txt=document.getElementById('cifraInput').value;
+  if(!txt.trim()){ alert('Escreva algo!'); return; }
+  originalCifra=txt;
+  parseCifra(txt);
+  closeCifraModal();
+}
+function clearCifra(){ document.getElementById('cifraInput').value=''; }
+function pasteExample(){
+  document.getElementById('cifraInput').value=`[G]Como é grande o meu amor por você
+[C]Meu coração é tão pequeno
+[G]Só agora é que eu vi
+[D]Que esse amor por você é demais
+
+[Em]Como é grande o meu amor por você
+[G]Nem mesmo o céu nem as estrelas
+[C]Nem mesmo o mar e o infinito
+[D]Nada é maior que o meu amor
+[G]Nem mais bonito`;
+}
+function loadCifraFile(input){
+  const f=input.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    document.getElementById('cifraInput').value=e.target.result;
+  };
+  r.readAsText(f);
+}
+
 function toggleMenu(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
 function toggleControles(){ const c=document.getElementById('controles'); const a=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); a.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); a.innerText='▼'; } }
 function chgSz(t,d){ if(t==='c'){ cs=Math.max(10,Math.min(32,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(12,Math.min(40,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
@@ -273,7 +299,6 @@ function toggleFullscreen(){ document.body.classList.toggle('fullscreen-cifra');
 function handleTap(){ if(!document.body.classList.contains('fullscreen-cifra')) return; toolsVisible?hideTools():showTools(); }
 function showTools(){ document.getElementById('floatTools').classList.add('show'); toolsVisible=true; setTimeout(hideTools,4000); }
 function hideTools(){ document.getElementById('floatTools').classList.remove('show'); toolsVisible=false; }
-function loadCifra(i){ const f=i.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>parseCifra(e.target.result); r.readAsText(f); }
 
 document.documentElement.style.setProperty('--chord-size','15px'); document.documentElement.style.setProperty('--lyric-size','17px');
 document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
