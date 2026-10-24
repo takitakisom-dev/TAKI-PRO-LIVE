@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME PRO v4.4 FINAL</title>
+<title>SHOWTIME v4.5 LEVE</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%}
-:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:18px;--lyric-size:16px}
+:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#FF8C00;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:20px;--lyric-size:19px}
 body{background:var(--bg);color:var(--white);font-family:Inter,system-ui}
 aside{width:240px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:fixed;height:100vh;z-index:100;transition:.3s}
 main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
@@ -15,7 +15,7 @@ main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 4
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;width:100%;overflow:hidden}
 .btn{padding:8px 14px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:11px;font-weight:700;cursor:pointer}
 .btn.gold{background:var(--gold);color:#000}
-.btn.small{padding:8px 14px;font-size:11px}
+.btn.small{padding:8px 14px}
 .btn.big{width:100%;padding:12px;font-size:13px;margin-bottom:8px;display:flex;justify-content:center;gap:8px}
 .file{font-size:11px;color:var(--gray);background:#111;padding:8px 10px;border-radius:8px;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -26,46 +26,55 @@ main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 4
 .cifra-top{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
 .cifra-title{font-size:18px;font-weight:900}
 .ctrl-row{display:flex;align-items:center;justify-content:space-between;background:#111;border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:8px}
-.ctrl-row .label{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase}
 .stepper{display:flex;align-items:center;gap:10px}
 .stepper button{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.stepper .val{min-width:40px;text-align:center;font-weight:800;font-size:14px}
+.stepper .val{min-width:40px;text-align:center;font-weight:800}
 .stepper .val.gold{background:var(--gold);color:#000;padding:4px 10px;border-radius:20px;font-size:12px}
 .cifra-box{background:#0E0E0E;border:1px solid var(--border);border-radius:12px;padding:20px;height:420px;overflow-y:auto;scroll-behavior:smooth}
-.cifra-line{display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:18px}
-.pair{display:inline-flex;flex-direction:column;align-items:flex-start;margin-right:2px}
-.chord{color:var(--orange);font-weight:900;font-size:var(--chord-size);margin-bottom:5px;min-height:var(--chord-size)}
-.lyric{color:#E8E8E8;font-size:var(--lyric-size);line-height:1.4;white-space:pre-wrap}
-.collapsible{overflow:hidden;transition:.35s max-height}
-.collapsible.closed{max-height:0}
-.collapsible.open{max-height:900px}
-.arrow{cursor:pointer;color:var(--gold);font-size:14px}
+.cifra-line{display:flex;flex-wrap:wrap;align-items:flex-end;margin-bottom:22px;line-height:1.2}
+.pair{display:inline-flex;flex-direction:column;align-items:flex-start;margin-right:4px}
+.chord{color:var(--orange);font-weight:900;font-size:var(--chord-size);margin-bottom:6px;min-height:var(--chord-size)}
+.lyric{color:#E8E8E8;font-size:var(--lyric-size);line-height:1.5;white-space:pre-wrap;font-weight:400}
+.collapsible.open{max-height:900px;overflow:hidden;transition:.35s}
+.collapsible.closed{max-height:0;overflow:hidden;transition:.35s}
+.arrow{cursor:pointer;color:var(--gold)}
 .scroll-bar{display:flex;align-items:center;gap:8px;background:#111;border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-top:8px;flex-wrap:wrap}
 .speed{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--gray);cursor:pointer;font-weight:700}
 .speed.active{background:var(--gold);color:#000;border-color:var(--gold)}
 audio{width:100%;height:32px;margin-bottom:8px}
+
+/* FULLSCREEN NOVO - MODO LEVE CONFORTAVEL */
 body.fullscreen-cifra aside,body.fullscreen-cifra .topbar,body.fullscreen-cifra .player-card{display:none!important}
-body.fullscreen-cifra main{margin:0;padding:0;display:block;height:100vh;background:#000}
-body.fullscreen-cifra .cifra-card{height:100vh;border:none;border-radius:0;background:#000;padding:0;display:flex;flex-direction:column}
-body.fullscreen-cifra .cifra-top{padding:16px;background:#0A0A0A;border-bottom:1px solid var(--border);display:flex!important}
-body.fullscreen-cifra .cifra-box{flex:1;border:none;background:#000;height:auto;padding:32px 24px}
-body.fullscreen-cifra .chord{font-size:calc(var(--chord-size) * 1.7)!important}
-body.fullscreen-cifra .lyric{font-size:calc(var(--lyric-size) * 1.9)!important}
-body.fullscreen-cifra .float-tools{position:fixed;right:16px;top:50%;transform:translateY(-50%);background:rgba(20,20,20,.95);border:1px solid var(--gold);border-radius:24px;padding:14px;display:flex;flex-direction:column;gap:10px;z-index:50}
-.float-tools{display:none}
-.float-tools button{width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:20px;cursor:pointer}
+body.fullscreen-cifra main{margin:0;padding:0;display:block;height:100vh;background:#FFFBF0}
+body.fullscreen-cifra .cifra-card{height:100vh;border:none;border-radius:0;background:#FFFBF0;padding:0;display:flex;flex-direction:column}
+body.fullscreen-cifra .cifra-top{padding:12px 16px;background:#FFFBF0;border-bottom:1px solid #EDE3D0;display:flex!important}
+body.fullscreen-cifra .cifra-title{color:#2B2B2B}
+body.fullscreen-cifra .cifra-box{flex:1;border:none;background:#FFFBF0;height:auto;padding:28px 20px}
+body.fullscreen-cifra .chord{color:#C75E13!important;font-size:calc(var(--chord-size) * 1.1)!important;font-weight:800}
+body.fullscreen-cifra .lyric{color:#2E2E2E!important;font-size:calc(var(--lyric-size) * 1.15)!important;line-height:1.9!important;font-weight:500;letter-spacing:.2px}
+body.fullscreen-cifra .cifra-line{margin-bottom:26px}
+
+/* BOTAO LATERAL AGORA ESCONDIDO - SO APARECE AO TOCAR */
+.float-tools{position:fixed;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,251,240,.92);border:1px solid #D4B483;border-radius:24px;padding:14px;display:none;flex-direction:column;gap:10px;z-index:50;backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,.15);transition:.3s}
+.float-tools.show{display:flex}
+.float-tools button{width:46px;height:46px;border-radius:50%;border:1px solid #D4B483;background:#fff;color:#8B6A3E;font-size:20px;cursor:pointer}
+.float-tools .label{font-size:9px;color:#8B6A3E;text-align:center;font-weight:700;letter-spacing:.5px}
+.hint-tap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:8px 16px;border-radius:20px;font-size:11px;z-index:60;display:none}
+.hint-tap.show{display:block}
+body.fullscreen-cifra .hint-tap.show{display:block}
+
 @media(max-width:900px){aside{transform:translateX(-100%)} aside.open{transform:translateX(0)} main{margin-left:0;grid-template-columns:1fr!important;gap:10px;padding:10px;width:100vw} .hamburger{display:block} .overlay.open{display:block} .cifra-box{height:380px}}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-<aside id="sidebar"><div class="logo">SHOWTIME PRO</div></aside>
+<aside id="sidebar"><div style="padding:0 20px 20px;color:var(--gold);font-weight:900;letter-spacing:2px;border-bottom:1px solid var(--border);margin-bottom:20px">SHOWTIME PRO</div></aside>
 <main>
-<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b></div><div>🔔 3</div></div>
+<div class="topbar"><button class="hamburger" onclick="toggleMenu()">☰</button><div><b style="color:var(--gold)">PALCO AO VIVO</b></div><div>🔔</div></div>
 
 <div class="card player-card">
 <button class="btn big gold" onclick="fVS.click()">🔍 Buscar VS</button>
-<input type="file" id="fVS" hidden accept=".wav,.mp3,.m4a" onchange="loadFile(this,'vs')">
+<input type="file" id="fVS" hidden onchange="loadFile(this,'vs')">
 <div class="file" id="fVSName">📁 Nenhum VS</div>
 <audio id="aVS" controls playsinline></audio>
 <div class="controls">
@@ -80,7 +89,7 @@ body.fullscreen-cifra .float-tools{position:fixed;right:16px;top:50%;transform:t
 
 <div class="card player-card">
 <button class="btn big" onclick="fPB.click()">🔍 Buscar Playback</button>
-<input type="file" id="fPB" hidden accept=".wav,.mp3,.m4a" onchange="loadFile(this,'pb')">
+<input type="file" id="fPB" hidden onchange="loadFile(this,'pb')">
 <div class="file" id="fPBName">📁 Nenhum Playback</div>
 <audio id="aPB" controls playsinline></audio>
 <div class="controls">
@@ -93,19 +102,19 @@ body.fullscreen-cifra .float-tools{position:fixed;right:16px;top:50%;transform:t
 </div>
 </div>
 
-<div class="card cifra-card">
+<div class="card cifra-card" id="cifraCard">
 <div class="cifra-top">
 <div class="cifra-title">Cifra</div>
 <button class="btn small gold" onclick="fCifra.click()">+ Nova Cifra</button>
 <button class="btn small" onclick="toggleFullscreen()">⛶ Tela Cheia</button>
-<input type="file" id="fCifra" hidden accept=".txt,.cifra" onchange="loadCifra(this)">
-<div style="margin-left:auto;display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--gray)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span></div>
+<input type="file" id="fCifra" hidden accept=".txt" onchange="loadCifra(this)">
+<div style="margin-left:auto;display:flex;gap:8px;align-items:center"><span style="font-size:11px;color:var(--gray)">Controles</span><span class="arrow" id="arrow" onclick="toggleControles()">▼</span></div>
 </div>
 <div class="collapsible open" id="controles">
 <div class="ctrl-row"><span class="label">Tom</span><div class="stepper"><button onclick="chgTom(-1)">−</button><span class="val gold" id="tom">G</span><button onclick="chgTom(1)">+</button></div></div>
 <div class="ctrl-row"><span class="label">Capo</span><div class="stepper"><button onclick="chgCapo(-1)">−</button><span class="val" id="capo">0</span><button onclick="chgCapo(1)">+</button></div></div>
-<div class="ctrl-row"><span class="label">Acorde</span><div class="stepper"><button onclick="chgSz('c',-1)">−</button><span class="val" id="cSz">18px</span><button onclick="chgSz('c',1)">+</button></div></div>
-<div class="ctrl-row"><span class="label">Letra</span><div class="stepper"><button onclick="chgSz('l',-1)">−</button><span class="val" id="lSz">16px</span><button onclick="chgSz('l',1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Acorde</span><div class="stepper"><button onclick="chgSz('c',-1)">−</button><span class="val" id="cSz">20px</span><button onclick="chgSz('c',1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Letra</span><div class="stepper"><button onclick="chgSz('l',-1)">−</button><span class="val" id="lSz">19px</span><button onclick="chgSz('l',1)">+</button></div></div>
 <div class="scroll-bar">
 <span style="font-size:10px;color:var(--gold);font-weight:800">AUTO-SCROLL</span>
 <div style="display:flex;gap:6px"><button class="speed active" id="sp1" onclick="setSpeed(1)">1</button><button class="speed" id="sp2" onclick="setSpeed(2)">2</button><button class="speed" id="sp3" onclick="setSpeed(3)">3</button><button class="speed" id="sp4" onclick="setSpeed(4)">4</button></div>
@@ -113,17 +122,21 @@ body.fullscreen-cifra .float-tools{position:fixed;right:16px;top:50%;transform:t
 <button class="btn small gold" id="playScroll" onclick="toggleScroll()" style="margin-left:auto">▶ PLAY</button>
 </div>
 </div>
-<div class="cifra-box" id="cifraBox"></div>
-<div class="float-tools">
-<button onclick="chgSz('l',-1)">−</button><div style="text-align:center;color:var(--gold);font-size:10px">LETRA</div><button onclick="chgSz('l',1)">+</button>
-<div style="height:1px;background:var(--border);margin:6px 0"></div>
-<button onclick="chgSz('c',-1)" style="font-size:12px">C-</button><div style="text-align:center;color:var(--gold);font-size:10px">ACORDE</div><button onclick="chgSz('c',1)" style="font-size:12px">C+</button>
-<button onclick="toggleFullscreen()" style="margin-top:12px;background:var(--gold);color:#000">✕</button>
-</div>
+<div class="cifra-box" id="cifraBox" onclick="handleTap()"></div>
 </div>
 </main>
+
+<div class="float-tools" id="floatTools">
+<button onclick="chgSz('l',-1)">−</button><div class="label">LETRA</div><button onclick="chgSz('l',1)">+</button>
+<div style="height:1px;background:#EDE3D0;margin:6px 0"></div>
+<button onclick="chgSz('c',-1)" style="font-size:12px">C-</button><div class="label">ACORDE</div><button onclick="chgSz('c',1)" style="font-size:12px">C+</button>
+<button onclick="hideTools()" style="margin-top:12px;background:#2B2B2B;color:#fff;border-color:#2B2B2B">✕</button>
+</div>
+
+<div class="hint-tap" id="hintTap">Toque na tela para mostrar controles • Toque novamente para esconder</div>
+
 <script>
-let audioCtx=null,vs={},pb={},cs=18,ls=16,scrollId=null,speed=1,isScrolling=false;
+let audioCtx=null,vs={},pb={},cs=20,ls=19,scrollId=null,speed=1,isScrolling=false,toolsVisible=false;
 const speeds=[0,0.25,0.7,1.6,3.0]; const labels=['','muito lento','lento','medio','rapido'];
 let originalCifra="[G]Como e grande o meu amor por voce,\n[C]Meu coracao e tao pequeno,\n[G]So agora e que eu vi,\n[D]Que esse amor por voce e demais,\n[Em]Como e grande o meu amor por voce\n[G]Nem mesmo o ceu nem as estrelas,\n[C]Nem mesmo o mar e o infinito,\n[D]Nada e maior que o meu amor,\n[G]Nem mais bonito...";
 function ensureCtx(){ if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); if(audioCtx.state==='suspended') audioCtx.resume(); }
@@ -136,30 +149,28 @@ function parseCifra(text){
   const box=document.getElementById('cifraBox'); box.innerHTML='';
   const lines=text.split('\n');
   lines.forEach(rawLine=>{
-    if(!rawLine.trim()){ box.innerHTML+='<div style="height:12px"></div>'; return; }
+    if(!rawLine.trim()){ box.innerHTML+='<div style="height:14px"></div>'; return; }
     const lineDiv=document.createElement('div'); lineDiv.className='cifra-line';
     const allMatches=[...rawLine.matchAll(/\[([^\]]+)\]/g)];
     if(allMatches.length===0){
       const pair=document.createElement('span'); pair.className='pair';
-      const chordSpan=document.createElement('span'); chordSpan.className='chord'; chordSpan.innerHTML='&nbsp;';
-      const lyricSpan=document.createElement('span'); lyricSpan.className='lyric'; lyricSpan.textContent=rawLine;
-      pair.appendChild(chordSpan); pair.appendChild(lyricSpan); lineDiv.appendChild(pair);
+      const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
+      const l=document.createElement('span'); l.className='lyric'; l.textContent=rawLine;
+      pair.appendChild(c); pair.appendChild(l); lineDiv.appendChild(pair);
     } else {
       allMatches.forEach((m,i)=>{
-        const chord=m[1];
         const nextStart=i+1<allMatches.length?allMatches[i+1].index:rawLine.length;
         const lyricText=rawLine.substring(m.index+m[0].length, nextStart);
         const pair=document.createElement('span'); pair.className='pair';
-        const chordSpan=document.createElement('span'); chordSpan.className='chord'; chordSpan.textContent=chord;
-        const lyricSpan=document.createElement('span'); lyricSpan.className='lyric'; lyricSpan.textContent=lyricText||' ';
-        pair.appendChild(chordSpan); pair.appendChild(lyricSpan); lineDiv.appendChild(pair);
+        const cs=document.createElement('span'); cs.className='chord'; cs.textContent=m[1];
+        const ls=document.createElement('span'); ls.className='lyric'; ls.textContent=lyricText||' ';
+        pair.appendChild(cs); pair.appendChild(ls); lineDiv.appendChild(pair);
         if(i===0 && m.index>0){
-          const firstPair=lineDiv.firstChild;
           const before=document.createElement('span'); before.className='pair';
-          const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
-          const l=document.createElement('span'); l.className='lyric'; l.textContent=rawLine.substring(0,m.index);
-          before.appendChild(c); before.appendChild(l);
-          lineDiv.insertBefore(before, firstPair);
+          const cc=document.createElement('span'); cc.className='chord'; cc.innerHTML='&nbsp;';
+          const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=rawLine.substring(0,m.index);
+          before.appendChild(cc); before.appendChild(ll);
+          lineDiv.insertBefore(before, lineDiv.firstChild);
         }
       });
     }
@@ -167,16 +178,27 @@ function parseCifra(text){
   });
 }
 function toggleMenu(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
-function toggleControles(){ const c=document.getElementById('controles'); const ar=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); ar.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); ar.innerText='▼'; } }
-function chgSz(t,d){ if(t==='c'){ cs=Math.max(10,Math.min(36,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(10,Math.min(48,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
-const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]; } function chgCapo(d){ document.getElementById('capo').innerText=parseInt(document.getElementById('capo').innerText)+d; }
-function setSpeed(s){ speed=s; document.querySelectorAll('.speed').forEach(el=>el.classList.remove('active')); document.getElementById('sp'+s).classList.add('active'); document.getElementById('speedLabel').innerText=labels[s]; if(isScrolling){ clearInterval(scrollId); startScroll(); } }
-function toggleScroll(){ if(isScrolling) stopScroll(); else startScroll(); }
-function startScroll(){ isScrolling=true; document.getElementById('playScroll').innerText='⏸ PAUSE'; const box=document.getElementById('cifraBox'); scrollId=setInterval(()=>{ box.scrollTop+=speeds[speed]; if(box.scrollTop+box.clientHeight>=box.scrollHeight-2) stopScroll(); },40); }
+function toggleControles(){ const c=document.getElementById('controles'); const a=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); a.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); a.innerText='▼'; } }
+function chgSz(t,d){ if(t==='c'){ cs=Math.max(12,Math.min(36,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(12,Math.min(48,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
+const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]; } function chgCapo(d){ let v=parseInt(document.getElementById('capo').innerText)+d; if(v<0)v=0; if(v>12)v=12; document.getElementById('capo').innerText=v; }
+function setSpeed(s){ speed=s; document.querySelectorAll('.speed').forEach(e=>e.classList.remove('active')); document.getElementById('sp'+s).classList.add('active'); document.getElementById('speedLabel').innerText=labels[s]; if(isScrolling){ clearInterval(scrollId); startScroll(); } }
+function toggleScroll(){ isScrolling?stopScroll():startScroll(); }
+function startScroll(){ isScrolling=true; document.getElementById('playScroll').innerText='⏸ PAUSE'; const b=document.getElementById('cifraBox'); scrollId=setInterval(()=>{ b.scrollTop+=speeds[speed]; if(b.scrollTop+b.clientHeight>=b.scrollHeight-2) stopScroll(); },40); }
 function stopScroll(){ isScrolling=false; document.getElementById('playScroll').innerText='▶ PLAY'; clearInterval(scrollId); }
-function toggleFullscreen(){ document.body.classList.toggle('fullscreen-cifra'); }
-function loadCifra(input){ const f=input.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>{ parseCifra(e.target.result); }; r.readAsText(f); }
-document.documentElement.style.setProperty('--chord-size','18px'); document.documentElement.style.setProperty('--lyric-size','16px');
+function toggleFullscreen(){ 
+  document.body.classList.toggle('fullscreen-cifra'); 
+  if(document.body.classList.contains('fullscreen-cifra')){
+    setTimeout(()=>{ document.getElementById('hintTap').classList.add('show'); setTimeout(()=>document.getElementById('hintTap').classList.remove('show'),3000); },500);
+  } else { hideTools(); }
+}
+function handleTap(){
+  if(!document.body.classList.contains('fullscreen-cifra')) return;
+  if(toolsVisible){ hideTools(); } else { showTools(); }
+}
+function showTools(){ document.getElementById('floatTools').classList.add('show'); toolsVisible=true; }
+function hideTools(){ document.getElementById('floatTools').classList.remove('show'); toolsVisible=false; }
+function loadCifra(i){ const f=i.files[0]; if(!f) return; const r=new FileReader(); r.onload=e=>parseCifra(e.target.result); r.readAsText(f); }
+document.documentElement.style.setProperty('--chord-size','20px'); document.documentElement.style.setProperty('--lyric-size','19px');
 document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
 parseCifra(originalCifra);
 document.body.addEventListener('click',()=>{ try{ensureCtx()}catch(e){} },{once:true});
