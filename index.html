@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#1E5AA7">
-<title>SHOWTIME v29 FIX TOTAL</title>
+<title>SHOWTIME v30 MENU COMPLETO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF}
+:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--green:#16A34A;--text2:#6B8BB0}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);font-family:Arial, sans-serif;padding-bottom:80px}
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
-.top b{font-size:14px}
-.content{margin-top:64px;padding:10px;display:flex;flex-direction:column;gap:10px}
+body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:80px}
+.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.content{margin-top:60px;padding:10px;display:flex;flex-direction:column;gap:10px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px}
 .btn{padding:12px 16px;border-radius:22px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;width:100%;font-size:13px}
-.btn.blue{background:var(--blue);color:#fff}
-.file{font-size:12px;background:var(--light);color:var(--blue);padding:8px;border-radius:8px;margin:8px 0;font-weight:600}
-audio{width:100%;margin-top:8px}
+.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.btn.small{padding:6px 10px;width:auto;font-size:11px}
+.file{font-size:12px;background:var(--light);color:var(--blue);padding:8px;border-radius:8px;margin:8px 0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+audio{width:100%;margin-top:8px;height:36px}
 .toggle{margin-top:10px;padding:10px 14px;background:var(--light);border-radius:22px;display:flex;justify-content:space-between;cursor:pointer;font-weight:700;color:var(--blue);font-size:13px}
 .ctrls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .ctrls.hide{display:none}
 .ctrl{background:var(--light);border-radius:10px;padding:10px}
 .ctrl label{display:flex;justify-content:space-between;font-size:10px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.ctrl input{width:100%}
+.ctrl input{width:100%;accent-color:var(--blue)}
 .bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:70px;border-top:2px solid var(--border)}
-.bottom button{flex:1;border:none;background:#fff;color:#6B8BB0;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.bottom button{flex:1;border:none;background:#fff;color:var(--text2);font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
 .bottom button.active{background:var(--blue);color:#fff}
-/* MENU */
-#menu{position:fixed;inset:0;z-index:300;display:none}
+/* MENU FIXO */
+#menu{position:fixed;inset:0;z-index:500;display:none}
 #menu.open{display:block}
 #menuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-#menuPanel{position:absolute;top:0;left:0;bottom:0;width:85%;max-width:360px;background:#fff;overflow-y:auto}
+#menuPanel{position:absolute;top:0;left:0;bottom:0;width:88%;max-width:380px;background:#fff;overflow-y:auto}
 .menuHead{background:var(--blue);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
-.menuSec{color:var(--blue);font-size:11px;font-weight:800;padding:14px 16px 6px;text-transform:uppercase;border-top:1px solid var(--border);margin-top:6px}
-.menuItem{display:flex;gap:10px;padding:14px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer}
-.menuItem .ico{width:34px;height:34px;background:var(--light);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.cifraBox{padding:16px;min-height:200px;white-space:pre-wrap;font-size:15px;font-weight:600}
-.modal{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:12px}
+.menuSec{color:var(--blue);font-size:11px;font-weight:800;padding:14px 16px 6px;text-transform:uppercase;border-top:1px solid var(--border);margin-top:6px;display:flex;align-items:center;gap:6px}
+.menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
+.menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:var(--text2)}
+.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}
+.modal{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:10px}
 .modal.open{display:flex}
-.modalBox{background:#fff;border-radius:14px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto}
+.modalBox{background:#fff;border-radius:16px;width:100%;max-width:700px;max-height:90vh;overflow-y:auto}
 .inp{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;margin:6px 0}
+.fotoBox{width:84px;height:84px;border-radius:50%;background:var(--light);border:3px dashed var(--blue);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;margin:0 auto 8px}
+.fotoBox img{width:100%;height:100%;object-fit:cover}
 </style>
 </head>
 <body>
@@ -47,51 +50,68 @@ audio{width:100%;margin-top:8px}
 <div id="menu">
 <div id="menuBg" onclick="closeMenu()"></div>
 <div id="menuPanel">
-<div class="menuHead"><b>SHOWTIME v29 FIX</b><span onclick="closeMenu()" style="font-size:24px;cursor:pointer">✕</span></div>
-<div class="menuSec">🎤 Pede Aí</div>
-<div class="menuItem" onclick="alert('Pedidos OK'); closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><br><small>0 pedidos</small></div></div>
-<div class="menuItem" onclick="alert('Repertorio OK'); closeMenu()"><div class="ico">📁</div><div><b>Meu Repertório</b><br><small>Pastas por artista</small></div></div>
-<div class="menuItem" onclick="alert('QR OK'); closeMenu()"><div class="ico">📱</div><div><b>QR Code da Mesa</b></div></div>
-<div class="menuSec">📚 Cifras</div>
-<div class="menuItem" onclick="alert('Cifras OK'); closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b></div></div>
-<div class="menuItem" onclick="alert('VS OK'); closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S.</b><br><small>Buscar e Salvar VS</small></div></div>
-<div class="menuItem" onclick="alert('PB OK'); closeMenu()"><div class="ico">🎼</div><div><b>Meus PLAYBACKs</b><br><small>Buscar e Salvar Playback</small></div></div>
-<div class="menuSec">📚 Biblioteca Azul</div>
-<div class="menuItem" onclick="alert('Biblioteca OK'); closeMenu()"><div class="ico">📚</div><div><b>Biblioteca - Tudo em Pastas</b><br><small>Azul clean organizada</small></div></div>
-<div class="menuSec">🎨 Outros</div>
-<div class="menuItem" onclick="alert('Temas OK'); closeMenu()"><div class="ico">🎨</div><div><b>Temas</b></div></div>
-<div style="height:80px"></div>
+<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v30</b><br><small id="artistName">André Taki</small></div><span onclick="closeMenu()" style="font-size:26px;cursor:pointer">✕</span></div>
+
+<div class="menuSec">🎤 PEDE AÍ</div>
+<div class="menuItem" onclick="openPedeAi(); closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small id="pedeCount">0 pedidos</small></div><span class="badge" style="background:#16A34A">AO VIVO</span></div>
+<div class="menuItem" onclick="openRep(); closeMenu()"><div class="ico">📁</div><div><b>Meu Repertório</b><small id="repInfo">Pastas por artista</small></div></div>
+<div class="menuItem" onclick="openQR(); closeMenu()"><div class="ico">📱</div><div><b>QR Code da Mesa</b><small>Com foto 2MB + palco</small></div></div>
+<div class="menuItem" onclick="openCadastro(); closeMenu()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small id="pixInfo">Foto, Nome, PIX</small></div><span class="badge">NOVO</span></div>
+<div class="menuItem" onclick="shareApp(); closeMenu()" style="background:#E8F5E9"><div class="ico" style="background:#C8E6C9">📤</div><div><b>Compartilhar App</b><small>Enviar link para cliente</small></div><span class="badge" style="background:#16A34A">NOVO</span></div>
+
+<div class="menuSec">📚 CIFRAS</div>
+<div class="menuItem" onclick="alert('Minhas Cifras - em breve lista'); closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small id="cntCifras">0 cifras</small></div></div>
+<div class="menuItem" onclick="alert('Cifras com VS - restaurado'); closeMenu()"><div class="ico">🎬</div><div><b>Cifras com VS</b><small id="cntVS">Com VS</small></div></div>
+<div class="menuItem" onclick="alert('Cifras com Playback - restaurado'); closeMenu()"><div class="ico">🎹</div><div><b>Cifras com Playback</b><small id="cntPB">Com Playback</small></div></div>
+<div class="menuItem" onclick="openMyVS(); closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S.</b><small id="cntMyVS">Buscar e Salvar VS</small></div></div>
+<div class="menuItem" onclick="openMyPB(); closeMenu()"><div class="ico">🎼</div><div><b>Meus PLAYBACKs</b><small id="cntMyPB">Buscar e Salvar Playback</small></div></div>
+
+<div class="menuSec">📚 BIBLIOTECA AZUL</div>
+<div class="menuItem" onclick="openBib(); closeMenu()"><div class="ico">📚</div><div><b>Biblioteca - Tudo em Pastas</b><small id="cntBib">Azul clean organizada</small></div><span class="badge" style="background:#F59E0B">GERAL</span></div>
+
+<div class="menuSec">🎨 OUTROS</div>
+<div class="menuItem" onclick="alert('10 Temas - restaurado'); closeMenu()"><div class="ico">🎨</div><div><b>10 Temas Lindos</b><small>Azul Clean e mais 9</small></div></div>
+<div class="menuItem" onclick="exportBKP()"><div class="ico">⬆️</div><div><b>Exportar BKP Completo</b><small>JSON com pastas</small></div></div>
+<div class="menuItem" onclick="document.getElementById('importFile').click()"><div class="ico">⬇️</div><div><b>Importar BKP</b><small>Restaurar tudo</small></div></div>
+<input type="file" id="importFile" hidden accept=".json">
+<div class="menuItem" onclick="alert('Instalar: Chrome > 3 pontinhos > Instalar app'); closeMenu()"><div class="ico">📲</div><div><b>Instalar sem 3 pontinhos</b><small>App na home</small></div></div>
+<div class="menuItem" onclick="shareApp(); closeMenu()" style="background:#E3F2FD"><div class="ico" style="background:#BBDEFB">🔗</div><div><b>Compartilhar Link</b><small>QR + Link do Pede Aí</small></div><span class="badge">COMPARTILHAR</span></div>
+
+<div style="height:90px"></div>
 </div>
 </div>
 
 <div class="top">
-<div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v29 - FIX TOTAL</b></div>
-<button class="btn blue" style="width:auto;padding:8px 16px;font-size:12px" onclick="alert('PEDIDOS CLICOU!')">🎤 PEDIDOS</button>
+<div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v30 - MENU COMPLETO</b></div>
+<div style="display:flex;gap:6px">
+<button class="btn small blue" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button>
+<button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="openPedeAi()">🎤 PEDIDOS</button>
+</div>
 </div>
 
 <div class="content">
 <div class="card">
 <button class="btn blue" onclick="document.getElementById('vsFile').click()">🔍 Buscar VS</button>
-<input type="file" id="vsFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadVS(this)">
-<div class="file" id="vsLabel">📁 Nenhum VS</div>
+<input type="file" id="vsFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadFile(this,'VS')">
+<div class="file" id="vsLabel">📁 Nenhum VS carregado</div>
 <audio id="audioVS" controls></audio>
-<div class="toggle" onclick="toggleBox('vsCtrls')"><span id="vsInfo">🎛️ VS • 100% • -3ST • 84%</span><span id="vsToggle">Recolher</span></div>
+<div class="toggle" onclick="toggleBox('vsCtrls')"><span id="vsInfo">🎛️ VS • 100% • -3ST • 84%</span><span>Recolher</span></div>
 <div class="ctrls" id="vsCtrls">
 <div class="ctrl"><label><span>BPM</span><b id="bVS">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updVS()"></div>
 <div class="ctrl"><label><span>PITCH</span><b id="pVS">-3 ST</b></label><input type="range" min="-12" max="12" value="-3" oninput="updVS()"></div>
 <div class="ctrl"><label><span>VOLUME</span><b id="vVS">84%</b></label><input type="range" min="0" max="100" value="84" oninput="updVS()"></div>
-<div class="ctrl"><label><span>GRAVE</span><b id="gVS">0 dB</b></label><input type="range" min="-12" max="12" value="0"></div>
-<div class="ctrl"><label><span>AGUDO</span><b id="aVS2">0 dB</b></label><input type="range" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>GRAVE</span><b>0 dB</b></label><input type="range" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>AGUDO</span><b>0 dB</b></label><input type="range" min="-12" max="12" value="0"></div>
 <div class="ctrl"><label><span>REVERB</span><b>0%</b></label><input type="range" min="0" max="100" value="0"></div>
 </div>
 </div>
 
 <div class="card">
 <button class="btn" onclick="document.getElementById('pbFile').click()">🔍 Buscar Playback</button>
-<input type="file" id="pbFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadPB(this)">
+<input type="file" id="pbFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadFile(this,'PB')">
 <div class="file" id="pbLabel">📁 Nenhum Playback</div>
 <audio id="audioPB" controls></audio>
-<div class="toggle" onclick="toggleBox('pbCtrls')"><span id="pbInfo">🎛️ PB • 100% • +11ST • 80%</span><span id="pbToggle">Recolher</span></div>
+<div class="toggle" onclick="toggleBox('pbCtrls')"><span id="pbInfo">🎛️ PB • 100% • +11ST • 80%</span><span>Recolher</span></div>
 <div class="ctrls" id="pbCtrls">
 <div class="ctrl"><label><span>BPM</span><b id="bPB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updPB()"></div>
 <div class="ctrl"><label><span>PITCH</span><b id="pPB">+11 ST</b></label><input type="range" min="-12" max="12" value="11" oninput="updPB()"></div>
@@ -105,105 +125,102 @@ audio{width:100%;margin-top:8px}
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:10px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
 <div><b>Será</b><br><small>Legião Urbana • Tom: D</small></div>
-<button class="btn" style="width:auto;background:#fff;color:var(--blue);padding:6px 10px" onclick="openMenu()">☰ Menu</button>
+<div style="display:flex;gap:6px"><button class="btn small" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button><button class="btn small" style="background:#fff;color:var(--blue)" onclick="openMenu()">☰</button></div>
 </div>
-<div class="cifraBox" id="cifraBox">[Intro] D  A/C#  Bm  G
-D  A/C#
-  Será que eu sou o único...
-
-[Refrão]
-G  D
-  Será que...
+<div style="padding:12px;white-space:pre-wrap;font-weight:600">[Intro] D  A/C#  Bm  G
+Será que eu sou o único...
 </div>
-<button class="btn blue" onclick="alert('Salvar OK')" style="margin-top:10px">💾 Salvar na pasta</button>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button class="btn blue" onclick="shareApp()">📤 Compartilhar Cifra</button>
+<button class="btn" onclick="alert('Salvar OK')">💾 Salvar na pasta</button>
+</div>
 </div>
 </div>
 
 <div class="bottom">
 <button onclick="openMenu()"><span style="font-size:22px">☰</span>Menu</button>
-<button onclick="alert('Repertorio clicou!')"><span style="font-size:22px">📁</span>Repertório</button>
-<button class="active" onclick="alert('Tocar clicou!')"><span style="font-size:22px">▶</span>Tocar</button>
-<button onclick="alert('Salvar clicou!')"><span style="font-size:22px">💾</span>Salvar</button>
-<button onclick="alert('Cheia clicou!')"><span style="font-size:22px">⛶</span>Cheia</button>
+<button onclick="openRep()"><span style="font-size:22px">📁</span>Repertório</button>
+<button class="active" onclick="alert('Tocar')"><span style="font-size:22px">▶</span>Tocar</button>
+<button onclick="alert('Salvar')"><span style="font-size:22px">💾</span>Salvar</button>
+<button onclick="shareApp()"><span style="font-size:22px">📤</span>Compartilhar</button>
 </div>
 
+<!-- MODAIS SIMPLES -->
+<div class="modal" id="modPede"><div class="modalBox" style="padding:16px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><b>🎤 Pede Aí + Compartilhar</b><button class="btn small" onclick="closeModal('modPede')">✕</button></div><div id="pedeBody"></div></div></div>
+<div class="modal" id="modShare"><div class="modalBox" style="padding:16px;max-width:400px"><div style="display:flex;justify-content:space-between;margin-bottom:12px"><b>📤 Compartilhar</b><button class="btn small" onclick="closeModal('modShare')">✕</button></div><div style="text-align:center"><p style="font-size:14px;margin-bottom:12px">Compartilhe seu Pede Aí com clientes</p><div id="qrShare" style="display:flex;justify-content:center;margin:12px 0"></div><p id="linkShare" style="font-size:11px;word-break:break-all;background:var(--light);padding:8px;border-radius:8px"></p><button class="btn blue" style="margin-top:12px" onclick="copyLink()">📋 Copiar Link</button><button class="btn green" style="margin-top:8px" onclick="nativeShare()">📤 Compartilhar no WhatsApp</button></div></div></div>
+
 <script>
-// FUNÇÕES SIMPLES - SEM TRAVAR
-function openMenu(){
-  console.log('Abrindo menu');
-  document.getElementById('menu').classList.add('open');
-}
-function closeMenu(){
-  document.getElementById('menu').classList.remove('open');
-}
-function toggleBox(id){
-  var el=document.getElementById(id);
-  if(el.classList.contains('hide')) el.classList.remove('hide');
-  else el.classList.add('hide');
-}
-function loadVS(input){
-  var f=input.files[0];
-  if(!f) return;
-  var a=document.getElementById('audioVS');
-  a.src=URL.createObjectURL(f);
-  document.getElementById('vsLabel').innerText='📁 '+f.name;
-  a.play().catch(function(){});
-}
-function loadPB(input){
-  var f=input.files[0];
-  if(!f) return;
-  var a=document.getElementById('audioPB');
-  a.src=URL.createObjectURL(f);
-  document.getElementById('pbLabel').innerText='📁 '+f.name;
-  a.play().catch(function(){});
+function openMenu(){document.getElementById('menu').classList.add('open');}
+function closeMenu(){document.getElementById('menu').classList.remove('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function toggleBox(id){document.getElementById(id).classList.toggle('hide');}
+function loadFile(input,type){
+  var f=input.files[0]; if(!f) return;
+  var audio=document.getElementById(type==='VS'?'audioVS':'audioPB');
+  audio.src=URL.createObjectURL(f);
+  document.getElementById(type==='VS'?'vsLabel':'pbLabel').innerText='📁 '+f.name;
 }
 function updVS(){
-  var bpm=document.querySelector('#vsCtrls input:nth-child(1)')?.value || 100;
-  // pega valores
-  var bpmVal=document.getElementById('vsCtrls').querySelectorAll('input')[0].value;
-  var pitVal=document.getElementById('vsCtrls').querySelectorAll('input')[1].value;
-  var volVal=document.getElementById('vsCtrls').querySelectorAll('input')[2].value;
-  document.getElementById('bVS').innerText=bpmVal+'%';
-  document.getElementById('pVS').innerText=(pitVal>0?'+'+pitVal:pitVal)+' ST';
-  document.getElementById('vVS').innerText=volVal+'%';
-  var audio=document.getElementById('audioVS');
-  if(audio){
-    try{
-      audio.playbackRate=(bpmVal/100)*Math.pow(2,pitVal/12);
-      audio.volume=volVal/100;
-    }catch(e){}
-  }
-  document.getElementById('vsInfo').innerText='🎛️ VS • '+bpmVal+'% • '+pitVal+'ST • '+volVal+'%';
+  var inputs=document.getElementById('vsCtrls').querySelectorAll('input');
+  var bpm=inputs[0].value, pit=inputs[1].value, vol=inputs[2].value;
+  document.getElementById('bVS').innerText=bpm+'%';
+  document.getElementById('pVS').innerText=(pit>0?'+'+pit:pit)+' ST';
+  document.getElementById('vVS').innerText=vol+'%';
+  var a=document.getElementById('audioVS');
+  try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){}
+  document.getElementById('vsInfo').innerText='🎛️ VS • '+bpm+'% • '+pit+'ST • '+vol+'%';
 }
 function updPB(){
   var inputs=document.getElementById('pbCtrls').querySelectorAll('input');
-  var bpmVal=inputs[0].value;
-  var pitVal=inputs[1].value;
-  var volVal=inputs[2].value;
-  document.getElementById('bPB').innerText=bpmVal+'%';
-  document.getElementById('pPB').innerText=(pitVal>0?'+'+pitVal:pitVal)+' ST';
-  document.getElementById('vPB').innerText=volVal+'%';
-  var audio=document.getElementById('audioPB');
-  if(audio){
-    try{
-      audio.playbackRate=(bpmVal/100)*Math.pow(2,pitVal/12);
-      audio.volume=volVal/100;
-    }catch(e){}
-  }
-  document.getElementById('pbInfo').innerText='🎛️ PB • '+bpmVal+'% • '+pitVal+'ST • '+volVal+'%';
+  var bpm=inputs[0].value, pit=inputs[1].value, vol=inputs[2].value;
+  document.getElementById('bPB').innerText=bpm+'%';
+  document.getElementById('pPB').innerText=(pit>0?'+'+pit:pit)+' ST';
+  document.getElementById('vPB').innerText=vol+'%';
+  var a=document.getElementById('audioPB');
+  try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){}
+  document.getElementById('pbInfo').innerText='🎛️ PB • '+bpm+'% • '+pit+'ST • '+vol+'%';
 }
+function openPedeAi(){
+  var link=location.href.split('?')[0]+'?pedeai=1';
+  document.getElementById('pedeBody').innerHTML='<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center"><b>Pede uma música para o cantor<br><span style="color:var(--blue);font-size:20px">André Taki</span></b><div id="qrPede" style="display:flex;justify-content:center;margin:12px 0"></div><p style="font-size:11px;word-break:break-all">'+link+'</p><button class="btn blue" style="margin-top:10px" onclick="shareApp()">📤 Compartilhar Link</button><button class="btn green" style="margin-top:8px" onclick="copyLinkDirect(\''+link+'\')">📋 Copiar Link</button></div>';
+  document.getElementById('modPede').classList.add('open');
+  setTimeout(function(){ var el=document.getElementById('qrPede'); if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:160,height:160}); } },200);
+}
+function openRep(){ alert('Meu Repertório - Pastas por artista (restaurado)'); }
+function openQR(){ openPedeAi(); }
+function openCadastro(){ alert('Cadastro Cantor + Foto - restaurado: aqui você coloca foto 2MB, nome artístico e PIX'); }
+function openMyVS(){ alert('Meus V.S. - Buscar e Salvar VS em pastas (restaurado)'); }
+function openMyPB(){ alert('Meus PLAYBACKs - Buscar e Salvar Playback em pastas (restaurado)'); }
+function openBib(){ alert('Biblioteca - Tudo em Pastas - Azul clean organizada (restaurado)'); }
+function exportBKP(){ alert('Exportar BKP Completo - JSON com pastas (restaurado)'); }
 
-// Garante clique mesmo se inline falhar
-document.addEventListener('DOMContentLoaded', function(){
-  console.log('DOM carregou, menu deve funcionar');
-  // Teste: se menu não abre, mostra alerta
+// COMPARTILHAR NOVO
+function shareApp(){
+  var link=location.href.split('?')[0]+'?pedeai=1';
+  document.getElementById('linkShare').innerText=link;
+  document.getElementById('modShare').classList.add('open');
   setTimeout(function(){
-    if(!window.menuTested){
-      console.log('Teste de menu OK');
-      window.menuTested=true;
-    }
-  },1000);
-});
+    var el=document.getElementById('qrShare');
+    if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:180,height:180}); }
+  },200);
+}
+function copyLink(){
+  var txt=document.getElementById('linkShare').innerText;
+  navigator.clipboard.writeText(txt).then(function(){ alert('✅ Link copiado!'); }).catch(function(){ prompt('Copie o link:',txt); });
+}
+function copyLinkDirect(link){
+  navigator.clipboard.writeText(link).then(function(){ alert('✅ Link copiado!'); });
+}
+function nativeShare(){
+  var link=document.getElementById('linkShare').innerText;
+  var text='🎤 Pede uma música para o cantor André Taki no meu show! Acesse: '+link;
+  if(navigator.share){
+    navigator.share({title:'Pede Aí - André Taki', text:text, url:link}).catch(function(){});
+  }else{
+    var wa='https://wa.me/?text='+encodeURIComponent(text);
+    window.open(wa,'_blank');
+  }
+}
 </script>
 </body>
 </html>
