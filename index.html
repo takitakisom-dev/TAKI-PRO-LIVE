@@ -3,120 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME v12 FINAL</title>
+<title>SHOWTIME v14 AZUL E BRANCO</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--blue:#3F51B5;--blue-c:#1E3A8A;--gold:#D4B483;--border:#232323;--size:14px;--bg:#FFFFFF;--font:#000000;--fam:'Courier New',monospace}
-body{background:#0A0A0A;color:#fff;font-family:Inter,system-ui}
-main{padding:12px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
-.card{background:#161616;border:1px solid var(--border);border-radius:14px;padding:14px}
-.cifra-card{padding:0!important;background:var(--bg)!important;border-radius:12px!important;overflow:hidden;display:flex;flex-direction:column;height:85vh}
+:root{--blue:#3F51B5;--blue-dark:#303F9F;--blue-light:#E8EAF6;--blue-c:#1E3A8A;--size:14px;--bg:#FFFFFF;--font:#212121;--fam:'Courier New',monospace}
+body{background:#E8EAF6;color:#212121;font-family:Inter,system-ui;overflow-x:hidden}
+main{padding:12px;display:grid;grid-template-columns:1fr 1fr 460px;gap:12px;padding-bottom:100px}
+.top{grid-column:1/-1;background:var(--blue);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(63,81,181,.3)}
+.top b{color:#fff;letter-spacing:1px;font-size:14px}
+.card{background:#fff;border:1px solid #C5CAE9;border-radius:14px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.card.player{padding:14px}
+.btn{padding:10px 16px;border-radius:20px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-weight:700;cursor:pointer;width:100%;font-size:12px}
+.btn.gold{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.small{padding:6px 12px;font-size:11px;width:auto}
+.file{font-size:11px;color:#5C6BC0;background:var(--blue-light);padding:8px 10px;border-radius:8px;margin:8px 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:500}
+audio{width:100%;height:36px;margin:6px 0}
+.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.ctrl{background:#F5F7FF;border:1px solid #C5CAE9;border-radius:10px;padding:10px}
+.ctrl label{display:flex;justify-content:space-between;font-size:9px;color:#5C6BC0;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.ctrl label b{color:var(--blue);font-size:11px}
+.ctrl input{width:100%;accent-color:var(--blue);height:5px}
+.cifra-card{padding:0!important;background:var(--bg)!important;border-radius:14px!important;overflow:hidden;display:flex;flex-direction:column;height:85vh;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.12);border:1px solid #C5CAE9!important}
+.cifra-card.fullscreen{position:fixed!important;inset:0;z-index:5000;height:100vh!important;border-radius:0!important;width:100vw!important}
 .cifra-head{background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .cifra-head .t{font-weight:700;font-size:16px}
 .cifra-head .a{font-size:12px;opacity:.9}
-.cifra-box{flex:1;background:var(--bg);padding:16px 16px 80px;overflow-y:auto;overflow-x:hidden}
-.linha{font-family:var(--fam);font-size:var(--size);white-space:pre-wrap;word-break:break-word;line-height:1.35;margin:0}
+.cifra-box{flex:1;background:var(--bg);padding:18px 18px 90px;overflow-y:auto}
+.linha{font-family:var(--fam);font-size:var(--size);white-space:pre-wrap;word-break:break-word;line-height:1.4}
 .acorde{color:var(--blue-c);font-weight:800}
 .acorde.no-bold{font-weight:400}
 .acorde.no-color{color:var(--font)}
 .letra{color:var(--font);font-weight:600}
-.secao{color:var(--font);font-weight:700;margin-top:18px;margin-bottom:6px}
-.vazia{height:14px}
-.bottom{position:sticky;bottom:0;background:#5A6B7D;display:flex;height:52px;z-index:20}
-.bottom button{flex:1;background:transparent;border:none;color:#fff;font-size:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.bottom button span{font-size:20px}
-.bottom button.active{background:var(--blue);color:#fff}
-.btn{padding:10px 16px;border-radius:20px;border:1px solid var(--gold);background:transparent;color:var(--gold);font-weight:700;cursor:pointer;width:100%}
-.btn.gold{background:var(--gold);color:#000}
-.pref{position:fixed;inset:0;background:#fff;z-index:999;display:none;flex-direction:column;overflow-y:auto}
+.secao{color:var(--blue);font-weight:700;margin-top:20px;margin-bottom:8px;font-size:13px;text-transform:uppercase}
+.vazia{height:12px}
+.bottom{position:absolute;bottom:0;left:0;right:0;background:#fff;display:flex;height:60px;z-index:20;border-top:2px solid var(--blue-light);box-shadow:0 -2px 8px rgba(0,0,0,.08)}
+.bottom button{flex:1;background:#fff;border:none;color:#757575;font-size:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:500}
+.bottom button span{font-size:22px}
+.bottom button.active{background:var(--blue);color:#fff;border-radius:0}
+.full-btn{position:absolute;top:10px;right:10px;background:var(--blue);color:#fff;border:none;border-radius:20px;padding:6px 12px;font-size:11px;cursor:pointer;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.pref{position:fixed;inset:0;background:#fff;z-index:9999;display:none;flex-direction:column;overflow-y:auto}
 .pref.open{display:flex}
 .pref-head{background:var(--blue);color:#fff;padding:14px 16px;display:flex;gap:16px;align-items:center;height:56px}
-.pref-head b{font-size:18px;font-weight:500}
-.p-icon{width:100%;display:flex;justify-content:center;padding:20px 0 10px}
-.p-circle{width:110px;height:110px;background:#E8EAF6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:50px}
-.p-title{text-align:center;color:var(--blue);font-size:22px;font-weight:500}
-.p-sub{text-align:center;color:#757575;font-size:13px;padding:8px 24px 20px}
-.p-sec{color:#FF5722;font-size:14px;font-weight:500;padding:16px 16px 8px;border-top:1px solid #EEE;margin-top:8px}
-.p-item{display:flex;align-items:center;gap:16px;padding:14px 16px;cursor:pointer}
-.p-item:active{background:#F5F5F5}
-.p-item-icon{width:24px;display:flex;justify-content:center;color:#616161;font-size:18px}
+.p-sec{color:var(--blue);font-size:14px;font-weight:700;padding:16px 16px 8px;border-top:1px solid #E8EAF6;margin-top:8px;text-transform:uppercase;letter-spacing:.5px}
+.p-item{display:flex;align-items:center;gap:16px;padding:14px 16px;cursor:pointer;border-bottom:1px solid #F5F7FF}
+.p-item:active{background:#E8EAF6}
 .p-item-text{flex:1}
-.p-item-title{font-size:15px;color:#212121}
+.p-item-title{font-size:15px;color:#212121;font-weight:500}
 .p-item-sub{font-size:13px;color:#757575}
-.p-check{width:22px;height:22px;border:2px solid #757575;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;color:transparent}
+.p-check{width:22px;height:22px;border:2px solid #9FA8DA;border-radius:4px;display:flex;align-items:center;justify-content:center;color:transparent;background:#fff}
 .p-check.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.p-dot{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;display:none;align-items:center;justify-content:center;padding:12px}
+.p-dot{width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #C5CAE9}
+.modal{position:fixed;inset:0;background:rgba(63,81,181,.5);backdrop-filter:blur(4px);z-index:10000;display:none;align-items:center;justify-content:center;padding:12px}
 .modal.open{display:flex}
-.modal-box{background:#1A1A1A;border:1px solid var(--border);border-radius:16px;width:100%;max-width:520px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
-.modal-h{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:#161616;border-bottom:1px solid var(--border)}
-.modal-b{padding:14px 16px;flex:1;overflow-y:auto}
-.modal-b label{font-size:10px;color:#6B6B6B;text-transform:uppercase;margin:12px 0 6px;display:block}
-.modal-b input,.modal-b textarea{width:100%;background:#0E0E0E;border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:#fff;outline:none}
-.modal-b textarea{height:220px;font-family:monospace;font-size:13px;resize:none}
-.modal-f{padding:14px 16px;display:flex;gap:10px;background:#161616;border-top:1px solid var(--border)}
-.file{font-size:11px;color:#6B6B6B;background:#111;padding:8px 10px;border-radius:8px;margin:8px 0}
-audio{width:100%;height:36px}
-@media(max-width:900px){main{grid-template-columns:1fr!important} .cifra-card{height:78vh}}
+.modal-box{background:#fff;border-radius:16px;width:100%;max-width:520px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+@media(max-width:1100px){main{grid-template-columns:1fr!important} .cifra-card{height:75vh} .cifra-card.fullscreen{height:100vh!important}}
 </style>
 </head>
 <body>
+<main id="main">
+<div class="top"><b>🎸 SHOWTIME PRO • AZUL E BRANCO</b><div style="display:flex;gap:8px"><button class="btn small gold" style="background:#fff;color:var(--blue)" onclick="toggleFull()">⛶ TELA CHEIA</button><button class="btn small" style="background:#fff;color:var(--blue);border-color:#fff" onclick="openPref()">⚙️</button></div></div>
 
-<main>
-<div class="card"><button class="btn gold" onclick="vs.click()">🔍 Buscar VS</button><input type="file" id="vs" hidden accept=".mp3,.wav,.m4a" onchange="load(this,'VS')"><div class="file" id="fVS">📁 Nenhum VS</div><audio id="aVS" controls></audio></div>
-<div class="card"><button class="btn" onclick="pb.click()">🔍 Buscar Playback</button><input type="file" id="pb" hidden accept=".mp3,.wav,.m4a" onchange="load(this,'PB')"><div class="file" id="fPB">📁 Nenhum Playback</div><audio id="aPB" controls></audio></div>
+<div class="card player" id="cardVS">
+<button class="btn gold" onclick="document.getElementById('vs').click()">🔍 Buscar VS</button>
+<input type="file" id="vs" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadFile(this,'VS')">
+<div class="file" id="fVS">📁 Nenhum VS carregado</div>
+<audio id="aVS" controls crossorigin="anonymous"></audio>
+<div class="ctrls">
+<div class="ctrl"><label><span>BPM</span><b id="lBpmVS">100%</b></label><input type="range" min="50" max="200" value="100" id="bpmVS" oninput="updateAudio('VS')"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="lPitVS">0</b></label><input type="range" min="-12" max="12" value="0" id="pitVS" oninput="updateAudio('VS')"></div>
+<div class="ctrl"><label><span>GRAVE</span><b id="lBassVS">0dB</b></label><input type="range" min="-12" max="12" value="0" id="bassVS" oninput="updateAudio('VS')"></div>
+<div class="ctrl"><label><span>AGUDO</span><b id="lTreVS">0dB</b></label><input type="range" min="-12" max="12" value="0" id="treVS" oninput="updateAudio('VS')"></div>
+<div class="ctrl"><label><span>DELAY</span><b id="lDelVS">0%</b></label><input type="range" min="0" max="100" value="0" id="delVS" oninput="updateAudio('VS')"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="lVolVS">80%</b></label><input type="range" min="0" max="100" value="80" id="volVS" oninput="updateAudio('VS')"></div>
+</div>
+</div>
 
-<div class="card cifra-card">
-<div class="cifra-head"><div><div class="t" id="hT">Primeiros Erros</div><div class="a" id="hA">Capital Inicial</div></div><div style="display:flex;gap:12px;font-size:18px"><span onclick="openPref()" style="cursor:pointer">⚙️</span><span onclick="openM()">✎</span></div></div>
+<div class="card player" id="cardPB">
+<button class="btn" onclick="document.getElementById('pb').click()">🔍 Buscar Playback</button>
+<input type="file" id="pb" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadFile(this,'PB')">
+<div class="file" id="fPB">📁 Nenhum Playback</div>
+<audio id="aPB" controls crossorigin="anonymous"></audio>
+<div class="ctrls">
+<div class="ctrl"><label><span>BPM</span><b id="lBpmPB">100%</b></label><input type="range" min="50" max="200" value="100" id="bpmPB" oninput="updateAudio('PB')"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="lPitPB">0</b></label><input type="range" min="-12" max="12" value="0" id="pitPB" oninput="updateAudio('PB')"></div>
+<div class="ctrl"><label><span>GRAVE</span><b id="lBassPB">0dB</b></label><input type="range" min="-12" max="12" value="0" id="bassPB" oninput="updateAudio('PB')"></div>
+<div class="ctrl"><label><span>AGUDO</span><b id="lTrePB">0dB</b></label><input type="range" min="-12" max="12" value="0" id="trePB" oninput="updateAudio('PB')"></div>
+<div class="ctrl"><label><span>DELAY</span><b id="lDelPB">0%</b></label><input type="range" min="0" max="100" value="0" id="delPB" oninput="updateAudio('PB')"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="lVolPB">80%</b></label><input type="range" min="0" max="100" value="80" id="volPB" oninput="updateAudio('PB')"></div>
+</div>
+</div>
+
+<div class="card cifra-card" id="cifraCard">
+<div class="cifra-head"><div><div class="t" id="hT">Primeiros Erros</div><div class="a" id="hA">Capital Inicial • Tom: D</div></div><div style="display:flex;gap:12px"><span onclick="openPref()" style="cursor:pointer">⚙️</span><span onclick="openM()" style="cursor:pointer">✎</span></div></div>
+<button class="full-btn" onclick="toggleFull()" id="fullBtn">⛶ Cheia</button>
 <div class="cifra-box" id="box"></div>
 <div class="bottom">
-<button id="bPlay" class="active" onclick="toggle()"><span>▶</span>Tocar</button>
+<button id="bPlay" class="active" onclick="toggleScroll()"><span>▶</span>Tocar</button>
 <button onclick="dl()"><span>⬇</span>Baixar</button>
 <button onclick="size(1)"><span>＋</span>Aumentar</button>
 <button onclick="size(-1)"><span>－</span>Diminuir</button>
 <button onclick="openM()"><span>✎</span>Editar</button>
-<button onclick="openPref()"><span>♫</span>Cifra</button>
+<button onclick="toggleFull()"><span>⛶</span>Cheia</button>
 </div>
 </div>
 </main>
 
-<div class="modal" id="mod" onclick="if(event.target===this)closeM()"><div class="modal-box"><div class="modal-h"><b style="color:var(--gold)">✍️ NOVA CIFRA</b><button class="btn" style="width:auto;padding:6px 12px" onclick="closeM()">✕</button></div><div class="modal-b"><label>Música *</label><input id="sT"><label>Artista *</label><input id="sA"><label>Cifra</label><textarea id="sC"></textarea></div><div class="modal-f"><button class="btn" onclick="closeM()">Cancelar</button><button class="btn gold" onclick="save()">SALVAR</button></div></div></div>
+<div class="modal" id="mod"><div class="modal-box"><div style="padding:14px 16px;display:flex;justify-content:space-between;background:var(--blue);color:#fff"><b>✍️ NOVA CIFRA</b><button onclick="closeM()" style="background:#fff;color:var(--blue);border:none;border-radius:20px;padding:6px 12px;cursor:pointer">✕</button></div><div style="padding:14px;background:#fff"><label style="font-size:10px;color:var(--blue);font-weight:700">Música *</label><input id="sT" style="width:100%;background:#F5F7FF;border:1px solid #C5CAE9;border-radius:10px;padding:12px;color:#212121;margin:6px 0 12px"><label style="font-size:10px;color:var(--blue);font-weight:700">Artista *</label><input id="sA" style="width:100%;background:#F5F7FF;border:1px solid #C5CAE9;border-radius:10px;padding:12px;color:#212121;margin:6px 0 12px"><label style="font-size:10px;color:var(--blue);font-weight:700">Cifra</label><textarea id="sC" style="width:100%;height:220px;background:#F5F7FF;border:1px solid #C5CAE9;border-radius:12px;padding:14px;color:#212121;font-family:monospace"></textarea><div style="display:flex;gap:10px;margin-top:12px"><button class="btn" onclick="closeM()">Cancelar</button><button class="btn gold" onclick="save()">SALVAR</button></div></div></div></div>
 
 <div class="pref" id="pref">
-<div class="pref-head"><span onclick="closePref()" style="cursor:pointer;font-size:24px">←</span><b>Preferências</b></div>
-<div class="p-icon"><div class="p-circle">🔧</div></div>
-<div class="p-title">Personalize sua experiencia</div>
-<div class="p-sub">Ajuste busca, exibição, reprodução e limpeza das cifras em um só lugar.</div>
-
+<div class="pref-head"><span onclick="closePref()" style="cursor:pointer;font-size:24px">←</span><b>Preferências • Azul e Branco</b></div>
+<div style="display:flex;justify-content:center;padding:20px 0 10px"><div style="width:110px;height:110px;background:#E8EAF6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:50px">🔧</div></div>
+<div style="text-align:center;color:var(--blue);font-size:22px;font-weight:600">Personalize sua experiencia</div>
+<div style="text-align:center;color:#757575;font-size:13px;padding:8px 24px 20px">Tema azul e branco, limpo e profissional igual sua prévia.</div>
 <div class="p-sec">Plano de fundo</div>
-<div class="p-item" onclick="bg()"><div class="p-item-icon">🎨</div><div class="p-item-text"><div class="p-item-title">Cor de fundo</div><div class="p-item-sub" id="lBg">#FFFFFF</div></div><div class="p-dot" id="dBg" style="background:#fff"></div></div>
-<div class="p-item" onclick="fc()"><div class="p-item-icon">A̲</div><div class="p-item-text"><div class="p-item-title">Cor da fonte</div><div class="p-item-sub" id="lFc">#000000</div></div><div class="p-dot" id="dFc" style="background:#000"></div></div>
-<div class="p-item" onclick="size(1)"><div class="p-item-icon">T</div><div class="p-item-text"><div class="p-item-title">Tamanho da fonte</div><div class="p-item-sub" id="lSz">14px</div></div></div>
-<div class="p-item" onclick="tog('colorir')"><div class="p-item-icon">🎨</div><div class="p-item-text"><div class="p-item-title">Colorir acorde</div><div class="p-item-sub">Destaca os acordes</div></div><div class="p-check on" id="cColorir">✓</div></div>
-<div class="p-item" onclick="cc()"><div class="p-item-icon">🎨</div><div class="p-item-text"><div class="p-item-title">Cor do acorde</div><div class="p-item-sub" id="lCc">#1E3A8A</div></div><div class="p-dot" id="dCc" style="background:#1E3A8A"></div></div>
-<div class="p-item" onclick="tog('negrito')"><div class="p-item-icon"><b>B</b></div><div class="p-item-text"><div class="p-item-title">Acorde em negrito</div><div class="p-item-sub">Coloca acorde em negrito</div></div><div class="p-check on" id="cNegrito">✓</div></div>
-
+<div class="p-item" onclick="bg()"><div>🎨</div><div class="p-item-text"><div class="p-item-title">Cor de fundo</div><div class="p-item-sub" id="lBg">#FFFFFF</div></div><div class="p-dot" id="dBg" style="background:#fff"></div></div>
+<div class="p-item" onclick="fc()"><div>A̲</div><div class="p-item-text"><div class="p-item-title">Cor da fonte</div><div class="p-item-sub" id="lFc">#212121</div></div><div class="p-dot" id="dFc" style="background:#212121"></div></div>
+<div class="p-item" onclick="size(1)"><div>T</div><div class="p-item-text"><div class="p-item-title">Tamanho da fonte</div><div class="p-item-sub" id="lSz">14px</div></div></div>
+<div class="p-item" onclick="tog('colorir')"><div>🎨</div><div class="p-item-text"><div class="p-item-title">Colorir acorde</div><div class="p-item-sub">Azul destaque</div></div><div class="p-check on" id="cColorir">✓</div></div>
+<div class="p-item" onclick="cc()"><div>🎨</div><div class="p-item-text"><div class="p-item-title">Cor do acorde</div><div class="p-item-sub" id="lCc">#1E3A8A</div></div><div class="p-dot" id="dCc" style="background:#1E3A8A"></div></div>
+<div class="p-item" onclick="tog('negrito')"><div><b>B</b></div><div class="p-item-text"><div class="p-item-title">Acorde em negrito</div></div><div class="p-check on" id="cNegrito">✓</div></div>
 <div class="p-sec">Tocando a música</div>
-<div class="p-item" onclick="sp()"><div class="p-item-icon">▶️</div><div class="p-item-text"><div class="p-item-title">Velocidade Rolagem Automática</div><div class="p-item-sub" id="lSp">muito lento (1)</div></div></div>
-<div class="p-item" onclick="tog('toque')"><div class="p-item-icon">👆</div><div class="p-item-text"><div class="p-item-title">Usar toque rápido</div><div class="p-item-sub">Tocar na tela acelera a rolagem</div></div><div class="p-check" id="cToque"></div></div>
-
+<div class="p-item" onclick="sp()"><div>▶️</div><div class="p-item-text"><div class="p-item-title">Velocidade Rolagem Automática</div><div class="p-item-sub" id="lSp">muito lento (1)</div></div></div>
+<div class="p-item" onclick="tog('toque')"><div>👆</div><div class="p-item-text"><div class="p-item-title">Usar toque rápido</div></div><div class="p-check" id="cToque"></div></div>
 <div class="p-sec">Limpeza da música</div>
-<div class="p-item" onclick="tog('limpeza')"><div class="p-item-icon">✨</div><div class="p-item-text"><div class="p-item-title">Executar Limpeza ao Tocar</div><div class="p-item-sub">Remove sujeiras ao tocar</div></div><div class="p-check on" id="cLimpeza">✓</div></div>
-<div class="p-item" onclick="tog('riffs')"><div class="p-item-icon">🎸</div><div class="p-item-text"><div class="p-item-title">Esconder riffs</div><div class="p-item-sub">Esconde tablaturas e riffs</div></div><div class="p-check on" id="cRiffs">✓</div></div>
-<div class="p-item" onclick="tog('extra')"><div class="p-item-icon">📄</div><div class="p-item-text"><div class="p-item-title">Esconder informações extra</div><div class="p-item-sub">Esconde tom, capotraste</div></div><div class="p-check" id="cExtra"></div></div>
-<div class="p-item" onclick="tog('brancas')"><div class="p-item-icon">␣</div><div class="p-item-text"><div class="p-item-title">Esconde todas as linhas em branco</div><div class="p-item-sub">Remove espaços vazios</div></div><div class="p-check" id="cBrancas"></div></div>
+<div class="p-item" onclick="tog('limpeza')"><div>✨</div><div class="p-item-text"><div class="p-item-title">Executar Limpeza ao Tocar</div></div><div class="p-check on" id="cLimpeza">✓</div></div>
+<div class="p-item" onclick="tog('riffs')"><div>🎸</div><div class="p-item-text"><div class="p-item-title">Esconder riffs</div></div><div class="p-check on" id="cRiffs">✓</div></div>
+<div class="p-item" onclick="tog('extra')"><div>📄</div><div class="p-item-text"><div class="p-item-title">Esconder informações extra</div></div><div class="p-check" id="cExtra"></div></div>
+<div class="p-item" onclick="tog('brancas')"><div>␣</div><div class="p-item-text"><div class="p-item-title">Esconde linhas em branco</div></div><div class="p-check" id="cBrancas"></div></div>
 <div style="height:90px"></div>
 </div>
 
 <script>
-let sz=14,spd=1,scroll=null,playing=false,cfg={colorir:true,negrito:true,toque:false,limpeza:true,riffs:true,extra:false,brancas:false};
+let sz=14,spd=1,scrollInt=null,playing=false,full=false,cfg={colorir:true,negrito:true,toque:false,limpeza:true,riffs:true,extra:false,brancas:false};
+let audioCtx=null, tracks={VS:{},PB:{}};
 let song={title:'Primeiros Erros',artist:'Capital Inicial',cifra:`tom: D
 [Intro] D5  D  E/B
         D5  D  E/B
         D9  A11/C#  G/B
-
-[Riff] E|-------- Tab -------
-       B|-------- Riff -------
 
 [Primeira Parte]
 
@@ -124,46 +147,31 @@ D5         D7M(9)              D5
      Meu caminho é cada manhã
                D7M(9)                      Bm7(11)
      Não procure saber onde estou
-               Bm7(9/11)                     Bm7(11)
-Meu destino não é de ninguém
-                       A7(4)                         D5
-E eu não deixo os meus passos no chão
-
-Informação extra: Capo 2ª casa
 
 [Refrão]
                  G4+(6)                  G7M
 Se o meu corpo virasse sol`};
-
-function load(i,t){const f=i.files[0];if(!f)return;const a=document.getElementById(t==='VS'?'aVS':'aPB');a.src=URL.createObjectURL(f);a.load();document.getElementById(t==='VS'?'fVS':'fPB').innerText='📁 '+f.name;a.oncanplay=()=>a.play().catch(()=>{});}
-function render(t){
- let L=t.split('\n');
- if(cfg.limpeza){L=L.filter(l=>{if(cfg.riffs&&/^\[Riff\]|^\s*[EBGDAe]\||Tab|Riff/i.test(l))return false;if(cfg.extra&&/Informação extra|Capo|Afinação|^tom:/i.test(l))return false;if(cfg.brancas&&!l.trim())return false;return true;});}
- const b=document.getElementById('box');b.innerHTML='';
- L.forEach(raw=>{
-  if(!raw.trim()){if(cfg.brancas)return;const d=document.createElement('div');d.className='linha vazia';b.appendChild(d);return;}
-  const tr=raw.trim();
-  if(/^\[.*\]$/.test(tr)||tr.toLowerCase().startsWith('[intro]')){const d=document.createElement('div');d.className='linha secao';d.textContent=raw;b.appendChild(d);return;}
-  if(/^tom:/i.test(tr)&&cfg.extra&&cfg.limpeza)return;
-  const isChord=/^[A-G0-9#\/\(\)b\+M\s]+$/.test(raw.trim())&&/[A-G]/.test(raw)&&!/ [a-z]{4,}/.test(raw);
-  const d=document.createElement('div');d.className='linha '+(isChord?'acorde'+(cfg.negrito?'':' no-bold')+(cfg.colorir?'':' no-color'):'letra');d.textContent=raw;b.appendChild(d);
- });
-}
-function openM(){document.getElementById('mod').classList.add('open');sT.value=song.title;sA.value=song.artist;sC.value=song.cifra;}
-function closeM(){document.getElementById('mod').classList.remove('open');}
+function ensureCtx(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}
+function initTrack(id){ensureCtx();const a=document.getElementById(id==='VS'?'aVS':'aPB');if(tracks[id].src) return;const src=audioCtx.createMediaElementSource(a);const bass=audioCtx.createBiquadFilter();bass.type='lowshelf';bass.frequency.value=320;const tre=audioCtx.createBiquadFilter();tre.type='highshelf';tre.frequency.value=3200;const delay=audioCtx.createDelay(2.0);delay.delayTime.value=0.35;const delayGain=audioCtx.createGain();delayGain.gain.value=0;const gain=audioCtx.createGain();gain.gain.value=0.8;src.connect(bass);bass.connect(tre);tre.connect(gain);tre.connect(delay);delay.connect(delayGain);delayGain.connect(gain);delayGain.connect(delay);gain.connect(audioCtx.destination);tracks[id]={audio:a,src,bass,tre,del:delay,gain,delayGain};}
+function loadFile(input,type){const f=input.files[0];if(!f)return;const a=document.getElementById(type==='VS'?'aVS':'aPB');a.src=URL.createObjectURL(f);a.load();document.getElementById(type==='VS'?'fVS':'fPB').innerText='📁 '+f.name;a.oncanplay=()=>{initTrack(type);updateAudio(type);a.play().catch(()=>{});};}
+function updateAudio(type){ensureCtx();initTrack(type);const bpm=parseInt(document.getElementById(type==='VS'?'bpmVS':'bpmPB').value);const pit=parseInt(document.getElementById(type==='VS'?'pitVS':'pitPB').value);const bass=parseInt(document.getElementById(type==='VS'?'bassVS':'bassPB').value);const tre=parseInt(document.getElementById(type==='VS'?'treVS':'trePB').value);const del=parseInt(document.getElementById(type==='VS'?'delVS':'delPB').value);const vol=parseInt(document.getElementById(type==='VS'?'volVS':'volPB').value);const a=tracks[type].audio||document.getElementById(type==='VS'?'aVS':'aPB');a.playbackRate=(bpm/100)*Math.pow(2,pit/12);if(tracks[type].bass)tracks[type].bass.gain.value=bass;if(tracks[type].tre)tracks[type].tre.gain.value=tre;if(tracks[type].delayGain)tracks[type].delayGain.gain.value=del/100*0.6;if(tracks[type].gain)tracks[type].gain.gain.value=vol/100;else a.volume=vol/100;document.getElementById(type==='VS'?'lBpmVS':'lBpmPB').innerText=bpm+'%';document.getElementById(type==='VS'?'lPitVS':'lPitPB').innerText=(pit>0?'+'+pit:pit)+' st';document.getElementById(type==='VS'?'lBassVS':'lBassPB').innerText=bass+'dB';document.getElementById(type==='VS'?'lTreVS':'lTrePB').innerText=tre+'dB';document.getElementById(type==='VS'?'lDelVS':'lDelPB').innerText=del+'%';document.getElementById(type==='VS'?'lVolVS':'lVolPB').innerText=vol+'%';}
+function render(t){let L=t.split('\n');if(cfg.limpeza){L=L.filter(l=>{if(cfg.riffs&&/^\[Riff\]|^\s*[EBGDAe]\||Tab|Riff/i.test(l))return false;if(cfg.extra&&/Informação extra|Capo|Afinação|^tom:/i.test(l))return false;if(cfg.brancas&&!l.trim())return false;return true;});}const b=document.getElementById('box');b.innerHTML='';L.forEach(raw=>{if(!raw.trim()){if(cfg.brancas)return;const d=document.createElement('div');d.className='linha vazia';b.appendChild(d);return;}const tr=raw.trim();if(/^\[.*\]$/.test(tr)){const d=document.createElement('div');d.className='linha secao';d.textContent=raw;b.appendChild(d);return;}const isChord=/^[A-G0-9#\/\(\)b\+M\s]+$/.test(raw.trim())&&/[A-G]/.test(raw)&&!/ [a-z]{4,}/.test(raw);const d=document.createElement('div');d.className='linha '+(isChord?'acorde'+(cfg.negrito?'':' no-bold')+(cfg.colorir?'':' no-color'):'letra');d.textContent=raw;b.appendChild(d);});}
+function toggleFull(){full=!full;const card=document.getElementById('cifraCard');const vs=document.getElementById('cardVS');const pb=document.getElementById('cardPB');if(full){card.classList.add('fullscreen');vs.style.display='none';pb.style.display='none';document.getElementById('main').style.padding='0';fullBtn.innerText='✕ Sair';}else{card.classList.remove('fullscreen');vs.style.display='block';pb.style.display='block';document.getElementById('main').style.padding='12px';fullBtn.innerText='⛶ Cheia';}}
+function openM(){mod.classList.add('open');sT.value=song.title;sA.value=song.artist;sC.value=song.cifra;}
+function closeM(){mod.classList.remove('open');}
 function save(){if(!sT.value.trim()||!sA.value.trim()||!sC.value.trim())return alert('Preencha!');song.title=sT.value.trim();song.artist=sA.value.trim();song.cifra=sC.value;hT.innerText=song.title;hA.innerText=song.artist;render(song.cifra);closeM();}
-function size(d){sz=Math.max(10,Math.min(24,sz+d));document.documentElement.style.setProperty('--size',sz+'px');document.getElementById('lSz').innerText=sz+'px';}
-function openPref(){document.getElementById('pref').classList.add('open');}
-function closePref(){document.getElementById('pref').classList.remove('open');}
+function size(d){sz=Math.max(10,Math.min(28,sz+d));document.documentElement.style.setProperty('--size',sz+'px');lSz.innerText=sz+'px';}
+function openPref(){pref.classList.add('open');}
+function closePref(){pref.classList.remove('open');}
 function tog(k){cfg[k]=!cfg[k];const el=document.getElementById('c'+k.charAt(0).toUpperCase()+k.slice(1));if(el){if(cfg[k]){el.classList.add('on');el.innerText='✓';}else{el.classList.remove('on');el.innerText='';}}render(song.cifra);}
-function bg(){const c=['#FFFFFF','#FFFBF0','#000000','#E8F5E9'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#FFFFFF');i=(i+1)%c.length;document.documentElement.style.setProperty('--bg',c[i]);lBg.innerText=c[i];dBg.style.background=c[i];}
-function fc(){const c=['#000000','#1E3A8A','#B71C1C'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--font').trim()||'#000000');i=(i+1)%c.length;document.documentElement.style.setProperty('--font',c[i]);lFc.innerText=c[i];dFc.style.background=c[i];render(song.cifra);}
-function cc(){const c=['#1E3A8A','#B71C1C','#2E7D32','#FF5722'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--blue-c').trim()||'#1E3A8A');i=(i+1)%c.length;document.documentElement.style.setProperty('--blue-c',c[i]);lCc.innerText=c[i];dCc.style.background=c[i];render(song.cifra);}
-function sp(){spd=spd%4+1;const lbs=['','muito lento','lento','medio','rapido'];document.getElementById('lSp').innerText=lbs[spd]+' ('+spd+')';}
-function toggle(){const b=document.getElementById('bPlay');if(playing){clearInterval(scroll);playing=false;b.innerHTML='<span>▶</span>Tocar';b.classList.add('active');}else{playing=true;b.innerHTML='<span>⏸</span>Pausar';b.classList.remove('active');b.style.background='#C62828';const box=document.getElementById('box');scroll=setInterval(()=>{box.scrollTop+=[0,0.6,1.4,2.8,4.2][spd];},40);}}
+function bg(){const c=['#FFFFFF','#F5F7FF','#E8EAF6'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()||'#FFFFFF');i=(i+1)%c.length;document.documentElement.style.setProperty('--bg',c[i]);lBg.innerText=c[i];dBg.style.background=c[i];}
+function fc(){const c=['#212121','#1E3A8A','#B71C1C'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--font').trim()||'#212121');i=(i+1)%c.length;document.documentElement.style.setProperty('--font',c[i]);lFc.innerText=c[i];dFc.style.background=c[i];render(song.cifra);}
+function cc(){const c=['#1E3A8A','#B71C1C','#2E7D32','#303F9F'];let i=c.indexOf(getComputedStyle(document.documentElement).getPropertyValue('--blue-c').trim()||'#1E3A8A');i=(i+1)%c.length;document.documentElement.style.setProperty('--blue-c',c[i]);lCc.innerText=c[i];dCc.style.background=c[i];render(song.cifra);}
+function sp(){spd=spd%4+1;const lbs=['','muito lento','lento','medio','rapido'];lSp.innerText=lbs[spd]+' ('+spd+')';}
+function toggleScroll(){const b=bPlay;if(playing){clearInterval(scrollInt);playing=false;b.innerHTML='<span>▶</span>Tocar';b.classList.add('active');b.style.background='';}else{playing=true;b.innerHTML='<span>⏸</span>Pausar';b.classList.remove('active');b.style.background='#C62828';const box=document.getElementById('box');scrollInt=setInterval(()=>{box.scrollTop+=[0,0.6,1.4,2.8,4.2][spd];},40);}}
 function dl(){const bl=new Blob([song.cifra],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=song.title+'.txt';a.click();}
-document.getElementById('aVS').volume=0.8;document.getElementById('aPB').volume=0.8;render(song.cifra);
-document.getElementById('box').addEventListener('click',()=>{if(cfg.toque&&playing)document.getElementById('box').scrollTop+=80;});
+render(song.cifra);
+box.addEventListener('click',()=>{if(cfg.toque&&playing)box.scrollTop+=80;});
 </script>
 </body>
 </html>
