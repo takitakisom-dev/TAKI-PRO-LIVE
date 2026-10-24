@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SHOWTIME v5.1 PROFISSIONAL</title>
+<title>SHOWTIME v5.2 PROFISSIONAL ZERO GAP</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box} html,body{overflow-x:hidden!important;width:100%}
-:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#B45309;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:14px;--lyric-size:16px}
+:root{--bg:#0A0A0A;--card:#161616;--card2:#1E1E1E;--gold:#D4B483;--orange:#B45309;--white:#FAFAFA;--gray:#6B6B6B;--border:#232323;--chord-size:13px;--lyric-size:15px}
 body{background:var(--bg);color:var(--white);font-family:Inter,system-ui}
 aside{width:240px;background:var(--card);border-right:1px solid var(--border);padding:20px 0;position:fixed;height:100vh;z-index:100;transition:.3s}
 main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 420px;gap:12px}
@@ -29,23 +29,24 @@ main{margin-left:240px;padding:12px;display:grid;grid-template-columns:1fr 1fr 4
 .stepper button{width:34px;height:34px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .stepper .val{min-width:40px;text-align:center;font-weight:800}
 .stepper .val.gold{background:var(--gold);color:#000;padding:4px 10px;border-radius:20px;font-size:12px}
-.cifra-box{background:#FFFBF0;border:1px solid #EDE3D0;border-radius:12px;padding:20px;height:520px;overflow-y:auto;scroll-behavior:smooth}
+.cifra-box{background:#FFFBF0;border:1px solid #EDE3D0;border-radius:12px;padding:18px;height:520px;overflow-y:auto;scroll-behavior:smooth}
 .scroll-bar{display:flex;align-items:center;gap:8px;background:#111;border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-top:8px;flex-wrap:wrap}
 .speed{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--gray);cursor:pointer;font-weight:700}
 .speed.active{background:var(--gold);color:#000;border-color:var(--gold)}
 audio{width:100%;height:38px;margin-bottom:8px;border-radius:8px}
-.cifra-header{border-bottom:1px solid #E8DCC6;padding-bottom:12px;margin-bottom:18px}
-.cifra-header h2{font-size:20px;font-weight:900;color:#1A1A1A;margin-bottom:2px;text-transform:uppercase}
+.cifra-header{border-bottom:1px solid #E8DCC6;padding-bottom:10px;margin-bottom:14px}
+.cifra-header h2{font-size:18px;font-weight:900;color:#1A1A1A;margin-bottom:2px;text-transform:uppercase}
 .cifra-header p{font-size:11px;color:#B45309;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.cifra-secao{font-size:10px;font-weight:800;color:#8B6A3E;background:#F5EBD5;border:1px solid #EDE3D0;padding:3px 10px;border-radius:20px;display:inline-block;margin:14px 0 8px 0;letter-spacing:1px;text-transform:uppercase}
 
-/* PROFISSIONAL - ACORDE COLADO NA LETRA */
-.cifra-line{display:block;margin-bottom:14px;line-height:1.1}
-.pair{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:top;margin-right:2px;position:relative}
-.chord{color:#B45309;font-weight:800;font-size:var(--chord-size);line-height:1;margin:0;padding:0;white-space:nowrap;min-height:14px}
-.lyric{color:#1F1F1F;font-size:var(--lyric-size);line-height:1.35;white-space:pre-wrap;margin:0;padding:0;font-weight:500;min-height:16px}
-.chord:empty,.chord:blank{display:none}
-.pair .chord{margin-bottom:1px}
-.cifra-secao{font-size:11px;font-weight:800;color:#8B6A3E;background:#F5EBD5;border:1px solid #EDE3D0;padding:4px 10px;border-radius:20px;display:inline-block;margin:12px 0 6px 0;letter-spacing:1px;text-transform:uppercase}
+/* PROFISSIONAL DE VERDADE - MONOESPACADO COM ESPAÇO ZERO */
+.cc-block{margin-bottom:10px;line-height:1.1}
+.cc-chords{font-family:'Courier New', Courier, monospace;color:#B45309;font-weight:800;font-size:var(--chord-size);white-space:pre;overflow-x:auto;margin:0;padding:0;line-height:1.1;letter-spacing:0}
+.cc-lyric{font-family:'Courier New', Courier, monospace;color:#1F1F1F;font-weight:500;font-size:var(--lyric-size);white-space:pre;overflow-x:auto;margin:1px 0 0 0;padding:0;line-height:1.35;letter-spacing:0}
+.cc-bracket-line{display:block;margin-bottom:10px;line-height:1.1}
+.pair{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:top;margin-right:3px}
+.pair .chord{font-family:'Courier New', monospace;color:#B45309;font-weight:800;font-size:var(--chord-size);line-height:1;margin:0 0 1px 0;white-space:nowrap}
+.pair .lyric{font-family:Inter, system-ui;color:#1F1F1F;font-size:var(--lyric-size);line-height:1.35;white-space:pre-wrap;margin:0;font-weight:500}
 
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
 .modal-overlay.open{display:flex}
@@ -126,8 +127,8 @@ body.fullscreen-cifra .cifra-box{flex:1;border:none;background:#FFFBF0;height:au
 <div class="collapsible open" id="controles">
 <div class="ctrl-row"><span class="label">Tom</span><div class="stepper"><button onclick="chgTom(-1)">−</button><span class="val gold" id="tom">D</span><button onclick="chgTom(1)">+</button></div></div>
 <div class="ctrl-row"><span class="label">Capo</span><div class="stepper"><button onclick="chgCapo(-1)">−</button><span class="val" id="capo">0</span><button onclick="chgCapo(1)">+</button></div></div>
-<div class="ctrl-row"><span class="label">Acorde</span><div class="stepper"><button onclick="chgSz('c',-1)">−</button><span class="val" id="cSz">14px</span><button onclick="chgSz('c',1)">+</button></div></div>
-<div class="ctrl-row"><span class="label">Letra</span><div class="stepper"><button onclick="chgSz('l',-1)">−</button><span class="val" id="lSz">16px</span><button onclick="chgSz('l',1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Acorde</span><div class="stepper"><button onclick="chgSz('c',-1)">−</button><span class="val" id="cSz">13px</span><button onclick="chgSz('c',1)">+</button></div></div>
+<div class="ctrl-row"><span class="label">Letra</span><div class="stepper"><button onclick="chgSz('l',-1)">−</button><span class="val" id="lSz">15px</span><button onclick="chgSz('l',1)">+</button></div></div>
 <div class="scroll-bar">
 <span style="font-size:10px;color:var(--gold);font-weight:800">AUTO-SCROLL</span>
 <div style="display:flex;gap:6px"><button class="speed active" id="sp1" onclick="setSpeed(1)">1</button><button class="speed" id="sp2" onclick="setSpeed(2)">2</button><button class="speed" id="sp3" onclick="setSpeed(3)">3</button><button class="speed" id="sp4" onclick="setSpeed(4)">4</button></div>
@@ -150,10 +151,10 @@ body.fullscreen-cifra .cifra-box{flex:1;border:none;background:#FFFBF0;height:au
 <label>🎼 Cifra / Letra</label>
 <textarea id="cifraInput" placeholder="Cole do Cifra Club ou digite com [G]..."></textarea>
 <div class="hint-box">
-<b>💡 Aceita 2 formatos:</b><br>
-1- <b>[G]Meu caminho</b> é cada manhã (coladinho)<br>
-2- <b>D5 D7M(9)</b> em cima + letra embaixo (Cifra Club)<br>
-Agora junta profissional sem buraco!
+<b>💡 Agora 100% profissional:</b> Preserva espaços exatos. Se colar<br>
+<pre style="color:#D4B483">        D7M(9)            Bm7(11)
+Não procure saber onde estou</pre>
+Vai ficar coladinho, D7M(9) em cima de "Não" e Bm7(11) em cima de "onde".
 </div>
 <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
 <button class="btn small" onclick="document.getElementById('fCifraFile').click()">📁 Buscar .txt</button>
@@ -178,21 +179,17 @@ Agora junta profissional sem buraco!
 <div class="hint" id="hint">Toque na letra para mostrar controles</div>
 
 <script>
-let cs=14,ls=16,scrollId=null,speed=1,isScrolling=false,toolsVisible=false;
+let cs=13,ls=15,scrollId=null,speed=1,isScrolling=false,toolsVisible=false;
 const speeds=[0,0.25,0.7,1.6,3.0]; const labels=['','muito lento','lento','medio','rapido'];
-let currentSong={title:'PRIMEIROS ERROS', artist:'CAPITAL INICIAL', tom:'D', cifra:`[Intro] D5 D E/B
-        D5 D E/B
-        D9 A11/C# G/B
-        D9 A11/C# G/B
-
-[Primeira Parte]
-D5          D7M(9)          D5
+let currentSong={title:'PRIMEIROS ERROS', artist:'CAPITAL INICIAL', tom:'D', cifra:`        D5          D7M(9)          D5
 Meu caminho é cada manhã
-        D7M(9)            Bm7(11)
+                D7M(9)            Bm7(11)
 Não procure saber onde estou
-Em7(9)
+        Em7(9)
 Meu destino não é de ninguém
-G/B            A4
+        G/B            A4
+Eu não deixo os meus pés no chão
+                D5          D7M(9)
 Eu não deixo os meus pés no chão`};
 let ctx=null; let vs={chain:null}; let pb={chain:null};
 
@@ -233,7 +230,7 @@ function changeReverb(type,val){
   document.getElementById(type==='vs'?'vsR':'pbR').innerText=val+'%';
 }
 
-// PARSER PROFISSIONAL - COLA ACORDE NA LETRA SEM BURACO
+// PROFISSIONAL - PRESERVA ESPAÇOS EXATOS
 function parseCifraSmart(text){
   const box=document.getElementById('cifraBox'); box.innerHTML='';
   const header=document.createElement('div'); header.className='cifra-header';
@@ -243,107 +240,82 @@ function parseCifraSmart(text){
   const lines=text.split('\n');
   for(let i=0;i<lines.length;i++){
     let raw=lines[i];
-    if(!raw.trim()){ box.innerHTML+='<div style="height:10px"></div>'; continue; }
+    if(!raw.trim()){ box.innerHTML+='<div style="height:12px"></div>'; continue; }
 
-    // Seção tipo [Intro] [Primeira Parte]
-    const secMatch=raw.trim().match(/^\[(Intro|Refrão|Primeira|Segunda|Ponte|Solo|Verso|.*Parte.*)\]$/i);
+    const secMatch=raw.trim().match(/^\[(Intro|Refrão|Primeira|Segunda|Ponte|Solo|Verso|Refr|.*Parte.*)\]/i);
     if(secMatch){
       const sec=document.createElement('div'); sec.className='cifra-secao'; sec.textContent=raw.replace(/[\[\]]/g,''); box.appendChild(sec); continue;
     }
 
-    // Detecta linha de acordes pura (ex: D5 D7M(9) D5)
-    const isChordLine=/^[A-G0-9#\/\(\)bM\s]+$/.test(raw) && /[A-G]/.test(raw) && raw.trim().split(/\s+/).every(t=>/^[A-G]/.test(t) || t==='') && !/[a-z]{4,}/.test(raw.toLowerCase().replace(/m/g,''));
+    // Detecta se é linha de acordes (só acordes e espaços)
+    const isChordLine=/^[A-G0-9#\/\(\)bMm\s]+$/.test(raw.trim()) && /[A-G]/.test(raw) && raw.trim().split(/\s+/).filter(Boolean).every(tok=>/^[A-G][#b]?/.test(tok));
     const nextLine=lines[i+1]||'';
-    const nextIsLyric=nextLine.trim() && !isChordLine && !nextLine.trim().startsWith('[') && /[a-záéíóúãõâê]/i.test(nextLine);
+    const nextIsLyric=nextLine.trim() && !/^[A-G0-9#\/\(\)bMm\s]+$/.test(nextLine.trim()) || (nextLine.trim() && /[a-záéíóúãõâê]{2,}/i.test(nextLine));
 
-    if(isChordLine && nextIsLyric){
-      // PROFISSIONAL: junta acorde + letra na mesma linha visual
-      const chordTokens=[];
-      let regex=/\S+/g, m;
-      while((m=regex.exec(raw))!==null){ chordTokens.push({chord:m[0], index:m.index}); }
-
-      const lineDiv=document.createElement('div'); lineDiv.className='cifra-line';
-      
-      if(chordTokens.length===0){
-        // só letra sem acorde
-        const p=document.createElement('span'); p.className='pair';
-        const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
-        const l=document.createElement('span'); l.className='lyric'; l.textContent=nextLine;
-        p.append(c,l); lineDiv.appendChild(p);
-      } else {
-        chordTokens.forEach((tok, idx)=>{
-          const nextIdx=idx+1<chordTokens.length?chordTokens[idx+1].index:nextLine.length;
-          const start=tok.index;
-          const end=Math.min(nextLine.length, nextIdx);
-          let lyricChunk=nextLine.substring(start, end);
-          if(idx===0 && start>0){ // texto antes do primeiro acorde
-            lyricChunk=nextLine.substring(0, end);
-            // primeiro par com texto antes
-            const p=document.createElement('span'); p.className='pair';
-            const cc=document.createElement('span'); cc.className='chord'; cc.textContent=tok.chord;
-            const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=lyricChunk || ' ';
-            p.append(cc,ll); lineDiv.appendChild(p);
-          } else {
-            // corta lyricChunk para não ficar vazio gigante
-            if(!lyricChunk.trim() && idx+1<chordTokens.length) lyricChunk=' ';
-            const p=document.createElement('span'); p.className='pair';
-            const cc=document.createElement('span'); cc.className='chord'; cc.textContent=tok.chord;
-            const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=lyricChunk || nextLine.substring(start, start+1) || ' ';
-            p.append(cc,ll); lineDiv.appendChild(p);
-          }
-        });
-        // se sobrou letra depois do último acorde
-        const lastChordEnd=chordTokens[chordTokens.length-1].index + chordTokens[chordTokens.length-1].chord.length;
-        if(lastChordEnd < nextLine.length){
-          const resto=nextLine.substring(lastChordEnd);
-          if(resto.trim()){
-            const p=document.createElement('span'); p.className='pair';
-            const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
-            const l=document.createElement('span'); l.className='lyric'; l.textContent=resto;
-            p.append(c,l); lineDiv.appendChild(p);
-          }
-        }
-      }
-      box.appendChild(lineDiv);
-      i++; // pula a linha da letra já usada
-    } else {
-      // Formato [G] letra
-      const lineDiv=document.createElement('div'); lineDiv.className='cifra-line';
+    if(isChordLine && nextIsLyric && nextLine.trim() && !nextLine.trim().startsWith('[')){
+      // Cifra Club style: preserva espaços exatos
+      const block=document.createElement('div'); block.className='cc-block';
+      const chordDiv=document.createElement('div'); chordDiv.className='cc-chords'; chordDiv.textContent=raw;
+      const lyricDiv=document.createElement('div'); lyricDiv.className='cc-lyric'; lyricDiv.textContent=nextLine;
+      block.appendChild(chordDiv); block.appendChild(lyricDiv);
+      box.appendChild(block);
+      i++;
+    } else if(/\[.*\]/.test(raw)){
+      // formato [G] letra - converte para monoespaçado profissional também
+      const lineDiv=document.createElement('div'); lineDiv.className='cc-bracket-line';
       const ms=[...raw.matchAll(/\[([^\]]+)\]/g)];
-      if(ms.length===0){
-        // Linha que não é acorde e não é [G] = letra pura ou intro com acordes inline tipo D5 D E/B
-        if(/^[A-G].*\s+[A-G]/.test(raw) && raw.split(/\s+/).length<=6 && raw.length<50){
-          // ex: D5 D E/B -> trata como linha de acordes sozinha
-          const tokens=raw.trim().split(/\s+/);
-          tokens.forEach(tok=>{
-            const p=document.createElement('span'); p.className='pair';
-            const cc=document.createElement('span'); cc.className='chord'; cc.textContent=tok;
-            const ll=document.createElement('span'); ll.className='lyric'; ll.innerHTML='&nbsp; ';
-            p.append(cc,ll); lineDiv.appendChild(p);
-          });
-        } else {
-          const p=document.createElement('span'); p.className='pair';
-          const c=document.createElement('span'); c.className='chord'; c.innerHTML='&nbsp;';
-          const l=document.createElement('span'); l.className='lyric'; l.textContent=raw;
-          p.append(c,l); lineDiv.appendChild(p);
-        }
-      } else {
-        ms.forEach((m,idx)=>{
-          const next= idx+1<ms.length?ms[idx+1].index:raw.length;
-          const lyric=raw.substring(m.index+m[0].length, next);
-          const p=document.createElement('span'); p.className='pair';
-          const cc=document.createElement('span'); cc.className='chord'; cc.textContent=m[1];
-          const ll=document.createElement('span'); ll.className='lyric'; ll.textContent=lyric||' ';
-          p.append(cc,ll); lineDiv.appendChild(p);
-          if(idx===0 && m.index>0){
-            const b=document.createElement('span'); b.className='pair';
-            const bc=document.createElement('span'); bc.className='chord'; bc.innerHTML='&nbsp;';
-            const bl=document.createElement('span'); bl.className='lyric'; bl.textContent=raw.substring(0,m.index);
-            b.append(bc,bl); lineDiv.insertBefore(b, lineDiv.firstChild);
-          }
-        });
+      let html='';
+      let lastIdx=0;
+      // constrói duas linhas: acordes e letra preservando posição
+      let chordLine=''; let lyricLine='';
+      ms.forEach((m, idx)=>{
+        const before=raw.substring(lastIdx, m.index);
+        lyricLine+=before;
+        chordLine+=' '.repeat(before.length);
+        chordLine+=m[1];
+        chordLine+=' '.repeat(Math.max(0, (raw.substring(m.index+m[0].length, idx+1<ms.length?ms[idx+1].index:raw.length).length) - 0));
+        // preenche com espaços do tamanho do acorde para não sobrepor
+        const nextStart=idx+1<ms.length?ms[idx+1].index:raw.length;
+        const afterChord=raw.substring(m.index+m[0].length, nextStart);
+        lyricLine+=afterChord;
+        chordLine+= ' '.repeat(Math.max(0, afterChord.length - m[1].length));
+        // ajusta
+        if(chordLine.length < lyricLine.length) chordLine = chordLine.padEnd(lyricLine.length, ' ');
+        lastIdx=nextStart;
+      });
+      // Se começou sem acorde
+      if(ms.length>0 && ms[0].index>0){
+        lyricLine=raw.substring(0, ms[0].index) + lyricLine;
+        chordLine=' '.repeat(ms[0].index) + chordLine;
       }
-      box.appendChild(lineDiv);
+      const block=document.createElement('div'); block.className='cc-block';
+      const chordDiv=document.createElement('div'); chordDiv.className='cc-chords'; chordDiv.textContent=chordLine;
+      const lyricDiv=document.createElement('div'); lyricDiv.className='cc-lyric'; lyricDiv.textContent=lyricLine;
+      // se chordLine vazio, só mostra lyric
+      if(chordLine.trim()) block.appendChild(chordDiv);
+      block.appendChild(lyricDiv);
+      box.appendChild(block);
+    } else {
+      // Linha solta (letra sem acorde ou acorde solto)
+      if(isChordLine){
+        const block=document.createElement('div'); block.className='cc-block';
+        const chordDiv=document.createElement('div'); chordDiv.className='cc-chords'; chordDiv.textContent=raw;
+        const lyricDiv=document.createElement('div'); lyricDiv.className='cc-lyric'; lyricDiv.innerHTML='&nbsp;';
+        block.appendChild(chordDiv); block.appendChild(lyricDiv);
+        box.appendChild(block);
+      } else {
+        const block=document.createElement('div'); block.className='cc-block';
+        const chordDiv=document.createElement('div'); chordDiv.className='cc-chords'; chordDiv.innerHTML='&nbsp;';
+        const lyricDiv=document.createElement('div'); lyricDiv.className='cc-lyric'; lyricDiv.textContent=raw;
+        // se for letra pura sem acorde acima, não mostra linha vazia de acorde
+        if(raw.trim().length>0 && !isChordLine){
+          const b2=document.createElement('div'); b2.className='cc-block';
+          const l2=document.createElement('div'); l2.className='cc-lyric'; l2.textContent=raw;
+          b2.appendChild(l2); box.appendChild(b2);
+        } else {
+          block.appendChild(chordDiv); block.appendChild(lyricDiv); box.appendChild(block);
+        }
+      }
     }
   }
 }
@@ -372,27 +344,22 @@ function clearCifra(){ document.getElementById('songTitle').value=''; document.g
 function pasteExample(){
   document.getElementById('songTitle').value='Primeiros Erros';
   document.getElementById('artistName').value='Capital Inicial';
-  document.getElementById('cifraInput').value=`D5          D7M(9)          D5
+  document.getElementById('cifraInput').value=`        D5          D7M(9)          D5
 Meu caminho é cada manhã
-        D7M(9)            Bm7(11)
+                D7M(9)            Bm7(11)
 Não procure saber onde estou
-Em7(9)
-Meu destino não é de ninguém
-G/B            A4
-Eu não deixo os meus pés no chão`;
+        Em7(9)
+Meu destino não é de ninguém`;
 }
 function loadCifraFile(input){
   const f=input.files[0]; if(!f) return;
   const r=new FileReader();
-  r.onload=e=>{
-    document.getElementById('cifraInput').value=e.target.result;
-    if(!document.getElementById('songTitle').value) document.getElementById('songTitle').value=f.name.replace('.txt','');
-  };
+  r.onload=e=>{ document.getElementById('cifraInput').value=e.target.result; if(!document.getElementById('songTitle').value) document.getElementById('songTitle').value=f.name.replace('.txt',''); };
   r.readAsText(f);
 }
 function toggleMenu(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('open'); }
 function toggleControles(){ const c=document.getElementById('controles'); const a=document.getElementById('arrow'); if(c.classList.contains('open')){ c.classList.remove('open'); c.classList.add('closed'); a.innerText='▶'; } else { c.classList.remove('closed'); c.classList.add('open'); a.innerText='▼'; } }
-function chgSz(t,d){ if(t==='c'){ cs=Math.max(10,Math.min(28,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(12,Math.min(32,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
+function chgSz(t,d){ if(t==='c'){ cs=Math.max(9,Math.min(24,cs+d)); document.documentElement.style.setProperty('--chord-size',cs+'px'); document.getElementById('cSz').innerText=cs+'px'; } else { ls=Math.max(11,Math.min(28,ls+d)); document.documentElement.style.setProperty('--lyric-size',ls+'px'); document.getElementById('lSz').innerText=ls+'px'; } }
 const tons=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; function chgTom(d){ let i=tons.indexOf(document.getElementById('tom').innerText); i=(i+d+12)%12; document.getElementById('tom').innerText=tons[i]; currentSong.tom=tons[i]; } function chgCapo(d){ let v=parseInt(document.getElementById('capo').innerText)+d; if(v<0)v=0; if(v>12)v=12; document.getElementById('capo').innerText=v; }
 function setSpeed(s){ speed=s; document.querySelectorAll('.speed').forEach(e=>e.classList.remove('active')); document.getElementById('sp'+s).classList.add('active'); document.getElementById('speedLabel').innerText=labels[s]; if(isScrolling){ clearInterval(scrollId); startScroll(); } }
 function toggleScroll(){ isScrolling?stopScroll():startScroll(); }
@@ -403,7 +370,7 @@ function handleTap(){ if(!document.body.classList.contains('fullscreen-cifra')) 
 function showTools(){ document.getElementById('floatTools').classList.add('show'); toolsVisible=true; setTimeout(hideTools,4000); }
 function hideTools(){ document.getElementById('floatTools').classList.remove('show'); toolsVisible=false; }
 
-document.documentElement.style.setProperty('--chord-size','14px'); document.documentElement.style.setProperty('--lyric-size','16px');
+document.documentElement.style.setProperty('--chord-size','13px'); document.documentElement.style.setProperty('--lyric-size','15px');
 document.getElementById('aVS').volume=0.8; document.getElementById('aPB').volume=0.8;
 parseCifraSmart(currentSong.cifra);
 document.body.addEventListener('click',()=>{ try{ ensureCtx(); }catch(e){} },{once:true});
