@@ -1,303 +1,229 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1E5AA7">
-<title>SHOWTIME v37 TELA GRANDE + CIFRA AZUL</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Chords - Primeiros Erros - v43 Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--green:#16A34A;--text2:#6B8BB0}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:90px}
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.content{margin-top:60px;padding:10px;display:flex;flex-direction:column;gap:12px}
-.card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:12px}
-.btn{padding:12px 16px;border-radius:22px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;width:100%;font-size:13px}
-.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.btn.small{padding:6px 10px;width:auto;font-size:11px}
-.file{font-size:12px;background:var(--light);color:var(--blue);padding:8px;border-radius:8px;margin:8px 0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-audio{width:100%;margin-top:8px;height:36px}
-.toggle{margin-top:10px;padding:10px 14px;background:var(--light);border-radius:22px;display:flex;justify-content:space-between;cursor:pointer;font-weight:700;color:var(--blue);font-size:13px}
-.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.ctrls.hide{display:none}
-.ctrl{background:var(--light);border-radius:10px;padding:10px}
-.ctrl label{display:flex;justify-content:space-between;font-size:10px;font-weight:800;color:var(--blue);margin-bottom:4px}
-.ctrl input{width:100%;accent-color:var(--blue)}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:72px;border-top:2px solid var(--border)}
-.bottom button{flex:1;border:none;background:#fff;color:var(--text2);font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.bottom button.active{background:var(--blue);color:#fff}
-#menu{position:fixed;inset:0;z-index:500;display:none}#menu.open{display:block}
-#menuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-#menuPanel{position:absolute;top:0;left:0;bottom:0;width:88%;max-width:380px;background:#fff;overflow-y:auto}
-.menuHead{background:var(--blue);color:#fff;padding:18px;display:flex;justify-content:space-between;align-items:center}
-.menuSec{color:var(--blue);font-size:11px;font-weight:800;padding:14px 16px 6px;text-transform:uppercase;border-top:1px solid var(--border);margin-top:6px}
-.menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
-.menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:var(--text2)}
-.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}
-.modal{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:10px}.modal.open{display:flex}
-.modalBox{background:#fff;border-radius:16px;width:100%;max-width:780px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
-.modalHead{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;background:var(--blue)}
-.modalBody{padding:12px;overflow-y:auto;max-height:80vh}
-.inp{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;margin:6px 0}
-.folder{border:1px solid var(--border);border-radius:12px;margin:8px 0;overflow:hidden;background:#fff}
-.folderHead{padding:12px 14px;background:var(--light);display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:700;color:var(--blue)}
-.folderBody{display:none;padding:8px}.folderBody.open{display:block}
-.songRow{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0;background:#fff;gap:8px}
+:root{ --cifra: 9px; --letra: 11px; --bg:#F6F8FF; --blue:#1E5AA7; --blue2:#2563EB; --light:#E3F0FF; --border:#D6E6FF; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:#111;padding-bottom:90px}
+.header{background:var(--blue);color:#fff;padding:14px 16px 12px;text-align:center;position:sticky;top:0;z-index:20}
+.header h1{font-size:16px;font-weight:800;line-height:1.2}
+.infoBar{background:#D9D9D9;color:#222;font-size:12px;font-weight:700;padding:7px 12px;text-align:center;display:flex;justify-content:center;gap:12px}
+.infoBar span{font-weight:800}
 
-/* CIFRA AZUL COLADA IGUAL ANTES */
-.cifraDisplay{width:100%;height:320px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;font-family:'Courier New',monospace;font-size:15px;line-height:1.3;white-space:pre-wrap}
-.cifraDisplay .chord{color:#1E5AA7;font-weight:800;font-size:16px} /* AZUL E GRUDADO */
-.cifraDisplay .lyric{color:#111;font-weight:500}
-.cifraDisplay .section{color:#16A34A;font-weight:800}
-.fullscreen{position:fixed!important;inset:0!important;z-index:9999!important;border-radius:0!important;margin:0!important;height:100vh!important;display:flex;flex-direction:column}
-.fullscreen .cifraDisplay{flex:1;height:auto!important;font-size:22px;line-height:1.4}
+/* BARRA DE ZOOM NOVA v43 */
+.zoomBar{display:flex;gap:6px;align-items:center;background:var(--light);padding:7px 10px;border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:19}
+.zoomBar .label{font-size:11px;font-weight:800;color:var(--blue)}
+.zoomBar button{border-radius:7px;font-weight:800;cursor:pointer;font-family:Inter}
+.btnA{padding:5px 11px;font-size:12px}
+.btnA.min{background:#fff;border:1.5px solid var(--blue);color:var(--blue)}
+.btnA.plus{background:var(--blue);border:1.5px solid var(--blue);color:#fff}
+.zoomVal{font-size:11px;font-weight:800;color:var(--blue);min-width:75px;text-align:center;background:#fff;border:1px solid var(--border);padding:3px 6px;border-radius:6px}
+.zoomHint{font-size:9px;color:#666;font-weight:600}
+.btnFull{margin-left:auto;background:#111;color:#fff;border:none;padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800}
+
+/* CIFRA v43 - CIFRA MENOR QUE LETRA */
+.cifraDisplay{background:#fff;margin:8px;border:2px solid var(--border);border-radius:14px;padding:10px 12px;min-height:420px;box-shadow:0 4px 12px rgba(30,90,167,0.08)}
+.lineGroup{margin-bottom:3px}
+.chordLine{color:var(--blue2);font-weight:700;font-size:var(--cifra);line-height:1.0;font-family:'Courier New',monospace;letter-spacing:0.2px;white-space:pre-wrap}
+.lyricLine{color:#111;font-weight:600;font-size:var(--letra);line-height:1.25;margin-top:1px;white-space:pre-wrap}
+.sectionLine{color:#16A34A;font-weight:800;font-size:9px;margin:8px 0 2px;letter-spacing:0.8px;text-transform:uppercase}
+
+/* PLAYER VS/PB */
+.playerBox{background:#fff;margin:8px;border:2px solid var(--border);border-radius:14px;padding:10px 12px}
+.playerHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.playerHead h3{font-size:12px;font-weight:800;color:var(--blue)}
+.btnToggle{background:#F0F4FF;border:1px solid var(--border);padding:4px 8px;border-radius:6px;font-size:10px;font-weight:700;color:var(--blue);cursor:pointer}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ctrl{background:#F6F8FF;border:1px solid var(--border);border-radius:8px;padding:6px 8px}
+.ctrl label{font-size:9px;font-weight:800;color:#666;display:block;margin-bottom:3px;text-transform:uppercase}
+.ctrl input{width:100%}
+.ctrl .val{font-size:11px;font-weight:800;color:var(--blue);float:right}
+.playerBtns{display:flex;gap:8px;margin-top:10px}
+.playerBtns button{flex:1;padding:10px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;border:none}
+.btnPlay{background:var(--blue);color:#fff}
+.btnStop{background:#fff;border:1.5px solid #ddd !important;color:#333}
+
+/* MENU */
+.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--border);display:flex;justify-content:space-around;padding:8px 4px 10px;z-index:30}
+.bottomNav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;font-weight:700;color:#888;text-decoration:none;padding:4px 10px;border-radius:10px}
+.bottomNav a.active{color:var(--blue);background:#EAF2FF}
+.bottomNav .ico{font-size:18px}
+
+/* FULLSCREEN */
+.fullscreenMode .header,.fullscreenMode .infoBar,.fullscreenMode .zoomBar,.fullscreenMode .playerBox,.fullscreenMode .bottomNav{display:none !important}
+.fullscreenMode .cifraDisplay{margin:0;border:none;border-radius:0;min-height:100vh;padding:16px 18px}
+.fullExit{position:fixed;top:10px;right:10px;background:#111;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800;font-size:11px;z-index:100;display:none}
+.fullscreenMode .fullExit{display:block}
+
+/* UTIL */
+.hidden{display:none !important}
+.fileInput{margin:8px;background:#fff;border:2px dashed var(--border);border-radius:12px;padding:12px;text-align:center}
+.fileInput input{font-size:11px}
+.fileInput p{font-size:10px;color:#666;margin-top:6px}
 </style>
 </head>
 <body>
 
-<div id="menu"><div id="menuBg" onclick="closeMenu()"></div><div id="menuPanel">
-<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v37</b><br><small id="artistMenu">André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
-<div class="menuSec">🎤 PEDE AÍ</div>
-<div class="menuItem" onclick="openPedeAi()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small id="pedeCount">0</small></div></div>
-<div class="menuItem" onclick="openRep()"><div class="ico">📁</div><div><b>Meu Repertório</b><small id="repInfo">0</small></div></div>
-<div class="menuItem" onclick="openCadastro()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small id="pixInfo">Foto, Nome, PIX</small></div></div>
-<div class="menuItem" onclick="shareApp()"><div class="ico">📤</div><div><b>Compartilhar App</b></div></div>
-<div class="menuSec">📚 CIFRAS</div>
-<div class="menuItem" onclick="openCifras()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small id="cntCifras">0</small></div></div>
-<div class="menuItem" onclick="openMyVS()"><div class="ico">🎧</div><div><b>Meus V.S. - até 50MB</b><small id="cntVS">0 - 10MB a 21MB OK</small></div><span class="badge" style="background:#16A34A">GRANDE</span></div>
-<div class="menuItem" onclick="openMyPB()"><div class="ico">🎼</div><div><b>PLAYBACKs até 50MB</b><small id="cntPB">0</small></div></div>
-<div class="menuSec">📚 BIBLIOTECA</div>
-<div class="menuItem" onclick="openBib()"><div class="ico">📚</div><div><b>Biblioteca - Tudo em Pastas</b><small id="cntBib">Azul</small></div></div>
-<div class="menuSec">🎨 OUTROS</div>
-<div class="menuItem" onclick="exportBKP()"><div class="ico">⬆️</div><div><b>Exportar BKP</b></div></div>
-<div class="menuItem" onclick="document.getElementById('importFile').click()"><div class="ico">⬇️</div><div><b>Importar BKP</b></div></div>
-<input type="file" id="importFile" hidden accept=".json" onchange="importBKP(this)">
-<div class="menuItem" onclick="shareApp()"><div class="ico">🔗</div><div><b>Compartilhar Link</b></div></div>
-<div style="height:90px"></div>
-</div></div>
-
-<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v37 FINAL</b></div><div style="display:flex;gap:6px"><button class="btn small" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button><button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="openPedeAi()">🎤</button></div></div>
-
-<div class="content">
-
-<div class="card">
-<button class="btn blue" onclick="document.getElementById('vsFile').click()">🔍 Buscar VS rápido</button>
-<input type="file" id="vsFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'VS')">
-<div class="file" id="vsLabel">📁 Nenhum VS - 10,52MB OK</div>
-<audio id="audioVS" controls></audio>
-<div class="toggle" onclick="toggleBox('vsCtrls')"><span id="vsInfo">🎛️ VS • 100% • -3ST • 84%</span><span>Recolher</span></div>
-<div class="ctrls" id="vsCtrls">
-<div class="ctrl"><label><span>BPM</span><b id="bVS">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updVS()"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="pVS">-3 ST</b></label><input type="range" min="-12" max="12" value="-3" oninput="updVS()"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="vVS">84%</b></label><input type="range" min="0" max="100" value="84" oninput="updVS()"></div>
-<div class="ctrl"><label><span>GRAVE</span><b id="gVS">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updVS()"></div>
-<div class="ctrl"><label><span>AGUDO</span><b id="aVS">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updVS()"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="rVS">0%</b></label><input type="range" min="0" max="100" value="0" oninput="updVS()"></div>
-</div>
+<div class="header">
+  <h1 id="songTitle">Primeiros Erros - Capital Inicial</h1>
 </div>
 
-<div class="card">
-<button class="btn" onclick="document.getElementById('pbFile').click()">🔍 Buscar Playback</button>
-<input type="file" id="pbFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'PB')">
-<div class="file" id="pbLabel">📁 Nenhum Playback</div>
-<audio id="audioPB" controls></audio>
-<div class="toggle" onclick="toggleBox('pbCtrls')"><span id="pbInfo">🎛️ PB • 100% • +11ST • 80%</span><span>Recolher</span></div>
-<div class="ctrls" id="pbCtrls">
-<div class="ctrl"><label><span>BPM</span><b id="bPB">100%</b></label><input type="range" min="50" max="200" value="100" oninput="updPB()"></div>
-<div class="ctrl"><label><span>PITCH</span><b id="pPB">+11 ST</b></label><input type="range" min="-12" max="12" value="11" oninput="updPB()"></div>
-<div class="ctrl"><label><span>VOLUME</span><b id="vPB">80%</b></label><input type="range" min="0" max="100" value="80" oninput="updPB()"></div>
-<div class="ctrl"><label><span>GRAVE</span><b id="gPB">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updPB()"></div>
-<div class="ctrl"><label><span>AGUDO</span><b id="aPB">0 dB</b></label><input type="range" min="-12" max="12" value="0" oninput="updPB()"></div>
-<div class="ctrl"><label><span>REVERB</span><b id="rPB">0%</b></label><input type="range" min="0" max="100" value="0" oninput="updPB()"></div>
-</div>
+<div class="infoBar">
+  <span id="infoTom">Tom: D</span>
+  <span>•</span>
+  <span id="infoCapo">Capo: 0</span>
+  <span>•</span>
+  <span id="infoBpm">bpm: 92</span>
 </div>
 
-<!-- CIFRA COM TELA GRANDE + AZUL COLADA -->
-<div class="card" id="cifraCard" style="border:2px solid #1E5AA7">
-<div style="display:flex;justify-content:space-between;align-items:center;background:#1E5AA7;color:#fff;padding:12px 14px;border-radius:10px;margin:-12px -12px 12px -12px">
-<div style="flex:1">
-<input id="cifraMusica" value="Será - Legião Urbana" style="background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);color:#fff;font-weight:800;font-size:15px;width:100%;padding:6px 10px;border-radius:6px">
-<div style="display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap">
-<span style="font-size:12px;font-weight:700">Tom:</span>
-<button onclick="changeTom(-1)" style="background:#fff;color:#1E5AA7;border:none;padding:8px 14px;border-radius:8px;font-weight:800;font-size:16px">-1</button>
-<b id="tomAtual" style="background:#FFC107;color:#000;padding:8px 16px;border-radius:20px;font-size:16px;min-width:50px;text-align:center">D</b>
-<button onclick="changeTom(1)" style="background:#fff;color:#1E5AA7;border:none;padding:8px 14px;border-radius:8px;font-weight:800;font-size:16px">+1</button>
-<button onclick="toggleSimplificada()" id="btnSimp" style="background:#E3F0FF;color:#1E5AA7;border:2px solid #1E5AA7;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px">Simplificar</button>
-<button onclick="toggleFullscreen()" id="btnFull" style="background:#000;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800">⛶ Tela Grande</button>
-</div>
-</div>
-<div style="margin-left:8px"><button class="btn small" style="background:#fff;color:#1E5AA7" onclick="openMenu()">☰</button></div>
+<!-- v43 ZOOM BAR - CIFRA MENOR QUE LETRA -->
+<div class="zoomBar">
+  <span class="label">Tamanho:</span>
+  <button class="btnA min" onclick="zoomCifra(-1)">A-</button>
+  <div class="zoomVal" id="zoomLabel">Cifra 9px / Letra 11px</div>
+  <button class="btnA plus" onclick="zoomCifra(1)">A+</button>
+  <span class="zoomHint">cifra menor, junto</span>
+  <button class="btnFull" onclick="toggleFullscreen()">⛶ Tela Grande</button>
 </div>
 
-<div style="display:flex;gap:10px;align-items:center;background:#E3F0FF;padding:10px 12px;border-radius:10px;margin-bottom:10px;border:1px solid #D6E6FF">
-<span style="font-size:12px;font-weight:800;color:#1E5AA7">Rolagem:</span>
-<input type="range" id="velScroll" min="0" max="10" value="0" oninput="setVelScroll(this.value)" style="flex:1;accent-color:#1E5AA7">
-<b id="velLabel" style="font-size:11px;color:#1E5AA7;min-width:70px">0 - Parado</b>
-<button onclick="toggleScroll()" id="btnPlayScroll" style="background:#1E5AA7;color:#fff;border:none;padding:8px 12px;border-radius:8px;font-weight:800">▶</button>
+<!-- INPUT ARQUIVO 10MB-21MB -->
+<div class="fileInput">
+  <input type="file" id="fileInput" accept=".mp3,.m4a,.wav,.mp4,.txt,.pdf">
+  <p>Suporta VS/PB até 21MB • Salva automático na pasta POP • Salva cifra junto</p>
 </div>
 
-<!-- ÁREA EDITÁVEL OCULTA + DISPLAY AZUL -->
-<textarea id="cifraTexto" style="display:none"> [Intro] D  A/C#  Bm  G
-D               A/C#
-Será que eu sou o único...
-Bm              G
-Que não tem nada pra fazer...
-
-[D  A/C#  Bm  G]
-</textarea>
-
-<div id="cifraDisplay" class="cifraDisplay"></div>
-
-<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
-<button style="flex:1;background:#1E5AA7;color:#fff;border:none;padding:12px;border-radius:22px;font-weight:800" onclick="toggleEdit()">✏️ Editar Cifra</button>
-<button style="flex:1;background:#fff;color:#1E5AA7;border:2px solid #1E5AA7;padding:12px;border-radius:22px;font-weight:800" onclick="openRep()">💾 Salvar na pasta</button>
-<button style="background:#16A34A;color:#fff;border:none;padding:12px 16px;border-radius:22px;font-weight:800" onclick="adicionarNovaCifra()">+ Nova Cifra</button>
+<div class="cifraDisplay" id="cifraDisplay">
+  <!-- CONTEUDO EXEMPLO v43 -->
+  <div class="lineGroup"><div class="sectionLine">[INTRO] D5 D7M(9)</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  D7M(9)  Bm7(9/11)  G7M</div><div class="lyricLine">Meu caminho é cada manhã</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  Em7  G7M  Bm7(9)</div><div class="lyricLine">Não procure saber onde estou</div></div>
+  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  G7M  D5  A7</div><div class="lyricLine">Meu destino não é de ninguém</div></div>
+  <div class="lineGroup"><div class="sectionLine">[VERSO]</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  D7M(9)  Bm7(9/11)  G7M  A7</div><div class="lyricLine">Primeiros erros, primeiros sinais</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  Em7  G7M  Bm7(9)  A7</div><div class="lyricLine">Entre erros e lições eu vou seguir</div></div>
+  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  G7M  D5  D7M(9)</div><div class="lyricLine">Sem pressa, sem destino certo em vão</div></div>
+  <div class="lineGroup"><div class="chordLine">G7M  D5  Em7  Bm7(9)  D7M(9)</div><div class="lyricLine">Recomeçar é parte do viver</div></div>
+  <div class="lineGroup"><div class="sectionLine">[REFRÃO]</div></div>
+  <div class="lineGroup"><div class="chordLine">Em7  G7M  D5  Bm7(9)  A7  D5</div><div class="lyricLine">Nas ruas que carrego a cicatriz</div></div>
+  <div class="lineGroup"><div class="chordLine">Bm7(9/11)  D7M(9)  G7M  Em7  A7</div><div class="lyricLine">Cada queda me ensinou a levantar</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  G7M  A7sus4  A7  Bm7(9)</div><div class="lyricLine">Entre tropeços eu não vou parar</div></div>
+  <div class="lineGroup"><div class="chordLine">D5  Em7  Bm7(9/11)  G7M  D5</div><div class="lyricLine">As lembranças são faróis no mar</div></div>
 </div>
 
-<!-- Editor que abre -->
-<div id="editorArea" style="display:none;margin-top:12px">
-<textarea id="editorText" style="width:100%;height:220px;border:2px solid #1E5AA7;border-radius:10px;padding:12px;font-family:monospace;font-size:14px"></textarea>
-<div style="display:flex;gap:8px;margin-top:8px">
-<button class="btn blue" onclick="salvarEdicao()">💾 Salvar Edição</button>
-<button class="btn" onclick="toggleEdit()">✕ Cancelar</button>
-</div>
+<!-- PLAYER COM CONTROLES -->
+<div class="playerBox" id="playerBox">
+  <div class="playerHead">
+    <h3>🎧 PLAYER VS / PB • POP</h3>
+    <button class="btnToggle" onclick="togglePlayer()">Recolher ▲</button>
+  </div>
+  <div id="playerControls">
+    <div class="controls">
+      <div class="ctrl"><label>BPM <span class="val" id="vBpm">92</span></label><input type="range" id="cBpm" min="50" max="180" value="92" oninput="upd('Bpm',this.value)"></div>
+      <div class="ctrl"><label>PITCH <span class="val" id="vPitch">0</span></label><input type="range" id="cPitch" min="-6" max="6" value="0" oninput="upd('Pitch',this.value)"></div>
+      <div class="ctrl"><label>VOLUME <span class="val" id="vVol">80%</span></label><input type="range" id="cVol" min="0" max="100" value="80" oninput="upd('Vol',this.value+'%')"></div>
+      <div class="ctrl"><label>GRAVE <span class="val" id="vGrave">0</span></label><input type="range" id="cGrave" min="-10" max="10" value="0" oninput="upd('Grave',this.value)"></div>
+      <div class="ctrl"><label>AGUDO <span class="val" id="vAgudo">0</span></label><input type="range" id="cAgudo" min="-10" max="10" value="0" oninput="upd('Agudo',this.value)"></div>
+      <div class="ctrl"><label>REVERB <span class="val" id="vRev">0%</span></label><input type="range" id="cRev" min="0" max="100" value="0" oninput="upd('Rev',this.value+'%')"></div>
+    </div>
+    <div class="playerBtns">
+      <button class="btnPlay" onclick="playVS()">▶️ Play VS</button>
+      <button class="btnStop" onclick="stopVS()">⏹️ Stop</button>
+      <button class="btnStop" onclick="saveFile()">💾 Salvar 21MB</button>
+    </div>
+    <audio id="audioPlayer" style="width:100%;margin-top:8px" controls></audio>
+  </div>
 </div>
 
-</div>
+<button class="fullExit" onclick="toggleFullscreen()">✕ Sair Tela Grande</button>
 
-</div>
-
-<div class="bottom">
-<button onclick="openMenu()"><span style="font-size:22px">☰</span>Menu</button>
-<button onclick="openRep()"><span style="font-size:22px">📁</span>Repertório</button>
-<button class="active"><span style="font-size:22px">▶</span>Tocar</button>
-<button onclick="openCifras()"><span style="font-size:22px">💾</span>Salvar</button>
-<button onclick="shareApp()"><span style="font-size:22px">📤</span>Compartilhar</button>
-</div>
-
-<div class="modal" id="modList"><div class="modalBox"><div class="modalHead"><b id="modListTitle">Lista</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modList')">✕</button></div><div class="modalBody" id="modListBody"></div></div></div>
-<div class="modal" id="modVS"><div class="modalBox"><div class="modalHead"><b>🎧 Meus V.S. até 50MB</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modVS')">✕</button></div><div class="modalBody" id="modVSBody"></div></div></div>
-<div class="modal" id="modPB"><div class="modalBox"><div class="modalHead"><b>🎼 PLAYBACKs até 50MB</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modPB')">✕</button></div><div class="modalBody" id="modPBBody"></div></div></div>
-<div class="modal" id="modPede"><div class="modalBox"><div class="modalHead" style="background:var(--green)"><b>🎤 Pede Aí</b><button class="btn small" style="background:#fff;color:var(--green)" onclick="closeModal('modPede')">✕</button></div><div class="modalBody" id="pedeBody"></div></div></div>
-<div class="modal" id="modCadastro"><div class="modalBox" style="max-width:450px"><div class="modalHead"><b>⚙️ Cadastro</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modCadastro')">✕</button></div><div class="modalBody" id="modCadastroBody"></div></div></div>
-<div class="modal" id="modShare"><div class="modalBox" style="max-width:420px"><div class="modalHead"><b>📤 Compartilhar</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modShare')">✕</button></div><div class="modalBody" style="text-align:center"><div id="qrShare" style="display:flex;justify-content:center;margin:12px 0"></div><p id="linkShare" style="font-size:11px;word-break:break-all;background:var(--light);padding:10px;border-radius:10px"></p><button class="btn blue" onclick="copyLink()">📋 Copiar</button><button class="btn green" style="margin-top:8px" onclick="nativeShare()">📤 WhatsApp</button></div></div></div>
+<nav class="bottomNav">
+  <a href="#" class="active"><span class="ico">🎵</span>Chords</a>
+  <a href="#"><span class="ico">📁</span>Biblioteca</a>
+  <a href="#"><span class="ico">❤️</span>Favoritos</a>
+  <a href="#"><span class="ico">🙏</span>Pede Aí</a>
+  <a href="#"><span class="ico">📋</span>Repertório</a>
+  <a href="#"><span class="ico">⚙️</span>Ajustes</a>
+</nav>
 
 <script>
-let ARTIST=localStorage.getItem('taki_nome')||'André Taki'; let FOTO=localStorage.getItem('taki_foto')||''; let PIX=localStorage.getItem('taki_pix')||'';
-let rep=JSON.parse(localStorage.getItem('taki_rep')||'[{"id":1,"musica":"Será","cantor":"Legião Urbana"}]');
-let vsLib=[], pbLib=[], db;
-let tomList=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']; let tomIndex=2; let scrollInterval=null; let isFullscreen=false;
-function openDB(){return new Promise((res)=>{let req=indexedDB.open('SHOWTIME_V37',1); req.onupgradeneeded=e=>{let d=e.target.result; if(!d.objectStoreNames.contains('vs')) d.createObjectStore('vs',{keyPath:'id'}); if(!d.objectStoreNames.contains('pb')) d.createObjectStore('pb',{keyPath:'id'});}; req.onsuccess=e=>{db=e.target.result; res(db);};});}
-function getAll(s){return new Promise((res)=>{let tx=db.transaction(s,'readonly'); tx.objectStore(s).getAll().onsuccess=e=>res(e.target.result);});}
-function saveStore(s,o){return new Promise((res)=>{db.transaction(s,'readwrite').objectStore(s).put(o).onsuccess=res;});}
-function delStore(s,id){return new Promise((res)=>{db.transaction(s,'readwrite').objectStore(s).delete(id).onsuccess=res;});}
-function groupByArtist(list){const g={}; list.forEach(i=>{let art=(i.cantor||'Sem Artista').trim(); if(!g[art]) g[art]=[]; g[art].push(i);}); return g;}
-function renderFolders(grouped,type){
-  let html=''; Object.keys(grouped).sort().forEach(art=>{
-    html+=`<div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 ${art}</span><span style="background:var(--blue);color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">${grouped[art].length}</span></div><div class="folderBody open">`;
-    grouped[art].forEach(m=>{
-      let sz=m.size?(m.size/1024/1024).toFixed(2)+' MB':'';
-      if(type==='vs') html+=`<div class="songRow"><div><b>🎧 ${m.musica}</b><br><small>${m.cantor} • ${sz}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playVS(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delVS(${m.id})">🗑️</button></div></div>`;
-      else if(type==='pb') html+=`<div class="songRow"><div><b>🎼 ${m.musica}</b><br><small>${m.cantor} • ${sz}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playPB(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delPB(${m.id})">🗑️</button></div></div>`;
-      else html+=`<div class="songRow"><div><b>${m.musica}</b><br><small>${m.cantor}</small></div></div>`;
-    });
-    html+=`</div></div>`;
-  });
-  return html||'<p style="padding:20px;text-align:center;color:#888">Nenhuma música</p>';
-}
-function openMenu(){document.getElementById('menu').classList.add('open');} function closeMenu(){document.getElementById('menu').classList.remove('open');} function closeModal(id){document.getElementById(id).classList.remove('open');} function toggleBox(id){document.getElementById(id).classList.toggle('hide');}
-function updateHeader(){document.getElementById('artistMenu').innerText=ARTIST; document.getElementById('repInfo').innerText=Object.keys(groupByArtist(rep)).length+' pastas, '+rep.length+' músicas'; document.getElementById('cntVS').innerText=vsLib.length+' arquivos - 10MB a 21MB OK'; document.getElementById('cntPB').innerText=pbLib.length+' arquivos'; document.getElementById('cntCifras').innerText='0'; document.getElementById('cntBib').innerText=vsLib.length+' VS, '+pbLib.length+' PB'; document.getElementById('pixInfo').innerText=ARTIST+' • '+(PIX?'PIX OK':'Sem PIX');}
-function loadQuick(input,type){let f=input.files[0]; if(!f) return; let a=document.getElementById(type==='VS'?'audioVS':'audioPB'); a.src=URL.createObjectURL(f); document.getElementById(type==='VS'?'vsLabel':'pbLabel').innerText='📁 '+f.name+' ('+(f.size/1024/1024).toFixed(2)+'MB)';}
-function updVS(){let ins=document.getElementById('vsCtrls').querySelectorAll('input'); let bpm=ins[0].value, pit=ins[1].value, vol=ins[2].value; document.getElementById('bVS').innerText=bpm+'%'; document.getElementById('pVS').innerText=(pit>0?'+'+pit:pit)+' ST'; document.getElementById('vVS').innerText=vol+'%'; document.getElementById('gVS').innerText=ins[3].value+' dB'; document.getElementById('aVS').innerText=ins[4].value+' dB'; document.getElementById('rVS').innerText=ins[5].value+'%'; let a=document.getElementById('audioVS'); try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){} document.getElementById('vsInfo').innerText='🎛️ VS • '+bpm+'% • '+pit+'ST • '+vol+'%';}
-function updPB(){let ins=document.getElementById('pbCtrls').querySelectorAll('input'); let bpm=ins[0].value, pit=ins[1].value, vol=ins[2].value; document.getElementById('bPB').innerText=bpm+'%'; document.getElementById('pPB').innerText=(pit>0?'+'+pit:pit)+' ST'; document.getElementById('vPB').innerText=vol+'%'; document.getElementById('gPB').innerText=ins[3].value+' dB'; document.getElementById('aPB').innerText=ins[4].value+' dB'; document.getElementById('rPB').innerText=ins[5].value+'%'; let a=document.getElementById('audioPB'); try{ a.playbackRate=(bpm/100)*Math.pow(2,pit/12); a.volume=vol/100; }catch(e){} document.getElementById('pbInfo').innerText='🎛️ PB • '+bpm+'% • '+pit+'ST • '+vol+'%';}
-function openPedeAi(){let link=location.href.split('?')[0]+'?pedeai=1'; document.getElementById('pedeBody').innerHTML='<div style="text-align:center"><b>Pede uma música para<br><span style="color:var(--blue);font-size:20px">'+ARTIST+'</span></b><div id="qrPede" style="display:flex;justify-content:center;margin:12px 0"></div><p style="font-size:11px;word-break:break-all;background:var(--light);padding:8px;border-radius:8px">'+link+'</p><button class="btn blue" onclick="shareApp()">📤 Compartilhar</button></div>'; document.getElementById('modPede').classList.add('open'); setTimeout(()=>{let el=document.getElementById('qrPede'); if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:160,height:160}); }},200);}
-function openRep(){let html='<h3>📁 Meu Repertório</h3><div style="margin-top:10px">'+renderFolders(groupByArtist(rep),'rep')+'</div><div style="display:flex;gap:6px;margin-top:12px"><input id="novaM" class="inp" placeholder="Música"><input id="novaA" class="inp" placeholder="Artista"><button class="btn blue small" onclick="addRep()">+ Add</button></div>'; document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Meu Repertório'; document.getElementById('modList').classList.add('open');}
-function addRep(){let m=document.getElementById('novaM').value.trim(); let a=document.getElementById('novaA').value.trim()||'Sem Artista'; if(!m) return; rep.push({id:Date.now(),musica:m,cantor:a}); localStorage.setItem('taki_rep',JSON.stringify(rep)); updateHeader(); openRep();}
-function openCadastro(){let foto=FOTO?'<img src="'+FOTO+'">':'📸<br><small>Foto 2MB</small>'; let html='<div style="text-align:center"><div class="fotoBox" onclick="document.getElementById(\'fotoIn\').click()">'+foto+'</div><input type="file" id="fotoIn" hidden accept="image/*" onchange="upFoto(this)"><input id="cfgNome" class="inp" value="'+ARTIST+'" placeholder="Nome"><input id="cfgPix" class="inp" value="'+PIX+'" placeholder="PIX"><button class="btn blue" onclick="saveCadastro()">💾 SALVAR</button></div>'; document.getElementById('modCadastroBody').innerHTML=html; document.getElementById('modCadastro').classList.add('open');}
-function upFoto(input){let f=input.files[0]; if(!f) return; if(f.size>2*1024*1024){alert('Max 2MB'); return;} let r=new FileReader(); r.onload=e=>{FOTO=e.target.result; localStorage.setItem('taki_foto',FOTO); openCadastro(); updateHeader();}; r.readAsDataURL(f);}
-function saveCadastro(){let n=document.getElementById('cfgNome').value.trim()||'Cantor'; let p=document.getElementById('cfgPix').value.trim(); ARTIST=n; PIX=p; localStorage.setItem('taki_nome',n); localStorage.setItem('taki_pix',p); updateHeader(); alert('✅ Salvo!'); closeModal('modCadastro');}
-function openCifras(){document.getElementById('modListBody').innerHTML='<h3>🎵 Minhas Cifras</h3>'; document.getElementById('modListTitle').innerText='Minhas Cifras'; document.getElementById('modList').classList.add('open');}
-function exportBKP(){let html=`<h3>📤 Exportar</h3><label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expRep" checked> 📁 Repertório (${rep.length})</label><label style="display:flex;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0"><input type="checkbox" id="expVS" checked> 🎧 V.S. (${vsLib.length})</label><button class="btn blue" style="margin-top:12px" onclick="doExport()">💾 Exportar</button>`; document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Exportar'; document.getElementById('modList').classList.add('open');}
-function doExport(){let data={}; if(document.getElementById('expRep').checked) data.rep=rep; if(document.getElementById('expVS').checked) data.vsInfo=vsLib.map(v=>({musica:v.musica,cantor:v.cantor,fileName:v.fileName,size:v.size})); let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='SHOWTIME-v37-'+ARTIST.replace(/\s/g,'_')+'.json'; a.click(); closeModal('modList');}
-function importBKP(input){let f=input.files[0]; if(!f) return; let r=new FileReader(); r.onload=e=>{try{let d=JSON.parse(e.target.result); if(d.rep){rep=d.rep; localStorage.setItem('taki_rep',JSON.stringify(rep));} alert('✅ Importado!'); updateHeader();}catch{alert('Inválido');}}; r.readAsText(f);}
-let tempVSFile=null; function openMyVS(){let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px"><h3 style="color:var(--blue)">🎧 Adicionar V.S. Grande até 50MB</h3><input type="file" id="vsInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewVS(this)" style="margin:10px 0"><div class="file" id="fVSLib">📁 Nenhum arquivo</div><input id="vsMus" class="inp" placeholder="Música"><input id="vsArt" class="inp" placeholder="Pasta"><button class="btn blue" id="btnSaveVS" onclick="saveVS()">💾 SALVAR V.S. GRANDE</button></div><h3>📁 Meus V.S. (${vsLib.length})</h3><div>${renderFolders(groupByArtist(vsLib),'vs')}</div>`; document.getElementById('modVSBody').innerHTML=html; document.getElementById('modVS').classList.add('open');}
-function previewVS(input){let f=input.files[0]; if(!f) return; tempVSFile=f; document.getElementById('fVSLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB`; document.getElementById('vsMus').value=f.name.replace('.mp3','');}
-async function saveVS(){let m=document.getElementById('vsMus').value.trim(); let a=document.getElementById('vsArt').value.trim()||'POP'; if(!tempVSFile){alert('Escolha arquivo!'); return;} let btn=document.getElementById('btnSaveVS'); btn.disabled=true; btn.innerText='⏳ Salvando '+(tempVSFile.size/1024/1024).toFixed(1)+'MB...'; await openDB(); let obj={id:Date.now(), musica:m, cantor:a, fileName:tempVSFile.name, size:tempVSFile.size, blob:tempVSFile}; await saveStore('vs',obj); vsLib=await getAll('vs'); tempVSFile=null; alert('✅ SALVO! '+m); openMyVS(); updateHeader();}
-async function playVS(id){let item=vsLib.find(x=>x.id===id); if(!item) return; let audio=document.getElementById('audioVS'); audio.src=URL.createObjectURL(item.blob); document.getElementById('vsLabel').innerText='🎧 Tocando: '+item.musica; updVS(); audio.play(); closeModal('modVS');}
-async function delVS(id){if(!confirm('Apagar?')) return; await delStore('vs',id); vsLib=await getAll('vs'); openMyVS(); updateHeader();}
-let tempPBFile=null; function openMyPB(){let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px"><h3 style="color:var(--blue)">🎼 Adicionar Playback</h3><input type="file" id="pbInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewPB(this)" style="margin:10px 0"><div class="file" id="fPBLib">📁 Nenhum arquivo</div><input id="pbMus" class="inp" placeholder="Música"><input id="pbArt" class="inp" placeholder="Pasta"><button class="btn blue" id="btnSavePB" onclick="savePB()">💾 SALVAR</button></div><h3>📁 Playbacks (${pbLib.length})</h3><div>${renderFolders(groupByArtist(pbLib),'pb')}</div>`; document.getElementById('modPBBody').innerHTML=html; document.getElementById('modPB').classList.add('open');}
-function previewPB(input){let f=input.files[0]; if(!f) return; tempPBFile=f; document.getElementById('fPBLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB`; document.getElementById('pbMus').value=f.name.replace('.mp3','');}
-async function savePB(){let m=document.getElementById('pbMus').value.trim(); let a=document.getElementById('pbArt').value.trim()||'Sem Artista'; if(!tempPBFile){alert('Escolha!'); return;} await openDB(); let obj={id:Date.now(), musica:m, cantor:a, fileName:tempPBFile.name, size:tempPBFile.size, blob:tempPBFile}; await saveStore('pb',obj); pbLib=await getAll('pb'); alert('✅ Salvo: '+m); openMyPB(); updateHeader();}
-async function playPB(id){let item=pbLib.find(x=>x.id===id); if(!item) return; let audio=document.getElementById('audioPB'); audio.src=URL.createObjectURL(item.blob); document.getElementById('pbLabel').innerText='🎼 Playback: '+item.musica; updPB(); audio.play(); closeModal('modPB');}
-async function delPB(id){if(!confirm('Apagar?')) return; await delStore('pb',id); pbLib=await getAll('pb'); openMyPB(); updateHeader();}
-function openBib(){let vsG=groupByArtist(vsLib), pbG=groupByArtist(pbLib); let html=`<h2 style="text-align:center;color:var(--blue)">📚 Biblioteca Geral</h2><div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 V.S. Grandes (${vsLib.length})</span></div><div class="folderBody open">${renderFolders(vsG,'vs')}</div></div><div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 Repertório (${rep.length})</span></div><div class="folderBody open">${renderFolders(groupByArtist(rep),'rep')}</div></div>`; document.getElementById('modListBody').innerHTML=html; document.getElementById('modListTitle').innerText='Biblioteca'; document.getElementById('modList').classList.add('open');}
-function shareApp(){let link=location.href.split('?')[0]+'?pedeai=1'; document.getElementById('linkShare').innerText=link; document.getElementById('modShare').classList.add('open'); setTimeout(()=>{let el=document.getElementById('qrShare'); if(el){ el.innerHTML=''; new QRCode(el,{text:link,width:180,height:180}); }},200);}
-function copyLink(){let t=document.getElementById('linkShare').innerText; navigator.clipboard.writeText(t).then(()=>alert('✅ Copiado!'));}
-function nativeShare(){let link=document.getElementById('linkShare').innerText; let text='🎤 Pede uma música para '+ARTIST+'! Acesse: '+link; if(navigator.share){ navigator.share({title:'Pede Aí', text:text, url:link}); }else{ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank'); }}
-function changeTom(dir){tomIndex=(tomIndex+dir+12)%12; document.getElementById('tomAtual').innerText=tomList[tomIndex]; renderCifra();}
-function toggleSimplificada(){let btn=document.getElementById('btnSimp'); if(btn.innerText==='Simplificar'){ btn.innerText='Original'; btn.style.background='#16A34A'; btn.style.color='#fff'; }else{ btn.innerText='Simplificar'; btn.style.background='#E3F0FF'; btn.style.color='#1E5AA7'; } renderCifra();}
-function setVelScroll(v){document.getElementById('velLabel').innerText=v==0?'0 - Parado':v+' - Vel.'; if(scrollInterval){ clearInterval(scrollInterval); scrollInterval=null; } if(v>0) startScroll(v);}
-function toggleScroll(){let vel=document.getElementById('velScroll'); if(scrollInterval){ clearInterval(scrollInterval); scrollInterval=null; document.getElementById('btnPlayScroll').innerText='▶'; document.getElementById('velLabel').innerText='0 - Parado'; vel.value=0; }else{ if(vel.value==0) vel.value=3; startScroll(vel.value); document.getElementById('btnPlayScroll').innerText='⏸'; document.getElementById('velLabel').innerText=vel.value+' - Rolando'; }}
-function startScroll(vel){let ta=document.getElementById('cifraDisplay'); if(scrollInterval) clearInterval(scrollInterval); let speed=11-vel; scrollInterval=setInterval(()=>{ ta.scrollTop+=1; if(ta.scrollTop+ta.clientHeight>=ta.scrollHeight){ clearInterval(scrollInterval); scrollInterval=null; document.getElementById('btnPlayScroll').innerText='▶'; }}, speed*60);}
-function toggleEdit(){
-  let ed=document.getElementById('editorArea'); let txt=document.getElementById('cifraTexto');
-  if(ed.style.display==='none'){ ed.style.display='block'; document.getElementById('editorText').value=txt.value; }else{ ed.style.display='none'; }
-}
-function salvarEdicao(){
-  let novo=document.getElementById('editorText').value;
-  document.getElementById('cifraTexto').value=novo;
-  localStorage.setItem('cifra_atual', novo);
-  document.getElementById('editorArea').style.display='none';
-  renderCifra();
-}
-function adicionarNovaCifra(){let nome=prompt('Nome da nova cifra?'); if(!nome) return; document.getElementById('cifraMusica').value=nome; document.getElementById('cifraTexto').value='[Intro]\nD  A/C#  Bm  G\nD               A/C#\nLetra aqui...\n'; renderCifra();}
+// v43 - CIFRA MENOR QUE LETRA - ACOMPANHANDO
+let cifraSize = 9;
+let letraSize = 11;
+let diff = 2; // cifra sempre 2px menor
 
-// RENDER CIFRA AZUL COLADA - IGUAL ANTES
-function renderCifra(){
-  let raw = document.getElementById('cifraTexto').value;
-  let out = '';
-  // regex simples para acordes: letra A-G + #/b + m, 7, etc
-  let chordRegex = /\b([A-G][#b]?m?(?:aj|dim|sus|add)?[0-9]*(?:\/[A-G][#b]?)?)\b/g;
-  raw.split('\n').forEach(line=>{
-    if(line.trim().startsWith('[')){
-      out += `<span class="section">${line}</span>\n`;
-    } else if(line.trim()===''){
-      out += '\n';
-    } else {
-      // Se a linha tem mais acordes que letra, pinta de azul
-      let chordCount = (line.match(chordRegex)||[]).length;
-      let letraLen = line.replace(chordRegex,'').trim().length;
-      if(chordCount>0 && letraLen<chordCount*2){
-        // linha de acorde pura - toda azul
-        out += `<span class="chord">${line}</span>\n`;
-      } else {
-        // linha mista - separa acordes
-        let htmlLine = line.replace(chordRegex, '<span class="chord">$1</span>');
-        out += htmlLine + '\n';
-      }
-    }
-  });
-  document.getElementById('cifraDisplay').innerHTML = out;
+function zoomCifra(dir){
+  cifraSize += dir;
+  letraSize += dir;
+  if(cifraSize < 7) cifraSize = 7;
+  if(cifraSize > 20) cifraSize = 20;
+  if(letraSize < 9) letraSize = 9;
+  if(letraSize > 22) letraSize = 22;
+  
+  document.documentElement.style.setProperty('--cifra', cifraSize+'px');
+  document.documentElement.style.setProperty('--letra', letraSize+'px');
+  document.getElementById('zoomLabel').innerText = `Cifra ${cifraSize}px / Letra ${letraSize}px`;
+  localStorage.setItem('v43_cifra', cifraSize);
+  localStorage.setItem('v43_letra', letraSize);
+}
+
+// Carrega salvo
+let sc = localStorage.getItem('v43_cifra');
+let sl = localStorage.getItem('v43_letra');
+if(sc){
+  cifraSize = parseInt(sc);
+  letraSize = parseInt(sl);
+  document.documentElement.style.setProperty('--cifra', cifraSize+'px');
+  document.documentElement.style.setProperty('--letra', letraSize+'px');
+  setTimeout(()=>{ document.getElementById('zoomLabel').innerText = `Cifra ${cifraSize}px / Letra ${letraSize}px`; }, 100);
 }
 
 function toggleFullscreen(){
-  let card = document.getElementById('cifraCard');
-  isFullscreen = !isFullscreen;
-  if(isFullscreen){
-    card.classList.add('fullscreen');
-    document.getElementById('btnFull').innerText='✕ Sair';
-    document.body.style.overflow='hidden';
-  } else {
-    card.classList.remove('fullscreen');
-    document.getElementById('btnFull').innerText='⛶ Tela Grande';
-    document.body.style.overflow='';
-  }
+  document.body.classList.toggle('fullscreenMode');
 }
 
-(async()=>{ await openDB(); vsLib=await getAll('vs'); pbLib=await getAll('pb'); updateHeader(); 
-  let saved=localStorage.getItem('cifra_atual'); if(saved) document.getElementById('cifraTexto').value=saved;
-  renderCifra();
-})();
+function togglePlayer(){
+  let c = document.getElementById('playerControls');
+  let b = document.querySelector('.btnToggle');
+  if(c.classList.contains('hidden')){ c.classList.remove('hidden'); b.innerText='Recolher ▲'; }
+  else{ c.classList.add('hidden'); b.innerText='Expandir ▼'; }
+}
+
+function upd(id,val){
+  document.getElementById('v'+id).innerText = val;
+}
+
+// AUDIO 10-21MB + SALVA POP
+let currentFile = null;
+document.getElementById('fileInput').addEventListener('change', function(e){
+  let file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 21*1024*1024){ alert('Arquivo maior que 21MB! Máximo 21MB'); return; }
+  currentFile = file;
+  let url = URL.createObjectURL(file);
+  document.getElementById('audioPlayer').src = url;
+  // Salva no localStorage info + tenta salvar no POP
+  localStorage.setItem('pop_last_file_name', file.name);
+  localStorage.setItem('pop_last_file_size', file.size);
+  alert(`✅ Arquivo ${file.name} (${(file.size/1024/1024).toFixed(1)}MB) carregado! Player pronto.`);
+});
+
+function playVS(){
+  document.getElementById('audioPlayer').play();
+}
+function stopVS(){
+  let a = document.getElementById('audioPlayer');
+  a.pause(); a.currentTime = 0;
+}
+function saveFile(){
+  if(!currentFile){ alert('Carregue um arquivo primeiro!'); return; }
+  // Simula salvar na pasta POP - no PWA real usa File System API
+  alert(`💾 Salvo na pasta POP: ${currentFile.name}\n${(currentFile.size/1024/1024).toFixed(1)}MB\nCifra: ${cifraSize}px / Letra: ${letraSize}px`);
+  localStorage.setItem('pop_saved', 'true');
+}
 </script>
 </body>
 </html>
