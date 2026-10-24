@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SHOWTIME v52 MENU RESTAURADO</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>SHOWTIME v53 SISTEMA COMPLETO RESTAURADO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <style>
-:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--border:#D6E6FF;--c:9px;--l:11px}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:75px}
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:0;overflow:hidden;margin:10px}
-.cifraInfo{background:#F1F5F9;padding:8px 10px;margin:8px;border-radius:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;border:1px solid #E2E8F0}
-.zoomRow{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:8px 10px;margin:0 8px 8px 8px;border-radius:8px;border:1px solid var(--border);flex-wrap:wrap}
-.cifraDisplay{margin:0 8px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;height:62vh;-webkit-overflow-scrolling:touch}
-.chordLine{color:#2563EB;font-weight:800;font-size:var(--c);font-family:'Courier New',monospace;line-height:1.1;white-space:pre-wrap}
-.lyricLine{color:#111;font-weight:600;font-size:var(--l);margin-top:2px;line-height:1.3;white-space:pre-wrap}
-.sectionLine{color:#16A34A;font-weight:800;font-size:10px;margin:8px 0 2px;text-transform:uppercase}
-.btn{padding:6px 11px;border-radius:8px;border:1.5px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;font-size:11px}
-.btn.blue{background:var(--blue);color:#fff}.btn.yellow{background:#FFC107;color:#000;border-color:#FFC107}.btn.black{background:#111;color:#fff;border-color:#111}
-.tomVal{background:#FFC107;color:#000;padding:6px 14px;border-radius:10px;font-weight:800;font-size:14px;min-width:42px;text-align:center}
+:root{--blue:#1E5AA7;--light:#E3F0FF;--bg:#EAF2FF;--card:#fff;--border:#D6E6FF;--green:#16A34A;--c:9px;--l:11px}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);font-family:Inter,Arial,sans-serif;padding-bottom:90px}
+.top{position:sticky;top:0;z-index:100;background:var(--blue);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.content{padding:10px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:12px}
+.btn{padding:10px 14px;border-radius:22px;border:2px solid var(--blue);background:#fff;color:var(--blue);font-weight:800;cursor:pointer;font-size:12px}
+.btn.blue{background:var(--blue);color:#fff}.btn.green{background:var(--green);color:#fff;border-color:var(--green)}.btn.yellow{background:#FFC107;color:#000;border-color:#FFC107}.btn.black{background:#111;color:#fff;border-color:#111}.btn.small{padding:6px 10px;font-size:11px}
+.file{font-size:11px;background:var(--light);color:var(--blue);padding:8px;border-radius:8px;margin:8px 0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+audio{width:100%;margin-top:8px;height:36px}
+.toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--light);border-radius:22px;cursor:pointer;font-weight:700;color:var(--blue);font-size:12px;margin-top:8px}
+.ctrls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.ctrls.hide{display:none}
+.ctrl{background:var(--light);border-radius:10px;padding:10px}
+.ctrl label{display:flex;justify-content:space-between;font-size:10px;font-weight:800;color:var(--blue);margin-bottom:4px}
+.ctrl input{width:100%;accent-color:var(--blue)}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:68px;border-top:2px solid var(--border)}
+.bottom button{flex:1;border:none;background:#fff;color:#6B8BB0;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.bottom button.active{background:var(--blue);color:#fff}
 #menu{position:fixed;inset:0;z-index:500;display:none}#menu.open{display:block}
 #menuBg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
 #menuPanel{position:absolute;top:0;left:0;bottom:0;width:88%;max-width:380px;background:#fff;overflow-y:auto}
@@ -25,55 +31,106 @@
 .menuItem{display:flex;gap:12px;padding:13px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;align-items:center}
 .menuItem .ico{width:36px;height:36px;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .menuItem b{font-size:14px;display:block}.menuItem small{font-size:11px;color:#6B8BB0}
-.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}
-.bottom{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;display:flex;height:68px;border-top:2px solid var(--border)}
-.bottom button{flex:1;border:none;background:#fff;color:#6B8BB0;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
-.bottom button.active{background:var(--blue);color:#fff}
-.card.fullscreen{position:fixed!important;inset:0!important;z-index:9999!important;margin:0!important;border-radius:0!important;width:100vw!important;height:100vh!important;display:flex!important;flex-direction:column!important}
-.card.fullscreen .cifraDisplay{flex:1;height:auto!important;border:none!important;border-radius:0!important;padding:70px 16px 140px 16px}
-.fullTop,.fullBottom{position:fixed;left:0;right:0;z-index:10000;display:none}
-.fullTop{top:0;background:var(--blue);color:#fff;padding:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-.fullBottom{bottom:0;background:#fff;border-top:2px solid var(--border);padding:10px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.card.fullscreen .fullTop{display:flex!important}
-.card.fullscreen .fullBottom{display:flex!important}
-.scrollSide{position:fixed;right:10px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:8px;z-index:10001}
-.card.fullscreen .scrollSide{display:flex!important}
-.scrollSide button{width:46px;height:46px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:20px;font-weight:800}
+.badge{background:var(--blue);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;margin-left:auto}.badge.green{background:var(--green)}
+.modal{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:10px}.modal.open{display:flex}
+.modalBox{background:#fff;border-radius:16px;width:100%;max-width:780px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
+.modalHead{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff;background:var(--blue)}
+.modalBody{padding:12px;overflow-y:auto;max-height:80vh}
+.inp{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;margin:6px 0}
+.folder{border:1px solid var(--border);border-radius:12px;margin:8px 0;overflow:hidden;background:#fff}
+.folderHead{padding:12px 14px;background:var(--light);display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:700;color:var(--blue)}
+.folderBody{display:none;padding:8px}.folderBody.open{display:block}
+.songRow{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid var(--border);border-radius:10px;margin:6px 0;background:#fff;gap:8px}
+.cifraHeader{background:var(--blue);color:#fff;padding:12px 14px;border-radius:12px 12px 0 0;margin:-12px -12px 0 -12px;display:flex;justify-content:space-between;align-items:center}
+.cifraInfo{background:#F1F5F9;border:1px solid #E2E8F0;padding:8px 10px;border-radius:8px;margin:8px -12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:600;color:#334155}
+.zoomRow{display:flex;gap:6px;align-items:center;background:#E3F0FF;padding:6px 10px;border-radius:8px;margin-bottom:8px;border:1px solid var(--border);flex-wrap:wrap}
+.cifraDisplay{width:100%;min-height:320px;border:2px solid var(--border);border-radius:12px;padding:14px;background:#fff;overflow-y:auto;line-height:1.15;-webkit-overflow-scrolling:touch}
+.chordLine{color:#2563EB;font-weight:800;font-size:var(--c);font-family:'Courier New',monospace;line-height:1.1;white-space:pre-wrap}
+.lyricLine{color:#111;font-weight:600;font-size:var(--l);margin-top:2px;line-height:1.3;white-space:pre-wrap}
+.sectionLine{color:#16A34A;font-weight:800;font-size:10px;margin:8px 0 2px;text-transform:uppercase}
+.tomVal{background:#FFC107;color:#000;padding:6px 14px;border-radius:10px;font-weight:800;font-size:14px;min-width:42px;text-align:center}
+/* TELA GRANDE REAL SEM FIXO ESTRAGADO */
+#cifraCard.fullscreen{position:fixed!important;inset:0!important;z-index:9999!important;margin:0!important;border-radius:0!important;width:100vw!important;height:100vh!important;display:flex!important;flex-direction:column!important;background:#fff!important}
+#cifraCard.fullscreen .cifraDisplay{flex:1;border:none!important;border-radius:0!important;padding:16px 16px 140px 16px;height:auto!important}
+.fullTopBar{display:none;position:absolute;top:0;left:0;right:0;background:var(--blue);color:#fff;padding:10px;z-index:10}
+#cifraCard.fullscreen .fullTopBar{display:flex!important;position:relative;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.fullBottomBar{display:none}
+#cifraCard.fullscreen .fullBottomBar{display:flex!important;position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:2px solid var(--border);padding:10px;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.scrollSide{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);flex-direction:column;gap:8px}
+#cifraCard.fullscreen .scrollSide{display:flex!important}
+.scrollSide button{width:46px;height:46px;border-radius:50%;border:none;background:var(--blue);color:#fff;font-size:20px;font-weight:800;box-shadow:0 3px 10px rgba(0,0,0,.3)}
 .speedBtn.on{background:var(--blue)!important;color:#fff!important}
-.hideComandos .cifraInfo,.hideComandos .zoomRow,.hideComandos .top{display:none!important}
-.hideComandos .card{margin:0;border:none;border-radius:0}
-.hideComandos .cifraDisplay{margin:0;border:none;border-radius:0;height:100vh;padding:20px 16px}
+.hideComandos .top,.hideComandos .vsCard,.hideComandos .pbCard,.hideComandos .bottom{display:none!important}
+.hideComandos #cifraCard{margin:0;border:none;border-radius:0;height:100vh}
+.hideComandos .cifraDisplay{border:none;margin:0;border-radius:0;height:100vh;padding:20px}
 </style>
 </head>
 <body id="body">
 
 <div id="menu"><div id="menuBg" onclick="closeMenu()"></div><div id="menuPanel">
-<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v52</b><br><small>André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
+<div class="menuHead"><div><b style="font-size:18px">SHOWTIME v53</b><br><small id="artistMenu">André Taki</small></div><span onclick="closeMenu()" style="font-size:28px;cursor:pointer">✕</span></div>
 
 <div class="menuSec">🎤 PEDE AÍ COM PASTAS</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small>0 pedidos - AO VIVO</small></div><span class="badge" style="background:#16A34A">AO VIVO</span></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">📁</div><div><b>Repertório por Pastas</b><small>Você, Leãozinho, Caetano, Tim Maia</small></div><span class="badge">NOVO</span></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">📱</div><div><b>QR Code da Mesa</b><small>Com sua foto</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small>Foto, Nome Artístico, PIX</small></div></div>
+<div class="menuItem" onclick="openPedeAi()"><div class="ico">🎤</div><div><b>Pedidos Ao Vivo</b><small id="pedeCount">0 pedidos</small></div><span class="badge green">AO VIVO</span></div>
+<div class="menuItem" onclick="openRepertorio()"><div class="ico">📁</div><div><b>Repertório por Pastas</b><small id="repCountMenu">Pastas por artista</small></div><span class="badge">NOVO</span></div>
+<div class="menuItem" onclick="openPedeAi()"><div class="ico">📱</div><div><b>QR Code da Mesa</b><small>Com sua foto</small></div></div>
+<div class="menuItem" onclick="openCadastro()"><div class="ico">⚙️</div><div><b>Cadastro Cantor + Foto</b><small id="pixStatusMenu">Foto, Nome, PIX</small></div></div>
 
 <div class="menuSec">📚 CIFRAS EM PASTAS</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small>Em pastas por artista</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎬</div><div><b>Cifras com VS</b><small>Por artista</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎹</div><div><b>Cifras com Playback</b><small>Por artista</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎧</div><div><b>Meus V.S. até 50MB</b><small>10MB a 21MB OK - POP</small></div><span class="badge" style="background:#16A34A">GRANDE</span></div>
+<div class="menuItem" onclick="openMyCifras()"><div class="ico">🎵</div><div><b>Minhas Cifras</b><small id="cntCifras">0 cifras em pastas</small></div></div>
+<div class="menuItem" onclick="openMyCifrasVS()"><div class="ico">🎬</div><div><b>Cifras com VS</b><small id="cntCifrasVS">Por artista</small></div></div>
+<div class="menuItem" onclick="openMyCifrasPB()"><div class="ico">🎹</div><div><b>Cifras com Playback</b><small>Por artista</small></div></div>
+<div class="menuItem" onclick="openMyVS()"><div class="ico">🎧</div><div><b>Meus V.S. até 50MB</b><small id="cntVS">0 - 10MB a 21MB OK</small></div><span class="badge green">GRANDE</span></div>
+<div class="menuItem" onclick="openMyPB()"><div class="ico">🎼</div><div><b>PLAYBACKs</b><small id="cntPB">0 arquivos</small></div></div>
 
 <div class="menuSec">🎨 SISTEMA</div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">🎨</div><div><b>10 Temas</b><small>Azul Clean</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">⬆️</div><div><b>Exportar BKP Pastas</b><small>JSON completo</small></div></div>
-<div class="menuItem" onclick="closeMenu()"><div class="ico">⬇️</div><div><b>Importar BKP</b></div></div>
+<div class="menuItem" onclick="openThemes()"><div class="ico">🎨</div><div><b>10 Temas</b><small id="curTheme">Azul Clean</small></div></div>
+<div class="menuItem" onclick="exportBKP()"><div class="ico">⬆️</div><div><b>Exportar BKP Pastas</b><small>JSON completo</small></div></div>
+<div class="menuItem" onclick="document.getElementById('importFile').click()"><div class="ico">⬇️</div><div><b>Importar BKP</b></div></div>
+<input type="file" id="importFile" hidden accept=".json" onchange="importBKP(this)">
 <div style="height:90px"></div>
 </div></div>
 
-<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v52 MENU PERFEITO</b></div></div>
+<div class="top"><div style="display:flex;gap:12px;align-items:center"><span style="font-size:28px;cursor:pointer" onclick="openMenu()">☰</span><b>SHOWTIME v53 COMPLETO</b></div><div style="display:flex;gap:6px"><button class="btn small" style="background:#fff;color:var(--blue)" onclick="shareApp()">📤</button><button class="btn small" style="background:#16A34A;color:#fff;border-color:#16A34A" onclick="openPedeAi()">🎤</button></div></div>
+
+<div class="content">
+
+<!-- VS COM BPM PITCH GRAVE AGUDO REVERB QUE SUMIU -->
+<div class="card vsCard">
+<button class="btn blue" onclick="document.getElementById('vsFile').click()">🔍 Buscar VS rápido</button>
+<input type="file" id="vsFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'VS')">
+<div class="file" id="vsLabel">📁 Nenhum VS - 10,52MB OK</div>
+<audio id="audioVS" controls></audio>
+<div class="toggle" onclick="toggleBox('vsCtrls')"><span id="vsInfo">🎛️ VS • 100% • 0ST • 80% • Grave 0 Agudo 0 Rev 0</span><span>Recolher</span></div>
+<div class="ctrls" id="vsCtrls">
+<div class="ctrl"><label><span>BPM</span><b id="bVS">100%</b></label><input type="range" id="rBpmVS" min="50" max="200" value="100"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="pVS">0 ST</b></label><input type="range" id="rPitVS" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="vVS">80%</b></label><input type="range" id="rVolVS" min="0" max="100" value="80"></div>
+<div class="ctrl"><label><span>GRAVE</span><b id="gVS">0 dB</b></label><input type="range" id="rGraVS" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>AGUDO</span><b id="aVS">0 dB</b></label><input type="range" id="rAguVS" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>REVERB</span><b id="rVS">0%</b></label><input type="range" id="rRevVS" min="0" max="100" value="0"></div>
+</div>
+</div>
+
+<div class="card pbCard">
+<button class="btn" onclick="document.getElementById('pbFile').click()">🔍 Buscar Playback</button>
+<input type="file" id="pbFile" hidden accept=".mp3,.wav,.m4a,.ogg" onchange="loadQuick(this,'PB')">
+<div class="file" id="pbLabel">📁 Nenhum Playback</div>
+<audio id="audioPB" controls></audio>
+<div class="toggle" onclick="toggleBox('pbCtrls')"><span id="pbInfo">🎛️ PB • 100% • 0ST • 80%</span><span>Recolher</span></div>
+<div class="ctrls" id="pbCtrls">
+<div class="ctrl"><label><span>BPM</span><b id="bPB">100%</b></label><input type="range" id="rBpmPB" min="50" max="200" value="100"></div>
+<div class="ctrl"><label><span>PITCH</span><b id="pPB">0 ST</b></label><input type="range" id="rPitPB" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>VOLUME</span><b id="vPB">80%</b></label><input type="range" id="rVolPB" min="0" max="100" value="80"></div>
+<div class="ctrl"><label><span>GRAVE</span><b id="gPB">0 dB</b></label><input type="range" id="rGraPB" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>AGUDO</span><b id="aPB">0 dB</b></label><input type="range" id="rAguPB" min="-12" max="12" value="0"></div>
+<div class="ctrl"><label><span>REVERB</span><b id="rPB">0%</b></label><input type="range" id="rRevPB" min="0" max="100" value="0"></div>
+</div>
+</div>
 
 <div class="card" id="cifraCard">
-  <div class="fullTop">
-    <b>Primeiros Erros</b>
+  <div class="fullTopBar">
+    <b id="fullTitle">Primeiros Erros</b>
     <div style="display:flex;gap:4px;align-items:center;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:20px">
       <button class="btn small" onclick="mudaTom(-1)">-1</button><span class="tomVal" id="tomFull">D</span><button class="btn small" onclick="mudaTom(1)">+1</button>
       <button class="btn yellow small" onclick="mudaTom(-7)">-7</button><button class="btn yellow small" onclick="mudaTom(7)">+7</button>
@@ -81,36 +138,26 @@
     <button class="btn black small" onclick="saiFull()">✕ Sair</button>
   </div>
 
-  <div style="background:var(--blue);color:#fff;padding:12px 14px;display:flex;justify-content:space-between"><b>Primeiros Erros - Capital Inicial</b><small>v52 FINAL</small></div>
-  
-  <div class="cifraInfo">
-    <div style="display:flex;gap:4px;align-items:center">
-      <button class="btn small" onclick="mudaTom(-1)">-1</button>
-      <span class="tomVal" id="tomLabel">D</span>
-      <button class="btn small" onclick="mudaTom(1)">+1</button>
-      <button class="btn yellow small" onclick="mudaTom(-7)">-7</button>
-      <button class="btn yellow small" onclick="mudaTom(7)">+7</button>
-      <span id="tomInfo" style="font-size:10px;color:#666;margin-left:6px">original D</span>
-    </div>
-    <div style="display:flex;gap:6px;margin-left:auto">
-      <button id="btnSimples" class="btn small" onclick="toggleSimples()">🎵 Cifra Simples</button>
-      <button id="btnEscondeComando" class="btn small black" onclick="toggleEscondeComando()">🙈 Esconder Comandos</button>
-    </div>
+<div class="cifraHeader"><div style="flex:1;display:flex;align-items:center;gap:10px"><span style="font-size:22px;cursor:pointer" onclick="openMenu()">☰</span><input id="cifraMusica" value="Primeiros Erros - Capital Inicial" style="background:transparent;border:none;color:#fff;font-weight:800;font-size:14px;width:100%"></div></div>
+<div style="padding:0 12px">
+<div class="cifraInfo">
+  <div style="display:flex;gap:4px;align-items:center">
+    <button class="btn small" onclick="mudaTom(-1)">-1</button><span class="tomVal" id="tomLabel">D</span><button class="btn small" onclick="mudaTom(1)">+1</button>
+    <button class="btn yellow small" onclick="mudaTom(-7)">-7</button><button class="btn yellow small" onclick="mudaTom(7)">+7</button>
+    <span id="tomInfo" style="font-size:10px;color:#666;margin-left:6px">original D</span>
   </div>
-
-  <div class="zoomRow">
-    <b style="font-size:11px;color:var(--blue)">Tamanho:</b>
-    <button class="btn small" onclick="mudaSize(-1)">A-</button>
-    <span id="zoomLabel" style="background:#fff;border:1px solid var(--border);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800;color:var(--blue)">Cifra 9px / Letra 11px</span>
-    <button class="btn blue small" onclick="mudaSize(1)">A+</button>
-    <button class="btn black small" style="margin-left:auto" onclick="entraFull()">⛶ Tela Grande</button>
+  <div style="display:flex;gap:6px;margin-left:auto">
+    <button id="btnSimples" class="btn small" onclick="toggleSimples()">🎵 Cifra Simples</button>
+    <button id="btnEsconde" class="btn black small" onclick="toggleEscondeComando()">🙈 Esconder Comandos</button>
   </div>
+</div>
 
-  <textarea id="cifraOriginal" style="display:none">Tom: D
+<div class="zoomRow"><b style="font-size:11px;color:var(--blue)">Tamanho:</b><button class="btn small" onclick="mudaSize(-1)">A-</button><span id="zoomLabel" style="background:#fff;border:1px solid var(--border);padding:5px 10px;border-radius:7px;font-size:11px;font-weight:800;color:var(--blue)">Cifra 9px / Letra 11px</span><button class="btn blue small" onclick="mudaSize(1)">A+</button><span style="font-size:10px;color:#666">azul negrito coladinha</span><button class="btn black small" style="margin-left:auto" onclick="entraFull()">⛶ Tela Grande</button></div>
+
+<textarea id="cifraOriginal" style="display:none">Tom: D
 [INTRO] D5 D E/B
       D5   D   E/B
     D9  A11/C#  G/B
-         D9   A11/C#   G/B
 [PRIMEIRA PARTE]
 D5              D7M(9)                  D5
     Meu caminho é cada manhã
@@ -125,72 +172,134 @@ D5
     Se você não entende não vê
                      D7M(9)                       Bm7(11)
     Se não me vê não entende
-                  Bm7(9/11)                    Bm7(11)
-    Não procure saber onde estou
-                    Bm7(9/11)              G7M
-    Se o meu jeito te surpreende
-[SEGUNDA PARTE]
-                     G4+(6)               G7M
-    Se o meu corpo virasse sol
-                      G4+(6)                   Em7(9)
-    Se a minha mente virasse sol
 </textarea>
+<div id="cifraDisplay" class="cifraDisplay"></div>
 
-  <div id="cifraDisplay" class="cifraDisplay"></div>
+<div style="display:flex;gap:6px;padding:10px;flex-wrap:wrap"><button class="btn blue" style="flex:1" onclick="editar()">✏️ Editar Cifra</button><button class="btn" style="flex:1" onclick="openRepertorio()">💾 Salvar na pasta</button><button class="btn green" style="flex:1" onclick="novaCifra()">+ Nova Cifra</button></div>
 
-  <div class="scrollSide"><button onclick="rolar(-150)">▲</button><button onclick="rolar(150)">▼</button></div>
+<div class="scrollSide"><button onclick="rolar(-150)">▲</button><button onclick="rolar(150)">▼</button></div>
 
-  <div class="fullBottom">
-    <div style="display:flex;gap:4px;align-items:center;background:#E3F0FF;padding:6px 10px;border-radius:20px">
-      <b style="font-size:10px;color:var(--blue)">Rolagem:</b>
-      <button class="btn small speedBtn on" id="sp0" onclick="velocidade(0)">0 OFF</button>
-      <button class="btn small speedBtn" id="sp1" onclick="velocidade(1)">1 Devagar</button>
-      <button class="btn small speedBtn" id="sp2" onclick="velocidade(2)">2 Médio</button>
-      <button class="btn small speedBtn" id="sp3" onclick="velocidade(3)">3 Rápido</button>
-    </div>
-    <div style="display:flex;gap:6px">
-      <button class="btn blue small" onclick="rolar(-120)">▲ Subir</button>
-      <button class="btn blue small" onclick="rolar(120)">▼ Descer</button>
-      <button class="btn small" onclick="novaCifra()">+ Nova Cifra</button>
-      <button class="btn small black" onclick="toggleEscondeComando()">🙈 Esconder</button>
-    </div>
+<div class="fullBottomBar">
+  <div style="display:flex;gap:4px;align-items:center;background:#E3F0FF;padding:6px 10px;border-radius:20px">
+    <b style="font-size:10px;color:var(--blue)">Rolagem:</b>
+    <button class="btn small speedBtn on" id="sp0" onclick="velocidade(0)">0 OFF</button>
+    <button class="btn small speedBtn" id="sp1" onclick="velocidade(1)">1 Devagar</button>
+    <button class="btn small speedBtn" id="sp2" onclick="velocidade(2)">2 Médio</button>
+    <button class="btn small speedBtn" id="sp3" onclick="velocidade(3)">3 Rápido</button>
   </div>
+  <div style="display:flex;gap:6px">
+    <button class="btn blue small" onclick="rolar(-120)">▲ Subir</button><button class="btn blue small" onclick="rolar(120)">▼ Descer</button>
+    <button class="btn small" onclick="novaCifra()">+ Nova Cifra</button>
+  </div>
+</div>
+
+</div>
+</div>
+
 </div>
 
 <div class="bottom">
 <button onclick="openMenu()"><span style="font-size:20px">☰</span>Menu</button>
-<button><span style="font-size:20px">📁</span>Pastas</button>
+<button onclick="openRepertorio()"><span style="font-size:20px">📁</span>Pastas</button>
 <button class="active" onclick="entraFull()"><span style="font-size:20px">⛶</span>Tela Cheia</button>
-<button><span style="font-size:20px">💾</span>Salvar</button>
-<button><span style="font-size:20px">📤</span>Compartilhar</button>
+<button onclick="openMyVS()"><span style="font-size:20px">💾</span>Salvar</button>
+<button onclick="shareApp()"><span style="font-size:20px">📤</span>Compartilhar</button>
 </div>
 
+<div class="modal" id="modList"><div class="modalBox"><div class="modalHead"><b id="modListTitle">Lista</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modList')">✕</button></div><div class="modalBody" id="modListBody"></div></div></div>
+<div class="modal" id="modVS"><div class="modalBox"><div class="modalHead"><b>🎧 Meus V.S. até 50MB</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modVS')">✕</button></div><div class="modalBody" id="modVSBody"></div></div></div>
+<div class="modal" id="modPB"><div class="modalBox"><div class="modalHead"><b>🎼 PLAYBACKs</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modPB')">✕</button></div><div class="modalBody" id="modPBBody"></div></div></div>
+<div class="modal" id="modPede"><div class="modalBox"><div class="modalHead" style="background:var(--green)"><b>🎤 Pede Aí</b><button class="btn small" style="background:#fff;color:var(--green)" onclick="closeModal('modPede')">✕</button></div><div class="modalBody" id="pedeBody"></div></div></div>
+<div class="modal" id="modCadastro"><div class="modalBox" style="max-width:450px"><div class="modalHead"><b>⚙️ Cadastro Cantor + Foto</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modCadastro')">✕</button></div><div class="modalBody" id="modCadastroBody"></div></div></div>
+<div class="modal" id="modShare"><div class="modalBox" style="max-width:420px"><div class="modalHead"><b>📤 Compartilhar</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modShare')">✕</button></div><div class="modalBody" style="text-align:center"><div id="qrShare" style="display:flex;justify-content:center;margin:12px 0"></div><p id="linkShare" style="font-size:11px;word-break:break-all;background:var(--light);padding:10px;border-radius:10px"></p><button class="btn blue" onclick="copyLink()">📋 Copiar</button></div></div></div>
+<div class="modal" id="modNova"><div class="modalBox"><div class="modalHead"><b>➕ Nova Cifra</b><button class="btn small" style="background:#fff;color:var(--blue)" onclick="closeModal('modNova')">✕</button></div><div class="modalBody"><input id="novaMusNome" class="inp" placeholder="Música - Ex: Você"><input id="novaArtNome" class="inp" placeholder="Artista - Ex: Tim Maia (vira pasta)"><textarea id="novaCifraTxt" class="inp" style="height:200px;font-family:monospace" placeholder="Cole a cifra aqui"></textarea><button class="btn blue" onclick="salvarNovaCifra()">💾 Salvar na Pasta</button></div></div></div>
+
 <script>
-let tomLista=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-let offset=0,cifraSize=9,letraSize=11,simples=false,timer=null,comandosEscondidos=false;
-let original=document.getElementById('cifraOriginal').value;
-let display=document.getElementById('cifraDisplay');
-function openMenu(){document.getElementById('menu').classList.add('open')}function closeMenu(){document.getElementById('menu').classList.remove('open')}
+let ARTIST=localStorage.getItem('taki_nome')||'André Taki',FOTO=localStorage.getItem('taki_foto')||'';
+let rep=JSON.parse(localStorage.getItem('taki_rep')||'[{"id":1,"musica":"Você","cantor":"Tim Maia"},{"id":2,"musica":"Leãozinho","cantor":"Caetano Veloso"},{"id":3,"musica":"Você","cantor":"Caetano Veloso"},{"id":4,"musica":"Sampa","cantor":"Caetano Veloso"},{"id":5,"musica":"Primeiros Erros","cantor":"Capital Inicial"}]');
+let vsLib=[],pbLib=[],db,audioCtx=null,vsSource=null,vsGain=null,vsLow=null,vsHigh=null,pbSource=null,pbGain=null,pbLow=null,pbHigh=null;
+let tomLista=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],offset=0,cifraSize=9,letraSize=11,simples=false,timer=null,comandosEscondidos=false;
+let original=document.getElementById('cifraOriginal').value,display=document.getElementById('cifraDisplay');
+function openMenu(){document.getElementById('menu').classList.add('open')}function closeMenu(){document.getElementById('menu').classList.remove('open')}function closeModal(id){document.getElementById(id).classList.remove('open')}function toggleBox(id){document.getElementById(id).classList.toggle('hide')}
+function updateHeader(){document.getElementById('artistMenu').innerText=ARTIST;let g=groupByArtist(rep);document.getElementById('repCountMenu').innerText=Object.keys(g).length+' pastas, '+rep.length+' músicas';document.getElementById('cntVS').innerText=vsLib.length+' arquivos - 10MB a 21MB OK';document.getElementById('cntPB').innerText=pbLib.length+' arquivos';document.getElementById('cntCifras').innerText=rep.length+' cifras em '+Object.keys(g).length+' pastas';document.getElementById('cntCifrasVS').innerText=Object.keys(g).length+' pastas';}
+function groupByArtist(list){const g={};list.forEach(i=>{let art=(i.cantor||'Sem Artista').trim();if(!g[art])g[art]=[];g[art].push(i)});return g}
+function renderFolders(grouped,type){
+  let html='';Object.keys(grouped).sort().forEach(art=>{
+    html+=`<div class="folder"><div class="folderHead" onclick="this.nextElementSibling.classList.toggle('open')"><span>📁 ${art}</span><span style="background:var(--blue);color:#fff;padding:2px 8px;border-radius:10px;font-size:11px">${grouped[art].length}</span></div><div class="folderBody open">`;
+    grouped[art].forEach(m=>{
+      let sz=m.size?(m.size/1024/1024).toFixed(2)+' MB':'';
+      if(type==='vs') html+=`<div class="songRow"><div><b>🎧 ${m.musica}</b><br><small>${m.cantor} • ${sz}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playVS(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delVS(${m.id})">🗑️</button></div></div>`;
+      else if(type==='pb') html+=`<div class="songRow"><div><b>🎼 ${m.musica}</b><br><small>${m.cantor} • ${sz}</small></div><div style="display:flex;gap:6px"><button class="btn small blue" onclick="playPB(${m.id})">▶</button><button class="btn small" style="background:#ef4444;color:#fff;border-color:#ef4444" onclick="delPB(${m.id})">🗑️</button></div></div>`;
+      else html+=`<div class="songRow"><div><b>${m.musica}</b><br><small>${m.cantor}</small></div><div><button class="btn small blue" onclick="selRep(${m.id})">▶</button></div></div>`;
+    });
+    html+=`</div></div>`;
+  });
+  return html||'<p style="padding:20px;text-align:center;color:#888">Nenhuma música</p>';
+}
+function getAudioCtx(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx}
+function setupVSAudio(){let ctx=getAudioCtx();let a=document.getElementById('audioVS');if(vsSource)try{vsSource.disconnect()}catch(e){}vsSource=ctx.createMediaElementSource(a);vsLow=ctx.createBiquadFilter();vsLow.type='lowshelf';vsLow.frequency.value=320;vsHigh=ctx.createBiquadFilter();vsHigh.type='highshelf';vsHigh.frequency.value=3200;vsGain=ctx.createGain();vsGain.gain.value=0.8;vsSource.connect(vsLow);vsLow.connect(vsHigh);vsHigh.connect(vsGain);vsGain.connect(ctx.destination)}
+function setupPBAudio(){let ctx=getAudioCtx();let a=document.getElementById('audioPB');if(pbSource)try{pbSource.disconnect()}catch(e){}pbSource=ctx.createMediaElementSource(a);pbLow=ctx.createBiquadFilter();pbLow.type='lowshelf';pbLow.frequency.value=320;pbHigh=ctx.createBiquadFilter();pbHigh.type='highshelf';pbHigh.frequency.value=3200;pbGain=ctx.createGain();pbGain.gain.value=0.8;pbSource.connect(pbLow);pbLow.connect(pbHigh);pbHigh.connect(pbGain);pbGain.connect(ctx.destination)}
+function openDB(){return new Promise((res)=>{let req=indexedDB.open('SHOWTIME_V53',1);req.onupgradeneeded=e=>{let d=e.target.result;if(!d.objectStoreNames.contains('vs'))d.createObjectStore('vs',{keyPath:'id'});if(!d.objectStoreNames.contains('pb'))d.createObjectStore('pb',{keyPath:'id'})};req.onsuccess=e=>{db=e.target.result;res(db)}})}
+function getAll(s){return new Promise((res)=>{let tx=db.transaction(s,'readonly');tx.objectStore(s).getAll().onsuccess=e=>res(e.target.result)})}
+function saveStore(s,o){return new Promise((res)=>{db.transaction(s,'readwrite').objectStore(s).put(o).onsuccess=res})}
+function delStore(s,id){return new Promise((res)=>{db.transaction(s,'readwrite').objectStore(s).delete(id).onsuccess=res})}
+function loadQuick(input,type){let f=input.files[0];if(!f)return;let a=document.getElementById(type==='VS'?'audioVS':'audioPB');a.src=URL.createObjectURL(f);document.getElementById(type==='VS'?'vsLabel':'pbLabel').innerText='📁 '+f.name+' ('+(f.size/1024/1024).toFixed(2)+'MB)';try{if(type==='VS')setupVSAudio();else setupPBAudio()}catch(e){}}
+document.getElementById('rBpmVS').addEventListener('input',function(){document.getElementById('bVS').innerText=this.value+'%';let a=document.getElementById('audioVS');try{a.playbackRate=this.value/100}catch(e){}updVS()});
+document.getElementById('rPitVS').addEventListener('input',function(){document.getElementById('pVS').innerText=(this.value>0?'+'+this.value:this.value)+' ST';let a=document.getElementById('audioVS');try{a.playbackRate=Math.pow(2,this.value/12)*(document.getElementById('rBpmVS').value/100)}catch(e){}updVS()});
+document.getElementById('rVolVS').addEventListener('input',function(){document.getElementById('vVS').innerText=this.value+'%';document.getElementById('audioVS').volume=this.value/100;if(vsGain)vsGain.gain.value=this.value/100;updVS()});
+document.getElementById('rGraVS').addEventListener('input',function(){document.getElementById('gVS').innerText=this.value+' dB';if(vsLow)vsLow.gain.value=this.value;updVS()});
+document.getElementById('rAguVS').addEventListener('input',function(){document.getElementById('aVS').innerText=this.value+' dB';if(vsHigh)vsHigh.gain.value=this.value;updVS()});
+document.getElementById('rRevVS').addEventListener('input',function(){document.getElementById('rVS').innerText=this.value+'%';updVS()});
+function updVS(){let b=document.getElementById('rBpmVS').value,p=document.getElementById('rPitVS').value,v=document.getElementById('rVolVS').value,g=document.getElementById('rGraVS').value,a=document.getElementById('rAguVS').value,r=document.getElementById('rRevVS').value;document.getElementById('vsInfo').innerText=`🎛️ VS • ${b}% • ${p}ST • ${v}% • Grave ${g} Agudo ${a} Rev ${r}`}
+document.getElementById('rBpmPB').addEventListener('input',function(){document.getElementById('bPB').innerText=this.value+'%';try{document.getElementById('audioPB').playbackRate=this.value/100}catch(e){}});
+document.getElementById('rPitPB').addEventListener('input',function(){document.getElementById('pPB').innerText=(this.value>0?'+'+this.value:this.value)+' ST'});
+document.getElementById('rVolPB').addEventListener('input',function(){document.getElementById('vPB').innerText=this.value+'%';document.getElementById('audioPB').volume=this.value/100;if(pbGain)pbGain.gain.value=this.value/100});
+document.getElementById('rGraPB').addEventListener('input',function(){document.getElementById('gPB').innerText=this.value+' dB';if(pbLow)pbLow.gain.value=this.value});
+document.getElementById('rAguPB').addEventListener('input',function(){document.getElementById('aPB').innerText=this.value+' dB';if(pbHigh)pbHigh.gain.value=this.value});
+function openPedeAi(){document.getElementById('pedeBody').innerHTML=`<div style="text-align:center"><b>Pede uma música para<br><span style="color:var(--blue);font-size:20px">${ARTIST}</span></b><div id="qrPede" style="display:flex;justify-content:center;margin:12px 0"></div><div style="margin-top:12px;text-align:left"><b>📁 Repertório por Pastas</b>${renderFolders(groupByArtist(rep),'rep')}</div></div>`;document.getElementById('modPede').classList.add('open');setTimeout(()=>{let el=document.getElementById('qrPede');if(el){el.innerHTML='';new QRCode(el,{text:location.href.split('?')[0]+'?pedeai=1',width:160,height:160})}},200)}
+function openRepertorio(){let html=`<h3>📁 Repertório por Pastas (${Object.keys(groupByArtist(rep)).length} artistas, ${rep.length} músicas)</h3><input id="buscaRep" class="inp" placeholder="🔍 Buscar música ou artista..." oninput="filterRep()"><div id="repFolders">${renderFolders(groupByArtist(rep),'rep')}</div><div style="display:flex;gap:6px;margin-top:12px"><input id="novaM" class="inp" placeholder="Música: Você" style="flex:2"><input id="novaA" class="inp" placeholder="Artista: Caetano Veloso = pasta!" style="flex:1.5"><button class="btn blue small" onclick="addRep()">+ Criar Pasta</button></div>`;document.getElementById('modListBody').innerHTML=html;document.getElementById('modListTitle').innerText='📁 Repertório em Pastas';document.getElementById('modList').classList.add('open')}
+function filterRep(){let q=(document.getElementById('buscaRep').value||'').toLowerCase();let f=rep.filter(r=>(r.musica+' '+r.cantor).toLowerCase().includes(q));document.getElementById('repFolders').innerHTML=renderFolders(groupByArtist(f),'rep')}
+function addRep(){let m=document.getElementById('novaM').value.trim();let a=document.getElementById('novaA').value.trim()||'Sem Artista';if(!m)return;rep.push({id:Date.now(),musica:m,cantor:a});localStorage.setItem('taki_rep',JSON.stringify(rep));updateHeader();openRepertorio()}
+function selRep(id){let r=rep.find(x=>x.id===id);if(r){document.getElementById('cifraMusica').value=r.musica+' - '+r.cantor;document.getElementById('fullTitle').innerText=r.musica;closeModal('modList');closeMenu()}}
+function openMyCifras(){let html=`<h3>📁 Minhas Cifras por Pasta</h3><div>${renderFolders(groupByArtist(rep),'rep')}</div>`;document.getElementById('modListBody').innerHTML=html;document.getElementById('modListTitle').innerText='📁 Cifras em Pastas';document.getElementById('modList').classList.add('open')}
+function openMyCifrasVS(){let html=`<h3>🎬 Cifras com VS em Pastas</h3><div>${renderFolders(groupByArtist(rep),'rep')}</div>`;document.getElementById('modListBody').innerHTML=html;document.getElementById('modListTitle').innerText='🎬 VS';document.getElementById('modList').classList.add('open')}
+function openMyCifrasPB(){let html=`<h3>🎹 Cifras com Playback em Pastas</h3><div>${renderFolders(groupByArtist(rep),'rep')}</div>`;document.getElementById('modListBody').innerHTML=html;document.getElementById('modListTitle').innerText='🎹 PB';document.getElementById('modList').classList.add('open')}
+function openCadastro(){let foto=FOTO?`<img src="${FOTO}" style="width:100px;height:100px;border-radius:50%;object-fit:cover">`:'📸<br><small>Foto</small>';let html=`<div style="text-align:center"><div style="width:100px;height:100px;background:var(--light);border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="document.getElementById('fotoIn').click()">${foto}</div><input type="file" id="fotoIn" hidden accept="image/*" onchange="upFoto(this)"><input id="cfgNome" class="inp" value="${ARTIST}" placeholder="Nome Artístico"><button class="btn blue" onclick="saveCadastro()">💾 SALVAR</button></div>`;document.getElementById('modCadastroBody').innerHTML=html;document.getElementById('modCadastro').classList.add('open')}
+function upFoto(input){let f=input.files[0];if(!f)return;if(f.size>2*1024*1024){alert('Max 2MB');return}let r=new FileReader();r.onload=e=>{FOTO=e.target.result;localStorage.setItem('taki_foto',FOTO);openCadastro();updateHeader()};r.readAsDataURL(f)}
+function saveCadastro(){let n=document.getElementById('cfgNome').value.trim()||'Cantor';ARTIST=n;localStorage.setItem('taki_nome',n);updateHeader();alert('✅ Salvo!');closeModal('modCadastro')}
+function exportBKP(){let data={rep,artist:ARTIST,foto:FOTO};let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='SHOWTIME-v53-'+ARTIST.replace(/\s/g,'_')+'.json';a.click()}
+function importBKP(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=e=>{try{let d=JSON.parse(e.target.result);if(d.rep){rep=d.rep;localStorage.setItem('taki_rep',JSON.stringify(rep))}if(d.artist)ARTIST=d.artist;alert('✅ BKP importado!');updateHeader()}catch{alert('Inválido')}};r.readAsText(f)}
+let tempVSFile=null;function openMyVS(){let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px"><h3 style="color:var(--blue)">🎧 Adicionar V.S. até 50MB</h3><input type="file" id="vsInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewVS(this)" style="margin:10px 0"><div class="file" id="fVSLib">📁 Nenhum arquivo</div><input id="vsMus" class="inp" placeholder="Música"><input id="vsArt" class="inp" placeholder="Pasta POP"><button class="btn blue" id="btnSaveVS" onclick="saveVS()">💾 SALVAR GRANDE 10-21MB OK</button></div><h3>📁 Meus V.S. (${vsLib.length})</h3><div>${renderFolders(groupByArtist(vsLib),'vs')}</div>`;document.getElementById('modVSBody').innerHTML=html;document.getElementById('modVS').classList.add('open')}
+function previewVS(input){let f=input.files[0];if(!f)return;tempVSFile=f;document.getElementById('fVSLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB`;document.getElementById('vsMus').value=f.name.replace('.mp3','')}
+async function saveVS(){let m=document.getElementById('vsMus').value.trim();let a=document.getElementById('vsArt').value.trim()||'POP';if(!tempVSFile){alert('Escolha arquivo!');return}let btn=document.getElementById('btnSaveVS');btn.disabled=true;btn.innerText='⏳ Salvando '+(tempVSFile.size/1024/1024).toFixed(1)+'MB...';await openDB();let obj={id:Date.now(),musica:m,cantor:a,fileName:tempVSFile.name,size:tempVSFile.size,blob:tempVSFile};await saveStore('vs',obj);vsLib=await getAll('vs');tempVSFile=null;alert('✅ SALVO! '+m);openMyVS();updateHeader()}
+async function playVS(id){let item=vsLib.find(x=>x.id===id);if(!item)return;let audio=document.getElementById('audioVS');audio.src=URL.createObjectURL(item.blob);document.getElementById('vsLabel').innerText='🎧 Tocando: '+item.musica;audio.play();try{setupVSAudio()}catch(e){}closeModal('modVS')}
+async function delVS(id){if(!confirm('Apagar?'))return;await delStore('vs',id);vsLib=await getAll('vs');openMyVS();updateHeader()}
+let tempPBFile=null;function openMyPB(){let html=`<div style="background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px"><h3 style="color:var(--blue)">🎼 Adicionar Playback</h3><input type="file" id="pbInput" accept=".mp3,.wav,.m4a,.ogg" onchange="previewPB(this)" style="margin:10px 0"><div class="file" id="fPBLib">📁 Nenhum arquivo</div><input id="pbMus" class="inp" placeholder="Música"><input id="pbArt" class="inp" placeholder="Pasta"><button class="btn blue" id="btnSavePB" onclick="savePB()">💾 SALVAR</button></div><h3>📁 Playbacks (${pbLib.length})</h3><div>${renderFolders(groupByArtist(pbLib),'pb')}</div>`;document.getElementById('modPBBody').innerHTML=html;document.getElementById('modPB').classList.add('open')}
+function previewPB(input){let f=input.files[0];if(!f)return;tempPBFile=f;document.getElementById('fPBLib').innerText=`✅ ${f.name} - ${(f.size/1024/1024).toFixed(2)} MB`;document.getElementById('pbMus').value=f.name.replace('.mp3','')}
+async function savePB(){let m=document.getElementById('pbMus').value.trim();let a=document.getElementById('pbArt').value.trim()||'Sem Artista';if(!tempPBFile){alert('Escolha!');return}await openDB();let obj={id:Date.now(),musica:m,cantor:a,fileName:tempPBFile.name,size:tempPBFile.size,blob:tempPBFile};await saveStore('pb',obj);pbLib=await getAll('pb');alert('✅ Salvo: '+m);openMyPB();updateHeader()}
+async function playPB(id){let item=pbLib.find(x=>x.id===id);if(!item)return;let audio=document.getElementById('audioPB');audio.src=URL.createObjectURL(item.blob);document.getElementById('pbLabel').innerText='🎼 Playback: '+item.musica;audio.play();try{setupPBAudio()}catch(e){}closeModal('modPB')}
+async function delPB(id){if(!confirm('Apagar?'))return;await delStore('pb',id);pbLib=await getAll('pb');openMyPB();updateHeader()}
+function openThemes(){document.getElementById('modListBody').innerHTML='<h3>🎨 10 Temas</h3>';document.getElementById('modListTitle').innerText='Temas';document.getElementById('modList').classList.add('open')}
+function shareApp(){let link=location.href.split('?')[0]+'?pedeai=1';document.getElementById('linkShare').innerText=link;document.getElementById('modShare').classList.add('open');setTimeout(()=>{let el=document.getElementById('qrShare');if(el){el.innerHTML='';new QRCode(el,{text:link,width:180,height:180})}},200)}
+function copyLink(){let t=document.getElementById('linkShare').innerText;navigator.clipboard.writeText(t).then(()=>alert('✅ Copiado!'))}
+// CIFRA
 function applySize(){document.documentElement.style.setProperty('--c',cifraSize+'px');document.documentElement.style.setProperty('--l',letraSize+'px');document.getElementById('zoomLabel').innerText=`Cifra ${cifraSize}px / Letra ${letraSize}px`}applySize();
 function mudaSize(d){cifraSize+=d;letraSize+=d;if(cifraSize<7)cifraSize=7;if(letraSize<9)letraSize=9;if(cifraSize>20)cifraSize=20;if(letraSize>22)letraSize=22;applySize()}
 function transposeChord(ac,steps){return ac.replace(/([A-G][#b]?)/g,m=>{const map={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};let b=map[m]||m;let i=tomLista.indexOf(b);if(i==-1)return m;return tomLista[(i+steps+120)%12]})}
 function mudaTom(d){offset+=d;let idx=(2+offset+120)%12;let t=tomLista[idx];document.getElementById('tomLabel').innerText=t;document.getElementById('tomFull').innerText=t;document.getElementById('tomInfo').innerText=(offset>0?'+'+offset:offset)+' semitons';desenha()}
 function simplify(ch){let m=ch.match(/^([A-G][#b]?)/);if(!m)return ch;let slash=ch.match(/\/([A-G][#b]?)/);if(slash)return m[1]+'/'+slash[1];return m[1]}
 function toggleSimples(){simples=!simples;let b=document.getElementById('btnSimples');b.style.background=simples?'#1E5AA7':'#fff';b.style.color=simples?'#fff':'#1E5AA7';b.innerText=simples?'🎵 Completa':'🎵 Simples';desenha()}
-function toggleEscondeComando(){
-  comandosEscondidos=!comandosEscondidos;
-  document.getElementById('body').classList.toggle('hideComandos', comandosEscondidos);
-  document.getElementById('btnEscondeComando').innerText = comandosEscondidos ? '👁️ Mostrar Comandos' : '🙈 Esconder Comandos';
-  if(comandosEscondidos){ velocidade(0); } 
-}
+function toggleEscondeComando(){comandosEscondidos=!comandosEscondidos;document.getElementById('body').classList.toggle('hideComandos',comandosEscondidos);document.getElementById('btnEsconde').innerText=comandosEscondidos?'👁️ Mostrar Comandos':'🙈 Esconder Comandos';if(comandosEscondidos)velocidade(0)}
 function desenha(){let linhas=original.split('\n');let html='';for(let i=0;i<linhas.length;i++){let line=linhas[i];if(!line.trim()){html+='<div style="height:6px"></div>';continue}if(line.trim().startsWith('[')){html+=`<div class="sectionLine">${line.trim()}</div>`;continue}if(line.trim().startsWith('Tom:'))continue;let next=linhas[i+1]||'';let isChord=/[A-G]/.test(line)&&line.trim().length<90;let nextIsLyric=next&&/[a-z]{2,}/i.test(next);if(isChord&&nextIsLyric){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');html+=`<div class="lineGroup"><div class="chordLine">${ch}</div><div class="lyricLine">${next}</div></div>`;i++}else if(isChord){let ch=line;if(offset!=0)ch=transposeChord(ch,offset);if(simples)ch=ch.split(/\s+/).map(p=>/^[A-G]/.test(p)?simplify(p):p).join(' ');html+=`<div class="lineGroup"><div class="chordLine">${ch}</div></div>`}else{html+=`<div class="lineGroup"><div class="lyricLine">${line}</div></div>`}}display.innerHTML=html}
 function rolar(q){display.scrollBy({top:q,behavior:'smooth'})}
 function velocidade(v){document.querySelectorAll('.speedBtn').forEach(b=>b.classList.remove('on'));document.getElementById('sp'+v).classList.add('on');if(timer){clearInterval(timer);timer=null}if(v==0)return;let d=v==1?180:v==2?80:35;timer=setInterval(()=>{display.scrollTop+=1;if(display.scrollTop+display.clientHeight>=display.scrollHeight-10)velocidade(0)},d)}
-function entraFull(){let c=document.getElementById('cifraCard');c.classList.add('fullscreen');if(c.requestFullscreen)c.requestFullscreen().catch(()=>{});document.body.style.overflow='hidden'}
-function saiFull(){let c=document.getElementById('cifraCard');c.classList.remove('fullscreen');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});document.body.style.overflow='';velocidade(0)}
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.getElementById('cifraCard').classList.remove('fullscreen');document.body.style.overflow=''}})
-function novaCifra(){let n=prompt('Nome da música:');if(!n)return;let cf=prompt('Cole a cifra:');if(!cf)return;original=cf;desenha()}
-desenha();
+function entraFull(){let c=document.getElementById('cifraCard');c.classList.add('fullscreen');if(c.requestFullscreen)c.requestFullscreen().catch(()=>{});document.getElementById('fullTitle').innerText=document.getElementById('cifraMusica').value}
+function saiFull(){let c=document.getElementById('cifraCard');c.classList.remove('fullscreen');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});velocidade(0)}
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.getElementById('cifraCard').classList.remove('fullscreen')}})
+function editar(){let n=prompt('Edite:',original);if(n!==null){original=n;desenha()}}
+function novaCifra(){document.getElementById('modNova').classList.add('open')}
+function salvarNovaCifra(){let mus=document.getElementById('novaMusNome').value.trim();let art=document.getElementById('novaArtNome').value.trim()||'Sem Artista';let txt=document.getElementById('novaCifraTxt').value.trim();if(!mus||!txt){alert('Preencha música e cifra');return}rep.push({id:Date.now(),musica:mus,cantor:art,cifra:txt});localStorage.setItem('taki_rep',JSON.stringify(rep));original=txt;document.getElementById('cifraMusica').value=mus+' - '+art;desenha();closeModal('modNova');updateHeader();alert(`✅ "${mus}" na pasta 📁 ${art}`)}
+(async()=>{await openDB();vsLib=await getAll('vs');pbLib=await getAll('pb');updateHeader();desenha()})();
 </script>
 </body>
 </html>
